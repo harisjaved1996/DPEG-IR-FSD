@@ -1,19 +1,18 @@
-# Salesforce DX .forceignore
-# Patterns here are excluded from source tracking and deployments
+# Standard ignores
+.forceignore
 
-# System files
+# Non-Salesforce project directories - exclude from all deployments
+docs/
+scripts/
+
+# IDE and OS artifacts
+.vscode/
 .DS_Store
-Thumbs.db
+*.swp
+*~
 
-# SFDX artifacts
-.sfdx/
-.localdevserver/
-
-# Node
+# Node modules
 node_modules/
 
-# Logs
-*.log
-
-# Test results
-test-results/
+# Scratch org config (not deployable metadata)
+config/

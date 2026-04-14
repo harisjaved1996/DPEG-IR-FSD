@@ -1,25 +1,21 @@
 # Salesforce DX
 .sfdx/
-.localdevserver/
+.sf/
 
 # Node
 node_modules/
 npm-debug.log
-yarn-error.log
 
-# Logs
-*.log
-
-# OS
+# OS artifacts
 .DS_Store
 Thumbs.db
+*.swp
+*~
 
 # IDE
-.vscode/settings.json
 .idea/
-*.swp
-*.swo
+*.iml
 
-# Build / test output
-test-results/
-coverage/
+# Environment / credentials — NEVER commit
+.env
+.env.*
