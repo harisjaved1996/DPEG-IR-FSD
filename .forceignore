@@ -1,0 +1,19 @@
+# Salesforce DX .forceignore
+# Patterns here are excluded from source tracking and deployments
+
+# System files
+.DS_Store
+Thumbs.db
+
+# SFDX artifacts
+.sfdx/
+.localdevserver/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Test results
+test-results/

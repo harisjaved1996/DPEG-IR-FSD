@@ -1,0 +1,25 @@
+# Salesforce DX
+.sfdx/
+.localdevserver/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Build / test output
+test-results/
+coverage/

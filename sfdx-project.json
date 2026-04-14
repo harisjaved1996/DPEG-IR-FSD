@@ -1,0 +1,11 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "DPEG",
+  "namespace": "",
+  "sourceApiVersion": "63.0"
+}
