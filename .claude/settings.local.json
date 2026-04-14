@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp:*)",
+      "mcp__Salesforce__list_all_orgs",
+      "Bash(find \"F:/DPEG Project\" -name \".gitkeep\" -not -path \"*/.git/*\" -delete)"
+    ]
+  }
+}
