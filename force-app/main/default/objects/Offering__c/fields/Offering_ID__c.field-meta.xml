@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering_ID__c</fullName>
+    <label>Offering ID</label>
+    <description>Human-readable auto-numbered identifier for the offering (e.g., O-119), distinct from the offering Name.</description>
+    <inlineHelpText>System-assigned offering identifier. Read-only.</inlineHelpText>
+    <type>AutoNumber</type>
+    <displayFormat>O-{000}</displayFormat>
+    <startingNumber>115</startingNumber>
+    <externalId>false</externalId>
+</CustomField>

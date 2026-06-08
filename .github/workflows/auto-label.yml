@@ -1,0 +1,28 @@
+name: Auto-label PRs
+
+# Automatically applies labels to PRs based on:
+#   - Source branch name (feature/*, bugfix/*, hotfix/*, task/*)
+#   - Target branch (development, uat, main)
+#   - Changed file paths (apex, lwc, metadata, ci-cd, docs)
+#
+# Labels must be pre-created in the repository (Settings → Labels).
+# Configuration: .github/labeler.yml
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label:
+    name: Auto-label
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+          sync-labels: false # Don't remove labels added by humans

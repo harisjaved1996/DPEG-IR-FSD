@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>County__c</fullName>
+    <label>County</label>
+    <description>County in which the property is located.</description>
+    <inlineHelpText>Enter the county for the property.</inlineHelpText>
+    <type>Text</type>
+    <length>80</length>
+</CustomField>

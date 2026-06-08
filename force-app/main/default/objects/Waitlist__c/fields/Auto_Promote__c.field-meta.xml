@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_Promote__c</fullName>
+    <label>Auto Promote</label>
+    <description>Indicates this entry should be automatically promoted when capacity frees up (e.g., on a cancellation).</description>
+    <inlineHelpText>Checked to auto-promote this entry when an allocation opens.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

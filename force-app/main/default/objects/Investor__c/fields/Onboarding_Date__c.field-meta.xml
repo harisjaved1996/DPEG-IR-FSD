@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Onboarding_Date__c</fullName>
+    <label>Onboarding Date</label>
+    <description>Date the investor completed onboarding into the DPEG platform.</description>
+    <inlineHelpText>The date this investor was onboarded. Defaults to today.</inlineHelpText>
+    <type>Date</type>
+    <defaultValue>TODAY()</defaultValue>
+</CustomField>

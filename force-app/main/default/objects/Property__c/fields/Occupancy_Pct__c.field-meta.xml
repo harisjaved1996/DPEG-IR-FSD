@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Occupancy_Pct__c</fullName>
+    <label>Occupancy %</label>
+    <description>Current physical occupancy of the property as a percentage.</description>
+    <inlineHelpText>Enter occupancy as a percentage (e.g., 94.50).</inlineHelpText>
+    <type>Percent</type>
+    <precision>5</precision>
+    <scale>2</scale>
+</CustomField>

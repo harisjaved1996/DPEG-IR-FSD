@@ -1,0 +1,264 @@
+name: Deploy to Production
+
+# Triggers when code is merged into main.
+# Requires MANUAL APPROVAL before deploying to Production.
+#
+# Configure approval in:
+#   Repository Settings → Environments → production → Required reviewers: [tech lead / moderator]
+#
+# Pipeline:
+#   1. Approval gate (GitHub Environment 'production')
+#   2. Authenticate + backup current Production state
+#   3. Deploy with RunLocalTests
+#   4. Post-deploy smoke tests
+#   5. Auto-tag release with semantic version (patch bump)
+#   6. Email success or failure with rollback instructions
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # Required to create GitHub Release tags
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.org-url.outputs.value }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli@latest
+
+      # ── Auth ──────────────────────────────────────────────────────────────
+      - name: Authenticate to Production
+        run: |
+          echo "${{ secrets.PROD_ORG_AUTH_URL }}" > prod-auth.json
+          sf org login sfdx-url \
+            --sfdx-url-file prod-auth.json \
+            --alias Production \
+            --set-default
+          rm -f prod-auth.json
+
+      - name: Get Production org URL
+        id: org-url
+        run: |
+          URL=$(sf org display --target-org Production --json | jq -r '.result.instanceUrl')
+          echo "value=$URL" >> $GITHUB_OUTPUT
+          echo "Production org: $URL"
+
+      # ── Pre-deploy Backup ─────────────────────────────────────────────────
+      - name: Backup Production state
+        id: backup
+        run: |
+          mkdir -p backup/snapshot
+          sf project retrieve start \
+            --source-dir force-app \
+            --target-org Production \
+            --output-dir backup/snapshot \
+            --wait 60 || echo "⚠️  Backup retrieve completed with warnings — continuing."
+
+          BACKUP_FILE="prod-pre-deploy-${{ github.run_id }}.tar.gz"
+          tar -czf "$BACKUP_FILE" backup/snapshot || true
+          echo "file=$BACKUP_FILE" >> $GITHUB_OUTPUT
+          echo "✅ Production backup captured: $BACKUP_FILE"
+
+      - name: Upload Production backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-backup-${{ github.run_id }}
+          path: ${{ steps.backup.outputs.file }}
+          if-no-files-found: ignore
+          retention-days: 90 # Extended retention for production backups
+
+      # ── Deploy ────────────────────────────────────────────────────────────
+      - name: Deploy to Production
+        id: deploy
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --target-org Production \
+            --test-level RunLocalTests \
+            --wait 60
+
+      # ── Post-deploy Smoke Tests ───────────────────────────────────────────
+      - name: Run post-deploy smoke tests
+        id: smoke
+        if: steps.deploy.outcome == 'success'
+        run: |
+          sf apex run test \
+            --test-level RunLocalTests \
+            --target-org Production \
+            --result-format json \
+            --output-dir test-results \
+            --code-coverage \
+            --wait 60
+        continue-on-error: true
+
+      - name: Upload Production test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-test-results-${{ github.run_id }}
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 90
+
+      # ── Semantic Version Tagging ──────────────────────────────────────────
+      - name: Compute next semantic version
+        id: version
+        if: steps.deploy.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            // Find the latest vX.Y.Z tag and bump the patch number
+            const tags = await github.rest.repos.listTags({
+              owner:    context.repo.owner,
+              repo:     context.repo.repo,
+              per_page: 10,
+            });
+
+            const semver = tags.data
+              .map(t => t.name.match(/^v(\d+)\.(\d+)\.(\d+)$/))
+              .filter(Boolean)
+              .map(([, M, m, p]) => ({ major: +M, minor: +m, patch: +p }))
+              .sort((a, b) => b.major - a.major || b.minor - a.minor || b.patch - a.patch)[0];
+
+            if (!semver) return 'v1.0.0';
+            return `v${semver.major}.${semver.minor}.${semver.patch + 1}`;
+
+      - name: Create GitHub Release
+        id: release
+        if: steps.deploy.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const version = '${{ steps.version.outputs.result }}';
+            const { data: release } = await github.rest.repos.createRelease({
+              owner:            context.repo.owner,
+              repo:             context.repo.repo,
+              tag_name:         version,
+              name:             `DPEG ${version}`,
+              target_commitish: context.sha,
+              draft:            false,
+              prerelease:       false,
+              body: [
+                `## Production Deployment`,
+                ``,
+                `**Commit:** ${context.sha}`,
+                `**Deployed by:** ${{ github.actor }}`,
+                `**Commit message:** ${{ github.event.head_commit.message }}`,
+                ``,
+                `[CI Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`,
+              ].join('\n'),
+            });
+            console.log(`✅ Release created: ${release.html_url}`);
+
+      # ── Notifications ─────────────────────────────────────────────────────
+      - name: Email — Production deployment successful
+        if: steps.deploy.outcome == 'success'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "✅ [DPEG] Production Deployment Successful — ${{ steps.version.outputs.result }}"
+          content_type: text/plain
+          body: |
+            DPEG CI — Production Deployment SUCCESSFUL
+            ════════════════════════════════════════════
+
+            Environment : Production
+            Release     : ${{ steps.version.outputs.result }}
+            Org URL     : ${{ steps.org-url.outputs.value }}
+            Commit      : ${{ github.sha }}
+            Message     : ${{ github.event.head_commit.message }}
+            Deployed by : ${{ github.actor }}
+
+            A GitHub Release has been created for ${{ steps.version.outputs.result }}.
+
+            ── Artifacts (90-day retention) ────────────────────────────────────
+            Pre-deploy backup : prod-backup-${{ github.run_id }}
+            Smoke test results: prod-test-results-${{ github.run_id }}
+
+            ── CI Run ──────────────────────────────────────────────────────────
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            — DPEG Automated CI
+
+      - name: Email — Production deployment FAILED (immediate action required)
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "🚨 [DPEG] Production Deployment FAILED — IMMEDIATE ACTION REQUIRED"
+          content_type: text/plain
+          body: |
+            DPEG CI — Production Deployment FAILED
+            ════════════════════════════════════════
+
+            🚨 IMMEDIATE ACTION MAY BE REQUIRED 🚨
+
+            Environment : Production
+            Commit      : ${{ github.sha }}
+            Message     : ${{ github.event.head_commit.message }}
+            Deployed by : ${{ github.actor }}
+
+            The deployment to Production has FAILED.
+            The org may be in a partial or inconsistent state.
+
+            ── Rollback Steps ──────────────────────────────────────────────────
+            A pre-deploy backup was captured immediately before this deployment:
+              Artifact: prod-backup-${{ github.run_id }} (90-day retention)
+
+            To restore Production to its pre-deployment state:
+              1. Download artifact 'prod-backup-${{ github.run_id }}' from the CI run
+              2. Extract: tar -xzf prod-pre-deploy-*.tar.gz
+              3. Deploy backup:
+                 sf org login web --alias Production
+                 sf project deploy start \
+                   --source-dir backup/snapshot \
+                   --target-org Production \
+                   --test-level RunLocalTests \
+                   --wait 60
+
+            Alternatively, identify and revert the bad commit on 'main', then re-run
+            the deployment workflow after the required approver approves it.
+
+            ── CI Run (full log) ────────────────────────────────────────────────
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            — DPEG Automated CI

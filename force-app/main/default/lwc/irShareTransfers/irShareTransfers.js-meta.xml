@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>IR Share Transfers</masterLabel>
+    <description>Share Transfers page: KPI row (Total + per-status counts), a lifecycle board grouping transfers by status, and the full transfers table. Fetches ShareTransferController.getShareTransfers and distributes data to presentational children.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+</LightningComponentBundle>

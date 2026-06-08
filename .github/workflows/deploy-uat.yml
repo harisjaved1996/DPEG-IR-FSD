@@ -1,0 +1,196 @@
+name: Deploy to UAT
+
+# Triggers automatically when code is merged into the development branch.
+# Deploys the integrated codebase to the UAT sandbox for business validation.
+#
+# Uses GitHub Environment 'uat' — configure in:
+#   Repository Settings → Environments → uat
+#   (No approval required; auto-deploys immediately after merge.)
+#
+# Steps:
+#   1. Authenticate to UAT org
+#   2. Capture pre-deploy backup (retrieve current state as a rollback point)
+#   3. Deploy source
+#   4. Run post-deploy smoke tests
+#   5. Notify moderator (success or failure)
+
+on:
+  push:
+    branches:
+      - development
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  deploy-uat:
+    name: Deploy to UAT Sandbox
+    runs-on: ubuntu-latest
+    environment:
+      name: uat
+      url: ${{ steps.org-url.outputs.value }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli@latest
+
+      # ── Auth ──────────────────────────────────────────────────────────────
+      - name: Authenticate to UAT Org
+        run: |
+          echo "${{ secrets.UAT_ORG_AUTH_URL }}" > uat-auth.json
+          sf org login sfdx-url \
+            --sfdx-url-file uat-auth.json \
+            --alias UAT \
+            --set-default
+          rm -f uat-auth.json
+
+      - name: Get UAT org URL
+        id: org-url
+        run: |
+          URL=$(sf org display --target-org UAT --json | jq -r '.result.instanceUrl')
+          echo "value=$URL" >> $GITHUB_OUTPUT
+          echo "UAT org: $URL"
+
+      # ── Pre-deploy Backup ─────────────────────────────────────────────────
+      - name: Backup current UAT state
+        id: backup
+        run: |
+          mkdir -p backup/snapshot
+          sf project retrieve start \
+            --source-dir force-app \
+            --target-org UAT \
+            --output-dir backup/snapshot \
+            --wait 30 || echo "⚠️  Backup retrieve completed with warnings — continuing."
+
+          BACKUP_FILE="uat-pre-deploy-${{ github.run_id }}.tar.gz"
+          tar -czf "$BACKUP_FILE" backup/snapshot || true
+          echo "file=$BACKUP_FILE" >> $GITHUB_OUTPUT
+          echo "✅ Pre-deploy backup captured: $BACKUP_FILE"
+
+      - name: Upload pre-deploy backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: uat-backup-${{ github.run_id }}
+          path: ${{ steps.backup.outputs.file }}
+          if-no-files-found: ignore
+          retention-days: 30
+
+      # ── Deploy ────────────────────────────────────────────────────────────
+      - name: Deploy to UAT
+        id: deploy
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --target-org UAT \
+            --test-level RunLocalTests \
+            --wait 30
+
+      # ── Post-deploy Smoke Tests ───────────────────────────────────────────
+      - name: Run post-deploy smoke tests
+        id: smoke
+        if: steps.deploy.outcome == 'success'
+        run: |
+          sf apex run test \
+            --test-level RunLocalTests \
+            --target-org UAT \
+            --result-format json \
+            --output-dir test-results \
+            --code-coverage \
+            --wait 30
+        continue-on-error: true
+
+      - name: Upload UAT test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uat-test-results-${{ github.run_id }}
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      # ── Notifications ─────────────────────────────────────────────────────
+      - name: Email — UAT deployment successful
+        if: steps.deploy.outcome == 'success'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "✅ [DPEG] UAT Deployment Successful — ${{ github.sha }}"
+          content_type: text/plain
+          body: |
+            DPEG CI — UAT Deployment SUCCESSFUL
+            ════════════════════════════════════════
+
+            Environment : UAT Sandbox
+            Org URL     : ${{ steps.org-url.outputs.value }}
+            Commit      : ${{ github.sha }}
+            Message     : ${{ github.event.head_commit.message }}
+            Deployed by : ${{ github.actor }}
+            Triggered   : Merge to development
+
+            The development branch has been deployed to UAT.
+            Business validation and UAT testing can now begin.
+
+            ── Artifacts (30-day retention) ────────────────────────────────────
+            Pre-deploy backup : uat-backup-${{ github.run_id }}
+            Smoke test results: uat-test-results-${{ github.run_id }}
+
+            ── CI Run ──────────────────────────────────────────────────────────
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            — DPEG Automated CI
+
+      - name: Email — UAT deployment FAILED
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "❌ [DPEG] UAT Deployment FAILED — ${{ github.sha }}"
+          content_type: text/plain
+          body: |
+            DPEG CI — UAT Deployment FAILED
+            ════════════════════════════════════════
+
+            Environment : UAT Sandbox
+            Commit      : ${{ github.sha }}
+            Deployed by : ${{ github.actor }}
+
+            The deployment to UAT has FAILED. The UAT org may be in a partial state.
+
+            ── Rollback Steps ──────────────────────────────────────────────────
+            A pre-deploy backup was captured before this deployment attempt:
+              Artifact: uat-backup-${{ github.run_id }} (30-day retention)
+
+            To restore manually:
+              1. Download and extract the backup artifact
+              2. sf project deploy start --source-dir backup/snapshot --target-org UAT
+
+            ── CI Run ──────────────────────────────────────────────────────────
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            — DPEG Automated CI

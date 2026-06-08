@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Review_Queue</fullName>
+    <label>Review Queue</label>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Match_Status__c</field>
+        <operation>equals</operation>
+        <value>Review</value>
+    </filters>
+    <columns>NAME</columns>
+    <columns>Sender_Name__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Match_Confidence__c</columns>
+</ListView>

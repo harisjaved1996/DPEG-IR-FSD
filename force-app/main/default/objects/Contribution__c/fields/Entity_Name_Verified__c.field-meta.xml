@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Entity_Name_Verified__c</fullName>
+    <label>Entity Name Verified</label>
+    <description>Indicates the sender name on the incoming funds was verified against the investing entity of record.</description>
+    <inlineHelpText>Check when the wire sender name has been confirmed to match the investing entity.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

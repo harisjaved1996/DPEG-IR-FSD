@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Funnel Chart</masterLabel>
+    <description>Presentational pure-CSS funnel of stacked trapezoids (clip-path, no third-party libraries) with an accessible ordered list of stages, counts, and percentages. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

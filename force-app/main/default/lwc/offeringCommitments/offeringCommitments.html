@@ -1,0 +1,28 @@
+<template>
+    <div class="ir-offering-commitments">
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large">
+                <lightning-spinner alternative-text="Loading commitments" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <c-data-table-card
+                title="Commitments"
+                icon-name="utility:contract"
+                columns={columns}
+                rows={rows}
+                key-field="id"
+                empty-message="No commitments recorded for this offering."
+            ></c-data-table-card>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load commitments. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

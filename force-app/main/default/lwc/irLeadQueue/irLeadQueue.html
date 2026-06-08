@@ -1,0 +1,45 @@
+<template>
+    <c-section-card title={title} icon-name="utility:add_contact">
+        <span slot="actions" class="slds-badge ir-lead-queue__count">{rowCount}</span>
+
+        <template lwc:if={hasLeads}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered ir-lead-queue__table" aria-label="Lead onboarding queue">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><span class="slds-truncate" title="Name">Name</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Channel">Channel</span></th>
+                        <th scope="col"><span class="slds-truncate" title="KYC Status">KYC Status</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Portal Invite">Portal Invite</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Created">Created</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={rows} for:item="row">
+                        <tr key={row.key} class="slds-hint-parent">
+                            <th scope="row" data-label="Name">
+                                <div class="slds-truncate" title={row.name}>{row.name}</div>
+                            </th>
+                            <td data-label="Channel">
+                                <div class="slds-truncate" title={row.channel}>{row.channel}</div>
+                            </td>
+                            <td data-label="KYC Status">
+                                <c-status-badge status={row.kycStatus}></c-status-badge>
+                            </td>
+                            <td data-label="Portal Invite">
+                                <c-status-badge status={row.portalStatus}></c-status-badge>
+                            </td>
+                            <td data-label="Created">
+                                <div class="slds-truncate" title={row.createdText}>{row.createdText}</div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template lwc:else>
+            <div class="ir-lead-queue__empty slds-text-align_center slds-p-vertical_medium" role="status">
+                <p class="slds-text-body_regular slds-text-color_weak">No leads in the onboarding queue.</p>
+            </div>
+        </template>
+    </c-section-card>
+</template>

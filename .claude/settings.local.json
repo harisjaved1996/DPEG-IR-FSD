@@ -3,7 +3,33 @@
     "allow": [
       "Bash(claude mcp:*)",
       "mcp__Salesforce__list_all_orgs",
-      "Bash(find \"F:/DPEG Project\" -name \".gitkeep\" -not -path \"*/.git/*\" -delete)"
+      "Bash(find \"F:/DPEG Project\" -name \".gitkeep\" -not -path \"*/.git/*\" -delete)",
+      "Bash(sf plugins:*)",
+      "Bash(sf --version)",
+      "Bash(where sf:*)",
+      "Bash(where sfdx:*)",
+      "Bash(\"C:/Program Files/sf/bin/sf\" --version)",
+      "Bash(\"C:/Program Files/sf/bin/sf\" plugins list)",
+      "Bash(\"C:/Program Files/sf/bin/sf\" help plugins)",
+      "Bash(\"C:/Program Files/sf/bin/sf\" plugins)",
+      "WebSearch",
+      "Bash(python3 -c ':*)",
+      "Bash(pandoc \"f:/DPEG Project/docs/DPEG_Technical_Solution_Design_v1.3.docx\" -t markdown)",
+      "Bash(python:*)",
+      "Bash(xargs grep *)",
+      "Bash(mv sf-apex-test *)",
+      "Bash(mv sf-custom-application *)",
+      "Bash(mv sf-custom-field *)",
+      "Bash(mv sf-custom-lightning-type *)",
+      "Bash(mv sf-custom-object *)",
+      "Bash(winget install *)",
+      "Bash(gh *)",
+      "Bash(echo \"EXIT:$?\")",
+      "PowerShell(gh *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" --version)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "Salesforce"
+  ]
 }

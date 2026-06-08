@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <description>Lifecycle stage of the commitment from soft commit through funding or cancellation.</description>
+    <inlineHelpText>Track the commitment from Soft Commit through PPM signing, Committed, and Funded.</inlineHelpText>
+    <type>Picklist</type>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Soft Commit</fullName>
+                <default>true</default>
+                <label>Soft Commit</label>
+            </value>
+            <value>
+                <fullName>PPM Sent</fullName>
+                <default>false</default>
+                <label>PPM Sent</label>
+            </value>
+            <value>
+                <fullName>PPM Signed</fullName>
+                <default>false</default>
+                <label>PPM Signed</label>
+            </value>
+            <value>
+                <fullName>Committed</fullName>
+                <default>false</default>
+                <label>Committed</label>
+            </value>
+            <value>
+                <fullName>Funded</fullName>
+                <default>false</default>
+                <label>Funded</label>
+            </value>
+            <value>
+                <fullName>Waitlisted</fullName>
+                <default>false</default>
+                <label>Waitlisted</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

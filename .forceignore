@@ -16,3 +16,10 @@ node_modules/
 
 # Scratch org config (not deployable metadata)
 config/
+**/jsconfig.json
+**/.eslintrc.json
+
+# LWC Jest tests and tooling (not deployable metadata)
+**/__tests__/**
+**/*.test.js
+**/__mocks__/**

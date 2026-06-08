@@ -1,0 +1,25 @@
+:host {
+  display: inline-block;
+}
+
+.ir-confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.ir-confidence-badge__score {
+  font-weight: 700;
+}
+
+.slds-theme_success .ir-confidence-badge__icon {
+  --slds-c-icon-color-foreground: var(--dpeg-teal, #2bafac);
+}
+
+.slds-theme_warning .ir-confidence-badge__icon {
+  --slds-c-icon-color-foreground: var(--slds-g-color-warning-1, #8c4b02);
+}
+
+.slds-theme_error .ir-confidence-badge__icon {
+  --slds-c-icon-color-foreground: var(--slds-g-color-error-1, #ba0517);
+}

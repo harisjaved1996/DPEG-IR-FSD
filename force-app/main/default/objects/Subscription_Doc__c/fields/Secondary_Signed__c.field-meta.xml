@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Signed__c</fullName>
+    <label>Secondary Signed</label>
+    <description>Indicates the secondary signer has executed the subscription document.</description>
+    <inlineHelpText>Checked once the secondary signer has signed.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

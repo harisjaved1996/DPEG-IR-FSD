@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering__c</fullName>
+    <label>Offering</label>
+    <description>The offering this commitment is made against.</description>
+    <inlineHelpText>Select the offering the investing entity is committing to.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Offering__c</referenceTo>
+    <relationshipLabel>Commitments</relationshipLabel>
+    <relationshipName>Commitments</relationshipName>
+    <required>true</required>
+    <deleteConstraint>Restrict</deleteConstraint>
+</CustomField>

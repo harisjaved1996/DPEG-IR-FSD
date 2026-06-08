@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Projected_Exit__c</fullName>
+    <label>Projected Exit</label>
+    <description>Projected exit/disposition timeframe for the property (e.g., a target quarter).</description>
+    <inlineHelpText>Enter the projected exit period (e.g., Q3 2028).</inlineHelpText>
+    <type>Text</type>
+    <length>40</length>
+</CustomField>

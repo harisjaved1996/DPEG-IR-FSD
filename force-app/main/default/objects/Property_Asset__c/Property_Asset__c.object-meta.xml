@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Assets-under-management (AUM) record representing a property held by DPEG. Minimal record for the Investor Relations app with an active/disposed lifecycle status and an optional link to its Property detail.</description>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Property Asset</label>
+    <nameField>
+        <label>Property Asset Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Property Assets</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Property_Asset_Compact</compactLayoutAssignment>
+</CustomObject>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property__c</fullName>
+    <label>Property</label>
+    <description>The real-estate property this offering raises capital to acquire or operate.</description>
+    <inlineHelpText>Link the property associated with this offering.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Property__c</referenceTo>
+    <relationshipLabel>Offerings</relationshipLabel>
+    <relationshipName>Offerings</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

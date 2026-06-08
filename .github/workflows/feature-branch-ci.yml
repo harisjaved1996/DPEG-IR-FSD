@@ -1,0 +1,221 @@
+name: Feature Branch CI
+
+# Triggers on every developer push to feature/*, bugfix/*, task/*, hotfix/* branches.
+# Deliberately excludes development, uat, and main (those are governed by pr-validate.yml).
+#
+# Pipeline (parallel tiers):
+#   Tier 1 — Fast quality gates: Lint + Format, LWC Jest, PMD, Security (all parallel)
+#   Tier 2 — Scratch Org validate (waits for PMD to pass; no point spinning up an org for bad code)
+#   Tier 3 — Auto-revert + Notify (runs only on any failure in tiers 1 or 2)
+#
+# On failure:  Offending commit is auto-reverted, developer + moderator are emailed.
+# On success:  Branch is healthy; all artifacts are published.
+#
+# Loop prevention:
+#   - GITHUB_TOKEN pushes do NOT re-trigger this workflow (GitHub security design).
+#   - Auto-revert commit messages start with "Auto-revert:" — all jobs skip those commits.
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "bugfix/**"
+      - "task/**"
+      - "hotfix/**"
+
+permissions:
+  contents: write # Required to push the auto-revert commit
+  security-events: write # Required for SARIF upload inside _reusable-security.yml
+
+env:
+  NODE_VERSION: "20"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# TIER 1 — Fast quality gates (all run in parallel)
+# ──────────────────────────────────────────────────────────────────────────────
+
+jobs:
+  lint-and-format:
+    name: Lint + Format
+    if: "!startsWith(github.event.head_commit.message, 'Auto-revert:')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Prettier check
+        run: npm run prettier:check
+
+      - name: ESLint
+        run: npm run lint
+
+  lwc-jest:
+    name: LWC Jest Tests
+    if: "!startsWith(github.event.head_commit.message, 'Auto-revert:')"
+    runs-on: ubuntu-latest
+    needs: lint-and-format
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Run Jest with coverage
+        run: npm run test:unit:coverage
+
+      - name: Upload LWC coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lwc-coverage-${{ github.run_id }}
+          path: coverage/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  pmd:
+    name: PMD Static Analysis
+    if: "!startsWith(github.event.head_commit.message, 'Auto-revert:')"
+    uses: ./.github/workflows/_reusable-pmd.yml
+    with:
+      pmd-version: "7.3.0"
+
+  security:
+    name: Security & SAST Scan
+    if: "!startsWith(github.event.head_commit.message, 'Auto-revert:')"
+    uses: ./.github/workflows/_reusable-security.yml
+    with:
+      node-version: "20"
+      sast-severity-threshold: 3
+    secrets: inherit
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # TIER 2 — Scratch Org validate (waits for PMD; security/lint run in parallel)
+  # ──────────────────────────────────────────────────────────────────────────────
+
+  scratch-org:
+    name: Scratch Org Validate
+    if: "!startsWith(github.event.head_commit.message, 'Auto-revert:')"
+    needs: pmd # Scratch org only spins up when Apex is clean
+    uses: ./.github/workflows/_reusable-scratch-org.yml
+    with:
+      org-alias-prefix: "dpeg-feature"
+      coverage-threshold: 90
+    secrets:
+      DEVHUB_AUTH_URL: ${{ secrets.DEVHUB_AUTH_URL }}
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # TIER 3 — Auto-revert + Notify on any failure
+  # ──────────────────────────────────────────────────────────────────────────────
+
+  auto-revert:
+    name: Auto-Revert + Notify
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, lwc-jest, pmd, security, scratch-org]
+    if: |
+      always() &&
+      !startsWith(github.event.head_commit.message, 'Auto-revert:') &&
+      (
+        needs.lint-and-format.result == 'failure' ||
+        needs.lwc-jest.result        == 'failure' ||
+        needs.pmd.result             == 'failure' ||
+        needs.security.result        == 'failure' ||
+        needs.scratch-org.result     == 'failure'
+      )
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine failure cause
+        id: cause
+        run: |
+          # Priority: fail-fast gates first, then deeper checks
+          if [ "${{ needs.pmd.result }}" == "failure" ]; then
+            echo "text=PMD static analysis — Apex violations found" >> $GITHUB_OUTPUT
+          elif [ "${{ needs.security.result }}" == "failure" ]; then
+            echo "text=Security/SAST scan failed (severity-3+ violation or exposed secret)" >> $GITHUB_OUTPUT
+          elif [ "${{ needs.lint-and-format.result }}" == "failure" ]; then
+            echo "text=Lint/format check failed (Prettier or ESLint)" >> $GITHUB_OUTPUT
+          elif [ "${{ needs.lwc-jest.result }}" == "failure" ]; then
+            echo "text=LWC Jest tests failed" >> $GITHUB_OUTPUT
+          else
+            SR="${{ needs.scratch-org.outputs.failure-reason }}"
+            echo "text=Scratch org: ${SR:-validation failed}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure Git identity
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Revert offending commit
+        run: |
+          git revert HEAD --no-edit
+          git commit --amend -m "Auto-revert: ${{ steps.cause.outputs.text }} on '${{ github.ref_name }}' (commit ${{ github.sha }}) [skip ci]"
+          git push origin HEAD
+
+      - name: Email — failure notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ github.event.pusher.email }}
+          cc: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "❌ [DPEG CI] Auto-reverted — ${{ github.ref_name }}"
+          content_type: text/plain
+          body: |
+            DPEG CI — Feature Branch Check FAILED
+            ════════════════════════════════════════
+
+            Branch   : ${{ github.ref_name }}
+            Commit   : ${{ github.sha }}
+            Author   : ${{ github.actor }}
+            Message  : ${{ github.event.head_commit.message }}
+
+            Failure  : ${{ steps.cause.outputs.text }}
+
+            ── Check Results ───────────────────────────────────────────────────
+            Lint + Format   : ${{ needs.lint-and-format.result }}
+            LWC Jest        : ${{ needs.lwc-jest.result }}
+            PMD Analysis    : ${{ needs.pmd.result }}
+            Security Scan   : ${{ needs.security.result }}
+            Scratch Org     : ${{ needs.scratch-org.result }}
+            Coverage        : ${{ needs.scratch-org.outputs.coverage }}%
+
+            The offending commit has been automatically reverted on your branch.
+            Pull the latest to continue working:
+
+            ── What to do ──────────────────────────────────────────────────────
+            1. Pull the revert:   git pull origin ${{ github.ref_name }}
+            2. Fix the issue in your local copy
+            3. Verify locally before pushing again:
+                 PMD:  pmd-dist-7.3.0/bin/pmd check --dir force-app/main/default/classes --rulesets pmd-ruleset.xml
+                 Jest: npm run test:unit:coverage
+                 Lint: npm run prettier:check && npm run lint
+            4. Push again — the CI pipeline will re-run automatically
+
+            ── Artifacts ───────────────────────────────────────────────────────
+            PMD report   : pmd-report-${{ github.run_id }}
+            Test results : test-results-${{ github.run_id }}
+            LWC coverage : lwc-coverage-${{ github.run_id }}
+
+            ── Full CI Log ─────────────────────────────────────────────────────
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            — DPEG Automated CI

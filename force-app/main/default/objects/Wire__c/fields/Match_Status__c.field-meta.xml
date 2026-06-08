@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Match_Status__c</fullName>
+    <label>Match Status</label>
+    <description>Operational status of matching this staged wire to a contribution and investor.</description>
+    <inlineHelpText>Auto-Settled when matched automatically; Review/Unmatched for the queue; Confirmed or Held after IR action.</inlineHelpText>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Auto-Settled</fullName>
+                <default>false</default>
+                <label>Auto-Settled</label>
+            </value>
+            <value>
+                <fullName>Review</fullName>
+                <default>false</default>
+                <label>Review</label>
+            </value>
+            <value>
+                <fullName>Unmatched</fullName>
+                <default>false</default>
+                <label>Unmatched</label>
+            </value>
+            <value>
+                <fullName>Confirmed</fullName>
+                <default>false</default>
+                <label>Confirmed</label>
+            </value>
+            <value>
+                <fullName>Held</fullName>
+                <default>false</default>
+                <label>Held</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

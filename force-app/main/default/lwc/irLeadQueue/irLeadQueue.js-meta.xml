@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>IR Lead Queue</masterLabel>
+    <description>Presentational lead-queue table for irOnboarding. Renders lead rows with KYC-status and portal-invite-status badges per row (datatable cannot host custom cell components). Props in, no events.</description>
+</LightningComponentBundle>

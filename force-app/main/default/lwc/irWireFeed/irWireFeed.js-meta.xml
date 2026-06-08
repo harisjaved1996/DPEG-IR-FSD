@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>IR Wire Feed</masterLabel>
+    <description>Presentational wire-feed table for irPayments. Renders wire rows with a confidence badge and match-status badge per row (datatable cannot host custom cell components). Props in, no events.</description>
+</LightningComponentBundle>

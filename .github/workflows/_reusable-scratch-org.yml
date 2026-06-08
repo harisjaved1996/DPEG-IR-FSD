@@ -1,0 +1,206 @@
+name: "[Reusable] Scratch Org Validate"
+
+# Called by feature-branch-ci.yml and pr-validate.yml.
+# Full lifecycle: create scratch org → deploy → run tests → check coverage → delete.
+# The scratch org is ALWAYS deleted (if: always() on delete step).
+# Outputs: passed, coverage, failure-reason.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node.js version for SF CLI install"
+        type: string
+        default: "20"
+      scratch-def:
+        description: "Path to scratch org definition JSON"
+        type: string
+        default: "config/project-scratch-def.json"
+      source-dir:
+        description: "Source directory to deploy"
+        type: string
+        default: "force-app"
+      test-level:
+        description: "Apex test level (RunLocalTests | RunAllTestsInOrg)"
+        type: string
+        default: "RunLocalTests"
+      coverage-threshold:
+        description: "Minimum required Apex code coverage percentage"
+        type: number
+        default: 90
+      org-alias-prefix:
+        description: "Prefix for the scratch org alias (run_id is appended)"
+        type: string
+        default: "dpeg-validate"
+      deploy-wait-minutes:
+        description: "Minutes to wait for deploy to complete"
+        type: number
+        default: 30
+      test-wait-minutes:
+        description: "Minutes to wait for test run to complete"
+        type: number
+        default: 30
+    secrets:
+      DEVHUB_AUTH_URL:
+        required: true
+    outputs:
+      passed:
+        description: "true when deploy + tests + coverage all passed"
+        value: ${{ jobs.scratch-org.outputs.passed }}
+      coverage:
+        description: "Apex test coverage percentage (numeric string)"
+        value: ${{ jobs.scratch-org.outputs.coverage }}
+      failure-reason:
+        description: "Human-readable failure reason, empty on success"
+        value: ${{ jobs.scratch-org.outputs.failure-reason }}
+
+jobs:
+  scratch-org:
+    name: Scratch Org — Deploy + Tests + Coverage
+    runs-on: ubuntu-latest
+    outputs:
+      passed: ${{ steps.status.outputs.passed }}
+      coverage: ${{ steps.coverage.outputs.value }}
+      failure-reason: ${{ steps.status.outputs.failure-reason }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-${{ runner.os }}-${{ inputs.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-global-${{ runner.os }}-${{ inputs.node-version }}-
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli@latest
+
+      - name: Authenticate Dev Hub
+        run: |
+          echo "${{ secrets.DEVHUB_AUTH_URL }}" > devhub-auth.json
+          sf org login sfdx-url \
+            --sfdx-url-file devhub-auth.json \
+            --alias DevHub \
+            --set-default-dev-hub
+          rm -f devhub-auth.json
+
+      - name: Create Scratch Org
+        id: create-org
+        run: |
+          # Include run_attempt so retries get a fresh org
+          ALIAS="${{ inputs.org-alias-prefix }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          sf org create scratch \
+            --definition-file "${{ inputs.scratch-def }}" \
+            --alias "$ALIAS" \
+            --duration-days 1 \
+            --set-default \
+            --no-track-source
+          echo "alias=$ALIAS" >> $GITHUB_OUTPUT
+          echo "✅ Scratch org created: $ALIAS"
+
+      # ── Deploy ──────────────────────────────────────────────────────────
+      - name: Deploy Source to Scratch Org
+        id: deploy
+        run: |
+          sf project deploy start \
+            --source-dir "${{ inputs.source-dir }}" \
+            --ignore-conflicts \
+            --wait ${{ inputs.deploy-wait-minutes }}
+        continue-on-error: true
+
+      # ── Run Apex Tests ──────────────────────────────────────────────────
+      - name: Run Apex Tests
+        id: tests
+        if: steps.deploy.outcome == 'success'
+        run: |
+          sf apex run test \
+            --test-level ${{ inputs.test-level }} \
+            --result-format json \
+            --output-dir test-results \
+            --code-coverage \
+            --wait ${{ inputs.test-wait-minutes }}
+        continue-on-error: true
+
+      # ── Check Coverage ──────────────────────────────────────────────────
+      - name: Check Coverage ≥ ${{ inputs.coverage-threshold }}%
+        id: coverage
+        if: steps.tests.outcome == 'success'
+        run: |
+          TEST_FILE=$(find test-results -name "test-result*.json" \
+            ! -name "*codecoverage*" | sort | head -1)
+
+          if [ -z "$TEST_FILE" ]; then
+            echo "value=0" >> $GITHUB_OUTPUT
+            echo "❌ No test result JSON found in test-results/."
+            exit 1
+          fi
+
+          # sf CLI v1 uses .result.summary; sf CLI v2 uses .summary directly
+          RAW=$(jq -r \
+            '.result.summary.testRunCoverage // .summary.testRunCoverage // "0%"' \
+            "$TEST_FILE")
+          VALUE=$(echo "$RAW" | tr -d '%')
+          echo "value=$VALUE" >> $GITHUB_OUTPUT
+          echo "Apex test coverage: ${VALUE}%"
+
+          if (( $(echo "$VALUE < ${{ inputs.coverage-threshold }}" | bc -l) )); then
+            echo "❌ Coverage ${VALUE}% is below the ${{ inputs.coverage-threshold }}% threshold."
+            exit 1
+          fi
+          echo "✅ Coverage ${VALUE}% — meets the ${{ inputs.coverage-threshold }}% requirement."
+        continue-on-error: true
+
+      # ── Artifacts ────────────────────────────────────────────────────────
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      # ── Cleanup — ALWAYS runs ────────────────────────────────────────────
+      - name: Delete Scratch Org
+        if: always()
+        run: |
+          sf org delete scratch \
+            --no-prompt \
+            --target-org "${{ steps.create-org.outputs.alias }}" || \
+          echo "⚠️  Scratch org deletion failed or org already expired — no action needed."
+
+      # ── Status Determination ─────────────────────────────────────────────
+      - name: Determine Overall Status
+        id: status
+        if: always()
+        run: |
+          PASSED=true
+          REASON=""
+
+          if [ "${{ steps.deploy.outcome }}" == "failure" ]; then
+            PASSED=false
+            REASON="Source deploy to scratch org failed"
+          elif [ "${{ steps.tests.outcome }}" == "failure" ]; then
+            PASSED=false
+            REASON="Apex tests failed"
+          elif [ "${{ steps.coverage.outcome }}" == "failure" ]; then
+            PASSED=false
+            REASON="Apex coverage (${{ steps.coverage.outputs.value }}%) is below ${{ inputs.coverage-threshold }}%"
+          fi
+
+          echo "passed=$PASSED"         >> $GITHUB_OUTPUT
+          echo "failure-reason=$REASON" >> $GITHUB_OUTPUT
+
+      - name: Fail job if validation did not pass
+        if: steps.status.outputs.passed == 'false'
+        run: |
+          echo "❌ Scratch org validation failed: ${{ steps.status.outputs.failure-reason }}"
+          exit 1

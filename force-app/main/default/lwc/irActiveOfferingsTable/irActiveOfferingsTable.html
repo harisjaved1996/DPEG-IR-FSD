@@ -1,0 +1,11 @@
+<template>
+    <c-data-table-card
+        title={title}
+        icon-name="utility:summary"
+        columns={columns}
+        rows={rows}
+        key-field="id"
+        empty-message="No active offerings to display."
+        onrowaction={handleRowAction}
+    ></c-data-table-card>
+</template>

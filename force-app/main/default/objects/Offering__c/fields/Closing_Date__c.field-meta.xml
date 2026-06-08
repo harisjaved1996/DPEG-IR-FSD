@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closing_Date__c</fullName>
+    <label>Closing Date</label>
+    <description>Date the offering closes to new commitments.</description>
+    <inlineHelpText>Enter the date the offering stops accepting new commitments. Cannot be before the Launch Date.</inlineHelpText>
+    <type>Date</type>
+    <required>false</required>
+</CustomField>

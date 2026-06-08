@@ -1,0 +1,41 @@
+# CODEOWNERS — DPEG
+#
+# Auto-assigns reviewers when owned files are changed in a PR.
+# Requires "Require review from Code Owners" in branch protection for main/uat/development.
+# Patterns are evaluated top-to-bottom; last match wins.
+# Syntax: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# ── Default: tech lead reviews everything ────────────────────────────────────
+*                                       @aftab-ali-avanza
+
+# ── CI/CD — only infra owners may merge workflow changes ─────────────────────
+/.github/                               @aftab-ali-avanza
+/.github/workflows/                     @aftab-ali-avanza
+
+# ── Architecture + orchestration docs ────────────────────────────────────────
+/ARCHITECTURE.md                        @aftab-ali-avanza
+/CLAUDE.md                              @aftab-ali-avanza
+/.claude/                               @aftab-ali-avanza
+/.claude/rules/                         @aftab-ali-avanza
+/README.md                              @aftab-ali-avanza
+
+# ── Apex classes + triggers ───────────────────────────────────────────────────
+/force-app/main/default/classes/        @aftab-ali-avanza
+/force-app/main/default/triggers/       @aftab-ali-avanza
+
+# ── LWC / UI ──────────────────────────────────────────────────────────────────
+/force-app/main/default/lwc/            @aftab-ali-avanza
+
+# ── Declarative metadata ─────────────────────────────────────────────────────
+/force-app/main/default/objects/        @aftab-ali-avanza
+/force-app/main/default/flows/          @aftab-ali-avanza
+/force-app/main/default/permissionsets/ @aftab-ali-avanza
+
+# ── Security & quality config — relaxations require explicit approval ─────────
+/pmd-ruleset.xml                        @aftab-ali-avanza
+/config/project-scratch-def.json        @aftab-ali-avanza
+
+# ── Package config ────────────────────────────────────────────────────────────
+/sfdx-project.json                      @aftab-ali-avanza
+/package.json                           @aftab-ali-avanza
+/package-lock.json                      @aftab-ali-avanza

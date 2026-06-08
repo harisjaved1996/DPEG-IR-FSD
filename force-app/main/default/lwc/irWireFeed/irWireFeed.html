@@ -1,0 +1,52 @@
+<template>
+    <c-section-card title={title} icon-name="utility:money">
+        <span slot="actions" class="slds-badge ir-wire-feed__count">{rowCount}</span>
+
+        <template lwc:if={hasWires}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered ir-wire-feed__table" aria-label="Inbound wire feed">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><span class="slds-truncate" title="Sender">Sender</span></th>
+                        <th scope="col" class="ir-wire-feed__num"><span class="slds-truncate" title="Amount">Amount</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Memo">Memo</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Received">Received</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Confidence">Confidence</span></th>
+                        <th scope="col"><span class="slds-truncate" title="Match Status">Match Status</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={rows} for:item="row">
+                        <tr key={row.key} class="slds-hint-parent">
+                            <th scope="row" data-label="Sender">
+                                <div class="slds-truncate" title={row.sender}>{row.sender}</div>
+                            </th>
+                            <td data-label="Amount" class="ir-wire-feed__num">
+                                <div class="slds-truncate" title={row.amountText}>{row.amountText}</div>
+                            </td>
+                            <td data-label="Memo">
+                                <div class="slds-truncate" title={row.memo}>{row.memo}</div>
+                            </td>
+                            <td data-label="Received">
+                                <div class="slds-truncate" title={row.receivedText}>{row.receivedText}</div>
+                            </td>
+                            <td data-label="Confidence">
+                                <c-confidence-badge
+                                    bucket={row.bucket}
+                                    confidence={row.confidence}
+                                ></c-confidence-badge>
+                            </td>
+                            <td data-label="Match Status">
+                                <c-status-badge status={row.matchStatus}></c-status-badge>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template lwc:else>
+            <div class="ir-wire-feed__empty slds-text-align_center slds-p-vertical_medium" role="status">
+                <p class="slds-text-body_regular slds-text-color_weak">No wires to display.</p>
+            </div>
+        </template>
+    </c-section-card>
+</template>

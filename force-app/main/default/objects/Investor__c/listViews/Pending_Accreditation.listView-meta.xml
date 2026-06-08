@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_Accreditation</fullName>
+    <label>Pending Accreditation</label>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>KYC_Status__c</field>
+        <operation>equals</operation>
+        <value>Pending</value>
+    </filters>
+    <columns>NAME</columns>
+    <columns>KYC_Status__c</columns>
+    <columns>IR_Rep__c</columns>
+</ListView>

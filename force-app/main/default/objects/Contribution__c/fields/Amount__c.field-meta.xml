@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount__c</fullName>
+    <label>Amount</label>
+    <description>Capital amount received in this contribution. Rolls up to the parent investment's Total Contributed.</description>
+    <inlineHelpText>Enter the received contribution amount in USD.</inlineHelpText>
+    <type>Currency</type>
+    <precision>16</precision>
+    <scale>2</scale>
+    <required>false</required>
+</CustomField>

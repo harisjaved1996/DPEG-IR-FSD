@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equity_Pct__c</fullName>
+    <label>Equity %</label>
+    <description>The investor's equity percentage used to compute this distribution within its batch. Seeded for batch-detail display.</description>
+    <inlineHelpText>Enter the equity percentage applied to this distribution.</inlineHelpText>
+    <type>Percent</type>
+    <precision>5</precision>
+    <scale>2</scale>
+    <required>false</required>
+</CustomField>

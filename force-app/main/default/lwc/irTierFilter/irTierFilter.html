@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-button-group-row ir-tier-filter" role="group" aria-label="Filter investors by tier">
+        <template for:each={options} for:item="option">
+            <lightning-button
+                key={option.key}
+                label={option.label}
+                variant={option.variant}
+                data-value={option.value}
+                onclick={handleSelect}
+                class="slds-button-group-item ir-tier-filter__button"
+            ></lightning-button>
+        </template>
+    </div>
+</template>

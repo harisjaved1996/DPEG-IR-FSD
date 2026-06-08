@@ -1,0 +1,71 @@
+<template>
+    <div class="ir-portfolio">
+        <header class="slds-m-bottom_medium ir-portfolio__header">
+            <h1 class="slds-text-heading_large ir-portfolio__title">Active Investments</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Portfolio performance across active offerings.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-portfolio__loader">
+                <lightning-spinner alternative-text="Loading Active Investments" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-portfolio__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="4"
+                            large-device-size="2"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <!-- INVESTMENT / PROPERTY CARDS -->
+            <template lwc:if={hasCards}>
+                <lightning-layout multiple-rows="true" pull-to-boundary="small" class="ir-portfolio__cards">
+                    <template for:each={cards} for:item="card">
+                        <lightning-layout-item
+                            key={card.key}
+                            size="12"
+                            medium-device-size="6"
+                            large-device-size="4"
+                            padding="around-small"
+                        >
+                            <c-ir-portfolio-card card={card}></c-ir-portfolio-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+            <template lwc:else>
+                <div class="slds-box slds-theme_shade slds-text-align_center slds-m-top_small" role="status">
+                    <p class="slds-text-body_regular slds-text-color_weak">No active investments to display.</p>
+                </div>
+            </template>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Active Investments. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,22 @@
+.sfdx/
+.sf/
+.localdevserver/
+node_modules/
+coverage/
+
+# Generated / third-party
+force-app/main/default/staticresources/**
+**/*-meta.xml
+
+# LWC HTML templates: Prettier's html parser (v3) quotes unquoted attribute
+# bindings (attr={expr} -> attr="{expr}") and rewrites on* handlers, which
+# breaks the LWC compiler (LWC1034). Templates are excluded from formatting;
+# .js and .css in lwc/ are still formatted.
+force-app/main/default/lwc/**/*.html
+
+# Claude artifacts — exclude all internal agent/skill files
+.claude/
+docs/
+
+# Anonymous Apex scripts (not class-based — prettier-plugin-apex can't parse them)
+scripts/

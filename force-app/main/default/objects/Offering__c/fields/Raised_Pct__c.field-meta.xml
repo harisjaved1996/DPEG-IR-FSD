@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Raised_Pct__c</fullName>
+    <label>Raised %</label>
+    <description>Proportion of the Target Raise that has been raised to date.</description>
+    <inlineHelpText>Automatically calculated: Amount Raised divided by Target Raise.</inlineHelpText>
+    <type>Percent</type>
+    <precision>5</precision>
+    <scale>2</scale>
+    <formula><![CDATA[IF(Target_Raise__c > 0, Amount_Raised__c / Target_Raise__c, 0)]]></formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+</CustomField>

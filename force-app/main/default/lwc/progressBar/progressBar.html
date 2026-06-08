@@ -1,0 +1,23 @@
+<template>
+    <div class="ir-progress-bar">
+        <template lwc:if={hasLabel}>
+            <div class="ir-progress-bar__meta">
+                <span class="ir-progress-bar__label slds-truncate">{label}</span>
+                <template lwc:if={showValue}>
+                    <span class="ir-progress-bar__value">{displayText}</span>
+                </template>
+            </div>
+        </template>
+        <div
+            class="ir-progress-bar__track"
+            role="progressbar"
+            aria-label={label}
+            aria-valuenow={roundedPercent}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuetext={ariaValueText}
+        >
+            <div class={fillClass} style={fillStyle}></div>
+        </div>
+    </div>
+</template>

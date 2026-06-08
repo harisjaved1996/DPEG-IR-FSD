@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Match_Confidence__c</fullName>
+    <label>Match Confidence</label>
+    <description>Confidence score (0-100) that this wire matches a known investor/commitment, produced by the matching engine.</description>
+    <inlineHelpText>Match confidence as a percentage value (0-100). Drives the Confidence Bucket.</inlineHelpText>
+    <type>Number</type>
+    <precision>3</precision>
+    <scale>0</scale>
+    <required>false</required>
+</CustomField>

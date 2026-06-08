@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering_Name__c</fullName>
+    <label>Offering Name</label>
+    <description>Name of the offering tied to the transferor investment, surfaced for quick reference on the transfer record.</description>
+    <inlineHelpText>Read-only. Offering name derived from the transferor investment.</inlineHelpText>
+    <type>Text</type>
+    <formula><![CDATA[Transferor_Investment__r.Offering__r.Name]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

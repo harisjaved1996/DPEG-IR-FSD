@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending</fullName>
+    <label>Pending Distributions</label>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACH_Status__c</field>
+        <operation>equals</operation>
+        <value>Pending</value>
+    </filters>
+    <columns>NAME</columns>
+    <columns>Investment__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Payment_Method__c</columns>
+</ListView>

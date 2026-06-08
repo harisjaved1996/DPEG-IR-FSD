@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finalized__c</fullName>
+    <label>Finalized</label>
+    <description>Derived flag indicating the document is fully executed: primary signed and either single-signer or secondary signed.</description>
+    <inlineHelpText>Read-only. True when all required signatures are complete.</inlineHelpText>
+    <type>Checkbox</type>
+    <formula><![CDATA[AND(Primary_Signed__c, OR(Single_Signer__c, Secondary_Signed__c))]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

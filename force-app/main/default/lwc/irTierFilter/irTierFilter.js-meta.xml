@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>IR Tier Filter</masterLabel>
+    <description>Presentational child: segmented investor-tier filter (All + Anchor / Active / Dormant). Consumes the selected value from its parent and emits tierchange. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

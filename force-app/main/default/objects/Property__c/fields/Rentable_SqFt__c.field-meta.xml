@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rentable_SqFt__c</fullName>
+    <label>Rentable SqFt</label>
+    <description>Total rentable square footage of the property.</description>
+    <inlineHelpText>Enter the rentable square footage.</inlineHelpText>
+    <type>Number</type>
+    <precision>9</precision>
+    <scale>0</scale>
+</CustomField>

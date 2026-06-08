@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_Renovated__c</fullName>
+    <label>Year Renovated</label>
+    <description>Most recent year the property underwent major renovation.</description>
+    <inlineHelpText>Enter the four-digit year of the last major renovation.</inlineHelpText>
+    <type>Number</type>
+    <precision>4</precision>
+    <scale>0</scale>
+</CustomField>

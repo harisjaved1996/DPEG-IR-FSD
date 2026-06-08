@@ -4,7 +4,10 @@
   "features": [
     "EnableSetPasswordInApi",
     "DuplicateManagement",
-    "ApprovalWorkflow"
+    "ApprovalWorkflow",
+    "Communities",
+    "MarketingUser",
+    "FieldAuditTrail"
   ],
   "settings": {
     "lightningExperienceSettings": {
@@ -12,6 +15,12 @@
     },
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
     }
   }
 }

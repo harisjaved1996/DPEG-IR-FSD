@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>IR Transfer Board</masterLabel>
+    <description>Presentational child that renders the share-transfer lifecycle board as one lane per status, each with a status badge and transfer cards. Consumes a lanes array from its parent and emits transferselect. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

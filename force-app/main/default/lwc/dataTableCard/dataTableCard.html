@@ -1,0 +1,29 @@
+<template>
+    <c-section-card title={title} icon-name={iconName} compact={compact}>
+        <span slot="actions" class="slds-badge ir-data-table-card__count">
+            {rowCount}
+        </span>
+
+        <template lwc:if={hasRows}>
+            <lightning-datatable
+                key-field={keyField}
+                data={rows}
+                columns={columns}
+                hide-checkbox-column={computedHideCheckbox}
+                show-row-number-column={showRowNumberColumn}
+                onrowaction={handleRowAction}
+                onrowselection={handleRowSelection}
+            ></lightning-datatable>
+        </template>
+        <template lwc:else>
+            <div class="ir-data-table-card__empty" role="status">
+                <lightning-icon
+                    icon-name="utility:table"
+                    size="small"
+                    class="ir-data-table-card__empty-icon"
+                ></lightning-icon>
+                <p class="ir-data-table-card__empty-text">{emptyMessage}</p>
+            </div>
+        </template>
+    </c-section-card>
+</template>

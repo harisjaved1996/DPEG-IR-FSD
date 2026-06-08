@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Confidence Badge</masterLabel>
+    <description>Presentational wire-match confidence pill (Auto-Settle/Review/Unmatched) themed by bucket or derived from a 0-100 score, with icon and text for color independence. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

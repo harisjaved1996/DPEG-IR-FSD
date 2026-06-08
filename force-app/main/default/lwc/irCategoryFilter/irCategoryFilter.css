@@ -1,0 +1,9 @@
+.ir-category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--slds-g-spacing-1, 0.25rem);
+}
+
+.ir-category-filter__button {
+  margin-bottom: var(--slds-g-spacing-1, 0.25rem);
+}

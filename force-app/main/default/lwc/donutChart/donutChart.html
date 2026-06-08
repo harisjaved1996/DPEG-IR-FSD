@@ -1,0 +1,89 @@
+<template>
+    <div class="ir-donut">
+        <div class="ir-donut__figure" style={svgStyle}>
+            <svg
+                class="ir-donut__svg"
+                viewBox="0 0 42 42"
+                role="img"
+                aria-label={chartAriaLabel}
+            >
+                <!-- Track ring -->
+                <circle
+                    class="ir-donut__track"
+                    cx="21"
+                    cy="21"
+                    r={radius}
+                    fill="transparent"
+                ></circle>
+
+                <!-- Data segments -->
+                <template lwc:if={hasData}>
+                    <template for:each={segments} for:item="seg">
+                        <circle
+                            key={seg.key}
+                            class="ir-donut__segment"
+                            cx="21"
+                            cy="21"
+                            r={radius}
+                            fill="transparent"
+                            stroke={seg.color}
+                            stroke-dasharray={seg.dashArray}
+                            stroke-dashoffset={seg.dashOffset}
+                            data-index={seg.index}
+                            onmouseover={handleSegmentHover}
+                        ></circle>
+                    </template>
+                </template>
+            </svg>
+
+            <!-- Center label/value overlay (kept out of the SR tree; the svg
+                 aria-label already conveys the summary) -->
+            <template lwc:if={hasCenter}>
+                <div class="ir-donut__center" aria-hidden="true">
+                    <template lwc:if={centerValue}>
+                        <span class="ir-donut__center-value"
+                            >{centerValue}</span
+                        >
+                    </template>
+                    <template lwc:if={centerLabel}>
+                        <span class="ir-donut__center-label"
+                            >{centerLabel}</span
+                        >
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <!-- Accessible, SR-readable data legend -->
+        <template lwc:if={hasData}>
+            <ul class="ir-donut__legend">
+                <template for:each={segments} for:item="seg">
+                    <li key={seg.key} class="ir-donut__legend-item">
+                        <button
+                            type="button"
+                            class="ir-donut__legend-button"
+                            data-index={seg.index}
+                            onfocus={handleLegendFocus}
+                            onmouseenter={handleLegendFocus}
+                        >
+                            <span
+                                class="ir-donut__swatch"
+                                style={seg.swatchStyle}
+                                aria-hidden="true"
+                            ></span>
+                            <span class="ir-donut__legend-label slds-truncate"
+                                >{seg.label}</span
+                            >
+                            <span class="ir-donut__legend-pct"
+                                >{seg.roundedPct}%</span
+                            >
+                        </button>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template lwc:else>
+            <p class="ir-donut__empty">No data to display</p>
+        </template>
+    </div>
+</template>

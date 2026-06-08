@@ -1,0 +1,75 @@
+<template>
+    <div class="ir-documents">
+        <header class="slds-m-bottom_medium ir-documents__header">
+            <h1 class="slds-text-heading_large ir-documents__title">Documents</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Investor relations document repository.</p>
+        </header>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-documents__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="4"
+                            large-device-size="4"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <!-- CATEGORY FILTER -->
+            <c-section-card title="Filter by Category" icon-name="utility:filterList" compact>
+                <c-ir-category-filter
+                    categories={categories}
+                    selected={selectedCategory}
+                    oncategorychange={handleCategoryChange}
+                ></c-ir-category-filter>
+            </c-section-card>
+
+            <!-- DOCUMENTS TABLE -->
+            <div class="slds-m-top_medium slds-is-relative">
+                <template lwc:if={isLoading}>
+                    <lightning-spinner alternative-text="Loading Documents" size="small"></lightning-spinner>
+                </template>
+                <c-data-table-card
+                    title="Documents"
+                    icon-name="utility:file"
+                    key-field="id"
+                    columns={documentColumns}
+                    rows={docs}
+                    empty-message="No documents to display for this category."
+                ></c-data-table-card>
+            </div>
+        </template>
+
+        <template lwc:if={isLoading}>
+            <template lwc:if={hasNoContentYet}>
+                <div class="slds-is-relative slds-p-around_large ir-documents__loader">
+                    <lightning-spinner alternative-text="Loading Documents" size="medium"></lightning-spinner>
+                </div>
+            </template>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Documents. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

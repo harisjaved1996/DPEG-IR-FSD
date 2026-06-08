@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Oversubscription overflow record for a DPEG offering. Tracks an investing entity's position in the waitlist queue, requested amount, and auto-promotion behavior when capacity frees up.</description>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Waitlist</label>
+    <nameField>
+        <displayFormat>WL-{0000}</displayFormat>
+        <label>Waitlist Name</label>
+        <startingNumber>1</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Waitlists</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Waitlist_Compact</compactLayoutAssignment>
+</CustomObject>

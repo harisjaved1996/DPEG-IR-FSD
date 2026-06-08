@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Minimal stub for the disposition (sale readiness) of a Property Asset (dispositions module). Created so TestDataFactory compiles; full field set is out of scope for the IR module.</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Disposition</label>
+    <nameField>
+        <label>Disposition Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>DISP-{0000}</displayFormat>
+        <startingNumber>1</startingNumber>
+    </nameField>
+    <pluralLabel>Dispositions</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

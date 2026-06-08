@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Status Badge</masterLabel>
+    <description>Presentational SLDS badge that maps a lifecycle status to a themed badge with an icon and visible label (color-independent). Supports a per-instance variantMap override. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

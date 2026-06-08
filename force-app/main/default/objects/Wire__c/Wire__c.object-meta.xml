@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Inbound bank wire or ACH staged from Plaid prior to being matched to a Contribution. Holds match-confidence scoring and the closest investor account.</description>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Wire</label>
+    <nameField>
+        <label>Wire Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>WR-{0000}</displayFormat>
+        <startingNumber>88</startingNumber>
+    </nameField>
+    <pluralLabel>Wires</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Wire_Compact</compactLayoutAssignment>
+</CustomObject>

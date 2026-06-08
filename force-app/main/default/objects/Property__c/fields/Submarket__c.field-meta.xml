@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submarket__c</fullName>
+    <label>Submarket</label>
+    <description>Real-estate submarket the property belongs to.</description>
+    <inlineHelpText>Enter the market/submarket designation for this property.</inlineHelpText>
+    <type>Text</type>
+    <length>80</length>
+</CustomField>

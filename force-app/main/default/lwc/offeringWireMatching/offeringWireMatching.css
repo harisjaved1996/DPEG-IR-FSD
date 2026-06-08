@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.ir-wire-matching__total {
+  font-weight: 600;
+  color: var(--dpeg-navy, #032d60);
+}
+
+.ir-wire-matching__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-wire-matching__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-1, 0.25rem);
+  padding-bottom: var(--slds-g-spacing-2, 0.5rem);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+}
+
+.ir-wire-matching__row-main,
+.ir-wire-matching__row-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-wire-matching__sender {
+  font-weight: 600;
+  color: var(--dpeg-navy, #032d60);
+}
+
+.ir-wire-matching__amount {
+  font-weight: 600;
+}
+
+.ir-wire-matching__memo {
+  min-width: 0;
+}

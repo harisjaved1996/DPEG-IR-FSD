@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Note__c</fullName>
+    <label>Note</label>
+    <description>Free-text log of signature issues or notes related to this subscription document.</description>
+    <inlineHelpText>Record any signature issues or relevant notes here.</inlineHelpText>
+    <type>LongTextArea</type>
+    <length>4000</length>
+    <visibleLines>5</visibleLines>
+</CustomField>

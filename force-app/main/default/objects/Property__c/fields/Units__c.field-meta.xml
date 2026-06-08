@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Units__c</fullName>
+    <label>Units</label>
+    <description>Number of leasable units or tenant spaces in the property.</description>
+    <inlineHelpText>Enter the number of units or tenant spaces.</inlineHelpText>
+    <type>Number</type>
+    <precision>6</precision>
+    <scale>0</scale>
+</CustomField>

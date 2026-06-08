@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>IR Payments</masterLabel>
+    <description>Payments page: KPI row, inbound wire feed (confidence + match-status badges), and contributions table. Fetches PaymentsController.getPayments and distributes data to presentational children.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage">
+            <property
+                name="periodMonths"
+                type="Integer"
+                default="18"
+                label="Period (months)"
+                description="Look-back window in months for the 'this period' contribution feed / KPI. Defaults to 18 so values are non-zero against seed data."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

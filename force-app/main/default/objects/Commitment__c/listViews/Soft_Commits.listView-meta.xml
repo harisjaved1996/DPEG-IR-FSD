@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Soft_Commits</fullName>
+    <label>Soft Commits</label>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Soft Commit</value>
+    </filters>
+    <columns>NAME</columns>
+    <columns>Investing_Entity__c</columns>
+    <columns>Offering__c</columns>
+    <columns>Committed_Amount__c</columns>
+</ListView>

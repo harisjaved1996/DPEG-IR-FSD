@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "DBRef_022"
+      },
+      "Unison__Offering__c": "@OffRef_Magnolia",
+      "Unison__Batch_Type__c": "Exit",
+      "Unison__Status__c": "Pending Approval",
+      "Unison__Distribution_Date__c": "2026-04-28",
+      "Unison__Total_Amount__c": 1200000,
+      "Unison__ACH_Amount__c": 890000,
+      "Unison__Cheque_Amount__c": 310000,
+      "Unison__Investor_Count__c": 28,
+      "Unison__Approval_Count__c": 0
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "DBRef_023"
+      },
+      "Unison__Offering__c": "@OffRef_Westheimer",
+      "Unison__Batch_Type__c": "Monthly",
+      "Unison__Status__c": "Completed",
+      "Unison__Distribution_Date__c": "2026-03-31",
+      "Unison__Total_Amount__c": 142000,
+      "Unison__ACH_Amount__c": 107000,
+      "Unison__Cheque_Amount__c": 35000,
+      "Unison__Investor_Count__c": 64,
+      "Unison__Approval_Count__c": 2
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "DBRef_024"
+      },
+      "Unison__Offering__c": "@OffRef_Heights",
+      "Unison__Batch_Type__c": "Quarterly",
+      "Unison__Status__c": "Processing",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Total_Amount__c": 486000,
+      "Unison__ACH_Amount__c": 365000,
+      "Unison__Cheque_Amount__c": 121000,
+      "Unison__Investor_Count__c": 312,
+      "Unison__Approval_Count__c": 2
+    }
+  ]
+}

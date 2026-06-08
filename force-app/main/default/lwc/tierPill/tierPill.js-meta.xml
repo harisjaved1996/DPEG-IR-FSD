@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Tier Pill</masterLabel>
+    <description>Presentational pill that renders an investor tier (Anchor/Active/Dormant) with brand color, icon, and visible label. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

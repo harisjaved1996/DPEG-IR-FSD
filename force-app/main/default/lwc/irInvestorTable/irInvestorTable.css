@@ -1,0 +1,12 @@
+.ir-investor-table {
+  width: 100%;
+}
+
+.ir-investor-table__name {
+  color: var(--dpeg-blue, #0070d2);
+  font-weight: 600;
+}
+
+.ir-investor-table__name:hover {
+  text-decoration: underline;
+}

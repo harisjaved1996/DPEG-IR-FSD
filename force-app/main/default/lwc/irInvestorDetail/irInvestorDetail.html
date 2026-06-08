@@ -1,0 +1,111 @@
+<template>
+    <div class="ir-investor-detail">
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-investor-detail__loader">
+                <lightning-spinner alternative-text="Loading Investor Detail" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- HEADER -->
+            <header class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_medium ir-investor-detail__header">
+                <div class="slds-media slds-media_center">
+                    <h1 class="slds-text-heading_medium ir-investor-detail__name">{investorName}</h1>
+                    <span class="slds-m-left_small">
+                        <c-tier-pill tier={tier}></c-tier-pill>
+                    </span>
+                </div>
+                <div>
+                    <c-status-badge status={kycStatus}></c-status-badge>
+                </div>
+            </header>
+
+            <!-- SUMMARY KPIs -->
+            <template lwc:if={hasSummary}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-investor-detail__kpis">
+                    <template for:each={summary} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="3"
+                            large-device-size="3"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <!-- POSITIONS -->
+            <div class="slds-m-bottom_medium">
+                <c-data-table-card
+                    title="Positions (Investments)"
+                    icon-name="utility:portfolio"
+                    key-field="id"
+                    columns={positionColumns}
+                    rows={positions}
+                    empty-message="No active positions for this investor."
+                ></c-data-table-card>
+            </div>
+
+            <!-- COMMITMENTS -->
+            <div class="slds-m-bottom_medium">
+                <c-data-table-card
+                    title="Commitments"
+                    icon-name="utility:contract"
+                    key-field="id"
+                    columns={commitmentColumns}
+                    rows={commitments}
+                    empty-message="No commitments for this investor."
+                ></c-data-table-card>
+            </div>
+
+            <!-- DISTRIBUTIONS -->
+            <div class="slds-m-bottom_medium">
+                <c-data-table-card
+                    title="Distributions"
+                    icon-name="utility:moneybag"
+                    key-field="id"
+                    columns={distributionColumns}
+                    rows={distributions}
+                    empty-message="No distributions for this investor."
+                ></c-data-table-card>
+            </div>
+
+            <!-- DOCUMENTS -->
+            <c-data-table-card
+                title="Documents"
+                icon-name="utility:file"
+                key-field="id"
+                columns={documentColumns}
+                rows={documents}
+                empty-message="No documents for this investor."
+            ></c-data-table-card>
+        </template>
+
+        <template lwc:if={notFound}>
+            <div class="slds-box slds-m-top_small" role="status">
+                <p class="slds-text-body_regular slds-text-color_weak">
+                    This investor could not be found or you do not have access to it.
+                </p>
+            </div>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Investor Detail. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

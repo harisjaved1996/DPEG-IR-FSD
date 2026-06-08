@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact__c</fullName>
+    <label>Contact</label>
+    <description>The Contact this investor profile summarizes. Source of KYC and accreditation status.</description>
+    <inlineHelpText>Select the Contact record that represents this investor individual.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Investors</relationshipLabel>
+    <relationshipName>Investors</relationshipName>
+    <required>true</required>
+    <deleteConstraint>Restrict</deleteConstraint>
+</CustomField>

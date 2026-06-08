@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>By_Category</fullName>
+    <label>All Documents by Category</label>
+    <filterScope>Everything</filterScope>
+    <columns>NAME</columns>
+    <columns>File_Name__c</columns>
+    <columns>Category__c</columns>
+    <columns>Offering__c</columns>
+    <columns>Portal_Visible__c</columns>
+</ListView>

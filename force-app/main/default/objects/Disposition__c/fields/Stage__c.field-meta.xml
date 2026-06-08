@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage__c</fullName>
+    <label>Stage</label>
+    <description>Current stage of the disposition (e.g. Disposition Readiness). Stored as free Text in this stub so any value set by TestDataFactory is accepted without a restricted picklist.</description>
+    <inlineHelpText>Enter the current stage of this disposition.</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+    <required>false</required>
+</CustomField>

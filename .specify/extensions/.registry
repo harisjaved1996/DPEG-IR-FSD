@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "git": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:9731aa8143a72fbebfdb440f155038ab42642517c2b2bdbbf67c8fdbe076ed79",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.git.feature",
+          "speckit.git.validate",
+          "speckit.git.remote",
+          "speckit.git.initialize",
+          "speckit.git.commit"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-04-25T07:09:51.151705+00:00"
+    },
+    "sf": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:8e7aa123d3fe16f7c4fb8ac3afec995b34f9703549d6450f8e858fc35a98fb95",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.sf.setup",
+          "speckit.sf.constitution",
+          "speckit.sf.specify",
+          "speckit.sf.clarify",
+          "speckit.sf.plan",
+          "speckit.sf.stories",
+          "speckit.sf.implement",
+          "speckit.sf.review",
+          "speckit.sf.change",
+          "speckit.sf.qa",
+          "speckit.sf.pr",
+          "speckit.sf.verify",
+          "speckit.sf.deploy",
+          "speckit.sf.score",
+          "speckit.sf.hotfix",
+          "speckit.sf.regression",
+          "speckit.sf.release-notes",
+          "speckit.sf.uat"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-04-25T07:13:47.992241+00:00"
+    }
+  }
+}

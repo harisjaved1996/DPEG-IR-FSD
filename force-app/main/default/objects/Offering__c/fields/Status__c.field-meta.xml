@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <description>Current stage of the offering across its eight-stage fundraising and activation lifecycle.</description>
+    <inlineHelpText>Advance the offering through its lifecycle from Draft to Closed Funded.</inlineHelpText>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Draft</fullName>
+                <default>true</default>
+                <label>Draft</label>
+            </value>
+            <value>
+                <fullName>Pre-Launch</fullName>
+                <default>false</default>
+                <label>Pre-Launch</label>
+            </value>
+            <value>
+                <fullName>Active Fundraising</fullName>
+                <default>false</default>
+                <label>Active Fundraising</label>
+            </value>
+            <value>
+                <fullName>Fully Subscribed</fullName>
+                <default>false</default>
+                <label>Fully Subscribed</label>
+            </value>
+            <value>
+                <fullName>Signatures Pending</fullName>
+                <default>false</default>
+                <label>Signatures Pending</label>
+            </value>
+            <value>
+                <fullName>Ready to Activate</fullName>
+                <default>false</default>
+                <label>Ready to Activate</label>
+            </value>
+            <value>
+                <fullName>Investment Active</fullName>
+                <default>false</default>
+                <label>Investment Active</label>
+            </value>
+            <value>
+                <fullName>Closed Funded</fullName>
+                <default>false</default>
+                <label>Closed Funded</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

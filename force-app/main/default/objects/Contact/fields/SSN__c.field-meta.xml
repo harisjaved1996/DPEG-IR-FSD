@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SSN__c</fullName>
+    <label>SSN</label>
+    <description>Sensitive Social Security Number for an individual investor contact. Access restricted via field-level security; surfaced to most users only through the masked formula field.</description>
+    <inlineHelpText>Enter the SSN (format ###-##-####). Restricted field — visible only to authorized roles.</inlineHelpText>
+    <type>Text</type>
+    <length>11</length>
+    <required>false</required>
+</CustomField>

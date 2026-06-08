@@ -1,0 +1,13 @@
+<template>
+    <template lwc:if={hasStatus}>
+        <span class={badgeClass}>
+            <lightning-icon
+                icon-name={iconName}
+                size="xx-small"
+                variant="bare"
+                class="ir-status-badge__icon slds-m-right_xx-small"
+            ></lightning-icon>
+            <span class="ir-status-badge__label">{status}</span>
+        </span>
+    </template>
+</template>

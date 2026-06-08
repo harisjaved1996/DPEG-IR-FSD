@@ -1,0 +1,18 @@
+<template>
+    <template lwc:if={hasContent}>
+        <span class={badgeClass} aria-label={ariaLabel}>
+            <lightning-icon
+                icon-name={iconName}
+                size="xx-small"
+                variant="bare"
+                class="ir-confidence-badge__icon slds-m-right_xx-small"
+            ></lightning-icon>
+            <span class="ir-confidence-badge__bucket">{resolvedBucket}</span>
+            <template lwc:if={hasConfidenceValue}>
+                <span class="ir-confidence-badge__score slds-m-left_xx-small"
+                    >{confidenceText}</span
+                >
+            </template>
+        </span>
+    </template>
+</template>

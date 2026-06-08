@@ -1,0 +1,147 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Khan"
+      },
+      "FirstName": "Tariq",
+      "LastName": "Khan",
+      "AccountId": "@AccRef_KhanFamilyTrust",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-55-1234"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_KhanSpouse"
+      },
+      "FirstName": "Sara",
+      "LastName": "Khan",
+      "AccountId": "@AccRef_KhanFamilyTrust",
+      "Unison__Role__c": "Secondary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-55-5678"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Patel"
+      },
+      "FirstName": "R.",
+      "LastName": "Patel",
+      "AccountId": "@AccRef_PatelInvestments",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-66-2345"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_DefiCap"
+      },
+      "FirstName": "Alex",
+      "LastName": "DefiCap",
+      "AccountId": "@AccRef_DefiCapital",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": false,
+      "Unison__Accreditation_Status__c": "Pending",
+      "Unison__SSN__c": "400-66-3456"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Kothari"
+      },
+      "FirstName": "Suresh",
+      "LastName": "Kothari",
+      "AccountId": "@AccRef_KothariIRA",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-77-4567"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Ahmed"
+      },
+      "FirstName": "M.",
+      "LastName": "Ahmed",
+      "AccountId": "@AccRef_AhmedM",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-77-5679"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Greentree"
+      },
+      "FirstName": "A.",
+      "LastName": "Greentree",
+      "AccountId": "@AccRef_GreenTree",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-88-6789"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Hassan"
+      },
+      "FirstName": "M.",
+      "LastName": "Hassan",
+      "AccountId": "@AccRef_HassanFamily",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-88-7890"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_Sharma"
+      },
+      "FirstName": "P.",
+      "LastName": "Sharma",
+      "AccountId": "@AccRef_SharmaHoldings",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": false,
+      "Unison__Accreditation_Status__c": "Re-verify",
+      "Unison__SSN__c": "400-88-8901"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_PacificRimContact"
+      },
+      "FirstName": "James",
+      "LastName": "Pacific",
+      "AccountId": "@AccRef_PacificRim",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-99-9012"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "ConRef_ThompsonContact"
+      },
+      "FirstName": "R.",
+      "LastName": "Thompson",
+      "AccountId": "@AccRef_ThompsonTrust",
+      "Unison__Role__c": "Primary",
+      "Unison__KYC_Complete__c": true,
+      "Unison__Accreditation_Status__c": "Verified",
+      "Unison__SSN__c": "400-99-0123"
+    }
+  ]
+}

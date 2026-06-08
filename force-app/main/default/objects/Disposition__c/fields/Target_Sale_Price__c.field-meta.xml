@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Sale_Price__c</fullName>
+    <label>Target Sale Price</label>
+    <description>Target sale price for the property asset being disposed of, in USD. Stub field; nullable.</description>
+    <inlineHelpText>Enter the target sale price in USD for this disposition.</inlineHelpText>
+    <type>Currency</type>
+    <precision>16</precision>
+    <scale>2</scale>
+    <required>false</required>
+</CustomField>

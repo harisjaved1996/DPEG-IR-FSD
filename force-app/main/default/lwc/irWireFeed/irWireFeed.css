@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.ir-wire-feed__table {
+  width: 100%;
+}
+
+.ir-wire-feed__num {
+  text-align: right;
+}

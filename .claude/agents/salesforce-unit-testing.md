@@ -136,13 +136,13 @@ private class {ClassName}Test {
     }
     
     /**
-     * @description Test {methodName} - bulk scenario (200+ records)
+     * @description Test {methodName} - bulk scenario (251+ records)
      */
     @isTest
     static void test{MethodName}_bulkScenario() {
         // Arrange
         List<SObject> records = new List<SObject>();
-        for (Integer i = 0; i < 200; i++) {
+        for (Integer i = 0; i < 251; i++) {
             // Create test records
         }
         
@@ -165,7 +165,7 @@ For **every** method, include:
 |---------------|---------|----------|
 | Positive | Happy path - valid inputs | ✅ Always |
 | Negative | Invalid inputs, error handling | ✅ Always |
-| Bulk | 200+ records for triggers/batch | ✅ For triggers/batch |
+| Bulk | 251+ records for triggers/batch (exceeds 200-record batch trigger threshold) | ✅ For triggers/batch |
 | Null/Empty | Null or empty inputs | ✅ If method accepts objects/collections |
 | Boundary | Edge cases, limits | ⚠️ When applicable |
 | User Context | Different user permissions | ⚠️ When sharing matters |
@@ -189,7 +189,7 @@ For **every** method, include:
 @isTest
 static void testTrigger_bulkInsert() {
     List<Account> accounts = new List<Account>();
-    for (Integer i = 0; i < 200; i++) {
+    for (Integer i = 0; i < 251; i++) {
         accounts.add(new Account(Name = 'Test ' + i));
     }
     
@@ -199,7 +199,7 @@ static void testTrigger_bulkInsert() {
     
     // Query and verify results
     List<Account> inserted = [SELECT Id, Name FROM Account WHERE Id IN :accounts];
-    Assert.areEqual(200, inserted.size(), 'All 200 accounts should be inserted');
+    Assert.areEqual(251, inserted.size(), 'All 251 accounts should be inserted');
 }
 
 @isTest
@@ -269,9 +269,9 @@ private class MockHttpResponse implements HttpCalloutMock {
 ```apex
 @isTest
 static void testBatch_execution() {
-    // Arrange - create test data
+    // Arrange - create test data (251+ to exceed the 200-record trigger batch threshold)
     List<Account> accounts = new List<Account>();
-    for (Integer i = 0; i < 200; i++) {
+    for (Integer i = 0; i < 251; i++) {
         accounts.add(new Account(Name = 'Test ' + i));
     }
     insert accounts;
@@ -279,12 +279,12 @@ static void testBatch_execution() {
     // Act
     Test.startTest();
     MyBatchClass batch = new MyBatchClass();
-    Database.executeBatch(batch, 200);
+    Database.executeBatch(batch, 200); // chunk size stays 200; record count is 251+
     Test.stopTest();
     
     // Assert - verify batch processed records
     List<Account> processed = [SELECT Id FROM Account WHERE Processed__c = true];
-    Assert.areEqual(200, processed.size(), 'All accounts should be processed');
+    Assert.areEqual(251, processed.size(), 'All accounts should be processed');
 }
 ```
 
@@ -370,7 +370,7 @@ After creating/updating test classes, report:
 1. **Test what was created** - Focus on the Developer agent's output
 2. **Check before creating** - Don't duplicate existing test classes
 3. **90%+ coverage** - Comprehensive testing, not just line coverage
-4. **Bulk always** - Every trigger test must include 200+ records
+4. **Bulk always** - Every trigger/batch test must insert 251+ records (exceeds the 200-record batch threshold)
 5. **Meaningful assertions** - Test behavior, not just execution
 
 # Persistent Agent Memory

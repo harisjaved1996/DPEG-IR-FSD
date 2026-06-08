@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering__c</fullName>
+    <label>Offering</label>
+    <description>The offering this subscription document is associated with.</description>
+    <inlineHelpText>Select the related offering.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Offering__c</referenceTo>
+    <relationshipLabel>Subscription Documents</relationshipLabel>
+    <relationshipName>Subscription_Docs</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

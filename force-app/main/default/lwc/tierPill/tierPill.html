@@ -1,0 +1,13 @@
+<template>
+    <template lwc:if={hasTier}>
+        <span class={pillClass}>
+            <lightning-icon
+                icon-name={iconName}
+                size="xx-small"
+                variant="bare"
+                class="ir-tier-pill__icon"
+            ></lightning-icon>
+            <span class="ir-tier-pill__label">{label}</span>
+        </span>
+    </template>
+</template>

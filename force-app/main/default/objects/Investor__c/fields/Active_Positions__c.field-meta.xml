@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Positions__c</fullName>
+    <label>Active Positions</label>
+    <description>Count of active investment positions currently held by this investor.</description>
+    <inlineHelpText>Number of investments with an active status held by this investor.</inlineHelpText>
+    <type>Number</type>
+    <precision>4</precision>
+    <scale>0</scale>
+</CustomField>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Junction object linking an Investing Entity (Account) to a signer Contact for the DPEG Investor Relations app. Implemented as a two master-detail junction (Account primary, Contact secondary) capturing the signer role and signature requirement.</description>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Investing Entity Contact</label>
+    <nameField>
+        <displayFormat>IEC-{0000}</displayFormat>
+        <label>Investing Entity Contact Name</label>
+        <startingNumber>1</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Investing Entity Contacts</pluralLabel>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Investing_Entity_Contact_Compact</compactLayoutAssignment>
+</CustomObject>

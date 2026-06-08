@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Single_Signer__c</fullName>
+    <label>Single Signer</label>
+    <description>Indicates the document requires only a single (primary) signature.</description>
+    <inlineHelpText>Checked when only one signer is required for this document.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

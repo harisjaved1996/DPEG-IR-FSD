@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Tracks secondary-market transfers of investment units between a transferor Investment position and a transferee Account for the DPEG Investor Relations app. Captures transfer units, amount, approval workflow status and type. Field history is tracked on state-change and financial fields.</description>
+    <enableActivities>true</enableActivities>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Share Transfer</label>
+    <nameField>
+        <displayFormat>ST-{000}</displayFormat>
+        <label>Share Transfer Name</label>
+        <startingNumber>10</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Share Transfers</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Share_Transfer_Compact</compactLayoutAssignment>
+</CustomObject>

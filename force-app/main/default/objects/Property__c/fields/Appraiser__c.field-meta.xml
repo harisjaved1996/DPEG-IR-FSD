@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appraiser__c</fullName>
+    <label>Appraiser</label>
+    <description>Name of the firm or individual who performed the most recent appraisal.</description>
+    <inlineHelpText>Enter the appraiser's name.</inlineHelpText>
+    <type>Text</type>
+    <length>120</length>
+</CustomField>

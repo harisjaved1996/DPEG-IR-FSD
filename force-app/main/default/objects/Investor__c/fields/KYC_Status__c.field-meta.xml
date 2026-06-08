@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KYC_Status__c</fullName>
+    <label>KYC Status</label>
+    <description>Derived KYC / accreditation status pulled from the related Contact's accreditation status.</description>
+    <inlineHelpText>Read-only. Mirrors the related Contact's Accreditation Status.</inlineHelpText>
+    <type>Text</type>
+    <formula><![CDATA[TEXT(Contact__r.Accreditation_Status__c)]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

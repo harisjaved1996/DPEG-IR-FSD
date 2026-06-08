@@ -1,0 +1,30 @@
+.ir-transfer-board__lane {
+  margin-bottom: var(--slds-g-spacing-3, 0.75rem);
+}
+
+.ir-transfer-board__count {
+  background: var(--dpeg-navy, #032d60);
+  color: var(--slds-g-color-on-brand, #fff);
+}
+
+.ir-transfer-board__cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ir-transfer-board__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-left: 3px solid var(--dpeg-blue, #0070d2);
+}
+
+.ir-transfer-board__card:hover {
+  background: var(--slds-g-color-surface-container-2, #f3f3f3);
+}
+
+.ir-transfer-board__card-amount {
+  color: var(--dpeg-teal, #2bafac);
+  font-weight: 600;
+}

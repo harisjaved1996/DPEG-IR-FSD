@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wire_Alias__c</fullName>
+    <label>Wire Alias</label>
+    <description>Learned alias linking a recurring sender name to an investing entity, improving future auto-matching.</description>
+    <inlineHelpText>Optional alias that maps this sender to a known investing entity for future matches.</inlineHelpText>
+    <type>Text</type>
+    <length>120</length>
+    <required>false</required>
+</CustomField>

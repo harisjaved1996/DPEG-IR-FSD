@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investment_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Status__c</fields>
+    <fields>Amount_Funded__c</fields>
+    <fields>Equity_Pct__c</fields>
+    <label>Investment Compact Layout</label>
+</CompactLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Investor_Channel__c</fields>
+    <fields>Onboarding_KYC_Status__c</fields>
+    <label>Lead Compact Layout</label>
+</CompactLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GP_Entity__c</fullName>
+    <label>GP Entity</label>
+    <description>Name of the general-partner entity sponsoring this offering (e.g., DPEG GP I LLC).</description>
+    <inlineHelpText>Enter the legal name of the sponsoring GP entity.</inlineHelpText>
+    <type>Text</type>
+    <length>120</length>
+    <required>false</required>
+</CustomField>

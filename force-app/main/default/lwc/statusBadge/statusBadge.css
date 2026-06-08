@@ -1,0 +1,26 @@
+:host {
+  display: inline-block;
+}
+
+.ir-status-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.ir-status-badge__icon {
+  line-height: 1;
+}
+
+/* Ensure bare icons inherit the badge theme's foreground color. */
+.slds-theme_success .ir-status-badge__icon {
+  --slds-c-icon-color-foreground: var(--slds-g-color-success-1, #2e844a);
+}
+
+.slds-theme_warning .ir-status-badge__icon {
+  --slds-c-icon-color-foreground: var(--slds-g-color-warning-1, #8c4b02);
+}
+
+.slds-theme_error .ir-status-badge__icon {
+  --slds-c-icon-color-foreground: var(--slds-g-color-error-1, #ba0517);
+}

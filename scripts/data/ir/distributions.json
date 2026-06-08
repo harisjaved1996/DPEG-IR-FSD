@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "DistRef_2400"
+      },
+      "Unison__Investment__c": "@InvestRef_Khan_Heights",
+      "Unison__Distribution_Batch__c": "@DBRef_024",
+      "Unison__Amount__c": 40000,
+      "Unison__ACH_Status__c": "Posted",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "ACH",
+      "Unison__Equity_Pct__c": 8.2
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "DistRef_2401"
+      },
+      "Unison__Investment__c": "@InvestRef_Patel_Heights",
+      "Unison__Distribution_Batch__c": "@DBRef_024",
+      "Unison__Amount__c": 17000,
+      "Unison__ACH_Status__c": "Posted",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "ACH",
+      "Unison__Equity_Pct__c": 3.4
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "DistRef_2402"
+      },
+      "Unison__Investment__c": "@InvestRef_Kothari_Heights",
+      "Unison__Distribution_Batch__c": "@DBRef_024",
+      "Unison__Amount__c": 12000,
+      "Unison__ACH_Status__c": "Cheque Mailed",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "Cheque",
+      "Unison__Equity_Pct__c": 2.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "DistRef_2403"
+      },
+      "Unison__Investment__c": "@InvestRef_Hassan_Heights",
+      "Unison__Distribution_Batch__c": "@DBRef_024",
+      "Unison__Amount__c": 16000,
+      "Unison__ACH_Status__c": "Pending",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "ACH",
+      "Unison__Equity_Pct__c": 3.3
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "DistRef_2404"
+      },
+      "Unison__Investment__c": "@InvestRef_Greentree_Heights",
+      "Unison__Distribution_Batch__c": "@DBRef_024",
+      "Unison__Amount__c": 24000,
+      "Unison__ACH_Status__c": "Cheque Mailed",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "Cheque",
+      "Unison__Equity_Pct__c": 4.9
+    }
+  ]
+}

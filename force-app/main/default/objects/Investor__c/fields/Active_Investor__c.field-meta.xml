@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Investor__c</fullName>
+    <label>Active Investor</label>
+    <description>Indicates the investor currently holds at least one active position.</description>
+    <inlineHelpText>Checked when the investor has one or more active investments.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

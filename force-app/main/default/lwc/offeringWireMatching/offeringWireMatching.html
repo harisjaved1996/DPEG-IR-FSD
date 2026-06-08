@@ -1,0 +1,68 @@
+<template>
+    <div class="ir-wire-matching">
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large">
+                <lightning-spinner alternative-text="Loading wire matching" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <template for:each={buckets} for:item="bucket">
+                    <lightning-layout-item
+                        key={bucket.key}
+                        size="12"
+                        medium-device-size="4"
+                        padding="around-small"
+                    >
+                        <c-section-card title={bucket.bucket} icon-name={bucket.icon}>
+                            <span slot="actions" class="slds-grid slds-grid_vertical-align-center slds-gutters_x-small">
+                                <span class="slds-col slds-text-body_small slds-text-color_weak ir-wire-matching__total">
+                                    {bucket.totalDisplay}
+                                </span>
+                                <span class="slds-col">
+                                    <c-confidence-badge bucket={bucket.bucket}></c-confidence-badge>
+                                </span>
+                            </span>
+
+                            <template lwc:if={bucket.hasWires}>
+                                <ul class="ir-wire-matching__list">
+                                    <template for:each={bucket.wires} for:item="wire">
+                                        <li key={wire.recordId} class="ir-wire-matching__row">
+                                            <div class="ir-wire-matching__row-main">
+                                                <span class="ir-wire-matching__sender">{wire.sender}</span>
+                                                <span class="ir-wire-matching__amount">{wire.amountDisplay}</span>
+                                            </div>
+                                            <div class="ir-wire-matching__row-meta">
+                                                <span class="slds-text-body_small slds-text-color_weak slds-truncate ir-wire-matching__memo">
+                                                    {wire.memo}
+                                                </span>
+                                                <c-confidence-badge
+                                                    bucket={wire.bucket}
+                                                    confidence={wire.confidence}
+                                                ></c-confidence-badge>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                            <template lwc:else>
+                                <p class="slds-text-body_small slds-text-color_weak slds-p-vertical_small">
+                                    No wires in this bucket.
+                                </p>
+                            </template>
+                        </c-section-card>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load wire matching. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

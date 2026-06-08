@@ -1,0 +1,74 @@
+<template>
+    <!-- Selectable variant: rendered as a button for keyboard + SR support -->
+    <template lwc:if={selectable}>
+        <button
+            type="button"
+            class={accentClass}
+            aria-label={ariaLabel}
+            onclick={handleActivate}
+        >
+            <div class="ir-kpi-card__accent" aria-hidden="true"></div>
+            <div class="ir-kpi-card__content">
+                <div class="ir-kpi-card__header">
+                    <template lwc:if={hasIcon}>
+                        <lightning-icon
+                            icon-name={iconName}
+                            size="x-small"
+                            class="ir-kpi-card__icon"
+                        ></lightning-icon>
+                    </template>
+                    <span class="ir-kpi-card__label slds-truncate">{label}</span>
+                </div>
+                <div class="ir-kpi-card__value-row">
+                    <span class="ir-kpi-card__value">{value}</span>
+                    <template lwc:if={hasTrend}>
+                        <span class={trendClass}>
+                            <lightning-icon
+                                icon-name={trendIcon}
+                                size="xx-small"
+                                variant="bare"
+                            ></lightning-icon>
+                            <span class="slds-assistive-text"
+                                >{trendAssistiveText}</span
+                            >
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </button>
+    </template>
+
+    <!-- Static variant -->
+    <template lwc:else>
+        <div class={accentClass} role="group" aria-label={ariaLabel}>
+            <div class="ir-kpi-card__accent" aria-hidden="true"></div>
+            <div class="ir-kpi-card__content">
+                <div class="ir-kpi-card__header">
+                    <template lwc:if={hasIcon}>
+                        <lightning-icon
+                            icon-name={iconName}
+                            size="x-small"
+                            class="ir-kpi-card__icon"
+                        ></lightning-icon>
+                    </template>
+                    <span class="ir-kpi-card__label slds-truncate">{label}</span>
+                </div>
+                <div class="ir-kpi-card__value-row">
+                    <span class="ir-kpi-card__value">{value}</span>
+                    <template lwc:if={hasTrend}>
+                        <span class={trendClass}>
+                            <lightning-icon
+                                icon-name={trendIcon}
+                                size="xx-small"
+                                variant="bare"
+                            ></lightning-icon>
+                            <span class="slds-assistive-text"
+                                >{trendAssistiveText}</span
+                            >
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

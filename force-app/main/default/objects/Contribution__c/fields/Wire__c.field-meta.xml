@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wire__c</fullName>
+    <label>Wire</label>
+    <description>The Plaid-staged bank wire this contribution was matched from.</description>
+    <inlineHelpText>Link the staged wire that this contribution was matched to, if applicable.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Wire__c</referenceTo>
+    <relationshipLabel>Contributions</relationshipLabel>
+    <relationshipName>Contributions</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

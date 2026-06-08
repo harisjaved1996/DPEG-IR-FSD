@@ -1,0 +1,35 @@
+<template>
+    <template lwc:if={hasOfferings}>
+        <ul class="slds-list_vertical ir-offering-progress-list">
+            <template for:each={rows} for:item="row">
+                <li key={row.key} class="ir-offering-progress-list__row">
+                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center ir-offering-progress-list__meta">
+                        <div class="slds-truncate ir-offering-progress-list__name">
+                            <span class="slds-text-body_regular slds-text-color_default">{row.name}</span>
+                            <template lwc:if={row.displayId}>
+                                <span class="slds-text-body_small slds-text-color_weak ir-offering-progress-list__id">&nbsp;·&nbsp;{row.displayId}</span>
+                            </template>
+                        </div>
+                        <div class="slds-no-flex slds-text-body_small slds-text-color_weak ir-offering-progress-list__amounts">
+                            <span class="ir-offering-progress-list__raised">{row.raisedText}</span>
+                            <span>&nbsp;/&nbsp;{row.targetText}</span>
+                            <template lwc:if={row.investorText}>
+                                <span class="ir-offering-progress-list__investors">&nbsp;·&nbsp;{row.investorText}</span>
+                            </template>
+                        </div>
+                    </div>
+                    <c-progress-bar
+                        percent={row.percent}
+                        label={row.name}
+                        variant={row.variant}
+                    ></c-progress-bar>
+                </li>
+            </template>
+        </ul>
+    </template>
+    <template lwc:else>
+        <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
+            No active offerings to display.
+        </p>
+    </template>
+</template>

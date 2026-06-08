@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Committed_Amount_Not_Negative</fullName>
+    <active>true</active>
+    <description>Prevents Committed Amount from being set to a negative value. Factory-safe: zero and blank are permitted; only negative values (less than 0) trigger the error.</description>
+    <errorConditionFormula>Committed_Amount__c &lt; 0</errorConditionFormula>
+    <errorMessage>Committed Amount cannot be negative.</errorMessage>
+</ValidationRule>

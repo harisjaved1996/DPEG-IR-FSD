@@ -1,0 +1,45 @@
+:host {
+  /* DPEG brand tokens — children inherit these custom properties. */
+  --dpeg-navy: #032d60;
+  --dpeg-blue: #0070d2;
+  --dpeg-teal: #2bafac;
+  --slds-g-color-brand-base-50: var(--dpeg-blue);
+  --slds-g-color-accent-container-1: var(--dpeg-teal);
+  display: block;
+}
+
+.ir-console {
+  padding: var(--slds-g-spacing-4, 1rem);
+}
+
+.ir-console__title {
+  color: var(--dpeg-navy);
+}
+
+.ir-console__loader {
+  min-height: var(--slds-g-sizing-12, 8rem);
+}
+
+.ir-console__donut {
+  padding: var(--slds-g-spacing-2, 0.5rem) 0;
+}
+
+.ir-console__baselines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-console__baseline-row {
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-console__baseline-label {
+  min-width: 0;
+  font-size: var(--slds-g-font-scale-neg-1, 0.8125rem);
+}
+
+.ir-console__baseline-value {
+  font-weight: 600;
+  color: var(--dpeg-navy, #032d60);
+}

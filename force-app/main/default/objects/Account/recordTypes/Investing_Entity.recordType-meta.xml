@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investing_Entity</fullName>
+    <active>true</active>
+    <label>Investing Entity</label>
+    <description>Record type for investor LP entities (Trusts, LLCs, IRAs, Individuals, Corporations). Drives the Investing Entity page layout with entity type, tax ID, bank details, and IR compliance fields.</description>
+</RecordType>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Document repository record for the DPEG Investor Relations app. Categorizes investor-facing documents (PPM, Sub Doc, K-1, reports, notices, transfer agreements) and controls portal visibility. Offering and Investing Entity links are optional (null = applies to all).</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>IR Document</label>
+    <nameField>
+        <displayFormat>D-{0000}</displayFormat>
+        <label>IR Document Name</label>
+        <startingNumber>435</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>IR Documents</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>IR_Document_Compact</compactLayoutAssignment>
+</CustomObject>

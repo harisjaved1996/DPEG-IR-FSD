@@ -1,0 +1,154 @@
+[
+  {
+    "sobject": "Unison__Property__c",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": [
+      "properties.json"
+    ]
+  },
+  {
+    "sobject": "Account",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": [
+      "accounts.json"
+    ]
+  },
+  {
+    "sobject": "Contact",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "contacts.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Investor__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "investors.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Investing_Entity_Contact__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "iecontacts.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Offering__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "offerings.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Property_Asset__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "propertyAssets.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Commitment__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "commitments.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Investment__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "investments.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Wire__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "wires.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Contribution__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "contributions.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Subscription_Doc__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "subscriptionDocs.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Waitlist__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "waitlist.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Distribution_Batch__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "distributionBatches.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Distribution__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "distributions.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Share_Transfer__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "shareTransfers.json"
+    ]
+  },
+  {
+    "sobject": "Unison__Transfer_Document__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "transferDocuments.json"
+    ]
+  },
+  {
+    "sobject": "Unison__IR_Document__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "irDocuments.json"
+    ]
+  },
+  {
+    "sobject": "Lead",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": [
+      "leads.json"
+    ]
+  }
+]

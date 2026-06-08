@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Count__c</fullName>
+    <label>Approval Count</label>
+    <description>Number of approvals recorded against this batch toward the two-of-three approval requirement (Phase C). Defaults to zero.</description>
+    <inlineHelpText>Number of approvals captured for this batch. Maintained by approval automation in a later phase.</inlineHelpText>
+    <type>Number</type>
+    <precision>2</precision>
+    <scale>0</scale>
+    <defaultValue>0</defaultValue>
+    <required>false</required>
+</CustomField>

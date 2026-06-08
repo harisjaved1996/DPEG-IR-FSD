@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KYC_Complete__c</fullName>
+    <label>KYC Complete</label>
+    <description>Indicates the Know Your Customer identity verification has been completed for this investor contact.</description>
+    <inlineHelpText>Check when all KYC identity-verification steps are complete for this contact.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

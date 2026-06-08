@@ -1,0 +1,137 @@
+name: "[Reusable] Security & SAST Scan"
+
+# Called by feature-branch-ci.yml and pr-validate.yml.
+# Runs three independent security checks:
+#   1. Salesforce SAST scanner → uploads SARIF to GitHub Security tab
+#   2. Gitleaks → detects hardcoded secrets / credentials in code
+#   3. npm audit → flags high-severity dependency vulnerabilities
+# Outputs: sast-passed, secrets-passed (both true/false strings).
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node.js version for SF CLI install"
+        type: string
+        default: "20"
+      sast-severity-threshold:
+        description: "SF scanner severity level that causes a failure (1=critical … 5=info)"
+        type: number
+        default: 3
+    outputs:
+      sast-passed:
+        description: "true when SAST scanner found no violations at or above threshold"
+        value: ${{ jobs.security.outputs.sast-passed }}
+      secrets-passed:
+        description: "true when Gitleaks detected no exposed secrets"
+        value: ${{ jobs.security.outputs.secrets-passed }}
+
+jobs:
+  security:
+    name: Security & SAST Scan
+    runs-on: ubuntu-latest
+    # security-events: write is required for the SARIF upload step.
+    permissions:
+      contents: read
+      security-events: write
+    outputs:
+      sast-passed: ${{ steps.sast.outputs.passed }}
+      secrets-passed: ${{ steps.assess-secrets.outputs.passed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Gitleaks scans full git history
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-${{ runner.os }}-${{ inputs.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-global-${{ runner.os }}-${{ inputs.node-version }}-
+
+      - name: Install Salesforce CLI + Scanner plugin
+        run: |
+          npm install --global @salesforce/cli@latest
+          sf plugins install @salesforce/sfdx-scanner
+
+      # ── SAST: Salesforce Code Scanner ────────────────────────────────────
+      - name: Run Salesforce SAST Scanner
+        id: sast
+        run: |
+          set +e
+          sf scanner run \
+            --target "force-app/**/*.cls,force-app/**/*.trigger,force-app/**/*.js" \
+            --format sarif \
+            --outfile scanner-results.sarif \
+            --severity-threshold ${{ inputs.sast-severity-threshold }}
+          EXIT=$?
+          set -e
+
+          # Ensure SARIF file exists even if scanner found nothing to report
+          [ ! -f scanner-results.sarif ] && \
+            echo '{"version":"2.1.0","$schema":"https://json.schemastore.org/sarif-2.1.0.json","runs":[]}' \
+            > scanner-results.sarif
+
+          if [ $EXIT -ne 0 ]; then
+            echo "passed=false" >> $GITHUB_OUTPUT
+            echo "❌ SAST: severity-${{ inputs.sast-severity-threshold }}+ violations found."
+          else
+            echo "passed=true"  >> $GITHUB_OUTPUT
+            echo "✅ SAST: no violations at severity ${{ inputs.sast-severity-threshold }} or above."
+          fi
+
+      - name: Upload SARIF to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scanner-results.sarif
+          category: salesforce-sast
+
+      # ── Secrets: Gitleaks ─────────────────────────────────────────────────
+      - name: Gitleaks — Secrets Detection
+        id: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true # We assess the outcome ourselves below
+
+      - name: Assess Gitleaks result
+        id: assess-secrets
+        run: |
+          if [ "${{ steps.gitleaks.outcome }}" == "success" ]; then
+            echo "passed=true"  >> $GITHUB_OUTPUT
+            echo "✅ Secrets: no exposed secrets detected."
+          else
+            echo "passed=false" >> $GITHUB_OUTPUT
+            echo "❌ Secrets: Gitleaks detected potential secrets or credentials in the codebase."
+          fi
+
+      # ── Dependencies: npm audit ───────────────────────────────────────────
+      - name: npm Dependency Audit
+        if: hashFiles('package-lock.json') != ''
+        run: |
+          npm audit --audit-level=high --json | \
+            jq -r 'if .metadata.vulnerabilities.high > 0 or .metadata.vulnerabilities.critical > 0
+                   then "⚠️  npm audit: \(.metadata.vulnerabilities.high) high, \(.metadata.vulnerabilities.critical) critical vulnerabilities found."
+                   else "✅ npm audit: no high/critical vulnerabilities."
+                   end' || \
+          echo "⚠️  npm audit returned non-zero (check output above)."
+
+      # ── Final gate ────────────────────────────────────────────────────────
+      - name: Fail job if any critical scan failed
+        if: |
+          steps.sast.outputs.passed == 'false' ||
+          steps.assess-secrets.outputs.passed == 'false'
+        run: |
+          echo "❌ Security scan failed:"
+          [ "${{ steps.sast.outputs.passed }}"    == "false" ] && echo "  - SAST: severity-${{ inputs.sast-severity-threshold }} violations found (check GitHub Security tab)"
+          [ "${{ steps.assess-secrets.outputs.passed }}" == "false" ] && echo "  - Secrets: Gitleaks detected exposed credentials"
+          exit 1

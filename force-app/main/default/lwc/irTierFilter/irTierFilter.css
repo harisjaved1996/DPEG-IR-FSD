@@ -1,0 +1,9 @@
+.ir-tier-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--slds-g-spacing-1, 0.25rem);
+}
+
+.ir-tier-filter__button {
+  margin-bottom: var(--slds-g-spacing-1, 0.25rem);
+}

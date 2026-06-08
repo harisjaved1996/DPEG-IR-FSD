@@ -1,0 +1,46 @@
+<template>
+    <div class="ir-investor-list">
+        <header class="slds-m-bottom_medium ir-investor-list__header">
+            <h1 class="slds-text-heading_large ir-investor-list__title">Investors</h1>
+            <p class="slds-text-body_small slds-text-color_weak">All investors with tier, capital, and KYC status.</p>
+        </header>
+
+        <template lwc:if={showContent}>
+            <!-- TIER FILTER -->
+            <c-section-card title="Filter by Tier" icon-name="utility:filterList" compact>
+                <c-ir-tier-filter
+                    selected={selectedTier}
+                    ontierchange={handleTierChange}
+                ></c-ir-tier-filter>
+            </c-section-card>
+
+            <!-- INVESTOR TABLE -->
+            <div class="slds-m-top_medium slds-is-relative">
+                <template lwc:if={isLoading}>
+                    <lightning-spinner alternative-text="Loading Investors" size="small"></lightning-spinner>
+                </template>
+                <c-ir-investor-table
+                    title="Investors"
+                    investors={investors}
+                    oninvestorselect={handleInvestorSelect}
+                ></c-ir-investor-table>
+            </div>
+        </template>
+
+        <template lwc:if={isLoading}>
+            <template lwc:if={hasNoContentYet}>
+                <div class="slds-is-relative slds-p-around_large ir-investor-list__loader">
+                    <lightning-spinner alternative-text="Loading Investors" size="medium"></lightning-spinner>
+                </div>
+            </template>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Investors. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

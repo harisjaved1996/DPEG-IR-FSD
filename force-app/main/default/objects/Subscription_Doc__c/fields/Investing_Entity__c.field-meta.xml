@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investing_Entity__c</fullName>
+    <label>Investing Entity</label>
+    <description>The investing entity (Account) executing this subscription document.</description>
+    <inlineHelpText>Select the investing-entity Account.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Subscription Documents</relationshipLabel>
+    <relationshipName>Subscription_Docs</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

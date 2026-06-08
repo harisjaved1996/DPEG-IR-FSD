@@ -1,0 +1,306 @@
+name: PR Validate
+
+# Triggers on every PR opened, updated, or re-opened against development, uat, or main.
+# This is the last gate before code enters a protected integration branch.
+#
+# Pipeline:
+#   Tier 0 — PR Compliance (title convention, destructive-change detection)
+#   Tier 1 — Fast quality gates: Lint + Format, LWC Jest, PMD, Security (parallel)
+#   Tier 2 — Scratch Org full validate (waits for PMD + LWC Jest)
+#   Tier 3 — Post PR comment + email on any failure
+#
+# On failure: Merge is BLOCKED. A comment is posted on the PR and moderator is emailed.
+# On success: All checks pass; reviewer(s) can approve and merge.
+#
+# Note: No auto-revert here — the PR branch is already isolated.
+# The developer fixes their branch; the PR re-triggers on the next push.
+
+on:
+  pull_request:
+    branches:
+      - main
+      - uat
+      - development
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write # Post PR comments on failure
+  security-events: write # SARIF upload inside _reusable-security.yml
+
+env:
+  NODE_VERSION: "20"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# TIER 0 — PR Compliance (fast, no org needed)
+# ──────────────────────────────────────────────────────────────────────────────
+
+jobs:
+  pr-compliance:
+    name: PR Compliance
+    runs-on: ubuntu-latest
+    outputs:
+      has-destructive: ${{ steps.destructive.outputs.has-destructive }}
+      deleted-files: ${{ steps.destructive.outputs.deleted-files }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── PR title must follow Conventional Commits ───────────────────────
+      - name: Validate PR title convention
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          # Pattern: type(optional-scope): description (min 5 chars)
+          # Allowed types: feat fix hotfix chore docs refactor test style perf ci build revert
+          PATTERN="^(feat|fix|hotfix|chore|docs|refactor|test|style|perf|ci|build|revert)(\([a-zA-Z0-9_\- ]+\))?: .{5,}$"
+
+          if ! echo "$TITLE" | grep -qP "$PATTERN"; then
+            echo "❌ PR title does not match the required convention."
+            echo ""
+            echo "   Required format:  type(scope): short description  (5+ chars)"
+            echo "   Allowed types:    feat | fix | hotfix | chore | docs | refactor"
+            echo "                     test | style | perf | ci | build | revert"
+            echo ""
+            echo "   Examples:"
+            echo "     feat(acquisitions): Add lead-to-opportunity conversion service"
+            echo "     fix(ir): Fix Distribution ACH status not updating on Plaid webhook"
+            echo "     hotfix(transaction): Fix critical date alert not firing at T-1"
+            echo "     chore: Upgrade PMD ruleset to v7.3.0"
+            echo ""
+            echo "   Your title: \"$TITLE\""
+            exit 1
+          fi
+          echo "✅ PR title is valid: \"$TITLE\""
+
+      # ── Detect removed Salesforce metadata files ─────────────────────────
+      - name: Detect destructive changes
+        id: destructive
+        run: |
+          BASE="${{ github.base_ref }}"
+          git fetch origin "$BASE" --depth=1
+
+          # Find files deleted in this PR that live under force-app/
+          DELETED=$(git diff --name-status "origin/$BASE"...HEAD | \
+            grep '^D' | grep 'force-app/' | awk '{print $2}' || true)
+
+          if [ -n "$DELETED" ]; then
+            echo "⚠️  Destructive changes detected — metadata files removed in this PR:"
+            echo "$DELETED"
+            echo "has-destructive=true" >> $GITHUB_OUTPUT
+            {
+              echo "deleted-files<<EOF"
+              echo "$DELETED"
+              echo "EOF"
+            } >> $GITHUB_OUTPUT
+          else
+            echo "✅ No destructive changes detected."
+            echo "has-destructive=false" >> $GITHUB_OUTPUT
+            echo "deleted-files="        >> $GITHUB_OUTPUT
+          fi
+
+      # ── Block destructive changes targeting main entirely ────────────────
+      - name: Block destructive changes to main
+        if: |
+          steps.destructive.outputs.has-destructive == 'true' &&
+          github.base_ref == 'main'
+        run: |
+          echo "❌ Destructive changes are NOT permitted in a PR directly targeting 'main'."
+          echo "   The following metadata files were removed:"
+          echo "${{ steps.destructive.outputs.deleted-files }}"
+          echo ""
+          echo "   To remove metadata from Production:"
+          echo "   1. Create a destructiveChanges.xml package"
+          echo "   2. Target 'development' first, validate in UAT, then promote to main"
+          exit 1
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # TIER 1 — Fast quality gates (all run in parallel with Tier 0)
+  # ──────────────────────────────────────────────────────────────────────────────
+
+  lint-and-format:
+    name: Lint + Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      - run: npm ci
+      - name: Prettier check
+        run: npm run prettier:check
+      - name: ESLint
+        run: npm run lint
+
+  lwc-jest:
+    name: LWC Jest Tests
+    runs-on: ubuntu-latest
+    needs: lint-and-format
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      - run: npm ci
+      - name: Run Jest with coverage
+        run: npm run test:unit:coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lwc-coverage-${{ github.run_id }}
+          path: coverage/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  pmd:
+    name: PMD Static Analysis
+    uses: ./.github/workflows/_reusable-pmd.yml
+    with:
+      pmd-version: "7.3.0"
+
+  security:
+    name: Security & SAST Scan
+    uses: ./.github/workflows/_reusable-security.yml
+    with:
+      node-version: "20"
+      sast-severity-threshold: 3
+    secrets: inherit
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # TIER 2 — Scratch Org validate (waits for PMD + LWC Jest to pass)
+  # ──────────────────────────────────────────────────────────────────────────────
+
+  scratch-org:
+    name: Scratch Org Validate
+    needs: [lwc-jest, pmd]
+    uses: ./.github/workflows/_reusable-scratch-org.yml
+    with:
+      org-alias-prefix: "dpeg-pr"
+      coverage-threshold: 90
+    secrets:
+      DEVHUB_AUTH_URL: ${{ secrets.DEVHUB_AUTH_URL }}
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # TIER 3 — Post PR comment + email moderator on any failure
+  # ──────────────────────────────────────────────────────────────────────────────
+
+  notify-failure:
+    name: Notify Failure
+    runs-on: ubuntu-latest
+    needs: [pr-compliance, lint-and-format, lwc-jest, pmd, security, scratch-org]
+    if: failure()
+
+    steps:
+      - name: Post PR comment — failure summary
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const jobs = {
+              'PR Compliance':   '${{ needs.pr-compliance.result }}',
+              'Lint + Format':   '${{ needs.lint-and-format.result }}',
+              'LWC Jest':        '${{ needs.lwc-jest.result }}',
+              'PMD Analysis':    '${{ needs.pmd.result }}',
+              'Security Scan':   '${{ needs.security.result }}',
+              'Scratch Org':     '${{ needs.scratch-org.result }}',
+            };
+
+            const icon = (r) =>
+              r === 'success'  ? '✅ Passed'  :
+              r === 'failure'  ? '❌ Failed'  :
+              r === 'skipped'  ? '⏭️ Skipped' :
+              r === 'cancelled'? '🚫 Cancelled' :
+              `⏳ ${r}`;
+
+            const rows = Object.entries(jobs)
+              .map(([name, r]) => `| ${name} | ${icon(r)} |`)
+              .join('\n');
+
+            const coverage    = '${{ needs.scratch-org.outputs.coverage }}';
+            const failReason  = '${{ needs.scratch-org.outputs.failure-reason }}';
+            const hasDestructive = '${{ needs.pr-compliance.outputs.has-destructive }}' === 'true';
+            const deletedFiles   = `${{ needs.pr-compliance.outputs.deleted-files }}`;
+
+            const lines = [
+              '## ❌ PR Validation Failed',
+              '',
+              'One or more required checks failed. **Merge is blocked** until all checks pass.',
+              '',
+              '| Check | Result |',
+              '|-------|--------|',
+              rows,
+              '',
+            ];
+
+            if (coverage)   lines.push(`**Apex Test Coverage:** ${coverage}%`);
+            if (failReason) lines.push(`**Failure Detail:** ${failReason}`);
+            if (hasDestructive) {
+              lines.push('');
+              lines.push('> ⚠️ **Destructive changes detected** — metadata files were removed in this PR.');
+              if (deletedFiles) {
+                lines.push('> Removed files:');
+                deletedFiles.split('\n').filter(Boolean).forEach(f => lines.push(`> - \`${f}\``));
+              }
+            }
+
+            lines.push('');
+            lines.push('### How to fix');
+            lines.push(`1. Review the [CI run](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}) for full details`);
+            lines.push('2. Fix the issues on your branch');
+            lines.push('3. Push — all checks re-run automatically on the updated commit');
+            lines.push('');
+            lines.push('> *Posted automatically by DPEG CI*');
+
+            await github.rest.issues.createComment({
+              owner:        context.repo.owner,
+              repo:         context.repo.repo,
+              issue_number: context.issue.number,
+              body:         lines.join('\n'),
+            });
+
+      - name: Email — PR validation failure
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: ${{ secrets.SMTP_FROM_EMAIL }}
+          to: ${{ secrets.MODERATOR_EMAIL }}
+          subject: "❌ [DPEG CI] PR #${{ github.event.pull_request.number }} failed — '${{ github.head_ref }}' → '${{ github.base_ref }}'"
+          content_type: text/plain
+          body: |
+            DPEG CI — PR Validation FAILED
+            ════════════════════════════════════════
+
+            PR        : #${{ github.event.pull_request.number }} — ${{ github.event.pull_request.title }}
+            Branch    : ${{ github.head_ref }} → ${{ github.base_ref }}
+            Author    : ${{ github.event.pull_request.user.login }}
+            Commit    : ${{ github.sha }}
+
+            ── Check Results ───────────────────────────────────────────────────
+            PR Compliance  : ${{ needs.pr-compliance.result }}
+            Lint + Format  : ${{ needs.lint-and-format.result }}
+            LWC Jest       : ${{ needs.lwc-jest.result }}
+            PMD Analysis   : ${{ needs.pmd.result }}
+            Security Scan  : ${{ needs.security.result }}
+            Scratch Org    : ${{ needs.scratch-org.result }}
+            Coverage       : ${{ needs.scratch-org.outputs.coverage }}%
+
+            ── Failure Detail ──────────────────────────────────────────────────
+            ${{ needs.scratch-org.outputs.failure-reason }}
+
+            ── Destructive Changes ─────────────────────────────────────────────
+            ${{ needs.pr-compliance.outputs.has-destructive == 'true' && 'YES — metadata files were removed. Review before approving.' || 'None detected.' }}
+
+            ── Links ───────────────────────────────────────────────────────────
+            PR     : ${{ github.event.pull_request.html_url }}
+            CI Run : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            PMD    : Artifact 'pmd-report-${{ github.run_id }}'
+            Tests  : Artifact 'test-results-${{ github.run_id }}'
+
+            — DPEG Automated CI

@@ -1,0 +1,86 @@
+# GitHub Actions Labeler configuration (actions/labeler@v5)
+#
+# Labels are applied automatically to PRs based on:
+#   - Source branch name
+#   - Target (base) branch
+#   - Changed file paths
+#
+# Pre-create these labels in Repository Settings → Labels before enabling.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Branch type labels ────────────────────────────────────────────────────────
+feature:
+  - head-branch: ["^feature/"]
+
+bugfix:
+  - head-branch: ["^bugfix/"]
+
+hotfix:
+  - head-branch: ["^hotfix/"]
+
+task:
+  - head-branch: ["^task/"]
+
+# ── Target branch labels ──────────────────────────────────────────────────────
+target-development:
+  - base-branch: ["^development$"]
+
+target-uat:
+  - base-branch: ["^uat$"]
+
+target-main:
+  - base-branch: ["^main$"]
+
+# ── Salesforce component type labels ─────────────────────────────────────────
+apex:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "force-app/**/*.cls"
+          - "force-app/**/*.trigger"
+
+lwc:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "force-app/**/lwc/**"
+
+metadata:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "force-app/**/*.xml"
+          - "force-app/**/objects/**"
+          - "force-app/**/flows/**"
+          - "force-app/**/permissionsets/**"
+
+salesforce:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "force-app/**"
+
+# ── Infrastructure / tooling labels ──────────────────────────────────────────
+ci-cd:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "docs/**"
+          - "ARCHITECTURE.md"
+          - "CLAUDE.md"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "package-lock.json"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "sfdx-project.json"
+          - "config/**"
+          - "pmd-ruleset.xml"
+          - ".eslintrc*"
+          - ".prettierrc*"

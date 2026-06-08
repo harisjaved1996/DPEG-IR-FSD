@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Signature_Status__c</fullName>
+    <label>Secondary Signature Status</label>
+    <description>Workflow status of the secondary signer's e-signature, including single-signer handling.</description>
+    <inlineHelpText>Use Single Signer or N/A when no secondary signature is required.</inlineHelpText>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Sent</fullName>
+                <default>false</default>
+                <label>Sent</label>
+            </value>
+            <value>
+                <fullName>Signed</fullName>
+                <default>false</default>
+                <label>Signed</label>
+            </value>
+            <value>
+                <fullName>Awaiting Primary</fullName>
+                <default>false</default>
+                <label>Awaiting Primary</label>
+            </value>
+            <value>
+                <fullName>Single Signer</fullName>
+                <default>false</default>
+                <label>Single Signer</label>
+            </value>
+            <value>
+                <fullName>N/A</fullName>
+                <default>false</default>
+                <label>N/A</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

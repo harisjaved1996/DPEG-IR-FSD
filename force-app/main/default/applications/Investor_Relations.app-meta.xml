@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>IR_Dashboard</defaultLandingTab>
+    <description>Investor Relations application for DPEG — manages offerings, investments, distributions, share transfers, documents, and investor onboarding.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Investor Relations</label>
+    <navType>Standard</navType>
+    <tabs>IR_Dashboard</tabs>
+    <tabs>IR_Console</tabs>
+    <tabs>Active_Investments</tabs>
+    <tabs>Offering__c</tabs>
+    <tabs>IR_Onboarding</tabs>
+    <tabs>IR_Distributions</tabs>
+    <tabs>IR_ShareTransfers</tabs>
+    <tabs>IR_Documents</tabs>
+    <tabs>IR_Investors</tabs>
+    <tabs>IR_Payments</tabs>
+    <uiType>Lightning</uiType>
+    <brand>
+        <headerColor>#032D60</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+</CustomApplication>

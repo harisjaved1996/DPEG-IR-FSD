@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_ID_EIN__c</fullName>
+    <label>Tax ID / EIN</label>
+    <description>Sensitive employer identification number for the investing entity. Access restricted via field-level security; surfaced to most users only through the masked formula field.</description>
+    <inlineHelpText>Enter the entity EIN (format ##-#######). Restricted field — visible only to authorized roles.</inlineHelpText>
+    <type>Text</type>
+    <length>20</length>
+    <required>false</required>
+</CustomField>

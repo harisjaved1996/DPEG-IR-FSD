@@ -1,0 +1,94 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "OffRef_Magnolia"
+      },
+      "Name": "Magnolia Crossing — DPEG Fund LP",
+      "Unison__Status__c": "Active Fundraising",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Committed_Investor_Count__c": 142,
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Property__c": "@PropRef_Magnolia"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "OffRef_Cypress"
+      },
+      "Name": "Cypress Grove — DPEG MF Fund VII",
+      "Unison__Status__c": "Pre-Launch",
+      "Unison__Target_Raise__c": 21000000,
+      "Unison__Amount_Raised__c": 0,
+      "Unison__Total_Committed__c": 0,
+      "Unison__Committed_Investor_Count__c": 0,
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__GP_Entity__c": "DPEG GP II LLC",
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Property__c": "@PropRef_Cypress"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "OffRef_Beltway"
+      },
+      "Name": "Beltway Plaza Co-Invest",
+      "Unison__Status__c": "Fully Subscribed",
+      "Unison__Target_Raise__c": 7500000,
+      "Unison__Amount_Raised__c": 9400000,
+      "Unison__Total_Committed__c": 9400000,
+      "Unison__Committed_Investor_Count__c": 12,
+      "Unison__Minimum_Investment__c": 25000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2024-06-01",
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Property__c": "@PropRef_Beltway"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "OffRef_Westheimer"
+      },
+      "Name": "Westheimer C-Stores Refi",
+      "Unison__Status__c": "Closed Funded",
+      "Unison__Target_Raise__c": 4200000,
+      "Unison__Amount_Raised__c": 4200000,
+      "Unison__Total_Committed__c": 4200000,
+      "Unison__Committed_Investor_Count__c": 64,
+      "Unison__Minimum_Investment__c": 25000,
+      "Unison__Overbook_Multiplier__c": 1,
+      "Unison__GP_Entity__c": "DPEG GP III LLC",
+      "Unison__Launch_Date__c": "2023-09-01",
+      "Unison__Transfers_Permitted__c": true,
+      "Unison__Property__c": "@PropRef_Westheimer"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "OffRef_Heights"
+      },
+      "Name": "Heights Apartments Q1 Dist",
+      "Unison__Status__c": "Investment Active",
+      "Unison__Target_Raise__c": 8800000,
+      "Unison__Amount_Raised__c": 8800000,
+      "Unison__Total_Committed__c": 8800000,
+      "Unison__Committed_Investor_Count__c": 312,
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2022-01-01",
+      "Unison__Transfers_Permitted__c": true,
+      "Unison__Property__c": "@PropRef_Heights"
+    }
+  ]
+}

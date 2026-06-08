@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Offering Wire Matching</masterLabel>
+    <description>Offering Workspace "Wire Matching" tab. Fetches OfferingWorkspaceController.getWireMatching and renders three confidence buckets (Auto-Settle, Review, Unmatched) as sectionCards with confidenceBadge headers and per-wire detail rows.</description>
+</LightningComponentBundle>

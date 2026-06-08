@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confidence_Bucket__c</fullName>
+    <label>Confidence Bucket</label>
+    <description>Categorizes the match confidence into Auto-Settle (>=99), Review (70-98), or Unmatched (&lt;70) to drive the matching queue.</description>
+    <inlineHelpText>Auto-derived band: Auto-Settle at 99+, Review at 70-98, Unmatched below 70.</inlineHelpText>
+    <type>Text</type>
+    <formula><![CDATA[IF(Match_Confidence__c >= 99, 'Auto-Settle', IF(Match_Confidence__c >= 70, 'Review', 'Unmatched'))]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

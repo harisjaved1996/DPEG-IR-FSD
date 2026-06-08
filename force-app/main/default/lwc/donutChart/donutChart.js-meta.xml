@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Donut Chart</masterLabel>
+    <description>Presentational pure-SVG donut chart (stroke-dasharray segments, no third-party libraries) with center label/value and an accessible, screen-reader-readable legend. Emits slicehover. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

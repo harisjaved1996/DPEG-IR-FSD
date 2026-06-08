@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Debt_Structure__c</fullName>
+    <label>Debt Structure</label>
+    <description>Summary of the debt structure on the property (loan type, terms, rate).</description>
+    <inlineHelpText>Describe the debt structure (e.g., fixed-rate senior loan, terms).</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+</CustomField>

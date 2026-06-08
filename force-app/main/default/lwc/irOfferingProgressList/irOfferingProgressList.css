@@ -1,0 +1,28 @@
+.ir-offering-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-4, 1rem);
+}
+
+.ir-offering-progress-list__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-1, 0.25rem);
+}
+
+.ir-offering-progress-list__meta {
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-offering-progress-list__name {
+  min-width: 0;
+}
+
+.ir-offering-progress-list__raised {
+  font-weight: 600;
+  color: var(--dpeg-navy, #032d60);
+}
+
+.ir-offering-progress-list__amounts {
+  white-space: nowrap;
+}

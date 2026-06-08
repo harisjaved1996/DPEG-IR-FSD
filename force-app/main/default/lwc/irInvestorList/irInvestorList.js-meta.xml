@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>IR Investor List</masterLabel>
+    <description>Investors page: a tier filter and the investor table (tier pill + KYC status badge per row). Fetches InvestorListController.getInvestors(null) on load, re-fetches getInvestors(tier) on filter change, and navigates to the Investor record on row click.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+</LightningComponentBundle>

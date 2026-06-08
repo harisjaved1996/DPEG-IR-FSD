@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transfer_Date__c</fullName>
+    <label>Transfer Date</label>
+    <description>Effective date the unit transfer takes place.</description>
+    <inlineHelpText>The effective date of the transfer.</inlineHelpText>
+    <type>Date</type>
+    <trackHistory>true</trackHistory>
+</CustomField>

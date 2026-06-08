@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.ir-batch-detail__content {
+  min-height: var(--slds-g-sizing-12, 8rem);
+}

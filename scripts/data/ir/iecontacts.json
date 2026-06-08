@@ -1,0 +1,114 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Khan_Primary"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_KhanFamilyTrust",
+      "Unison__Contact__c": "@ConRef_Khan",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Khan_Secondary"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_KhanFamilyTrust",
+      "Unison__Contact__c": "@ConRef_KhanSpouse",
+      "Unison__Signer_Role__c": "Secondary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_KFT_IRA_Primary"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_KFT_IRA",
+      "Unison__Contact__c": "@ConRef_Khan",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Patel"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_PatelInvestments",
+      "Unison__Contact__c": "@ConRef_Patel",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_DefiCap"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_DefiCapital",
+      "Unison__Contact__c": "@ConRef_DefiCap",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Kothari"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_KothariIRA",
+      "Unison__Contact__c": "@ConRef_Kothari",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Ahmed"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_AhmedM",
+      "Unison__Contact__c": "@ConRef_Ahmed",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Greentree"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_GreenTree",
+      "Unison__Contact__c": "@ConRef_Greentree",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Hassan"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_HassanFamily",
+      "Unison__Contact__c": "@ConRef_Hassan",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_Sharma"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_SharmaHoldings",
+      "Unison__Contact__c": "@ConRef_Sharma",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    },
+    {
+      "attributes": {
+        "type": "Unison__Investing_Entity_Contact__c",
+        "referenceId": "IECRef_PacificRim"
+      },
+      "Unison__Investing_Entity__c": "@AccRef_PacificRim",
+      "Unison__Contact__c": "@ConRef_PacificRimContact",
+      "Unison__Signer_Role__c": "Primary",
+      "Unison__Signature_Required__c": true
+    }
+  ]
+}

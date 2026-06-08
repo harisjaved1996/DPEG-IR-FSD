@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Portal_Visible__c</fullName>
+    <label>Portal Visible</label>
+    <description>Controls whether this document is visible to investors in the portal.</description>
+    <inlineHelpText>Checked when the document should be visible to investors in the portal.</inlineHelpText>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

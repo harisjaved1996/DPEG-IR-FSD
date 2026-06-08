@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closing_Not_Before_Launch</fullName>
+    <active>true</active>
+    <description>Prevents Closing Date from being set earlier than Launch Date when both dates are populated. Factory-safe: only fires when both date fields have values.</description>
+    <errorConditionFormula><![CDATA[AND(NOT(ISBLANK(Closing_Date__c)), NOT(ISBLANK(Launch_Date__c)), Closing_Date__c < Launch_Date__c)]]></errorConditionFormula>
+    <errorMessage>Closing Date cannot be before Launch Date.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Share_Transfer__c</fullName>
+    <label>Share Transfer</label>
+    <description>The share transfer this legal document is associated with.</description>
+    <inlineHelpText>Select the related share transfer.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Share_Transfer__c</referenceTo>
+    <relationshipLabel>Transfer Documents</relationshipLabel>
+    <relationshipName>Transfer_Documents</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

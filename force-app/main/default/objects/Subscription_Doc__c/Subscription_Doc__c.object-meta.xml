@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Tracks dual-signature subscription documents for a DPEG offering commitment. Captures primary and secondary signer status, single-signer handling, a finalized indicator and funding-instruction release state.</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Subscription Document</label>
+    <nameField>
+        <displayFormat>SD-{0000}</displayFormat>
+        <label>Subscription Document Name</label>
+        <startingNumber>1000</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Subscription Documents</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Subscription_Doc_Compact</compactLayoutAssignment>
+</CustomObject>

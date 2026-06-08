@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>File_Name__c</fullName>
+    <label>File Name</label>
+    <description>Name of the stored transfer agreement file.</description>
+    <inlineHelpText>Enter the file name of the transfer document.</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+</CustomField>

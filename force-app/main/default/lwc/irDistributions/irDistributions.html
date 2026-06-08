@@ -1,0 +1,91 @@
+<template>
+    <div class="ir-distributions">
+        <header class="slds-m-bottom_medium ir-distributions__header">
+            <h1 class="slds-text-heading_large ir-distributions__title">Distributions</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Distribution batches, payment split, and per-investor detail.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-distributions__loader">
+                <lightning-spinner alternative-text="Loading Distributions" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-distributions__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="3"
+                            large-device-size="3"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <!-- ACH vs CHEQUE SPLIT -->
+                <lightning-layout-item size="12" large-device-size="4" padding="around-small">
+                    <c-section-card title="Payment Split (ACH vs Cheque)" icon-name="utility:chart">
+                        <template lwc:if={hasSplit}>
+                            <c-donut-chart
+                                slices={distributionSplit}
+                                center-label="Total"
+                                center-value={splitTotalText}
+                            ></c-donut-chart>
+                        </template>
+                        <template lwc:else>
+                            <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
+                                No payment-split data to display.
+                            </p>
+                        </template>
+                    </c-section-card>
+                </lightning-layout-item>
+
+                <!-- BATCH TABLE -->
+                <lightning-layout-item size="12" large-device-size="8" padding="around-small">
+                    <c-data-table-card
+                        title="Distribution Batches"
+                        icon-name="utility:groups"
+                        key-field="id"
+                        columns={batchColumns}
+                        rows={batches}
+                        empty-message="No distribution batches to display."
+                        onrowaction={handleBatchAction}
+                    ></c-data-table-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Distributions. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+
+        <!-- BATCH DETAIL MODAL -->
+        <template lwc:if={showDetail}>
+            <c-ir-distribution-batch-detail
+                batch-id={selectedBatchId}
+                batch-name={selectedBatchName}
+                onclose={handleDetailClose}
+            ></c-ir-distribution-batch-detail>
+        </template>
+    </div>
+</template>

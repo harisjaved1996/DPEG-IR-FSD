@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Committed_Investor_Count__c</fullName>
+    <label>Committed Investor Count</label>
+    <description>Number of distinct investors committed to this offering. Maintained by Phase C automation; seeded in Phase A.</description>
+    <inlineHelpText>Count of committed investors for this offering. Updated by automation in a later phase.</inlineHelpText>
+    <type>Number</type>
+    <precision>6</precision>
+    <scale>0</scale>
+    <required>false</required>
+</CustomField>

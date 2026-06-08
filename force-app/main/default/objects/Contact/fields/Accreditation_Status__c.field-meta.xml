@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accreditation_Status__c</fullName>
+    <label>Accreditation Status</label>
+    <description>Accredited-investor verification status for this investor contact.</description>
+    <inlineHelpText>Pending until accreditation is verified; set to Re-verify when documentation has expired.</inlineHelpText>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>true</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Verified</fullName>
+                <default>false</default>
+                <label>Verified</label>
+            </value>
+            <value>
+                <fullName>Re-verify</fullName>
+                <default>false</default>
+                <label>Re-verify</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

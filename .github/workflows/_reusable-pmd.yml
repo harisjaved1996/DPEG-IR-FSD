@@ -1,0 +1,100 @@
+name: "[Reusable] PMD Apex Analysis"
+
+# Called by feature-branch-ci.yml and pr-validate.yml.
+# Caches the PMD binary so repeat calls on the same runner are fast.
+# Outputs: passed (true/false), violation-count (integer string).
+
+on:
+  workflow_call:
+    inputs:
+      pmd-version:
+        description: "PMD release version"
+        type: string
+        default: "7.3.0"
+      scan-dir:
+        description: "Directory to scan"
+        type: string
+        default: "force-app/main/default/classes"
+      ruleset:
+        description: "PMD ruleset XML file"
+        type: string
+        default: "pmd-ruleset.xml"
+    outputs:
+      passed:
+        description: "true when no violations found"
+        value: ${{ jobs.pmd.outputs.passed }}
+      violation-count:
+        description: "Total number of PMD violations"
+        value: ${{ jobs.pmd.outputs.violation-count }}
+
+jobs:
+  pmd:
+    name: PMD Static Analysis
+    runs-on: ubuntu-latest
+    outputs:
+      passed: ${{ steps.analyse.outputs.passed }}
+      violation-count: ${{ steps.analyse.outputs.violation-count }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache PMD binary
+        id: cache-pmd
+        uses: actions/cache@v4
+        with:
+          path: pmd-dist-${{ inputs.pmd-version }}
+          key: pmd-${{ inputs.pmd-version }}-${{ runner.os }}
+
+      - name: Download PMD ${{ inputs.pmd-version }}
+        if: steps.cache-pmd.outputs.cache-hit != 'true'
+        run: |
+          curl -sL \
+            "https://github.com/pmd/pmd/releases/download/pmd_releases%2F${{ inputs.pmd-version }}/pmd-dist-${{ inputs.pmd-version }}-bin.zip" \
+            -o pmd.zip
+          unzip -q pmd.zip
+          rm pmd.zip
+
+      - name: Add PMD to PATH
+        run: echo "$GITHUB_WORKSPACE/pmd-dist-${{ inputs.pmd-version }}/bin" >> $GITHUB_PATH
+
+      - name: Run PMD Analysis
+        id: analyse
+        run: |
+          set +e
+          pmd check \
+            --dir "${{ inputs.scan-dir }}" \
+            --rulesets "${{ inputs.ruleset }}" \
+            --format xml \
+            --report-file pmd-report.xml \
+            --no-cache
+          EXIT=$?
+          set -e
+
+          if [ $EXIT -eq 0 ]; then
+            echo "passed=true"        >> $GITHUB_OUTPUT
+            echo "violation-count=0"  >> $GITHUB_OUTPUT
+            echo "✅ PMD passed — no violations found."
+          else
+            VIOLATIONS=$(grep -c '<violation' pmd-report.xml 2>/dev/null || echo "0")
+            echo "passed=false"                 >> $GITHUB_OUTPUT
+            echo "violation-count=$VIOLATIONS"  >> $GITHUB_OUTPUT
+            echo "❌ PMD failed — $VIOLATIONS violation(s) found."
+            echo "────── PMD Report ──────"
+            cat pmd-report.xml
+          fi
+
+      - name: Upload PMD report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pmd-report-${{ github.run_id }}
+          path: pmd-report.xml
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Fail job if violations found
+        if: steps.analyse.outputs.passed == 'false'
+        run: |
+          echo "❌ PMD found ${{ steps.analyse.outputs.violation-count }} violation(s)."
+          exit 1

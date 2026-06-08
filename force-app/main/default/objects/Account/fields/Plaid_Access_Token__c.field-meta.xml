@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plaid_Access_Token__c</fullName>
+    <label>Plaid Access Token</label>
+    <description>System-only Plaid access token for the entity's linked bank account. Not exposed on any page layout and granted to no permission set; accessed by Apex in system context only (Phase C).</description>
+    <inlineHelpText>System field. Managed by integration code only; do not edit manually.</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+    <required>false</required>
+</CustomField>

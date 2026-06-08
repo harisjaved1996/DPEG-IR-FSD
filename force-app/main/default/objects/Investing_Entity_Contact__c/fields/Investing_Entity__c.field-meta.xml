@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investing_Entity__c</fullName>
+    <label>Investing Entity</label>
+    <description>Primary master-detail parent: the Investing Entity (Account) this signer relationship belongs to.</description>
+    <inlineHelpText>The investing-entity Account this contact is associated with.</inlineHelpText>
+    <type>MasterDetail</type>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Investing Entity Contacts</relationshipLabel>
+    <relationshipName>Investing_Entity_Contacts</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

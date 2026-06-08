@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Raise_Not_Negative</fullName>
+    <active>true</active>
+    <description>Prevents Target Raise from being set to a negative value. Factory-safe: zero and blank are permitted; only negative values (less than 0) trigger the error.</description>
+    <errorConditionFormula>Target_Raise__c &lt; 0</errorConditionFormula>
+    <errorMessage>Target Raise cannot be negative.</errorMessage>
+</ValidationRule>

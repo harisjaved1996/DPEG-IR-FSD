@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Funded_Date__c</fullName>
+    <label>Funded Date</label>
+    <description>Date the investment position was funded.</description>
+    <inlineHelpText>Enter the date capital was funded into this position.</inlineHelpText>
+    <type>Date</type>
+    <required>false</required>
+</CustomField>

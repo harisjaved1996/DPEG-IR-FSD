@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Investor portfolio-summary record for the DPEG Investor Relations app. Aggregates an individual's onboarding, tier, KYC status and lifetime portfolio metrics. Linked to a Contact and an assigned IR representative.</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Investor</label>
+    <nameField>
+        <displayFormat>INVR-{0000}</displayFormat>
+        <label>Investor Name</label>
+        <startingNumber>1</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Investors</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <compactLayoutAssignment>Investor_Compact</compactLayoutAssignment>
+</CustomObject>

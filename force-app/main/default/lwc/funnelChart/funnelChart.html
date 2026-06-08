@@ -1,0 +1,31 @@
+<template>
+    <template lwc:if={hasStages}>
+        <ol class="ir-funnel" aria-label="Conversion funnel">
+            <template for:each={computedStages} for:item="stage">
+                <li key={stage.key} class="ir-funnel__stage">
+                    <div
+                        class="ir-funnel__bar"
+                        style={stage.barStyle}
+                        aria-hidden="true"
+                    ></div>
+                    <div class="ir-funnel__caption">
+                        <span class="ir-funnel__label">{stage.label}</span>
+                        <span class="ir-funnel__metrics">
+                            <span class="ir-funnel__count"
+                                >{stage.countText}</span
+                            >
+                            <template lwc:if={stage.hasPct}>
+                                <span class="ir-funnel__pct"
+                                    >({stage.pctText})</span
+                                >
+                            </template>
+                        </span>
+                    </div>
+                </li>
+            </template>
+        </ol>
+    </template>
+    <template lwc:else>
+        <p class="ir-funnel__empty">No data to display</p>
+    </template>
+</template>

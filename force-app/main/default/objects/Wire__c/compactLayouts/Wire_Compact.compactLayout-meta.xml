@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wire_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Amount__c</fields>
+    <fields>Confidence_Bucket__c</fields>
+    <fields>Match_Status__c</fields>
+    <label>Wire Compact Layout</label>
+</CompactLayout>

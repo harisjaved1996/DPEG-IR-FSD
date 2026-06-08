@@ -1,0 +1,16 @@
+<template>
+    <template lwc:if={hasOptions}>
+        <div class="slds-button-group-row ir-category-filter" role="group" aria-label="Filter documents by category">
+            <template for:each={options} for:item="option">
+                <lightning-button
+                    key={option.key}
+                    label={option.label}
+                    variant={option.variant}
+                    data-value={option.value}
+                    onclick={handleSelect}
+                    class="slds-button-group-item ir-category-filter__button"
+                ></lightning-button>
+            </template>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,57 @@
+<template>
+    <div class="ir-offering-workspace">
+        <!-- HEADER: stage tracker + KPI row (fetches getHeader itself) -->
+        <c-offering-header record-id={recordId} class="ir-offering-workspace__header"></c-offering-header>
+
+        <!-- 8 lazy tabs. Each tab feature component fetches its own slice. -->
+        <lightning-tabset variant="standard" active-tab-value={activeTab} class="ir-offering-workspace__tabs">
+            <lightning-tab label="Property Overview" value="propertyOverview" onactive={handleTabActive}>
+                <template lwc:if={showPropertyOverview}>
+                    <c-offering-property-overview record-id={recordId}></c-offering-property-overview>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Roster" value="roster" onactive={handleTabActive}>
+                <template lwc:if={showRoster}>
+                    <c-offering-roster record-id={recordId}></c-offering-roster>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Contributions" value="contributions" onactive={handleTabActive}>
+                <template lwc:if={showContributions}>
+                    <c-offering-contributions record-id={recordId}></c-offering-contributions>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Distributions" value="distributions" onactive={handleTabActive}>
+                <template lwc:if={showDistributions}>
+                    <c-offering-distributions record-id={recordId}></c-offering-distributions>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Commitments" value="commitments" onactive={handleTabActive}>
+                <template lwc:if={showCommitments}>
+                    <c-offering-commitments record-id={recordId}></c-offering-commitments>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Wire Matching" value="wireMatching" onactive={handleTabActive}>
+                <template lwc:if={showWireMatching}>
+                    <c-offering-wire-matching record-id={recordId}></c-offering-wire-matching>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Signatures" value="signatures" onactive={handleTabActive}>
+                <template lwc:if={showSignatures}>
+                    <c-offering-signatures record-id={recordId}></c-offering-signatures>
+                </template>
+            </lightning-tab>
+
+            <lightning-tab label="Waitlist" value="waitlist" onactive={handleTabActive}>
+                <template lwc:if={showWaitlist}>
+                    <c-offering-waitlist record-id={recordId}></c-offering-waitlist>
+                </template>
+            </lightning-tab>
+        </lightning-tabset>
+    </div>
+</template>

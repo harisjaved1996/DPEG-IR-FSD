@@ -1,0 +1,40 @@
+.ir-action-queue {
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-action-queue__button {
+  width: 100%;
+  padding: var(--slds-g-spacing-2, 0.5rem) var(--slds-g-spacing-1, 0.25rem);
+  text-align: left;
+  gap: var(--slds-g-spacing-2, 0.5rem);
+  border-radius: var(--slds-g-radius-border-2, 0.25rem);
+}
+
+.ir-action-queue__button:hover,
+.ir-action-queue__button:focus {
+  background-color: var(--slds-g-color-surface-container-1, #f3f3f3);
+}
+
+.ir-action-queue__media {
+  min-width: 0;
+}
+
+.ir-action-queue__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ir-action-queue__label {
+  font-weight: 600;
+  color: var(--dpeg-navy, #032d60);
+}
+
+.ir-action-queue__amount {
+  font-weight: 600;
+}
+
+.ir-action-queue__trailing {
+  gap: var(--slds-g-spacing-2, 0.5rem);
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transferor_Investment__c</fullName>
+    <label>Transferor Investment</label>
+    <description>The investment position from which units are being transferred (the seller's position).</description>
+    <inlineHelpText>Select the investment whose units are being transferred out.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Investment__c</referenceTo>
+    <relationshipLabel>Outbound Transfers</relationshipLabel>
+    <relationshipName>Outbound_Transfers</relationshipName>
+    <required>true</required>
+    <deleteConstraint>Restrict</deleteConstraint>
+</CustomField>

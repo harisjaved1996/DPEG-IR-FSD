@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Offering Distributions</masterLabel>
+    <description>Offering Workspace "Distributions" tab. Fetches OfferingWorkspaceController.getDistributionBatches and renders distribution batches (Batch, Type, Total, ACH, Cheque, Status, Date) in a dataTableCard.</description>
+</LightningComponentBundle>

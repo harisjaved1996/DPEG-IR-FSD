@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transfer_Document_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Document_Status__c</fields>
+    <label>Transfer Document Compact Layout</label>
+</CompactLayout>

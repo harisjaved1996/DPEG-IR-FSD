@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.ir-offering-header__loader {
+  min-height: var(--slds-g-sizing-12, 8rem);
+}
+
+.ir-offering-header__titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--slds-g-spacing-2, 0.5rem);
+  flex-wrap: wrap;
+}
+
+.ir-offering-header__title {
+  color: var(--dpeg-navy, #032d60);
+}

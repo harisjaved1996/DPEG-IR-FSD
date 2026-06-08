@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.ir-portfolio-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-g-spacing-3, 0.75rem);
+}
+
+.ir-portfolio-card__subtitle {
+  margin: 0;
+}
+
+.ir-portfolio-card__metrics,
+.ir-portfolio-card__footer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ir-portfolio-card__metric,
+.ir-portfolio-card__footer-stat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  text-align: center;
+}
+
+.ir-portfolio-card__metric-value {
+  color: var(--dpeg-navy, #032d60);
+  font-weight: 700;
+}
+
+.ir-portfolio-card__footer {
+  border-top: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+  padding-top: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.ir-portfolio-card__footer-value {
+  color: var(--dpeg-blue, #0070d2);
+  font-weight: 600;
+}
+
+.ir-portfolio-card__irr-head {
+  margin-bottom: var(--slds-g-spacing-1, 0.25rem);
+}
+
+.ir-portfolio-card__irr-figures {
+  color: var(--dpeg-teal, #2bafac);
+  font-weight: 600;
+}

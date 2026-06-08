@@ -1,0 +1,48 @@
+<template>
+    <c-section-card title={title} icon-name="utility:office365">
+        <div class="ir-portfolio-card">
+            <template lwc:if={hasSubtitle}>
+                <p class="slds-text-body_small slds-text-color_weak ir-portfolio-card__subtitle slds-truncate">
+                    <template lwc:if={offeringName}>{offeringName}</template>
+                    <template lwc:if={propertyType}>&nbsp;·&nbsp;{propertyType}</template>
+                </p>
+            </template>
+
+            <!-- Performance metric tiles -->
+            <ul class="slds-grid slds-grid_align-spread ir-portfolio-card__metrics">
+                <template for:each={metrics} for:item="metric">
+                    <li key={metric.key} class="ir-portfolio-card__metric">
+                        <span class="slds-text-body_small slds-text-color_weak ir-portfolio-card__metric-label">{metric.label}</span>
+                        <span class="slds-text-heading_small ir-portfolio-card__metric-value">{metric.value}</span>
+                    </li>
+                </template>
+            </ul>
+
+            <!-- IRR vs target progress -->
+            <div class="ir-portfolio-card__irr">
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center ir-portfolio-card__irr-head">
+                    <span class="slds-text-body_small slds-text-color_weak">IRR to Date vs Target</span>
+                    <span class="slds-text-body_small ir-portfolio-card__irr-figures">
+                        {irrToDateText}&nbsp;/&nbsp;{targetIrrText}
+                    </span>
+                </div>
+                <c-progress-bar
+                    percent={irrProgressPercent}
+                    label="IRR to date versus target"
+                    variant="teal"
+                    hide-value="true"
+                ></c-progress-bar>
+            </div>
+
+            <!-- LP roll-up footer -->
+            <ul class="slds-grid slds-grid_align-spread ir-portfolio-card__footer">
+                <template for:each={footerStats} for:item="stat">
+                    <li key={stat.key} class="ir-portfolio-card__footer-stat">
+                        <span class="slds-text-body_small slds-text-color_weak ir-portfolio-card__footer-label">{stat.label}</span>
+                        <span class="slds-text-body_regular ir-portfolio-card__footer-value">{stat.value}</span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </c-section-card>
+</template>

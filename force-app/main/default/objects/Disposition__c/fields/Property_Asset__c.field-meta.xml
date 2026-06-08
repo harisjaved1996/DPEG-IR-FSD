@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Asset__c</fullName>
+    <label>Property Asset</label>
+    <description>Optional link to the Property Asset being disposed of. Stub field; nullable.</description>
+    <inlineHelpText>Select the property asset this disposition applies to, if applicable.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Property_Asset__c</referenceTo>
+    <relationshipLabel>Dispositions</relationshipLabel>
+    <relationshipName>Dispositions</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

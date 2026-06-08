@@ -1,3 +1,43 @@
 {
-    "xml.preferences.showSchemaDocumentationType": "none"
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[apex]": {
+    "editor.defaultFormatter": "salesforce.salesforcedx-vscode-apex",
+    "editor.tabSize": 4
+  },
+  "[visualforce]": {
+    "editor.defaultFormatter": "salesforce.salesforcedx-vscode-visualforce"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "files.associations": {
+    "*.cls": "apex",
+    "*.trigger": "apex",
+    "*.page": "visualforce",
+    "*.component": "visualforce"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "search.exclude": {
+    "**/.sfdx": true,
+    "**/.sf": true,
+    "**/node_modules": true,
+    "**/coverage": true
+  },
+  "salesforcedx-vscode-apex.java.home": null,
+  "salesforcedx-vscode-core.telemetry.enabled": false,
+  "salesforcedx-vscode-core.retrieve-test-code-coverage": true
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering__c</fullName>
+    <label>Offering</label>
+    <description>The offering whose distributions are grouped in this batch.</description>
+    <inlineHelpText>Link the offering this distribution batch is for.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Offering__c</referenceTo>
+    <relationshipLabel>Distribution Batches</relationshipLabel>
+    <relationshipName>Distribution_Batches</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

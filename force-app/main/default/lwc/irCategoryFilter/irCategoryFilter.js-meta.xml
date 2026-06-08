@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>IR Category Filter</masterLabel>
+    <description>Presentational child: segmented document-category filter (All + one button per category with counts). Consumes a categories array and the selected value from its parent and emits categorychange. Child component — not placed directly on pages.</description>
+</LightningComponentBundle>

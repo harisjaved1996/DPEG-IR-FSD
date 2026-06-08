@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Offering__c</entityName>
+    <fieldName>Status__c</fieldName>
+    <masterLabel>Offering Status Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Draft</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Pre-Launch</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Active Fundraising</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Fully Subscribed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Signatures Pending</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Ready to Activate</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Investment Active</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames/>
+        <picklistValueName>Closed Funded</picklistValueName>
+    </pathAssistantSteps>
+</PathAssistant>

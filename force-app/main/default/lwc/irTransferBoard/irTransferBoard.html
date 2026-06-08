@@ -1,0 +1,44 @@
+<template>
+    <c-section-card title={title} icon-name="utility:flow">
+        <template lwc:if={hasLanes}>
+            <div class="slds-grid slds-wrap slds-grid_pull-padded-small ir-transfer-board">
+                <template for:each={laneViews} for:item="lane">
+                    <div
+                        key={lane.key}
+                        class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 ir-transfer-board__lane"
+                    >
+                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_x-small ir-transfer-board__lane-header">
+                            <c-status-badge status={lane.status}></c-status-badge>
+                            <span class="slds-badge ir-transfer-board__count" aria-label="Transfers in this lane">{lane.count}</span>
+                        </div>
+                        <ul class="ir-transfer-board__cards">
+                            <template for:each={lane.cards} for:item="card">
+                                <li key={card.key} class="slds-m-bottom_x-small ir-transfer-board__card-item">
+                                    <button
+                                        type="button"
+                                        class="slds-button slds-button_reset slds-box slds-box_x-small slds-text-align_left ir-transfer-board__card"
+                                        data-id={card.recordId}
+                                        onclick={handleSelect}
+                                    >
+                                        <span class="slds-text-body_small slds-text-color_weak slds-truncate ir-transfer-board__card-name">{card.name}</span>
+                                        <span class="slds-text-body_regular slds-truncate ir-transfer-board__card-from">From: {card.fromEntity}</span>
+                                        <span class="slds-text-body_regular slds-truncate ir-transfer-board__card-to">To: {card.toEntity}</span>
+                                        <span class="slds-grid slds-grid_align-spread slds-m-top_xx-small ir-transfer-board__card-meta">
+                                            <span class="slds-text-body_small slds-text-color_weak">{card.unitsText} units</span>
+                                            <span class="slds-text-body_small ir-transfer-board__card-amount">{card.amountText}</span>
+                                        </span>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
+                No share transfers to display.
+            </p>
+        </template>
+    </c-section-card>
+</template>

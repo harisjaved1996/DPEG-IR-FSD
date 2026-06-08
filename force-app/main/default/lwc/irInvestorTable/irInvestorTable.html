@@ -1,0 +1,52 @@
+<template>
+    <c-section-card title={title} icon-name="utility:people">
+        <template lwc:if={hasInvestors}>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer ir-investor-table">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><div class="slds-truncate" title="Investor">Investor</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Tier">Tier</div></th>
+                        <th scope="col"><div class="slds-truncate slds-text-align_right" title="Lifetime Invested">Lifetime Invested</div></th>
+                        <th scope="col"><div class="slds-truncate slds-text-align_right" title="Commitments">Commitments</div></th>
+                        <th scope="col"><div class="slds-truncate slds-text-align_right" title="Entities">Entities</div></th>
+                        <th scope="col"><div class="slds-truncate" title="KYC Status">KYC Status</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Last Activity">Last Activity</div></th>
+                        <th scope="col"><div class="slds-truncate" title="IR Rep">IR Rep</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={rows} for:item="row">
+                        <tr key={row.key} class="slds-hint-parent ir-investor-table__row">
+                            <th scope="row" data-label="Investor">
+                                <button
+                                    type="button"
+                                    class="slds-button slds-button_reset ir-investor-table__name"
+                                    data-id={row.recordId}
+                                    onclick={handleSelect}
+                                >
+                                    {row.investorName}
+                                </button>
+                            </th>
+                            <td data-label="Tier">
+                                <c-tier-pill tier={row.tier}></c-tier-pill>
+                            </td>
+                            <td data-label="Lifetime Invested" class="slds-text-align_right">{row.lifetimeInvestedText}</td>
+                            <td data-label="Commitments" class="slds-text-align_right">{row.totalCommitmentsText}</td>
+                            <td data-label="Entities" class="slds-text-align_right">{row.entitiesCountText}</td>
+                            <td data-label="KYC Status">
+                                <c-status-badge status={row.kycStatus}></c-status-badge>
+                            </td>
+                            <td data-label="Last Activity">{row.lastActivityText}</td>
+                            <td data-label="IR Rep">{row.irRep}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template lwc:else>
+            <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
+                No investors to display for this tier.
+            </p>
+        </template>
+    </c-section-card>
+</template>

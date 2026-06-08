@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investing_Entity__c</fullName>
+    <label>Investing Entity</label>
+    <description>The investing-entity account that holds this funded position.</description>
+    <inlineHelpText>Select the investing-entity account that owns this investment.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Investments</relationshipLabel>
+    <relationshipName>Investments</relationshipName>
+    <required>true</required>
+    <deleteConstraint>Restrict</deleteConstraint>
+</CustomField>

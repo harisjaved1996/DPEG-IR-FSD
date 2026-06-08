@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Matched_Account__c</fullName>
+    <label>Matched Account</label>
+    <description>The closest investing-entity account the matching engine associated with this wire.</description>
+    <inlineHelpText>The investing-entity account this wire was matched to (or the closest candidate).</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Matched Wires</relationshipLabel>
+    <relationshipName>Matched_Wires</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

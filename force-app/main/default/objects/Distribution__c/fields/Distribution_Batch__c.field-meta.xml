@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribution_Batch__c</fullName>
+    <label>Distribution Batch</label>
+    <description>Optional batch this distribution was processed within. Nullable; distributions may exist outside a batch.</description>
+    <inlineHelpText>Link the distribution batch this payment was processed in, if applicable.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Distribution_Batch__c</referenceTo>
+    <relationshipLabel>Distributions</relationshipLabel>
+    <relationshipName>Distributions</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

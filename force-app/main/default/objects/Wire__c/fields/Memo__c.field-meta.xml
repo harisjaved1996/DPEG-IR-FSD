@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Memo__c</fullName>
+    <label>Memo</label>
+    <description>Memo or reference text from the incoming bank wire, used to assist matching.</description>
+    <inlineHelpText>The memo/reference line from the bank feed (e.g., "DPEG MAGNOLIA").</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+    <required>false</required>
+</CustomField>

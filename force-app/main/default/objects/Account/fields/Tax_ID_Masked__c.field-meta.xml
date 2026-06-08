@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_ID_Masked__c</fullName>
+    <label>Tax ID (Masked)</label>
+    <description>Read-only masked rendering of the entity Tax ID / EIN, showing only the last four digits. Safe to display on layouts for all roles.</description>
+    <inlineHelpText>Displays the last four digits of the Tax ID / EIN. The full value is stored on the restricted Tax ID / EIN field.</inlineHelpText>
+    <type>Text</type>
+    <formula><![CDATA['**-***' & RIGHT(Tax_ID_EIN__c, 4)]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

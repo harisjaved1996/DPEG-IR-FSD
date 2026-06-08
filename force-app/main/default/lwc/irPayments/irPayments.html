@@ -1,0 +1,64 @@
+<template>
+    <div class="ir-payments">
+        <header class="slds-m-bottom_medium ir-payments__header">
+            <h1 class="slds-text-heading_large ir-payments__title">Payments</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Inbound wires and investor contributions.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-payments__loader">
+                <lightning-spinner alternative-text="Loading Payments" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-payments__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="3"
+                            large-device-size="3"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <!-- WIRE FEED -->
+            <div class="slds-m-bottom_medium">
+                <c-ir-wire-feed title="Inbound Wire Feed" wires={wires}></c-ir-wire-feed>
+            </div>
+
+            <!-- CONTRIBUTIONS TABLE -->
+            <c-data-table-card
+                title="Contributions"
+                icon-name="utility:contract"
+                key-field="id"
+                columns={contributionColumns}
+                rows={contributions}
+                empty-message="No contributions to display."
+            ></c-data-table-card>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Payments. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

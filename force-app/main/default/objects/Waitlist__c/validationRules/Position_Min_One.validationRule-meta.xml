@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Position_Min_One</fullName>
+    <active>true</active>
+    <description>Requires Waitlist Position to be 1 or greater when a value is entered. Factory-safe: blank positions are allowed; only populated values less than 1 trigger the error.</description>
+    <errorConditionFormula><![CDATA[AND(NOT(ISBLANK(Position__c)), Position__c < 1)]]></errorConditionFormula>
+    <errorMessage>Waitlist position must be 1 or greater.</errorMessage>
+</ValidationRule>

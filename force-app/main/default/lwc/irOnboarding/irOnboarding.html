@@ -1,0 +1,52 @@
+<template>
+    <div class="ir-onboarding">
+        <header class="slds-m-bottom_medium ir-onboarding__header">
+            <h1 class="slds-text-heading_large ir-onboarding__title">Onboarding</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Lead pipeline, KYC status, and portal invitations.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-onboarding__loader">
+                <lightning-spinner alternative-text="Loading Onboarding" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-onboarding__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="4"
+                            large-device-size="2"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <!-- LEAD QUEUE -->
+            <c-ir-lead-queue title="Lead Queue" leads={leads}></c-ir-lead-queue>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load Onboarding. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

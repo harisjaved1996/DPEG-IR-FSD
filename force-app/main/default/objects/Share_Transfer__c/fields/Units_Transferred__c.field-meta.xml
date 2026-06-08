@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Units_Transferred__c</fullName>
+    <label>Units Transferred</label>
+    <description>Number of investment units being transferred from the transferor to the transferee.</description>
+    <inlineHelpText>Enter the number of units to transfer.</inlineHelpText>
+    <type>Number</type>
+    <precision>16</precision>
+    <scale>2</scale>
+    <trackHistory>true</trackHistory>
+</CustomField>

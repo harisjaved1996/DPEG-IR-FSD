@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DPEG_Stake__c</fullName>
+    <label>DPEG Stake</label>
+    <description>DPEG's (GP/sponsor) capital stake in the property.</description>
+    <inlineHelpText>Enter DPEG's capital stake in USD.</inlineHelpText>
+    <type>Currency</type>
+    <precision>16</precision>
+    <scale>2</scale>
+</CustomField>

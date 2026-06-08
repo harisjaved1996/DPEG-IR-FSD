@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Offering Contributions</masterLabel>
+    <description>Offering Workspace "Contributions" tab. Fetches OfferingWorkspaceController.getContributions and renders the contribution feed (Entity, Amount, Method, Wire, Date, Match Status) in a dataTableCard.</description>
+</LightningComponentBundle>

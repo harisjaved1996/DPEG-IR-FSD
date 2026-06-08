@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Funding_Instructions_Status__c</fullName>
+    <label>Funding Instructions Status</label>
+    <description>Controls whether funding instructions have been released to the investor.</description>
+    <inlineHelpText>Locked = instructions withheld until signatures complete; Sent = released.</inlineHelpText>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Locked</fullName>
+                <default>true</default>
+                <label>Locked</label>
+            </value>
+            <value>
+                <fullName>Sent</fullName>
+                <default>false</default>
+                <label>Sent</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
