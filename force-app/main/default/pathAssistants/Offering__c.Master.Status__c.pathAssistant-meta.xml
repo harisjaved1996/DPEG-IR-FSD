@@ -4,6 +4,7 @@
     <entityName>Offering__c</entityName>
     <fieldName>Status__c</fieldName>
     <masterLabel>Offering Status Path</masterLabel>
+    <recordTypeName>Master</recordTypeName>
     <pathAssistantSteps>
         <fieldNames/>
         <picklistValueName>Draft</picklistValueName>
