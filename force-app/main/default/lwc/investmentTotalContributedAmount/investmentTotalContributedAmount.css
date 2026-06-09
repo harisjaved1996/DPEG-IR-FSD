@@ -1,0 +1,32 @@
+.investment-card {
+  border-radius: 0.75rem;
+  border: 1px solid #d8dde6;
+  border-left: 5px solid #2e844a;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fff9 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e6f4ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #54698d;
+  letter-spacing: 0.07rem;
+  margin-bottom: 0.25rem;
+}
+
+.metric-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2e844a;
+  line-height: 1;
+}
