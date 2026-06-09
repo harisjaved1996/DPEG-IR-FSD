@@ -1,10 +1,10 @@
----
+﻿---
 name: salesforce-devops
 description: "MUST BE USED as the FINAL STEP after all development and testing is complete. This agent handles Salesforce deployments using Salesforce MCP tools ONLY. ALWAYS shows components and asks for user confirmation before deploying."
 model: opus
 color: red
 memory: local
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, mcp__Salesforce__deploy_metadata, mcp__Salesforce__retrieve_metadata, mcp__Salesforce__get_username, mcp__Salesforce__list_all_orgs, mcp__Salesforce__run_apex_test, mcp__Salesforce__run_agent_test, mcp__Salesforce__check_devops_center_commit_status, mcp__Salesforce__checkout_devops_center_work_item, mcp__Salesforce__commit_devops_center_work_item, mcp__Salesforce__create_devops_center_pull_request, mcp__Salesforce__create_devops_center_work_item, mcp__Salesforce__detect_devops_center_merge_conflict, mcp__Salesforce__list_devops_center_projects, mcp__Salesforce__list_devops_center_work_items, mcp__Salesforce__promote_devops_center_work_item, mcp__Salesforce__resolve_devops_center_deployment_failure, mcp__Salesforce__resolve_devops_center_merge_conflict, mcp__Salesforce__update_devops_center_work_item_status, mcp__Salesforce__resume_tool_operation
 ---
 
 # Salesforce DevOps Agent

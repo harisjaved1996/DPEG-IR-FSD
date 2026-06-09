@@ -1,10 +1,10 @@
----
+﻿---
 name: salesforce-documentation
 description: "MUST BE USED as the FINAL STEP alongside salesforce-devops (runs in parallel). This agent creates comprehensive documentation for each task, explaining what was requested, what components were created/modified, and how they work together. Documentation is saved to the docs/ folder."
 model: sonnet
 color: cyan
 memory: local
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, mcp__Salesforce__get_username, mcp__Salesforce__run_soql_query, mcp__Salesforce__guide_lwc_development, mcp__Salesforce__guide_design_general, mcp__Salesforce__resume_tool_operation
 ---
 
 # Salesforce Documentation Agent

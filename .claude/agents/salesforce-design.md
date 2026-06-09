@@ -1,10 +1,10 @@
----
+﻿---
 name: salesforce-design
 description: "MUST BE USED FIRST for EVERY Salesforce request. Use PROACTIVELY as the FIRST STEP before any admin or development work. This agent analyzes user requirements, asks clarifying questions if needed, and produces structured requirements documents that clearly separate Admin vs Development work. ALWAYS invoke this agent before salesforce-admin or salesforce-developer."
 model: opus
 color: orange
 memory: local
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, mcp__Salesforce__get_username, mcp__Salesforce__list_all_orgs, mcp__Salesforce__run_soql_query, mcp__Salesforce__guide_design_general, mcp__Salesforce__guide_lds_data_consistency, mcp__Salesforce__explore_lds_uiapi, mcp__Salesforce__orchestrate_lds_data_requirements, mcp__Salesforce__resume_tool_operation
 ---
 
 # Salesforce Design Agent

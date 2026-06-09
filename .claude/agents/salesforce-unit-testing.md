@@ -1,10 +1,10 @@
----
+﻿---
 name: salesforce-unit-testing
 description: "MUST BE USED after salesforce-developer completes Apex development. This agent analyzes all Apex classes created by the developer, checks for existing test coverage, and creates or updates test classes to achieve 90%+ code coverage. Use PROACTIVELY after any Apex code is written."
 model: sonnet
 color: yellow
 memory: local
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, mcp__Salesforce__run_apex_test, mcp__Salesforce__run_agent_test, mcp__Salesforce__run_lwc_accessibility_jest_tests, mcp__Salesforce__create_lwc_jest_tests, mcp__Salesforce__review_lwc_jest_tests, mcp__Salesforce__scan_apex_class_for_antipatterns, mcp__Salesforce__get_username, mcp__Salesforce__list_all_orgs, mcp__Salesforce__resume_tool_operation
 ---
 
 # Salesforce Unit Testing Agent

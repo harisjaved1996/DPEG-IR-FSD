@@ -1,4 +1,4 @@
----
+﻿---
 name: salesforce-solution-architect
 description: >
   Salesforce Solution Architect. Declarative metadata design, Flow automation,
@@ -7,7 +7,7 @@ description: >
   Salesforce documentation.
 model: opus
 permissionMode: acceptEdits
-tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch
+tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch, mcp__Salesforce__deploy_metadata, mcp__Salesforce__retrieve_metadata, mcp__Salesforce__run_soql_query, mcp__Salesforce__get_username, mcp__Salesforce__list_all_orgs, mcp__Salesforce__assign_permission_set, mcp__Salesforce__guide_lds_data_consistency, mcp__Salesforce__guide_lds_development, mcp__Salesforce__guide_design_general, mcp__Salesforce__explore_lds_uiapi, mcp__Salesforce__orchestrate_lds_data_requirements, mcp__Salesforce__resume_tool_operation
 disallowedTools: Task
 skills:
   - sf-metadata

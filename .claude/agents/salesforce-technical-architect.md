@@ -1,4 +1,4 @@
----
+﻿---
 name: salesforce-technical-architect
 description: >
   Salesforce Technical Architect. Apex development, integration architecture, data modeling,
@@ -6,7 +6,7 @@ description: >
   Self-sufficient with web search for Salesforce documentation.
 model: opus
 permissionMode: acceptEdits
-tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch
+tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch, mcp__Salesforce__deploy_metadata, mcp__Salesforce__retrieve_metadata, mcp__Salesforce__run_apex_test, mcp__Salesforce__run_agent_test, mcp__Salesforce__run_soql_query, mcp__Salesforce__get_username, mcp__Salesforce__list_all_orgs, mcp__Salesforce__guide_lds_development, mcp__Salesforce__guide_lws_security, mcp__Salesforce__guide_lwc_development, mcp__Salesforce__guide_lwc_best_practices, mcp__Salesforce__guide_lds_graphql, mcp__Salesforce__fetch_lds_graphql_schema, mcp__Salesforce__validate_and_optimize, mcp__Salesforce__scan_apex_class_for_antipatterns, mcp__Salesforce__run_code_analyzer, mcp__Salesforce__explore_lbc_components, mcp__Salesforce__explore_lds_uiapi, mcp__Salesforce__reference_lwc_compilation_error, mcp__Salesforce__resume_tool_operation
 disallowedTools: Task
 skills:
   - sf-apex
