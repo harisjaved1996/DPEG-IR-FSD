@@ -297,7 +297,7 @@ public class TestDataFactory {
      */
     public static Commitment__c buildCommitment(Id investingEntityId, Id offeringId, Decimal amount) {
         return new Commitment__c(
-            Investing_Entity__c = investingEntityId,
+            // Investing_Entity__c = investingEntityId,
             Offering__c = offeringId,
             Committed_Amount__c = amount,
             Status__c = 'Committed'
