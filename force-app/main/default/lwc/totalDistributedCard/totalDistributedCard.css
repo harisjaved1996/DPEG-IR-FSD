@@ -23,14 +23,14 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #2e844a;
+  background: #0b827c;
   border-radius: 12px 12px 0 0;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 24px rgba(46, 132, 74, 0.15),
+    0 8px 24px rgba(11, 130, 124, 0.15),
     0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
@@ -38,7 +38,7 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: #eaf5ec;
+  background: #e4f4f3;
   display: flex;
   align-items: center;
   justify-content: center;

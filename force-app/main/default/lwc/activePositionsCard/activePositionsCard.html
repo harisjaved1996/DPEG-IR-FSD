@@ -1,18 +1,9 @@
 <template>
-    <article class="slds-card metric-card blue-border">
-        <div class="slds-card__body slds-card__body_inner">
-            <div class="slds-grid slds-grid_vertical-align-center slds-gutters">
-                <div class="slds-col slds-no-flex">
-                    <div class="icon-box blue-bg">
-                        <lightning-icon icon-name="standard:portfolio" size="small"></lightning-icon>
-                    </div>
-                </div>
-
-                <div class="slds-col">
-                    <p class="metric-label">ACTIVE POSITIONS</p>
-                    <h2 class="metric-value">2</h2>
-                </div>
-            </div>
+    <article class="metric-card">
+        <div class="icon-wrap">
+            <lightning-icon icon-name="standard:portfolio" size="small" alternative-text="Active Positions"></lightning-icon>
         </div>
+        <span class="metric-value">2</span>
+        <span class="metric-label">ACTIVE POSITIONS</span>
     </article>
 </template>

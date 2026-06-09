@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>66.0</apiVersion>
-    <isExposed>false</isExposed>
-    <masterLabel>IR Distribution Batch Detail</masterLabel>
-    <description>Modal child for irDistributions. Loads and displays per-investor distribution rows for a single batch via DistributionsController.getBatchDetail, keyed by batchId. Emits close.</description>
-</LightningComponentBundle>
