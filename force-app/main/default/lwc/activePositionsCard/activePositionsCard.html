@@ -1,9 +1,15 @@
 <template>
     <article class="metric-card">
-        <div class="icon-wrap">
-            <lightning-icon icon-name="standard:portfolio" size="small" alternative-text="Active Positions"></lightning-icon>
+        <div class="card-grid">
+            <div class="icon-cell">
+                <lightning-icon icon-name="utility:chart" size="small" alternative-text="Active Positions"></lightning-icon>
+            </div>
+            <div class="label-cell">
+                <span class="metric-label">ACTIVE POSITIONS</span>
+            </div>
+            <div class="value-cell">
+                <span class="metric-value">2</span>
+            </div>
         </div>
-        <span class="metric-value">2</span>
-        <span class="metric-label">ACTIVE POSITIONS</span>
     </article>
 </template>
