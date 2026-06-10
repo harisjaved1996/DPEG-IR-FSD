@@ -7,16 +7,21 @@
 }
 
 .aq-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.875rem 1.25rem 0.75rem;
   border-bottom: 1px solid #f0f2f4;
 }
 
+.aq-chevron {
+  --slds-c-icon-color-foreground-default: var(--slds-g-color-neutral-base-30, #5c5c5c);
+  flex-shrink: 0;
+}
+
 .aq-title {
-  font-size: 0.6875rem;
+  color: var(--slds-g-color-neutral-base-10, #181818);
   font-weight: 700;
-  color: #9aacbb;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .aq-list {
@@ -26,9 +31,16 @@
 }
 
 .aq-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   padding: 0.8125rem 1.25rem;
   border-bottom: 1px solid #f0f2f4;
   transition: background-color 0.15s ease;
+}
+
+.aq-item-icon {
+  flex-shrink: 0;
 }
 
 .aq-item:last-child {
@@ -40,7 +52,7 @@
 }
 
 .aq-item-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #181818;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-10, #181818);
 }

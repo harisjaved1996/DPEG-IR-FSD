@@ -1,48 +1,32 @@
 <template>
     <div class="card">
-        <table class="slds-table slds-table_cell-buffer slds-table_bordered list-table">
+        <table class="list-table">
             <thead>
-                <tr class="slds-line-height_reset">
-                    <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
-                    <th scope="col"><div class="slds-truncate" title="GP Entity">GP Entity</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Committed">Committed</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Contributed">Contributed</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Distributed">Distributed</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Target IRR">Target IRR</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Hold Period">Hold Period</div></th>
+                <tr>
+                    <th class="th-text">Name</th>
+                    <th class="th-text">Type</th>
+                    <th class="th-num">Committed</th>
+                    <th class="th-num">Contributed</th>
+                    <th class="th-num">Distributed</th>
+                    <th class="th-num">Target IRR</th>
+                    <th class="th-text">Hold Period</th>
                 </tr>
             </thead>
             <tbody>
-                <template for:each={investments} for:item="row">
-                    <tr key={row.id} class="slds-hint-parent">
-                        <th scope="row" data-label="Name">
-                            <div class="slds-truncate" title={row.name}>
-                                <a href="#" class="row-link" onclick={handleNameClick}>{row.name}</a>
-                            </div>
-                        </th>
-                        <td data-label="GP Entity">
-                            <div class="slds-truncate" title={row.gpEntity}>{row.gpEntity}</div>
-                        </td>
-                        <td data-label="Committed">
-                            <div class="slds-truncate" title={row.committed}>{row.committed}</div>
-                        </td>
-                        <td data-label="Contributed">
-                            <div class="slds-truncate" title={row.contributed}>{row.contributed}</div>
-                        </td>
-                        <td data-label="Distributed">
-                            <div class="slds-truncate dist-amount" title={row.distributed}>{row.distributed}</div>
-                        </td>
-                        <td data-label="Target IRR">
-                            <div class="slds-truncate irr-amount" title={row.targetIrr}>{row.targetIrr}</div>
-                        </td>
-                        <td data-label="Hold Period">
-                            <div class="slds-truncate" title={row.holdPeriod}>{row.holdPeriod}</div>
-                        </td>
+                <template for:each={rows} for:item="row">
+                    <tr key={row.id}>
+                        <td class="td-text"><span class="row-name">{row.name}</span></td>
+                        <td class="td-text"><span class={row.typeBadge}>{row.type}</span></td>
+                        <td class="td-num">{row.committed}</td>
+                        <td class="td-num">{row.contributed}</td>
+                        <td class="td-num dist-amount">{row.distributed}</td>
+                        <td class="td-num irr-amount">{row.targetIrr}</td>
+                        <td class="td-text">{row.holdPeriod}</td>
                     </tr>
                 </template>
             </tbody>
         </table>
-        <div class="card-footer">
+        <div class="list-footer">
             <button class="view-all-btn" type="button">View All</button>
         </div>
     </div>

@@ -2,45 +2,90 @@
   border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
   border-radius: 0.25rem;
   background-color: var(--slds-g-color-neutral-base-100, #ffffff);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
-/* Native list-view header tint + label color */
-.list-table thead th {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
+/* Footer with View All in the bottom-right */
+.list-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
 }
 
-.list-table thead th .slds-truncate {
-  color: var(--slds-g-color-neutral-base-30, #514f4d);
+.view-all-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
   font-weight: 400;
+  color: var(--slds-g-color-brand-base-50, #0176d3);
+  padding: 0;
+}
+
+.view-all-btn:hover {
+  text-decoration: underline;
+}
+
+/* Table */
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list-table thead th {
+  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
+  color: var(--slds-g-color-neutral-base-30, #706e6b);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.list-table thead th.th-num {
+  text-align: left;
+}
+
+.list-table tbody td {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-10, #181818);
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  white-space: nowrap;
+}
+
+.list-table tbody td.td-num {
+  text-align: right;
 }
 
 .list-table tbody tr:hover {
   background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
 }
 
-/* Primary column link */
-.row-link {
-  color: var(--slds-g-color-brand-base-50, #0176d3);
-  text-decoration: none;
+.row-name {
+  color: var(--slds-g-color-neutral-base-10, #181818);
 }
 
-.row-link:hover {
-  text-decoration: underline;
-}
-
-/* Stage badges */
+/* Stage tags / pills */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.625rem;
+  padding: 0.125rem 0.5rem;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
+.badge-gray {
+  background: #ecebea;
+  color: #5c5c5c;
+}
 .badge-blue {
   background: #dbeafe;
   color: #1d6fc4;
@@ -61,18 +106,23 @@
   background: #dcfce7;
   color: #166534;
 }
+.badge-red {
+  background: #fee2e2;
+  color: #b91c1c;
+}
 
 /* Progress bar */
 .progress-cell {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 120px;
 }
 
 .progress-track {
   flex: 1;
   height: 6px;
-  min-width: 60px;
+  min-width: 50px;
   background: #e8ecf0;
   border-radius: 999px;
   overflow: hidden;
@@ -81,7 +131,6 @@
 .progress-fill {
   height: 100%;
   border-radius: 999px;
-  transition: width 0.3s ease;
 }
 
 .progress-pct {
@@ -89,26 +138,4 @@
   font-weight: 600;
   min-width: 34px;
   text-align: right;
-}
-
-/* Footer */
-.card-footer {
-  display: flex;
-  justify-content: center;
-  padding: 0.625rem 1.25rem;
-  border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
-}
-
-.view-all-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: var(--slds-g-color-brand-base-50, #0176d3);
-  padding: 0;
-}
-
-.view-all-btn:hover {
-  text-decoration: underline;
 }

@@ -1,14 +1,10 @@
 <template>
-    <div class="aq-card">
-        <div class="aq-header">
-            <span class="aq-title">FAIZ'S ACTION QUEUE</span>
-        </div>
-        <ul class="aq-list">
-            <template for:each={actions} for:item="action">
-                <li key={action.id} class="aq-item">
-                    <span class="aq-item-title">{action.title}</span>
-                </li>
-            </template>
-        </ul>
-    </div>
+    <ul class="aq-list">
+        <template for:each={actions} for:item="action">
+            <li key={action.id} class="aq-item">
+                <lightning-icon icon-name={action.iconName} size="small" class="aq-item-icon"></lightning-icon>
+                <span class="slds-text-body_regular aq-item-title">{action.title}</span>
+            </li>
+        </template>
+    </ul>
 </template>

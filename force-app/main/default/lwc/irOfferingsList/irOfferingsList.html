@@ -1,37 +1,25 @@
 <template>
     <div class="card">
-        <table class="slds-table slds-table_cell-buffer slds-table_bordered list-table">
+        <table class="list-table">
             <thead>
-                <tr class="slds-line-height_reset">
-                    <th scope="col"><div class="slds-truncate" title="Offering">Offering</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Stage">Stage</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Target">Target</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Committed">Committed</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Funded">Funded</div></th>
-                    <th scope="col"><div class="slds-truncate" title="Progress">Progress</div></th>
+                <tr>
+                    <th class="th-text">Offering</th>
+                    <th class="th-text">Stage</th>
+                    <th class="th-num">Target</th>
+                    <th class="th-num">Committed</th>
+                    <th class="th-num">Funded</th>
+                    <th class="th-text">Progress</th>
                 </tr>
             </thead>
             <tbody>
-                <template for:each={offerings} for:item="row">
-                    <tr key={row.id} class="slds-hint-parent">
-                        <th scope="row" data-label="Offering">
-                            <div class="slds-truncate" title={row.name}>
-                                <a href="#" class="row-link" onclick={handleNameClick}>{row.name}</a>
-                            </div>
-                        </th>
-                        <td data-label="Stage">
-                            <div class="slds-truncate"><span class={row.badgeCss}>{row.stage}</span></div>
-                        </td>
-                        <td data-label="Target">
-                            <div class="slds-truncate" title={row.target}>{row.target}</div>
-                        </td>
-                        <td data-label="Committed">
-                            <div class="slds-truncate" title={row.committed}>{row.committed}</div>
-                        </td>
-                        <td data-label="Funded">
-                            <div class="slds-truncate" title={row.funded}>{row.funded}</div>
-                        </td>
-                        <td data-label="Progress">
+                <template for:each={rows} for:item="row">
+                    <tr key={row.id}>
+                        <td class="td-text"><span class="row-name">{row.name}</span></td>
+                        <td class="td-text"><span class={row.badgeCss}>{row.stage}</span></td>
+                        <td class="td-num">{row.target}</td>
+                        <td class="td-num">{row.committed}</td>
+                        <td class="td-num">{row.funded}</td>
+                        <td class="td-text">
                             <div class="progress-cell">
                                 <div class="progress-track">
                                     <div class="progress-fill" style={row.barStyle}></div>
@@ -43,7 +31,7 @@
                 </template>
             </tbody>
         </table>
-        <div class="card-footer">
+        <div class="list-footer">
             <button class="view-all-btn" type="button">View All</button>
         </div>
     </div>
