@@ -1,0 +1,12 @@
+<template>
+    <div class="property-card">
+        <div class="details-grid">
+            <template for:each={details} for:item="item">
+                <div key={item.key} class="detail-row">
+                    <span class="detail-label">{item.label}</span>
+                    <span class="detail-value">{item.value}</span>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

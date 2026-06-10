@@ -1,0 +1,37 @@
+.property-card {
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Two columns; each cell holds a label/value row */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.5rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+/* Label — column title typography from irInvestmentsList header */
+.detail-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-30, #706e6b);
+}
+
+/* Value — cell value typography from irInvestmentsList body */
+.detail-value {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-10, #181818);
+}
