@@ -1,0 +1,15 @@
+<template>
+    <div class="container">
+        <h2 class="section-title">Closed Investments Summary</h2>
+        <div class="cards-grid">
+            <template for:each={stats} for:item="stat">
+                <c-closed-investments-summary-child
+                    key={stat.key}
+                    label={stat.label}
+                    value={stat.value}
+                    value-color={stat.valueColor}>
+                </c-closed-investments-summary-child>
+            </template>
+        </div>
+    </div>
+</template>
