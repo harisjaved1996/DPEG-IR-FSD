@@ -2,7 +2,8 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>IR Action Queue</masterLabel>
+    <masterLabel>Investor Dashboard Cards</masterLabel>
+    <description>Displays 7 KPI stat cards: Active Offerings, Wires Today, Investor Contacts, Active Investments, Committed, Contributed, Distributed.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>

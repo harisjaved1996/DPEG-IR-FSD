@@ -1,0 +1,42 @@
+<template>
+    <div class="card">
+        <div class="table-wrap">
+            <div class="table-header">
+                <span class="col-offering">OFFERING</span>
+                <span class="col-stage">STAGE</span>
+                <span class="col-amount">TARGET</span>
+                <span class="col-amount">COMMITTED</span>
+                <span class="col-amount">FUNDED</span>
+                <span class="col-progress">PROGRESS</span>
+            </div>
+            <template for:each={offerings} for:item="row">
+                <div key={row.id} class="table-row">
+                    <div class="col-offering">
+                        <span class="row-name">{row.name}</span>
+                    </div>
+                    <div class="col-stage">
+                        <span class={row.badgeCss}>{row.stage}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.target}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.committed}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.funded}</span>
+                    </div>
+                    <div class="col-progress">
+                        <div class="progress-track">
+                            <div class="progress-fill" style={row.barStyle}></div>
+                        </div>
+                        <span class="progress-pct" style={row.pctStyle}>{row.pctLabel}</span>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div class="card-footer">
+            <button class="view-all-btn" type="button">View all →</button>
+        </div>
+    </div>
+</template>

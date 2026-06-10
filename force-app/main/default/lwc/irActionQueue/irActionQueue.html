@@ -1,42 +1,14 @@
 <template>
-    <template lwc:if={hasItems}>
-        <ul class="slds-has-dividers_bottom-space ir-action-queue">
-            <template for:each={rows} for:item="row">
-                <li key={row.key} class="slds-item ir-action-queue__item">
-                    <button
-                        type="button"
-                        class="slds-button slds-button_reset slds-grid slds-grid_align-spread slds-grid_vertical-align-center ir-action-queue__button"
-                        data-id={row.recordId}
-                        data-object={row.objectApiName}
-                        onclick={handleSelect}
-                    >
-                        <span class="slds-media slds-media_center slds-has-flexi-truncate ir-action-queue__media">
-                            <span class="slds-media__figure">
-                                <lightning-icon
-                                    icon-name={row.iconName}
-                                    size="small"
-                                    variant="bare"
-                                ></lightning-icon>
-                            </span>
-                            <span class="slds-media__body slds-has-flexi-truncate ir-action-queue__body">
-                                <span class="slds-truncate slds-text-body_regular ir-action-queue__label">{row.label}</span>
-                                <span class="slds-truncate slds-text-body_small slds-text-color_weak">{row.sublabel}</span>
-                            </span>
-                        </span>
-                        <span class="slds-no-flex slds-grid slds-grid_vertical-align-center ir-action-queue__trailing">
-                            <template lwc:if={row.hasAmount}>
-                                <span class="slds-text-body_small slds-m-right_small ir-action-queue__amount">{row.amountText}</span>
-                            </template>
-                            <c-status-badge status={row.status}></c-status-badge>
-                        </span>
-                    </button>
+    <div class="aq-card">
+        <div class="aq-header">
+            <span class="aq-title">FAIZ'S ACTION QUEUE</span>
+        </div>
+        <ul class="aq-list">
+            <template for:each={actions} for:item="action">
+                <li key={action.id} class="aq-item">
+                    <span class="aq-item-title">{action.title}</span>
                 </li>
             </template>
         </ul>
-    </template>
-    <template lwc:else>
-        <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
-            No outstanding actions. You are all caught up.
-        </p>
-    </template>
+    </div>
 </template>

@@ -1,0 +1,28 @@
+<template>
+    <div class="tabs-container">
+        <div class="tabs-bar">
+            <button
+                class={offeringsTabCss}
+                data-tab="offerings"
+                type="button"
+                onclick={handleTabClick}>
+                Active Offerings
+            </button>
+            <button
+                class={investmentsTabCss}
+                data-tab="investments"
+                type="button"
+                onclick={handleTabClick}>
+                Active Investments
+            </button>
+        </div>
+        <div class="tab-content">
+            <template if:true={isOfferings}>
+                <c-ir-offerings-list></c-ir-offerings-list>
+            </template>
+            <template if:true={isInvestments}>
+                <c-ir-investments-list></c-ir-investments-list>
+            </template>
+        </div>
+    </div>
+</template>

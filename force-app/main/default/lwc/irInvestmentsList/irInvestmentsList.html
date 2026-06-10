@@ -1,0 +1,43 @@
+<template>
+    <div class="card">
+        <div class="table-wrap">
+            <div class="table-header">
+                <span class="col-name">NAME</span>
+                <span class="col-gp">GP ENTITY</span>
+                <span class="col-amount">COMMITTED</span>
+                <span class="col-amount">CONTRIBUTED</span>
+                <span class="col-amount">DISTRIBUTED</span>
+                <span class="col-amount">TARGET IRR</span>
+                <span class="col-amount">HOLD PERIOD</span>
+            </div>
+            <template for:each={investments} for:item="row">
+                <div key={row.id} class="table-row">
+                    <div class="col-name">
+                        <span class="row-name">{row.name}</span>
+                    </div>
+                    <div class="col-gp">
+                        <span class="gp-name">{row.gpEntity}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.committed}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.contributed}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount dist-amount">{row.distributed}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount irr-amount">{row.targetIrr}</span>
+                    </div>
+                    <div class="col-amount">
+                        <span class="amount">{row.holdPeriod}</span>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div class="card-footer">
+            <button class="view-all-btn" type="button">View all →</button>
+        </div>
+    </div>
+</template>
