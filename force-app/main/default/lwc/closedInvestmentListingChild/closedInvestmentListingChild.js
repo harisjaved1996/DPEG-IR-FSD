@@ -1,6 +1,6 @@
-import { LightningElement, track } from "lwc";
+import { LightningElement } from "lwc";
 
-const PAGE_SIZE = 10;
+const DEFAULT_ROWS = 5;
 
 const TYPES = ["Retail", "Multifamily", "Land"];
 
@@ -165,10 +165,8 @@ const CLOSED_DATA = [
 ];
 
 export default class ClosedInvestmentListingChild extends LightningElement {
-  @track currentPage = 1;
-
-  get mappedData() {
-    return CLOSED_DATA.map((row, index) => {
+  get rows() {
+    return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row, index) => {
       const type = TYPES[index % TYPES.length];
       return {
         ...row,
@@ -177,41 +175,5 @@ export default class ClosedInvestmentListingChild extends LightningElement {
         distributedDisplay: row.distributed || "—"
       };
     });
-  }
-
-  get totalPages() {
-    return Math.max(1, Math.ceil(this.mappedData.length / PAGE_SIZE));
-  }
-
-  get rows() {
-    const start = (this.currentPage - 1) * PAGE_SIZE;
-    return this.mappedData.slice(start, start + PAGE_SIZE);
-  }
-
-  get pages() {
-    return Array.from({ length: this.totalPages }, (_, i) => ({
-      number: i + 1,
-      cssClass: i + 1 === this.currentPage ? "page-btn page-active" : "page-btn"
-    }));
-  }
-
-  get prevDisabled() {
-    return this.currentPage <= 1;
-  }
-
-  get nextDisabled() {
-    return this.currentPage >= this.totalPages;
-  }
-
-  handlePageClick(event) {
-    this.currentPage = parseInt(event.currentTarget.dataset.page, 10);
-  }
-
-  handlePrev() {
-    if (!this.prevDisabled) this.currentPage -= 1;
-  }
-
-  handleNext() {
-    if (!this.nextDisabled) this.currentPage += 1;
   }
 }

@@ -23,15 +23,7 @@
             </tbody>
         </table>
         <div class="list-footer">
-            <div class="pagination">
-                <button class="page-btn nav-btn" disabled={prevDisabled} onclick={handlePrev}>&#8249;</button>
-                <template for:each={pages} for:item="page">
-                    <button key={page.number} class={page.cssClass} data-page={page.number} onclick={handlePageClick}>
-                        {page.number}
-                    </button>
-                </template>
-                <button class="page-btn nav-btn" disabled={nextDisabled} onclick={handleNext}>&#8250;</button>
-            </div>
+            <button class="view-all-btn" type="button">View All</button>
         </div>
     </div>
 </template>
