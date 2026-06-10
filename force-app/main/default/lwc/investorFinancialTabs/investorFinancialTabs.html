@@ -1,0 +1,20 @@
+<template>
+    <div class="fin-card">
+        <div class="fin-tab-nav">
+            <button class={btnContributions} onclick={handleContributionsTab} type="button">
+                Contributions
+            </button>
+            <button class={btnDistributions} onclick={handleDistributionsTab} type="button">
+                Distributions
+            </button>
+        </div>
+        <div class="fin-tab-body">
+            <div class={contentContributionsClass}>
+                <c-investor-contributions-list></c-investor-contributions-list>
+            </div>
+            <div class={contentDistributionsClass}>
+                <c-investor-distributions-list></c-investor-distributions-list>
+            </div>
+        </div>
+    </div>
+</template>

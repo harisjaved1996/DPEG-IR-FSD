@@ -1,0 +1,27 @@
+<template>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Date Received</th>
+                    <th>Amount</th>
+                    <th>Investment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={pagedData} for:item="row">
+                    <tr key={row.id}>
+                        <td class="col-date">{row.dateReceived}</td>
+                        <td class="col-amount">{row.amount}</td>
+                        <td class="col-investment">{row.investment}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button class="page-btn" disabled={isFirstPage} onclick={handlePrevious} type="button">&#8249; Prev</button>
+            <span class="page-info">Page {currentPage} of {totalPages}</span>
+            <button class="page-btn" disabled={isLastPage} onclick={handleNext} type="button">Next &#8250;</button>
+        </div>
+    </div>
+</template>
