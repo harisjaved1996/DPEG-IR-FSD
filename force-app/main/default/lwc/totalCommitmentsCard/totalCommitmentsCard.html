@@ -1,14 +1,15 @@
 <template>
-    <article class="metric-card">
-        <div class="card-grid">
-            <div class="icon-cell">
-                <lightning-icon icon-name="standard:orders" size="small" alternative-text="Total Commitments"></lightning-icon>
-            </div>
-            <div class="label-cell">
-                <span class="metric-label">TOTAL COMMITMENTS</span>
-            </div>
-            <div class="value-cell">
-                <span class="metric-value">6</span>
+    <article class="stat-card slds-p-around_small">
+        <div class="card-body">
+            <lightning-icon
+                icon-name="standard:orders"
+                size="small"
+                alternative-text="Total Commitments"
+                class="stat-icon">
+            </lightning-icon>
+            <div class="text-col">
+                <span class="slds-text-heading_medium stat-value slds-truncate" title="6">6</span>
+                <span class="slds-text-title_caps stat-label slds-truncate" title="Total Commitments">Total Commitments</span>
             </div>
         </div>
     </article>

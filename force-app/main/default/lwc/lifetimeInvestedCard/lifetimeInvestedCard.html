@@ -1,14 +1,15 @@
 <template>
-    <article class="metric-card">
-        <div class="card-grid">
-            <div class="icon-cell">
-                <lightning-icon icon-name="utility:money" size="small" alternative-text="Lifetime Invested"></lightning-icon>
-            </div>
-            <div class="label-cell">
-                <span class="metric-label">LIFETIME INVESTED</span>
-            </div>
-            <div class="value-cell">
-                <span class="metric-value">$980K</span>
+    <article class="stat-card slds-p-around_small">
+        <div class="card-body">
+            <lightning-icon
+                icon-name="utility:money"
+                size="small"
+                alternative-text="Lifetime Invested"
+                class="stat-icon">
+            </lightning-icon>
+            <div class="text-col">
+                <span class="slds-text-heading_medium stat-value slds-truncate" title="$980K">$980K</span>
+                <span class="slds-text-title_caps stat-label slds-truncate" title="Lifetime Invested">Lifetime Invested</span>
             </div>
         </div>
     </article>
