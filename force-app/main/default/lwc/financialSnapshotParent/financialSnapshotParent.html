@@ -1,0 +1,11 @@
+<template>
+    <div class="snapshot">
+        <template for:each={items} for:item="item">
+            <c-financial-snapshot-child
+                key={item.key}
+                label={item.label}
+                value={item.value}>
+            </c-financial-snapshot-child>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,42 @@
+<template>
+    <article class="card slds-p-around_medium">
+        <!-- Row 1: IRR to Date (start) and Target IRR (end), statCard-style -->
+        <div class="irr-row">
+            <div class="stat-block">
+                <lightning-icon
+                    icon-name="standard:metrics"
+                    size="small"
+                    alternative-text="IRR to Date"
+                    class="stat-icon">
+                </lightning-icon>
+                <div class="text-col">
+                    <span class="slds-text-heading_medium stat-value slds-truncate" title={irrToDate}>{irrToDate}</span>
+                    <span class="slds-text-title_caps stat-label slds-truncate" title="IRR to Date">IRR to Date</span>
+                </div>
+            </div>
+            <div class="stat-block">
+                <lightning-icon
+                    icon-name="standard:goals"
+                    size="small"
+                    alternative-text="Target IRR"
+                    class="stat-icon">
+                </lightning-icon>
+                <div class="text-col">
+                    <span class="slds-text-heading_medium stat-value slds-truncate" title={targetIrr}>{targetIrr}</span>
+                    <span class="slds-text-title_caps stat-label slds-truncate" title="Target IRR">Target IRR</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: IRR progress to target bar -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">{progressLabel}</span>
+                <span class="progress-meta">{progressMeta}</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" style={barStyle}></div>
+            </div>
+        </div>
+    </article>
+</template>

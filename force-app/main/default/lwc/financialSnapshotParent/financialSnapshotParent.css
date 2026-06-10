@@ -1,0 +1,7 @@
+.snapshot {
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.25rem;
+  padding: 0.25rem 1rem;
+  box-sizing: border-box;
+}

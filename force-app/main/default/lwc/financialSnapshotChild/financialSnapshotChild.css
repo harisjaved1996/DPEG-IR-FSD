@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+:host:last-child .row {
+  border-bottom: none;
+}
+
+/* Label — native Lightning tab-label typography */
+.row-label {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-20, #3e3e3c);
+}
+
+/* Value — cell value typography from irInvestmentsList body */
+.row-value {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--slds-g-color-neutral-base-10, #181818);
+}
