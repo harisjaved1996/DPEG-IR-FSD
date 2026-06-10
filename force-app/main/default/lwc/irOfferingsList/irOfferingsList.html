@@ -1,42 +1,50 @@
 <template>
     <div class="card">
-        <div class="table-wrap">
-            <div class="table-header">
-                <span class="col-offering">OFFERING</span>
-                <span class="col-stage">STAGE</span>
-                <span class="col-amount">TARGET</span>
-                <span class="col-amount">COMMITTED</span>
-                <span class="col-amount">FUNDED</span>
-                <span class="col-progress">PROGRESS</span>
-            </div>
-            <template for:each={offerings} for:item="row">
-                <div key={row.id} class="table-row">
-                    <div class="col-offering">
-                        <span class="row-name">{row.name}</span>
-                    </div>
-                    <div class="col-stage">
-                        <span class={row.badgeCss}>{row.stage}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.target}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.committed}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.funded}</span>
-                    </div>
-                    <div class="col-progress">
-                        <div class="progress-track">
-                            <div class="progress-fill" style={row.barStyle}></div>
-                        </div>
-                        <span class="progress-pct" style={row.pctStyle}>{row.pctLabel}</span>
-                    </div>
-                </div>
-            </template>
-        </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered list-table">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col"><div class="slds-truncate" title="Offering">Offering</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Stage">Stage</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Target">Target</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Committed">Committed</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Funded">Funded</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Progress">Progress</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={offerings} for:item="row">
+                    <tr key={row.id} class="slds-hint-parent">
+                        <th scope="row" data-label="Offering">
+                            <div class="slds-truncate" title={row.name}>
+                                <a href="#" class="row-link" onclick={handleNameClick}>{row.name}</a>
+                            </div>
+                        </th>
+                        <td data-label="Stage">
+                            <div class="slds-truncate"><span class={row.badgeCss}>{row.stage}</span></div>
+                        </td>
+                        <td data-label="Target">
+                            <div class="slds-truncate" title={row.target}>{row.target}</div>
+                        </td>
+                        <td data-label="Committed">
+                            <div class="slds-truncate" title={row.committed}>{row.committed}</div>
+                        </td>
+                        <td data-label="Funded">
+                            <div class="slds-truncate" title={row.funded}>{row.funded}</div>
+                        </td>
+                        <td data-label="Progress">
+                            <div class="progress-cell">
+                                <div class="progress-track">
+                                    <div class="progress-fill" style={row.barStyle}></div>
+                                </div>
+                                <span class="progress-pct" style={row.pctStyle}>{row.pctLabel}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
         <div class="card-footer">
-            <button class="view-all-btn" type="button">View all →</button>
+            <button class="view-all-btn" type="button">View All</button>
         </div>
     </div>
 </template>

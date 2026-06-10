@@ -53,4 +53,8 @@ export default class IrInvestmentsList extends LightningElement {
       holdPeriod: "3 Years"
     }
   ];
+
+  handleNameClick(event) {
+    event.preventDefault();
+  }
 }

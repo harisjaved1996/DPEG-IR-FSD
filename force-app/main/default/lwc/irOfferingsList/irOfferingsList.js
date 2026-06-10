@@ -63,4 +63,8 @@ export default class IrOfferingsList extends LightningElement {
       pctLabel: "82%"
     }
   ];
+
+  handleNameClick(event) {
+    event.preventDefault();
+  }
 }

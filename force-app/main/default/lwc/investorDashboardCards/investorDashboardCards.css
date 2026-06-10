@@ -1,5 +1,8 @@
 .dashboard-cards {
   width: 100%;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  padding: 0.75rem;
+  box-sizing: border-box;
 }
 
 .cards-row {

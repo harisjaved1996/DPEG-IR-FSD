@@ -1,43 +1,49 @@
 <template>
     <div class="card">
-        <div class="table-wrap">
-            <div class="table-header">
-                <span class="col-name">NAME</span>
-                <span class="col-gp">GP ENTITY</span>
-                <span class="col-amount">COMMITTED</span>
-                <span class="col-amount">CONTRIBUTED</span>
-                <span class="col-amount">DISTRIBUTED</span>
-                <span class="col-amount">TARGET IRR</span>
-                <span class="col-amount">HOLD PERIOD</span>
-            </div>
-            <template for:each={investments} for:item="row">
-                <div key={row.id} class="table-row">
-                    <div class="col-name">
-                        <span class="row-name">{row.name}</span>
-                    </div>
-                    <div class="col-gp">
-                        <span class="gp-name">{row.gpEntity}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.committed}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.contributed}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount dist-amount">{row.distributed}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount irr-amount">{row.targetIrr}</span>
-                    </div>
-                    <div class="col-amount">
-                        <span class="amount">{row.holdPeriod}</span>
-                    </div>
-                </div>
-            </template>
-        </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered list-table">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+                    <th scope="col"><div class="slds-truncate" title="GP Entity">GP Entity</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Committed">Committed</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Contributed">Contributed</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Distributed">Distributed</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Target IRR">Target IRR</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Hold Period">Hold Period</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={investments} for:item="row">
+                    <tr key={row.id} class="slds-hint-parent">
+                        <th scope="row" data-label="Name">
+                            <div class="slds-truncate" title={row.name}>
+                                <a href="#" class="row-link" onclick={handleNameClick}>{row.name}</a>
+                            </div>
+                        </th>
+                        <td data-label="GP Entity">
+                            <div class="slds-truncate" title={row.gpEntity}>{row.gpEntity}</div>
+                        </td>
+                        <td data-label="Committed">
+                            <div class="slds-truncate" title={row.committed}>{row.committed}</div>
+                        </td>
+                        <td data-label="Contributed">
+                            <div class="slds-truncate" title={row.contributed}>{row.contributed}</div>
+                        </td>
+                        <td data-label="Distributed">
+                            <div class="slds-truncate dist-amount" title={row.distributed}>{row.distributed}</div>
+                        </td>
+                        <td data-label="Target IRR">
+                            <div class="slds-truncate irr-amount" title={row.targetIrr}>{row.targetIrr}</div>
+                        </td>
+                        <td data-label="Hold Period">
+                            <div class="slds-truncate" title={row.holdPeriod}>{row.holdPeriod}</div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
         <div class="card-footer">
-            <button class="view-all-btn" type="button">View all →</button>
+            <button class="view-all-btn" type="button">View All</button>
         </div>
     </div>
 </template>

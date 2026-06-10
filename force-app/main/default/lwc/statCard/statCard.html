@@ -1,12 +1,14 @@
 <template>
-    <article class="stat-card">
+    <article class="stat-card slds-p-around_small">
         <div class="card-body">
-            <div class="icon-badge" style={badgeStyle}>
-                <lightning-icon icon-name={iconName} size="x-small" variant="inverse"></lightning-icon>
-            </div>
+            <lightning-icon
+                icon-name={iconName}
+                size="small"
+                class="stat-icon">
+            </lightning-icon>
             <div class="text-col">
-                <span class="stat-value" style={valueStyle}>{value}</span>
-                <span class="stat-label">{label}</span>
+                <span class="slds-text-heading_medium stat-value slds-truncate" title={value}>{value}</span>
+                <span class="slds-text-title stat-label slds-truncate" title={label}>{label}</span>
             </div>
         </div>
     </article>

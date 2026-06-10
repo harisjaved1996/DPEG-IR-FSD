@@ -1,0 +1,64 @@
+<template>
+    <div class="list-container">
+        <!-- Search filter -->
+        <div class="filter-bar">
+            <lightning-input
+                type="search"
+                label="Search"
+                variant="label-hidden"
+                placeholder="Search by name..."
+                value={searchTerm}
+                onchange={handleSearch}>
+            </lightning-input>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+            <table class="inv-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="th-left">NAME</th>
+                        <th scope="col" class="th-left">GP ENTITY</th>
+                        <th scope="col" class="th-right">COMMITTED</th>
+                        <th scope="col" class="th-right">CONTRIBUTED</th>
+                        <th scope="col" class="th-right">DISTRIBUTED</th>
+                        <th scope="col" class="th-right">TARGET IRR</th>
+                        <th scope="col" class="th-right">HOLD PERIOD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={paginatedData} for:item="row">
+                        <tr key={row.id} class="table-row">
+                            <td class="col-name">{row.name}</td>
+                            <td class="td-val">{row.gpEntity}</td>
+                            <td class="td-val td-right">{row.committed}</td>
+                            <td class="td-val td-right">{row.contributed}</td>
+                            <td class={row.distributedClass}>{row.distributedDisplay}</td>
+                            <td class="td-irr td-right">{row.targetIrr}</td>
+                            <td class="td-val td-right">{row.holdPeriod}</td>
+                        </tr>
+                    </template>
+                    <template if:true={isEmpty}>
+                        <tr>
+                            <td colspan="7" class="empty-msg">No investments found.</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer: Pagination + View all -->
+        <div class="table-footer">
+            <div class="pagination">
+                <button class="page-btn nav-btn" disabled={prevDisabled} onclick={handlePrev}>&#8249;</button>
+                <template for:each={pages} for:item="page">
+                    <button key={page.number} class={page.cssClass} data-page={page.number} onclick={handlePageClick}>
+                        {page.number}
+                    </button>
+                </template>
+                <button class="page-btn nav-btn" disabled={nextDisabled} onclick={handleNext}>&#8250;</button>
+            </div>
+            <!-- <span class="view-all-btn">View all &#8594;</span> -->
+        </div>
+    </div>
+</template>

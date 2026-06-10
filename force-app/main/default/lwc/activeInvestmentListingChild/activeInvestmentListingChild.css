@@ -1,0 +1,159 @@
+.list-container {
+  background: #ffffff;
+}
+
+.filter-bar {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.inv-table th {
+  padding: 0.625rem 1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #706e6b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  border-bottom: 1px solid #e8ecf0;
+  background: #fafafa;
+}
+
+.th-left {
+  text-align: left;
+}
+
+.th-right {
+  text-align: right;
+}
+
+.inv-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #f4f6f9;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table-row:hover {
+  background: #f8f9fb;
+}
+
+.col-name {
+  font-weight: 600;
+  color: #0176d3;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.col-name:hover {
+  text-decoration: underline;
+  color: #014486;
+}
+
+.td-val {
+  color: #444;
+}
+
+.td-right {
+  text-align: right;
+}
+
+.td-teal {
+  color: #0176d3;
+}
+
+.td-dash {
+  color: #c9c7c5;
+  letter-spacing: 0.1em;
+}
+
+.td-irr {
+  color: #2e844a;
+  font-weight: 600;
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #706e6b;
+  font-size: 0.875rem;
+}
+
+.table-footer {
+  display: flex;
+  /* align-items: center; */
+  justify-content: end;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.page-btn {
+  min-width: 2rem;
+  height: 2rem;
+  border: 1px solid #e8ecf0;
+  background: #ffffff;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #444;
+  padding: 0 0.5rem;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #f0f7ff;
+  border-color: #0176d3;
+  color: #0176d3;
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-active {
+  background: #0176d3;
+  border-color: #0176d3;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.page-active:hover {
+  background: #014486;
+  border-color: #014486;
+}
+
+.nav-btn {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.view-all-btn {
+  color: #0176d3;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.view-all-btn:hover {
+  text-decoration: underline;
+}
