@@ -1,13 +1,12 @@
 <template>
-    <div class="container">
-        <h2 class="section-title">Active Investments Summary</h2>
+    <div class="dashboard-cards">
         <div class="cards-row">
             <template for:each={stats} for:item="stat">
                 <c-active-investments-summary-child
                     key={stat.key}
-                    label={stat.label}
                     value={stat.value}
-                    value-color={stat.valueColor}>
+                    label={stat.label}
+                    icon-name={stat.iconName}>
                 </c-active-investments-summary-child>
             </template>
         </div>

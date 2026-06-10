@@ -1,16 +1,4 @@
 <template>
-    <div class="tabs-container">
-        <div class="tab-bar">
-            <button class={activeTabClass} onclick={showActive}>Active</button>
-            <button class={closedTabClass} onclick={showClosed}>Closed</button>
-        </div>
-        <div class="tab-content">
-            <template if:true={isActiveTab}>
-                <c-active-investment-listing-child></c-active-investment-listing-child>
-            </template>
-            <template if:true={isClosedTab}>
-                <c-closed-investment-listing-child></c-closed-investment-listing-child>
-            </template>
-        </div>
-    </div>
+    <c-active-investment-listing-child></c-active-investment-listing-child>
+    <c-closed-investment-listing-child></c-closed-investment-listing-child>
 </template>

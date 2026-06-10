@@ -2,6 +2,13 @@ import { LightningElement, track } from "lwc";
 
 const PAGE_SIZE = 10;
 
+// Same GP entity value always maps to the same tag/badge style.
+const GP_BADGE = {
+  "DPEG GP I LLC": "badge badge-blue",
+  "DPEG GP II LLC": "badge badge-purple",
+  "DPEG GP III LLC": "badge badge-green"
+};
+
 const ACTIVE_DATA = [
   {
     id: "a1",
@@ -256,26 +263,23 @@ const ACTIVE_DATA = [
 ];
 
 export default class ActiveInvestmentListingChild extends LightningElement {
-  @track searchTerm = "";
   @track currentPage = 1;
 
-  get filteredData() {
-    const term = this.searchTerm.toLowerCase();
-    if (!term) return ACTIVE_DATA;
-    return ACTIVE_DATA.filter((r) => r.name.toLowerCase().includes(term));
+  get mappedData() {
+    return ACTIVE_DATA.map((row) => ({
+      ...row,
+      gpBadge: GP_BADGE[row.gpEntity] || "badge badge-gray",
+      distributedDisplay: row.distributed || "—"
+    }));
   }
 
   get totalPages() {
-    return Math.max(1, Math.ceil(this.filteredData.length / PAGE_SIZE));
+    return Math.max(1, Math.ceil(this.mappedData.length / PAGE_SIZE));
   }
 
-  get paginatedData() {
+  get rows() {
     const start = (this.currentPage - 1) * PAGE_SIZE;
-    return this.filteredData.slice(start, start + PAGE_SIZE).map((row) => ({
-      ...row,
-      distributedDisplay: row.distributed || "—",
-      distributedClass: row.distributed ? "td-teal td-right" : "td-dash td-right"
-    }));
+    return this.mappedData.slice(start, start + PAGE_SIZE);
   }
 
   get pages() {
@@ -291,15 +295,6 @@ export default class ActiveInvestmentListingChild extends LightningElement {
 
   get nextDisabled() {
     return this.currentPage >= this.totalPages;
-  }
-
-  get isEmpty() {
-    return this.paginatedData.length === 0;
-  }
-
-  handleSearch(event) {
-    this.searchTerm = event.detail.value;
-    this.currentPage = 1;
   }
 
   handlePageClick(event) {

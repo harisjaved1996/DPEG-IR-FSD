@@ -60,7 +60,7 @@
 }
 
 .list-table tbody td.td-num {
-  text-align: right;
+  text-align: left;
 }
 
 .list-table tbody tr:hover {

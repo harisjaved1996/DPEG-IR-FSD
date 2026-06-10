@@ -1,54 +1,32 @@
 <template>
-    <div class="list-container">
-        <!-- Search filter -->
-        <div class="filter-bar">
-            <lightning-input
-                type="search"
-                label="Search"
-                variant="label-hidden"
-                placeholder="Search by name..."
-                value={searchTerm}
-                onchange={handleSearch}>
-            </lightning-input>
-        </div>
-
-        <!-- Table -->
-        <div class="table-wrap">
-            <table class="inv-table">
-                <thead>
-                    <tr>
-                        <th scope="col" class="th-left">NAME</th>
-                        <th scope="col" class="th-left">GP ENTITY</th>
-                        <th scope="col" class="th-right">COMMITTED</th>
-                        <th scope="col" class="th-right">CONTRIBUTED</th>
-                        <th scope="col" class="th-right">DISTRIBUTED</th>
-                        <th scope="col" class="th-right">TARGET IRR</th>
-                        <th scope="col" class="th-right">HOLD PERIOD</th>
+    <div class="card">
+        <table class="list-table">
+            <thead>
+                <tr>
+                    <th class="th-text">Name</th>
+                    <th class="th-text">GP Entity</th>
+                    <th class="th-num">Committed</th>
+                    <th class="th-num">Contributed</th>
+                    <th class="th-num">Distributed</th>
+                    <th class="th-num">Target IRR</th>
+                    <th class="th-text">Hold Period</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={rows} for:item="row">
+                    <tr key={row.id}>
+                        <td class="td-text"><span class="row-name">{row.name}</span></td>
+                        <td class="td-text"><span class={row.gpBadge}>{row.gpEntity}</span></td>
+                        <td class="td-num">{row.committed}</td>
+                        <td class="td-num">{row.contributed}</td>
+                        <td class="td-num dist-amount">{row.distributedDisplay}</td>
+                        <td class="td-num irr-amount">{row.targetIrr}</td>
+                        <td class="td-text">{row.holdPeriod}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <template for:each={paginatedData} for:item="row">
-                        <tr key={row.id} class="table-row">
-                            <td class="col-name">{row.name}</td>
-                            <td class="td-val">{row.gpEntity}</td>
-                            <td class="td-val td-right">{row.committed}</td>
-                            <td class="td-val td-right">{row.contributed}</td>
-                            <td class={row.distributedClass}>{row.distributedDisplay}</td>
-                            <td class="td-irr td-right">{row.targetIrr}</td>
-                            <td class="td-val td-right">{row.holdPeriod}</td>
-                        </tr>
-                    </template>
-                    <template if:true={isEmpty}>
-                        <tr>
-                            <td colspan="7" class="empty-msg">No investments found.</td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Footer: Pagination + View all -->
-        <div class="table-footer">
+                </template>
+            </tbody>
+        </table>
+        <div class="list-footer">
             <div class="pagination">
                 <button class="page-btn nav-btn" disabled={prevDisabled} onclick={handlePrev}>&#8249;</button>
                 <template for:each={pages} for:item="page">
@@ -58,7 +36,6 @@
                 </template>
                 <button class="page-btn nav-btn" disabled={nextDisabled} onclick={handleNext}>&#8250;</button>
             </div>
-            <!-- <span class="view-all-btn">View all &#8594;</span> -->
         </div>
     </div>
 </template>
