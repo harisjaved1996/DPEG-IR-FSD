@@ -1,10 +1,30 @@
 import { LightningElement } from "lwc";
 
 const STATS = [
-  { key: "closedInvestments", label: "Closed Investments", value: "30", valueColor: "#181818" },
-  { key: "committed", label: "Committed", value: "$9.1M", valueColor: "#0176d3" },
-  { key: "contributed", label: "Contributed", value: "$750K", valueColor: "#0176d3" },
-  { key: "distributed", label: "Distributed", value: "$10.5M", valueColor: "#2e844a" }
+  {
+    key: "closedInvestments",
+    label: "Closed Investments",
+    value: "12",
+    iconName: "standard:investment_account"
+  },
+  {
+    key: "committed",
+    label: "Total Committed",
+    value: "$7M",
+    iconName: "standard:contract"
+  },
+  {
+    key: "contributed",
+    label: "Total Contributed",
+    value: "$4.7M",
+    iconName: "standard:metrics"
+  },
+  {
+    key: "distributed",
+    label: "Total Distributed",
+    value: "$500K",
+    iconName: "standard:partner_fund_allocation"
+  }
 ];
 
 export default class ClosedInvestmentsSummaryParent extends LightningElement {

@@ -2,11 +2,13 @@ import { LightningElement, track } from "lwc";
 
 const PAGE_SIZE = 10;
 
-// Same GP entity value always maps to the same tag/badge style.
-const GP_BADGE = {
-  "DPEG GP I LLC": "badge badge-blue",
-  "DPEG GP II LLC": "badge badge-purple",
-  "DPEG GP III LLC": "badge badge-green"
+const TYPES = ["Retail", "Multifamily", "Land"];
+
+// Same type value always maps to the same tag/badge style.
+const TYPE_BADGE = {
+  Retail: "badge badge-blue",
+  Multifamily: "badge badge-purple",
+  Land: "badge badge-green"
 };
 
 const ACTIVE_DATA = [
@@ -266,11 +268,15 @@ export default class ActiveInvestmentListingChild extends LightningElement {
   @track currentPage = 1;
 
   get mappedData() {
-    return ACTIVE_DATA.map((row) => ({
-      ...row,
-      gpBadge: GP_BADGE[row.gpEntity] || "badge badge-gray",
-      distributedDisplay: row.distributed || "—"
-    }));
+    return ACTIVE_DATA.map((row, index) => {
+      const type = TYPES[index % TYPES.length];
+      return {
+        ...row,
+        type,
+        typeBadge: TYPE_BADGE[type],
+        distributedDisplay: row.distributed || "—"
+      };
+    });
   }
 
   get totalPages() {

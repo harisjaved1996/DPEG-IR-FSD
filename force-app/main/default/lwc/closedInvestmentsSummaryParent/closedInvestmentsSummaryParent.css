@@ -1,18 +1,10 @@
 .container {
-  padding: 1rem;
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e8ecf0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #181818;
-  margin: 0 0 1rem 0;
-  padding: 0;
-  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem 0;
 }
 
 .cards-grid {

@@ -4,32 +4,32 @@ const STATS = [
   {
     key: "activeInvestments",
     label: "Active Investments",
-    value: "2",
+    value: "25",
     iconName: "standard:investment_account"
   },
   {
-    key: "lpCapitalDeployed",
-    label: "LP Capital Deployed",
+    key: "activeTotalCommited",
+    label: "Total Commited",
     value: "$13M",
     iconName: "standard:currency"
   },
   {
-    key: "totalLpInvestors",
-    label: "Total LP Investors",
-    value: "376",
-    iconName: "standard:groups"
+    key: "activeTotalContributed",
+    label: "Total Contributed",
+    value: "$10M",
+    iconName: "standard:currency"
   },
   {
-    key: "distributedToDate",
-    label: "Distributed to Date",
-    value: "$628K",
+    key: "activeTotalDistribued",
+    label: "Total Distributed",
+    value: "$200K",
+    iconName: "standard:currency"
+  },
+  {
+    key: "activeTotalInvestors",
+    label: "Total Investors",
+    value: "215",
     iconName: "standard:partner_fund_allocation"
-  },
-  {
-    key: "avgIrrToDate",
-    label: "Avg IRR to Date",
-    value: "11.3%",
-    iconName: "standard:metrics"
   },
   {
     key: "nearestProjectedExit",

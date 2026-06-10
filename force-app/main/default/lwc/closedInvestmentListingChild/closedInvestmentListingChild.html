@@ -4,24 +4,20 @@
             <thead>
                 <tr>
                     <th class="th-text">Name</th>
-                    <th class="th-text">GP Entity</th>
+                    <th class="th-text">Type</th>
                     <th class="th-num">Committed</th>
                     <th class="th-num">Contributed</th>
                     <th class="th-num">Distributed</th>
-                    <th class="th-num">Target IRR</th>
-                    <th class="th-text">Hold Period</th>
                 </tr>
             </thead>
             <tbody>
                 <template for:each={rows} for:item="row">
                     <tr key={row.id}>
                         <td class="td-text"><span class="row-name">{row.name}</span></td>
-                        <td class="td-text"><span class={row.gpBadge}>{row.gpEntity}</span></td>
+                        <td class="td-text"><span class={row.typeBadge}>{row.type}</span></td>
                         <td class="td-num">{row.committed}</td>
                         <td class="td-num">{row.contributed}</td>
-                        <td class="td-num dist-amount">{row.distributedDisplay}</td>
-                        <td class="td-num irr-amount">{row.targetIrr}</td>
-                        <td class="td-text">{row.holdPeriod}</td>
+                        <td class="td-num">{row.distributedDisplay}</td>
                     </tr>
                 </template>
             </tbody>
