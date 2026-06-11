@@ -1,6 +1,6 @@
 <template>
-    <lightning-card icon-name="standard:contract">
-        <span slot="title">Commitments ({recordCount})</span>
+    <lightning-card icon-name="standard:currency">
+        <span slot="title">Contributions ({recordCount})</span>
 
         <lightning-button
             slot="actions"
@@ -9,13 +9,13 @@
             onclick={handleNew}>
         </lightning-button>
 
-        <c-offering-datatable
+        <lightning-datatable
             key-field="id"
             data={data}
             columns={columns}
             hide-checkbox-column
             onrowaction={handleRowAction}>
-        </c-offering-datatable>
+        </lightning-datatable>
 
         <div slot="footer" class="view-all-footer">
             <a href="#" onclick={handleViewAll}>View All</a>

@@ -9,9 +9,9 @@ export default class OfferingDetailPageCard extends LightningElement {
       iconName: "standard:opportunity"
     },
     {
-      key: "raised",
+      key: "CommittedCapital",
       displayValue: "$8.6M",
-      label: "Raised",
+      label: "Committed Capital",
       iconName: "standard:currency"
     },
     {
@@ -27,9 +27,9 @@ export default class OfferingDetailPageCard extends LightningElement {
       iconName: "standard:contact"
     },
     {
-      key: "distributed",
+      key: "contributed",
       displayValue: "$1.3M",
-      label: "Total Distributed",
+      label: "Total Contributed",
       iconName: "standard:contract"
     },
     {

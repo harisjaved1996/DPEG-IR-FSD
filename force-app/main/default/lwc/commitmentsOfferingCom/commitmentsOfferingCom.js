@@ -5,6 +5,16 @@ const ROW_ACTIONS = [
   { label: "Delete", name: "delete" }
 ];
 
+const PILL_BASE =
+  "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;";
+
+// Light, native success-green pill for "Yes"; neutral pill otherwise.
+function pillStyle(value) {
+  return value === "Yes"
+    ? PILL_BASE + "background:#d7f4d3;color:#2e844a;"
+    : PILL_BASE + "background:#ecebea;color:#5c5c5c;";
+}
+
 const COLUMNS = [
   {
     label: "Commitment Number",
@@ -24,9 +34,22 @@ const COLUMNS = [
     typeAttributes: { label: { fieldName: "contact" }, target: "_self" }
   },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
+  {
+    label: "PPM Sent",
+    fieldName: "ppmSent",
+    type: "pill",
+    typeAttributes: { pillStyle: { fieldName: "ppmSentStyle" } }
+  },
+  {
+    label: "PPM Signed",
+    fieldName: "ppmSigned",
+    type: "pill",
+    typeAttributes: { pillStyle: { fieldName: "ppmSignedStyle" } }
+  },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];
 
+// PPM Signed can only be "Yes" when PPM Sent is "Yes".
 const DATA = [
   {
     id: "1",
@@ -36,7 +59,9 @@ const DATA = [
     committedAmount: "$200,000.00",
     contact: "A. Greentree",
     contactUrl: "#",
-    investingEntity: "18825 Sea, LLC"
+    investingEntity: "18825 Sea, LLC",
+    ppmSent: "Yes",
+    ppmSigned: "Yes"
   },
   {
     id: "2",
@@ -46,7 +71,9 @@ const DATA = [
     committedAmount: "$100,000.00",
     contact: "R. Thompson",
     contactUrl: "#",
-    investingEntity: "1988 Venture LLC"
+    investingEntity: "1988 Venture LLC",
+    ppmSent: "Yes",
+    ppmSigned: "No"
   },
   {
     id: "3",
@@ -56,13 +83,19 @@ const DATA = [
     committedAmount: "$500,000.00",
     contact: "P. Sharma",
     contactUrl: "#",
-    investingEntity: "24 Seven REH, LLC"
+    investingEntity: "24 Seven REH, LLC",
+    ppmSent: "No",
+    ppmSigned: "No"
   }
 ];
 
 export default class CommitmentsOfferingCom extends LightningElement {
   columns = COLUMNS;
-  data = DATA;
+  data = DATA.map((row) => ({
+    ...row,
+    ppmSentStyle: pillStyle(row.ppmSent),
+    ppmSignedStyle: pillStyle(row.ppmSigned)
+  }));
 
   get recordCount() {
     return this.data.length;
