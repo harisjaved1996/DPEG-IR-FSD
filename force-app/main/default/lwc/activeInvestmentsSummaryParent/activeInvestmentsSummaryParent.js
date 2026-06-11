@@ -17,7 +17,7 @@ const STATS = [
     key: "activeTotalContributed",
     label: "Total Contributed",
     value: "$10M",
-    iconName: "standard:currency"
+    iconName: "standard:note"
   },
   {
     key: "activeTotalDistribued",

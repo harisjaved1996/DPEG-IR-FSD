@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  margin: 0 0 0.75rem 0;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}

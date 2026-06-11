@@ -33,7 +33,7 @@ const TRANSFERS = [
     units: "3",
     amount: "$50K",
     status: "Completed",
-    date: "Mar 02"
+    date: "Mar 02 2026"
   }
 ];
 

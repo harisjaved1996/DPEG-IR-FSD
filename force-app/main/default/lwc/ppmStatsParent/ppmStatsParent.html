@@ -1,0 +1,14 @@
+<template>
+    <div class="container">
+        <div class="cards-grid">
+            <template for:each={stats} for:item="stat">
+                <c-ppm-stat-child
+                    key={stat.key}
+                    value={stat.value}
+                    label={stat.label}
+                    icon-name={stat.iconName}>
+                </c-ppm-stat-child>
+            </template>
+        </div>
+    </div>
+</template>
