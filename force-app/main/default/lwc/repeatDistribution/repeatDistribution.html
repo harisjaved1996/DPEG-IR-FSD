@@ -1,49 +1,58 @@
 <template>
-    <div class="card">
-        <div class="table-scroll">
-            <table class="list-table">
-                <thead>
-                    <tr>
-                        <th class="th-text">Date</th>
-                        <th class="th-text">Effective Date</th>
-                        <th class="th-text">Period</th>
-                        <th class="th-text">Description</th>
-                        <th class="th-text">Source</th>
-                        <th class="th-text">Paid Status</th>
-                        <th class="th-text">Type</th>
-                        <th class="th-num">Amount</th>
-                        <th class="th-action"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template for:each={rows} for:item="row">
-                        <tr key={row.id}>
-                            <td class="td-text">{row.date}</td>
-                            <td class="td-text">{row.effectiveDate}</td>
-                            <td class="td-text">{row.period}</td>
-                            <td class="td-text">{row.description}</td>
-                            <td class="td-text">{row.source}</td>
-                            <td class="td-text"><span class={row.statusBadge}>{row.paidStatus}</span></td>
-                            <td class="td-text">{row.type}</td>
-                            <td class="td-num amount-blue">
-                                <lightning-formatted-number
-                                    value={row.amount}
-                                    format-style="currency"
-                                    currency-code="USD">
-                                </lightning-formatted-number>
-                            </td>
-                            <td class="td-action">
-                                <lightning-button
-                                    label="Initiate"
-                                    variant="brand"
-                                    data-id={row.id}
-                                    onclick={handleInitiate}>
-                                </lightning-button>
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-        </div>
+    <div class="detail-wrap">
+        <template for:each={rows} for:item="row">
+            <div key={row.id} class="detail-card">
+                <div class="detail-grid">
+                    <div class="field">
+                        <span class="f-label">Date</span>
+                        <span class="f-value">{row.date}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Effective Date</span>
+                        <span class="f-value">{row.effectiveDate}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Period</span>
+                        <span class="f-value">{row.period}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Description</span>
+                        <span class="f-value">{row.description}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Source</span>
+                        <span class="f-value">{row.source}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Paid Status</span>
+                        <span class="f-value">
+                            <span class={row.statusBadge}>{row.paidStatus}</span>
+                        </span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Type</span>
+                        <span class="f-value">{row.type}</span>
+                    </div>
+                    <div class="field">
+                        <span class="f-label">Amount</span>
+                        <span class="f-value">
+                            <lightning-formatted-number
+                                value={row.amount}
+                                format-style="currency"
+                                currency-code="USD">
+                            </lightning-formatted-number>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <div class="verify-bar">
+        <lightning-button
+            label="Verify"
+            variant="brand-outline"
+            onclick={handleVerify}>
+        </lightning-button>
     </div>
 </template>

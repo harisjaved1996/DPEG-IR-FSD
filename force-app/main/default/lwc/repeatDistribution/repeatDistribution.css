@@ -1,94 +1,48 @@
-.card {
-  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
-  border-radius: 0.25rem;
-  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
-  overflow: hidden;
+.detail-wrap {
+  width: 100%;
 }
 
-/* Download as CSV link (top-right) */
-.list-header {
+.detail-card {
+  margin-bottom: 0.5rem;
+}
+
+.detail-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Two-column native record-detail field layout */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+  row-gap: 0;
+}
+
+.field {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0.5rem 1rem;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
 }
 
-.csv-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--slds-g-color-brand-base-50, #0176d3);
-  text-decoration: none;
-  font-size: 0.8125rem;
-}
-
-.csv-link:hover {
-  text-decoration: underline;
-}
-
-.csv-icon {
-  --slds-c-icon-color-foreground-default: var(--slds-g-color-brand-base-50, #0176d3);
-}
-
-/* Horizontal scroll for the wide table */
-.table-scroll {
-  width: 100%;
-  overflow-x: auto;
-}
-
-/* Table */
-.list-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.list-table thead th {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
-  color: var(--slds-g-color-neutral-base-30, #706e6b);
+.f-label {
   font-size: 0.75rem;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: normal;
-  text-align: left;
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
+  font-weight: 700;
+  color: var(--slds-g-color-neutral-base-20, #444444);
+  margin-bottom: 0.125rem;
 }
 
-.list-table thead th.th-num {
-  text-align: left;
-}
-
-.list-table tbody td {
+.f-value {
   font-size: 0.8125rem;
-  font-weight: 400;
   color: var(--slds-g-color-neutral-base-10, #181818);
-  padding: 0.5rem 1rem;
-  border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
-  white-space: nowrap;
 }
 
-.list-table tbody td.td-num {
-  text-align: left;
-}
-
-.list-table tbody tr:hover {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
-}
-
-.list-table tbody td.amount-blue {
+.amount-blue {
   color: var(--slds-g-color-brand-base-50, #0176d3);
 }
 
-/* Totals row */
-.list-table tfoot td {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--slds-g-color-neutral-base-10, #181818);
-  padding: 0.625rem 1rem;
-  border-top: 2px solid var(--slds-g-color-border-base-2, #c9c7c5);
-}
-
-/* Status pills */
+/* Status pill */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -103,18 +57,15 @@
   background: #ecebea;
   color: #5c5c5c;
 }
+
 .badge-green {
   background: #dcfce7;
   color: #166534;
 }
 
-/* Per-row Initiate action cell */
-.list-table thead th.th-action,
-.list-table tbody td.td-action,
-.list-table tfoot td {
-  white-space: nowrap;
-}
-
-.list-table tbody td.td-action {
-  text-align: right;
+/* Verify button (bottom-right) */
+.verify-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 0 0;
 }

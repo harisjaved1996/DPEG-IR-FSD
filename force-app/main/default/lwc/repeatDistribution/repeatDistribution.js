@@ -1,10 +1,11 @@
 import { LightningElement, api } from "lwc";
-import { CloseActionScreenEvent } from "lightning/actions";
 
 // Same paid-status value always maps to the same pill style.
 const STATUS_BADGE = {
   PAID: "badge badge-green",
-  UNPAID: "badge badge-gray"
+  UNPAID: "badge badge-gray",
+  Paid: "badge badge-green",
+  Unpaid: "badge badge-gray"
 };
 
 const DISTRIBUTIONS = [
@@ -48,18 +49,21 @@ export default class RepeatDistribution extends LightningElement {
   @api recordId;
   @api objectApiName;
 
-  // Only show distributions whose Paid Status is "PAID".
+  // When supplied by a parent, these rows are shown instead of the defaults.
+  @api records;
+
   get rows() {
-    return DISTRIBUTIONS.filter((row) => row.paidStatus === "PAID").map((row) => ({
+    const source =
+      this.records && this.records.length
+        ? this.records
+        : DISTRIBUTIONS.filter((row) => row.paidStatus === "PAID");
+    return source.map((row) => ({
       ...row,
       statusBadge: STATUS_BADGE[row.paidStatus] || "badge badge-gray"
     }));
   }
 
-  handleInitiate(event) {
-    const id = event.currentTarget.dataset.id;
-    // Placeholder: initiate the repeat distribution for record `id`, then close.
-    this.dispatchEvent(new CloseActionScreenEvent());
-    return id;
+  handleVerify() {
+    // Placeholder for the Verify action.
   }
 }
