@@ -1,0 +1,34 @@
+<template>
+    <div class="card">
+        <table class="list-table">
+            <thead>
+                <tr>
+                    <th class="th-text">ID</th>
+                    <th class="th-text">From</th>
+                    <th class="th-text">To</th>
+                    <th class="th-num">Units</th>
+                    <th class="th-num">Amount</th>
+                    <th class="th-text">Status</th>
+                    <th class="th-text">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={rows} for:item="row">
+                    <tr key={row.id}>
+                        <td class="td-text">{row.id}</td>
+                        <td class="td-text"><span class="row-name">{row.from}</span></td>
+                        <td class="td-text">{row.to}</td>
+                        <td class="td-num">{row.units}</td>
+                        <td class="td-num">{row.amount}</td>
+                        <td class="td-text">
+                            <span class={row.statusBadge}>
+                                <span class="status-dot"></span>{row.status}
+                            </span>
+                        </td>
+                        <td class="td-text">{row.date}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>

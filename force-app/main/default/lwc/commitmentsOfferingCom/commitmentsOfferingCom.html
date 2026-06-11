@@ -1,0 +1,24 @@
+<template>
+    <lightning-card icon-name="standard:contract">
+        <span slot="title">Commitments ({recordCount})</span>
+
+        <lightning-button
+            slot="actions"
+            label="New"
+            title="New"
+            onclick={handleNew}>
+        </lightning-button>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+
+        <div slot="footer" class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+</template>
