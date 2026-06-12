@@ -21,6 +21,13 @@ function buildPeriodOptions() {
   return options;
 }
 
+function formatCurrency(amount) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD"
+  }).format(amount || 0);
+}
+
 // Ownership values kept within the 0.41% – 6.74% range.
 const ENTITIES = [
   { entity: "AAZ VENTURES LLC", ownership: 0.4166 },
@@ -44,10 +51,19 @@ const ENTITIES = [
   { entity: "Zulfiqar Kunjee", ownership: 6.74 }
 ];
 
+const PRO_COLUMNS = [
+  { label: "Investing Entity", fieldName: "entity", type: "text" },
+  { label: "Membership", fieldName: "membership", type: "text" },
+  { label: "Ownership", fieldName: "ownershipLabel", type: "text" },
+  { label: "Preferred Return", fieldName: "preferredLabel", type: "text" },
+  { label: "Total", fieldName: "totalLabel", type: "text" }
+];
+
 export default class CreateDistribution extends LightningElement {
   sourceOptions = SOURCE_OPTIONS;
   typeOptions = TYPE_OPTIONS;
   periodOptions = buildPeriodOptions();
+  columns = PRO_COLUMNS;
 
   date = "";
   source = "Cash Flow";
@@ -61,20 +77,12 @@ export default class CreateDistribution extends LightningElement {
   rows = ENTITIES.map((item, index) => ({
     id: String(index + 1),
     entity: item.entity,
-    positionId: "--",
     membership: "LP",
     ownership: item.ownership,
     ownershipLabel: `${item.ownership.toFixed(4)}%`,
-    preferred: 0
+    preferredLabel: "$0.00",
+    totalLabel: "$0.00"
   }));
-
-  get grandPreferred() {
-    return this.rows.reduce((sum, row) => sum + (row.preferred || 0), 0);
-  }
-
-  get grandTotal() {
-    return this.grandPreferred;
-  }
 
   handleDateChange(event) {
     this.date = event.detail.value;
@@ -108,7 +116,8 @@ export default class CreateDistribution extends LightningElement {
     const amount = parseFloat(this.totalAmount) || 0;
     this.rows = this.rows.map((row) => {
       const preferred = (row.ownership / 100) * amount;
-      return { ...row, preferred };
+      const label = formatCurrency(preferred);
+      return { ...row, preferredLabel: label, totalLabel: label };
     });
   }
 

@@ -1,29 +1,12 @@
 .dist-page {
   box-sizing: border-box;
   width: 100%;
-  padding: 1.25rem;
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
+  padding: 1rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
 }
 
-/* Page header */
-.page-head {
-  margin-bottom: 1.25rem;
-}
-
-.breadcrumb {
-  font-size: 0.75rem;
-  color: var(--slds-g-color-brand-base-50, #0176d3);
-  margin-bottom: 0.25rem;
-}
-
-.page-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--slds-g-color-neutral-base-10, #181818);
-}
-
-/* Section cards */
-.section-card {
+/* Section cards (Recent Transactions style) */
+.card {
   background-color: var(--slds-g-color-neutral-base-100, #ffffff);
   border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
   border-radius: 0.5rem;
@@ -32,16 +15,26 @@
   margin-bottom: 1.25rem;
 }
 
-.section-header {
-  padding: 1rem 1.5rem;
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
   border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+.card-icon {
+  flex-shrink: 0;
+}
+
+.card-title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--slds-g-color-neutral-base-10, #181818);
 }
 
-.section-body {
-  padding: 1.5rem;
+.card-body {
+  padding: 1.25rem;
 }
 
 .field {
@@ -54,80 +47,22 @@
   margin-top: 0.25rem;
 }
 
-/* Pro Rata controls */
-.prorata-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.control {
-  flex: 1 1 220px;
-  margin-bottom: 0;
-}
-
-.apply-cell {
-  flex: 0 0 auto;
-}
-
-/* Modern financial table */
-.table-wrap {
-  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+/* Greyish filter panel (Search Type / Search / Apply style) */
+.filter-panel {
+  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
   border-radius: 0.5rem;
-  overflow: hidden;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
-.pro-table {
+.filter-apply {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.table-wrap {
   width: 100%;
-  border-collapse: collapse;
-}
-
-.pro-table thead th {
-  text-align: left;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--slds-g-color-neutral-base-30, #706e6b);
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
-  padding: 0.75rem 1rem;
-  white-space: nowrap;
-}
-
-.pro-table th.num,
-.pro-table td.num {
-  text-align: left;
-}
-
-.pro-table tbody td {
-  font-size: 0.8125rem;
-  color: var(--slds-g-color-neutral-base-10, #181818);
-  padding: 0.75rem 1rem;
-  border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
-  white-space: nowrap;
-}
-
-.pro-table tbody td.entity {
-  font-weight: 600;
-}
-
-.pro-table tbody tr:hover {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
-}
-
-.pro-table tfoot td {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  padding: 0.875rem 1rem;
-  border-top: 2px solid var(--slds-g-color-border-base-2, #c9c7c5);
-  background-color: var(--slds-g-color-neutral-base-95, #f3f2f2);
-  white-space: nowrap;
-}
-
-.total-label {
-  color: var(--slds-g-color-brand-base-50, #0176d3);
 }
 
 /* Save footer */

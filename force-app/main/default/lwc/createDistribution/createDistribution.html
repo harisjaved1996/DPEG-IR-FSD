@@ -1,9 +1,13 @@
 <template>
     <div class="dist-page">
-        <!-- Details section -->
-        <section class="section-card">
-            <div class="section-header">Details</div>
-            <div class="section-body">
+        <!-- Details -->
+        <article class="card">
+            <div class="card-header">
+                <lightning-icon icon-name="standard:record" size="small" class="card-icon"></lightning-icon>
+                <h2 class="card-title">Details</h2>
+            </div>
+            <div class="card-body">
+                <div class="filter-panel">
                 <div class="slds-grid slds-gutters slds-wrap">
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
                         <lightning-input
@@ -52,32 +56,38 @@
                         <p class="help-text">255 characters max</p>
                     </div>
                 </div>
+                </div>
             </div>
-        </section>
+        </article>
 
-        <!-- Pro Rata section -->
-        <section class="section-card">
-            <div class="section-header">Pro Rata</div>
-            <div class="section-body">
-                <div class="prorata-controls">
-                    <div class="control field">
-                        <lightning-combobox
-                            label="Type"
-                            value={type}
-                            options={typeOptions}
-                            onchange={handleTypeChange}>
-                        </lightning-combobox>
+        <!-- Pro Rata -->
+        <article class="card">
+            <div class="card-header">
+                <lightning-icon icon-name="standard:currency" size="small" class="card-icon"></lightning-icon>
+                <h2 class="card-title">Pro Rata</h2>
+            </div>
+            <div class="card-body">
+                <div class="filter-panel">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-combobox
+                                label="Type"
+                                value={type}
+                                options={typeOptions}
+                                onchange={handleTypeChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-input
+                                type="number"
+                                formatter="currency"
+                                label="Total Amount"
+                                value={totalAmount}
+                                onchange={handleAmountChange}>
+                            </lightning-input>
+                        </div>
                     </div>
-                    <div class="control field">
-                        <lightning-input
-                            type="number"
-                            formatter="currency"
-                            label="Total Amount"
-                            value={totalAmount}
-                            onchange={handleAmountChange}>
-                        </lightning-input>
-                    </div>
-                    <div class="control apply-cell">
+                    <div class="filter-apply">
                         <lightning-button
                             label="Apply"
                             variant="brand"
@@ -87,64 +97,15 @@
                 </div>
 
                 <div class="table-wrap">
-                    <table class="pro-table">
-                        <thead>
-                            <tr>
-                                <th>Investing Entity</th>
-                                <th>Membership</th>
-                                <th class="num">Ownership</th>
-                                <th class="num">Preferred Return</th>
-                                <th class="num">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template for:each={rows} for:item="row">
-                                <tr key={row.id}>
-                                    <td class="entity">{row.entity}</td>
-                                    <td>{row.membership}</td>
-                                    <td class="num">{row.ownershipLabel}</td>
-                                    <td class="num">
-                                        <lightning-formatted-number
-                                            value={row.preferred}
-                                            format-style="currency"
-                                            currency-code="USD">
-                                        </lightning-formatted-number>
-                                    </td>
-                                    <td class="num">
-                                        <lightning-formatted-number
-                                            value={row.preferred}
-                                            format-style="currency"
-                                            currency-code="USD">
-                                        </lightning-formatted-number>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                        <tfoot>
-                            <tr class="totals-row">
-                                <td class="total-label">Total</td>
-                                <td></td>
-                                <td></td>
-                                <td class="num">
-                                    <lightning-formatted-number
-                                        value={grandPreferred}
-                                        format-style="currency"
-                                        currency-code="USD">
-                                    </lightning-formatted-number>
-                                </td>
-                                <td class="num">
-                                    <lightning-formatted-number
-                                        value={grandTotal}
-                                        format-style="currency"
-                                        currency-code="USD">
-                                    </lightning-formatted-number>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <lightning-datatable
+                        key-field="id"
+                        data={rows}
+                        columns={columns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
                 </div>
             </div>
-        </section>
+        </article>
 
         <footer class="page-footer">
             <lightning-button

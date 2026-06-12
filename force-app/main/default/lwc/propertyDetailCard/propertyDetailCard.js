@@ -2,10 +2,17 @@ import { LightningElement } from "lwc";
 
 export default class PropertyDetailCard extends LightningElement {
   details = [
-    { key: "assetClass", label: "Asset class", value: "Multifamily" },
-    { key: "unitsLocations", label: "Units / locations", value: "248" },
-    { key: "rentableSqFt", label: "Rentable sq ft", value: "192,400" },
-    { key: "yearBuilt", label: "Year built", value: "1987" },
-    { key: "lastRenovation", label: "Last renovation", value: "2019" }
+    { key: "name", label: "Name", value: "DPEG Vicksburg, LP" },
+    { key: "acquisitionDate", label: "Acquisition Date", value: "9/15/25" },
+    { key: "assetType", label: "Asset Type", value: "Retail" },
+    {
+      key: "address",
+      label: "Address",
+      value: "1420 Heights Blvd, Houston, TX 77008, USA"
+    },
+    { key: "totalUnits", label: "Total Units", value: "116" },
+    { key: "squareFeet", label: "Square Feet", value: "635,325" },
+    { key: "rentableSf", label: "Rentable SF", value: "635,325" },
+    { key: "landAcres", label: "Land Acres", value: "45.75" }
   ];
 }

@@ -9,13 +9,13 @@
             onclick={handleNew}>
         </lightning-button>
 
-        <c-offering-datatable
+        <lightning-datatable
             key-field="id"
             data={data}
             columns={columns}
             hide-checkbox-column
             onrowaction={handleRowAction}>
-        </c-offering-datatable>
+        </lightning-datatable>
 
         <div slot="footer" class="view-all-footer">
             <a href="#" onclick={handleViewAll}>View All</a>
