@@ -1,0 +1,31 @@
+<template>
+    <div class="card">
+        <table class="list-table">
+            <thead>
+                <tr>
+                    <th class="th-text">Name</th>
+                    <th class="th-text">Email</th>
+                    <th class="th-text">Address</th>
+                    <th class="th-text">Status</th>
+                    <th class="th-text">Phone</th>
+                    <th class="th-text">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={rows} for:item="row">
+                    <tr key={row.id}>
+                        <td class="td-text"><span class="row-name">{row.name}</span></td>
+                        <td class="td-text">{row.email}</td>
+                        <td class="td-text">{row.address}</td>
+                        <td class="td-text"><span class={row.badgeCss}>{row.status}</span></td>
+                        <td class="td-text">{row.phone}</td>
+                        <td class="td-text">{row.date}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div class="list-footer">
+            <button class="view-all-btn" type="button">View All</button>
+        </div>
+    </div>
+</template>
