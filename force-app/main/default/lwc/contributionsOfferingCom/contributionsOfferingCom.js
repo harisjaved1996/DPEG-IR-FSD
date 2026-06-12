@@ -15,14 +15,14 @@ const COLUMNS = [
       target: "_self"
     }
   },
-  { label: "Contributed Date", fieldName: "contributedDate", type: "text" },
-  { label: "Amount", fieldName: "amount", type: "text" },
   {
     label: "Contact",
     fieldName: "contactUrl",
     type: "url",
     typeAttributes: { label: { fieldName: "contact" }, target: "_self" }
   },
+  { label: "Contributed Date", fieldName: "contributedDate", type: "text" },
+  { label: "Amount", fieldName: "amount", type: "text" },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];

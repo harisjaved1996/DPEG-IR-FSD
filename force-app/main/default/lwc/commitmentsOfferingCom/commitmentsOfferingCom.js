@@ -17,22 +17,13 @@ function pillStyle(value) {
 
 const COLUMNS = [
   {
-    label: "Commitment Number",
-    fieldName: "commitmentUrl",
-    type: "url",
-    typeAttributes: {
-      label: { fieldName: "commitmentNumber" },
-      target: "_self"
-    }
-  },
-  { label: "Commitment Date", fieldName: "commitmentDate", type: "text" },
-  { label: "Committed Amount", fieldName: "committedAmount", type: "text" },
-  {
     label: "Contact",
     fieldName: "contactUrl",
     type: "url",
     typeAttributes: { label: { fieldName: "contact" }, target: "_self" }
   },
+  { label: "Commitment Date", fieldName: "commitmentDate", type: "text" },
+  { label: "Committed Amount", fieldName: "committedAmount", type: "text" },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
   {
     label: "PPM Sent",
@@ -46,6 +37,7 @@ const COLUMNS = [
     type: "pill",
     typeAttributes: { pillStyle: { fieldName: "ppmSignedStyle" } }
   },
+  { label: "Funded", fieldName: "funded", type: "boolean" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];
 
@@ -93,6 +85,7 @@ export default class CommitmentsOfferingCom extends LightningElement {
   columns = COLUMNS;
   data = DATA.map((row) => ({
     ...row,
+    funded: true,
     ppmSentStyle: pillStyle(row.ppmSent),
     ppmSignedStyle: pillStyle(row.ppmSigned)
   }));
