@@ -1,0 +1,23 @@
+<template>
+    <lightning-card icon-name="standard:currency">
+        <span slot="title">Contributions ({recordCount})</span>
+
+        <lightning-button
+            slot="actions"
+            label="New"
+            title="New"
+            onclick={handleNew}>
+        </lightning-button>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+
+        <div slot="footer" class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,48 @@
+<template>
+    <lightning-card icon-name="standard:partner_fund_allocation">
+        <span slot="title">Distributions ({recordCount})</span>
+
+        <lightning-button
+            slot="actions"
+            label="New"
+            title="New"
+            onclick={handleNew}>
+        </lightning-button>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+
+        <div slot="footer" class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+
+    <!-- Repeat Distribution modal -->
+    <template lwc:if={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="bare"
+                        size="medium"
+                        class="modal-close"
+                        title="Close"
+                        alternative-text="Close"
+                        onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-modal__title slds-hyphenate">Repeat Distribution</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <c-repeat-distribution records={selectedRecords}></c-repeat-distribution>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

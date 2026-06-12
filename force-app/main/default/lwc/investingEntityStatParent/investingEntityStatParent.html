@@ -1,0 +1,12 @@
+<template>
+    <div class="stat-strip">
+        <template for:each={stats} for:item="stat">
+            <c-stat-card
+                key={stat.id}
+                icon-name={stat.iconName}
+                label={stat.label}
+                value={stat.value}>
+            </c-stat-card>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,12 @@
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
+@media (max-width: 48em) {
+  .stat-strip {
+    grid-template-columns: 1fr;
+  }
+}

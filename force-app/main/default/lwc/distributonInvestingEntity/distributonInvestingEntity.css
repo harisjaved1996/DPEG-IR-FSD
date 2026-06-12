@@ -1,0 +1,24 @@
+.view-all-footer {
+  text-align: center;
+}
+
+.view-all-footer a {
+  color: var(--slds-g-color-brand-base-50, #0176d3);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.view-all-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Modal close button (top-right of the header) */
+.slds-modal__header {
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
