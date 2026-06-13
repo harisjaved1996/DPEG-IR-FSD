@@ -68,7 +68,12 @@
 }
 
 .row-name {
-  color: var(--slds-g-color-neutral-base-10, #181818);
+  color: var(--slds-g-link-color, #0b5cab);
+  cursor: pointer;
+}
+
+.row-name:hover {
+  text-decoration: underline;
 }
 
 /* GP Entity tags / pills */

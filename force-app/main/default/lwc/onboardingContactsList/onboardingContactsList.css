@@ -60,7 +60,13 @@
 }
 
 .row-name {
-  color: var(--slds-g-color-neutral-base-10, #181818);
+  color: var(--slds-g-link-color, #0b5cab);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.row-name:hover {
+  text-decoration: underline;
 }
 
 /* Status tags / pills — same value always renders the same pill */
