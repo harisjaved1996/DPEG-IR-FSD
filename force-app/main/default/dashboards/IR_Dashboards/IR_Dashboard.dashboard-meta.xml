@@ -8,11 +8,132 @@
     <dashboardChartTheme>light</dashboardChartTheme>
     <dashboardColorPalette>unity</dashboardColorPalette>
     <dashboardGridLayout>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Donut</componentType>
+                <drillEnabled>false</drillEnabled>
+                <drillToDetailEnabled>false</drillToDetailEnabled>
+                <enableHover>false</enableHover>
+                <expandOthers>false</expandOthers>
+                <groupingSortProperties/>
+                <report>IR_Reports/Investments_by_Status</report>
+                <showPercentage>true</showPercentage>
+                <showValues>true</showValues>
+                <sortBy>RowLabelAscending</sortBy>
+                <sortLegendValues>false</sortLegendValues>
+                <title>Investments by Status</title>
+                <useReportChart>false</useReportChart>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>8</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <drillEnabled>false</drillEnabled>
+                <drillToDetailEnabled>false</drillToDetailEnabled>
+                <enableHover>false</enableHover>
+                <expandOthers>false</expandOthers>
+                <groupingSortProperties/>
+                <report>IR_Reports/Average_Returns_by_Status</report>
+                <showPercentage>false</showPercentage>
+                <showValues>true</showValues>
+                <sortBy>RowLabelAscending</sortBy>
+                <sortLegendValues>false</sortLegendValues>
+                <title>Avg Target IRR &amp; Cash-on-Cash by Status</title>
+                <useReportChart>false</useReportChart>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>8</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Column</componentType>
+                <drillEnabled>false</drillEnabled>
+                <drillToDetailEnabled>false</drillToDetailEnabled>
+                <enableHover>false</enableHover>
+                <expandOthers>false</expandOthers>
+                <groupingSortProperties/>
+                <report>IR_Reports/Average_Pricing_by_Period</report>
+                <showPercentage>false</showPercentage>
+                <showValues>true</showValues>
+                <sortBy>RowLabelAscending</sortBy>
+                <sortLegendValues>false</sortLegendValues>
+                <title>Avg Pricing by Investment Period</title>
+                <useReportChart>false</useReportChart>
+            </dashboardComponent>
+            <rowIndex>8</rowIndex>
+            <rowSpan>8</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+                <componentType>FlexTable</componentType>
+                <flexComponentProperties>
+                    <decimalPrecision>-1</decimalPrecision>
+                    <flexTableColumn>
+                        <reportColumn>Investment__c.Investment_Name__c</reportColumn>
+                        <showSubTotal>false</showSubTotal>
+                        <showTotal>false</showTotal>
+                        <type>detail</type>
+                    </flexTableColumn>
+                    <flexTableColumn>
+                        <reportColumn>Investment__c.Status__c</reportColumn>
+                        <showSubTotal>false</showSubTotal>
+                        <showTotal>false</showTotal>
+                        <type>detail</type>
+                    </flexTableColumn>
+                    <flexTableColumn>
+                        <reportColumn>Investment__c.Price_per_Share__c</reportColumn>
+                        <showSubTotal>false</showSubTotal>
+                        <showTotal>false</showTotal>
+                        <type>detail</type>
+                    </flexTableColumn>
+                    <flexTableColumn>
+                        <reportColumn>Investment__c.Target_IRR__c</reportColumn>
+                        <showSubTotal>false</showSubTotal>
+                        <showTotal>false</showTotal>
+                        <type>detail</type>
+                    </flexTableColumn>
+                    <flexTableColumn>
+                        <reportColumn>Investment__c.Cash_on_Cash__c</reportColumn>
+                        <showSubTotal>false</showSubTotal>
+                        <showTotal>false</showTotal>
+                        <type>detail</type>
+                    </flexTableColumn>
+                    <flexTableSortInfo>
+                        <sortColumn>Investment__c.Target_IRR__c</sortColumn>
+                        <sortOrder>2</sortOrder>
+                    </flexTableSortInfo>
+                    <hideChatterPhotos>true</hideChatterPhotos>
+                    <useReportTableSetting>false</useReportTableSetting>
+                </flexComponentProperties>
+                <groupingSortProperties/>
+                <report>IR_Reports/Investment_Key_Terms</report>
+                <title>Investment Key Terms</title>
+            </dashboardComponent>
+            <rowIndex>8</rowIndex>
+            <rowSpan>8</rowSpan>
+        </dashboardGridComponents>
         <numberOfColumns>12</numberOfColumns>
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
     <dashboardType>SpecifiedUser</dashboardType>
-    <description>Investor Relations dashboard.</description>
+    <description>Investor Relations dashboard: portfolio mix, return profile, pricing by hold period, and key terms.</description>
     <isGridLayout>true</isGridLayout>
     <runningUser>test-mgyuyuodcohc@example.com</runningUser>
     <textColor>#000000</textColor>

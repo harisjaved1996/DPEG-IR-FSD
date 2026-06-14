@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Average Returns by Status &amp; Period</name>
+    <description>Matrix of average Target IRR and Cash-on-Cash across status (rows) and investment period (columns).</description>
+    <format>Matrix</format>
+    <reportType>CustomEntity$Unison__Investment__c</reportType>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Unison__Investment__c.Unison__Target_IRR__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Unison__Investment__c.Unison__Cash_on_Cash__c</field>
+    </columns>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Unison__Investment__c.Unison__Investment_Period__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Unison__Investment__c.Unison__Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>
