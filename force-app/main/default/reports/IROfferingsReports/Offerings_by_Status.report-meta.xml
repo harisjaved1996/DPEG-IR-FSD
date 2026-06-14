@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <name>Commitments by Status</name>
-    <description>Committed amount and record count grouped by commitment status.</description>
+    <name>Offerings by Status</name>
+    <description>Count of offerings grouped by lifecycle status.</description>
     <format>Summary</format>
-    <reportType>CustomEntity$Commitment__c</reportType>
+    <reportType>CustomEntity$Offering__c</reportType>
     <columns>
         <field>CUST_NAME</field>
     </columns>
     <columns>
-        <field>Commitment__c.Commitment_Date__c</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Commitment__c.Committed_Amount__c</field>
+        <field>Offering__c.Target_Raise__c</field>
     </columns>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Commitment__c.Status__c</field>
+        <field>Offering__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <scope>organization</scope>

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <name>Commitments by Status</name>
-    <description>Committed amount and record count grouped by commitment status.</description>
+    <name>Contributions by Date</name>
+    <description>Total contribution amount grouped by contribution month.</description>
     <format>Summary</format>
-    <reportType>CustomEntity$Commitment__c</reportType>
+    <reportType>CustomEntity$Contribution__c</reportType>
     <columns>
         <field>CUST_NAME</field>
     </columns>
     <columns>
-        <field>Commitment__c.Commitment_Date__c</field>
-    </columns>
-    <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Commitment__c.Committed_Amount__c</field>
+        <field>Contribution__c.Amount__c</field>
     </columns>
     <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Commitment__c.Status__c</field>
+        <dateGranularity>Month</dateGranularity>
+        <field>Contribution__c.Contribution_Date__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <scope>organization</scope>
