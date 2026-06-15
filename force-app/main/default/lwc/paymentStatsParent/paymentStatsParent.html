@@ -1,0 +1,14 @@
+<template>
+    <div class="container">
+        <div class="cards-grid">
+            <template for:each={stats} for:item="stat">
+                <c-stat-card-side-bar
+                    key={stat.key}
+                    value={stat.value}
+                    label={stat.label}
+                    icon-name={stat.iconName}>
+                </c-stat-card-side-bar>
+            </template>
+        </div>
+    </div>
+</template>
