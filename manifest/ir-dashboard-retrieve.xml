@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>IR_Dashboards</members>
+        <members>IR_Dashboards/IR_Dashboard</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>IRInvestmentReports</members>
+        <members>IRContactsReports</members>
+        <members>IROfferingsReports</members>
+        <members>IRPropertiesReports</members>
+        <members>IRCommitmentsReports</members>
+        <members>IRContributionsReports</members>
+        <members>IRDistributionsReports</members>
+        <members>IRInvestmentReports/Investments_by_Status</members>
+        <members>IRInvestmentReports/Average_Returns_by_Status</members>
+        <members>IRInvestmentReports/Average_Pricing_by_Period</members>
+        <members>IRInvestmentReports/Investment_Key_Terms</members>
+        <members>IRContactsReports/New_Contacts_Accounts_Report_6mB</members>
+        <members>IROfferingsReports/Offerings_by_Status</members>
+        <members>IRPropertiesReports/Properties_by_Type</members>
+        <members>IRCommitmentsReports/Commitments_XQZ</members>
+        <members>IRCommitmentsReports/Commitments_by_Date</members>
+        <members>IRContributionsReports/Contributions_by_Type</members>
+        <members>IRContributionsReports/Contributions_by_Date</members>
+        <members>IRDistributionsReports/Distributions_by_Date</members>
+        <name>Report</name>
+    </types>
+    <version>66.0</version>
+</Package>

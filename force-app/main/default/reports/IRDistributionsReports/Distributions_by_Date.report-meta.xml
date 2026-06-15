@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <name>Distributions by Date</name>
-    <description>Total distributed amount and record count grouped by distribution month.</description>
-    <format>Summary</format>
-    <reportType>CustomEntity$Distribution__c</reportType>
     <columns>
         <field>CUST_NAME</field>
     </columns>
@@ -11,13 +7,25 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Distribution__c.Amount__c</field>
     </columns>
+    <description>Total distributed amount and record count grouped by distribution month.</description>
+    <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Month</dateGranularity>
         <field>Distribution__c.Distribution_Date__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
+    <name>Distributions by Date</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Distribution__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Distribution__c.Distribution_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

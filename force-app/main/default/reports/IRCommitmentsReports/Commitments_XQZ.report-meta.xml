@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <name>Commitments by Status</name>
-    <description>Committed amount and record count grouped by commitment status.</description>
-    <format>Summary</format>
-    <reportType>CustomEntity$Commitment__c</reportType>
     <columns>
         <field>CUST_NAME</field>
     </columns>
@@ -14,13 +10,25 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Commitment__c.Committed_Amount__c</field>
     </columns>
+    <description>Committed amount and record count grouped by commitment status.</description>
+    <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>Commitment__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
+    <name>Commitments by Status</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Commitment__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Commitment__c.Commitment_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

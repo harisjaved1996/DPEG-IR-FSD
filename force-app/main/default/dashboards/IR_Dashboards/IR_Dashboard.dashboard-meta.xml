@@ -8,7 +8,6 @@
     <dashboardChartTheme>light</dashboardChartTheme>
     <dashboardColorPalette>unity</dashboardColorPalette>
     <dashboardGridLayout>
-        <!-- ================= KPI SCORECARD STRIP (row 0) ================= -->
         <dashboardGridComponents>
             <colSpan>3</colSpan>
             <columnIndex>0</columnIndex>
@@ -105,7 +104,6 @@
             <rowIndex>0</rowIndex>
             <rowSpan>4</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= INVESTMENT PORTFOLIO (row 3) ================= -->
         <dashboardGridComponents>
             <colSpan>4</colSpan>
             <columnIndex>0</columnIndex>
@@ -133,6 +131,7 @@
                 <legendPosition>Right</legendPosition>
                 <report>IRInvestmentReports/Investments_by_Status</report>
                 <showPercentage>true</showPercentage>
+                <showTotal>false</showTotal>
                 <showValues>true</showValues>
                 <sortBy>RowValueDescending</sortBy>
                 <sortLegendValues>true</sortLegendValues>
@@ -157,6 +156,7 @@
                 <legendPosition>Bottom</legendPosition>
                 <report>IRInvestmentReports/Average_Returns_by_Status</report>
                 <showPercentage>false</showPercentage>
+                <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
                 <sortLegendValues>false</sortLegendValues>
@@ -203,7 +203,6 @@
             <rowIndex>4</rowIndex>
             <rowSpan>8</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= KEY TERMS &amp; CONTACTS (row 11) ================= -->
         <dashboardGridComponents>
             <colSpan>8</colSpan>
             <columnIndex>0</columnIndex>
@@ -302,7 +301,6 @@
             <rowIndex>12</rowIndex>
             <rowSpan>8</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= COMMITMENTS (row 19) ================= -->
         <dashboardGridComponents>
             <colSpan>3</colSpan>
             <columnIndex>0</columnIndex>
@@ -325,31 +323,6 @@
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>20</rowIndex>
-            <rowSpan>4</rowSpan>
-        </dashboardGridComponents>
-        <dashboardGridComponents>
-            <colSpan>3</colSpan>
-            <columnIndex>0</columnIndex>
-            <dashboardComponent>
-                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
-                <chartSummary>
-                    <aggregate>Sum</aggregate>
-                    <column>Commitment__c.Committed_Amount__c</column>
-                </chartSummary>
-                <componentType>Metric</componentType>
-                <decimalPrecision>-1</decimalPrecision>
-                <displayUnits>Auto</displayUnits>
-                <groupingSortProperties/>
-                <header>Total Committed Amount</header>
-                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
-                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
-                <indicatorHighColor>#00716B</indicatorHighColor>
-                <indicatorLowColor>#C23934</indicatorLowColor>
-                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
-                <report>IRCommitmentsReports/Commitments_XQZ</report>
-                <showRange>false</showRange>
-            </dashboardComponent>
-            <rowIndex>24</rowIndex>
             <rowSpan>4</rowSpan>
         </dashboardGridComponents>
         <dashboardGridComponents>
@@ -426,7 +399,31 @@
             <rowIndex>20</rowIndex>
             <rowSpan>8</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= CONTRIBUTIONS (row 27) ================= -->
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+                <chartSummary>
+                    <aggregate>Sum</aggregate>
+                    <column>Commitment__c.Committed_Amount__c</column>
+                </chartSummary>
+                <componentType>Metric</componentType>
+                <decimalPrecision>-1</decimalPrecision>
+                <displayUnits>Auto</displayUnits>
+                <groupingSortProperties/>
+                <header>Total Committed Amount</header>
+                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
+                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
+                <indicatorHighColor>#00716B</indicatorHighColor>
+                <indicatorLowColor>#C23934</indicatorLowColor>
+                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
+                <report>IRCommitmentsReports/Commitments_XQZ</report>
+                <showRange>false</showRange>
+            </dashboardComponent>
+            <rowIndex>24</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
         <dashboardGridComponents>
             <colSpan>3</colSpan>
             <columnIndex>0</columnIndex>
@@ -449,31 +446,6 @@
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>28</rowIndex>
-            <rowSpan>4</rowSpan>
-        </dashboardGridComponents>
-        <dashboardGridComponents>
-            <colSpan>3</colSpan>
-            <columnIndex>0</columnIndex>
-            <dashboardComponent>
-                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
-                <chartSummary>
-                    <aggregate>Sum</aggregate>
-                    <column>Contribution__c.Amount__c</column>
-                </chartSummary>
-                <componentType>Metric</componentType>
-                <decimalPrecision>-1</decimalPrecision>
-                <displayUnits>Auto</displayUnits>
-                <groupingSortProperties/>
-                <header>Total Contributions Amount</header>
-                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
-                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
-                <indicatorHighColor>#00716B</indicatorHighColor>
-                <indicatorLowColor>#C23934</indicatorLowColor>
-                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
-                <report>IRContributionsReports/Contributions_by_Type</report>
-                <showRange>false</showRange>
-            </dashboardComponent>
-            <rowIndex>32</rowIndex>
             <rowSpan>4</rowSpan>
         </dashboardGridComponents>
         <dashboardGridComponents>
@@ -504,6 +476,7 @@
                 <legendPosition>Right</legendPosition>
                 <report>IRContributionsReports/Contributions_by_Type</report>
                 <showPercentage>true</showPercentage>
+                <showTotal>false</showTotal>
                 <showValues>true</showValues>
                 <sortBy>RowValueDescending</sortBy>
                 <sortLegendValues>true</sortLegendValues>
@@ -550,7 +523,31 @@
             <rowIndex>28</rowIndex>
             <rowSpan>8</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= DISTRIBUTIONS (row 35) ================= -->
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+                <chartSummary>
+                    <aggregate>Sum</aggregate>
+                    <column>Contribution__c.Amount__c</column>
+                </chartSummary>
+                <componentType>Metric</componentType>
+                <decimalPrecision>-1</decimalPrecision>
+                <displayUnits>Auto</displayUnits>
+                <groupingSortProperties/>
+                <header>Total Contributions Amount</header>
+                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
+                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
+                <indicatorHighColor>#00716B</indicatorHighColor>
+                <indicatorLowColor>#C23934</indicatorLowColor>
+                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
+                <report>IRContributionsReports/Contributions_by_Type</report>
+                <showRange>false</showRange>
+            </dashboardComponent>
+            <rowIndex>32</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
         <dashboardGridComponents>
             <colSpan>3</colSpan>
             <columnIndex>0</columnIndex>
@@ -573,31 +570,6 @@
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>36</rowIndex>
-            <rowSpan>4</rowSpan>
-        </dashboardGridComponents>
-        <dashboardGridComponents>
-            <colSpan>3</colSpan>
-            <columnIndex>0</columnIndex>
-            <dashboardComponent>
-                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
-                <chartSummary>
-                    <aggregate>Sum</aggregate>
-                    <column>Distribution__c.Amount__c</column>
-                </chartSummary>
-                <componentType>Metric</componentType>
-                <decimalPrecision>-1</decimalPrecision>
-                <displayUnits>Auto</displayUnits>
-                <groupingSortProperties/>
-                <header>Total Distributed Amount</header>
-                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
-                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
-                <indicatorHighColor>#00716B</indicatorHighColor>
-                <indicatorLowColor>#C23934</indicatorLowColor>
-                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
-                <report>IRDistributionsReports/Distributions_by_Date</report>
-                <showRange>false</showRange>
-            </dashboardComponent>
-            <rowIndex>40</rowIndex>
             <rowSpan>4</rowSpan>
         </dashboardGridComponents>
         <dashboardGridComponents>
@@ -637,7 +609,31 @@
             <rowIndex>36</rowIndex>
             <rowSpan>8</rowSpan>
         </dashboardGridComponents>
-        <!-- ================= OFFERINGS &amp; PROPERTIES (row 43) ================= -->
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+                <chartSummary>
+                    <aggregate>Sum</aggregate>
+                    <column>Distribution__c.Amount__c</column>
+                </chartSummary>
+                <componentType>Metric</componentType>
+                <decimalPrecision>-1</decimalPrecision>
+                <displayUnits>Auto</displayUnits>
+                <groupingSortProperties/>
+                <header>Total Distributed Amount</header>
+                <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
+                <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
+                <indicatorHighColor>#00716B</indicatorHighColor>
+                <indicatorLowColor>#C23934</indicatorLowColor>
+                <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
+                <report>IRDistributionsReports/Distributions_by_Date</report>
+                <showRange>false</showRange>
+            </dashboardComponent>
+            <rowIndex>40</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
         <dashboardGridComponents>
             <colSpan>6</colSpan>
             <columnIndex>0</columnIndex>
@@ -701,6 +697,7 @@
                 <legendPosition>Bottom</legendPosition>
                 <report>IRPropertiesReports/Properties_by_Type</report>
                 <showPercentage>false</showPercentage>
+                <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
                 <sortBy>RowValueDescending</sortBy>
                 <sortLegendValues>true</sortLegendValues>

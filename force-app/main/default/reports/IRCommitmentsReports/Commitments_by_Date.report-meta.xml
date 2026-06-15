@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <name>Commitments by Date</name>
-    <description>Total committed amount grouped by commitment month.</description>
-    <format>Summary</format>
-    <reportType>CustomEntity$Commitment__c</reportType>
     <columns>
         <field>CUST_NAME</field>
     </columns>
@@ -11,13 +7,25 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Commitment__c.Committed_Amount__c</field>
     </columns>
+    <description>Total committed amount grouped by commitment month.</description>
+    <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Month</dateGranularity>
         <field>Commitment__c.Commitment_Date__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
+    <name>Commitments by Date</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Commitment__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Commitment__c.Commitment_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>
