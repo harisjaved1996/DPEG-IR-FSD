@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commitment_Status_Group__c</fullName>
+    <label>Commitment Status Group</label>
+    <description>Buckets commitment status into Committed, Funded, or Other for dashboard reporting.</description>
+    <inlineHelpText>Read-only category derived from Status: Committed, Funded, or Other (all remaining statuses).</inlineHelpText>
+    <type>Text</type>
+    <formula><![CDATA[CASE(TEXT(Unison__Status__c), "Committed", "Committed", "Funded", "Funded", "Other")]]></formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>
