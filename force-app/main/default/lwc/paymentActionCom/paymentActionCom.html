@@ -1,0 +1,18 @@
+<template>
+  <div class="slds-grid slds-grid_align-end actions">
+    <lightning-button
+      label="Sync all accounts"
+      icon-name="utility:sync"
+      icon-position="left"
+      variant="neutral"
+      onclick={handleSyncAllAccounts}
+    ></lightning-button>
+    <lightning-button
+      label="Link bank via Plaid"
+      icon-name="utility:add"
+      icon-position="left"
+      variant="brand"
+      onclick={handleLinkBankViaPlaid}
+    ></lightning-button>
+  </div>
+</template>
