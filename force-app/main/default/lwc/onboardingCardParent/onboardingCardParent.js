@@ -2,6 +2,24 @@ import { LightningElement } from "lwc";
 
 const STATS = [
   {
+    id: "inQueue",
+    iconName: "standard:task",
+    label: "In Queue",
+    value: "24"
+  },
+  {
+    id: "web",
+    iconName: "standard:lead",
+    label: "Web",
+    value: "63"
+  },
+  {
+    id: "email",
+    iconName: "standard:email",
+    label: "Email",
+    value: "38"
+  },
+  {
     id: "duplicate",
     iconName: "standard:record_lookup",
     label: "Duplicate Detected",
