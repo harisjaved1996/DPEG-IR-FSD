@@ -1,7 +1,7 @@
 import { LightningElement } from "lwc";
 
 const PILL_BASE =
-  "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;";
+  "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:0.25rem;font-size:0.75rem;font-weight:600;";
 
 // Same status value always maps to the same pill style.
 const STATUS_PILL = {
