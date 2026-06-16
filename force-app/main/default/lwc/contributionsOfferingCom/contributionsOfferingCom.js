@@ -24,6 +24,7 @@ const COLUMNS = [
   { label: "Contributed Date", fieldName: "contributedDate", type: "text" },
   { label: "Amount", fieldName: "amount", type: "text" },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
+  { label: "Type", fieldName: "type", type: "text" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];
 
@@ -36,7 +37,8 @@ const DATA = [
     amount: "$25,000.00",
     contact: "Johnson",
     contactUrl: "#",
-    investingEntity: "3D Way, LLC"
+    investingEntity: "3D Way, LLC",
+    type: "Full"
   },
   {
     id: "2",
@@ -46,7 +48,8 @@ const DATA = [
     amount: "$40,000.00",
     contact: "Albert Stein",
     contactUrl: "#",
-    investingEntity: "3DXB LLC"
+    investingEntity: "3DXB LLC",
+    type: "Full"
   },
   {
     id: "3",
@@ -56,7 +59,8 @@ const DATA = [
     amount: "$32,000.00",
     contact: "M. Patel",
     contactUrl: "#",
-    investingEntity: "5As Capital Group LLC"
+    investingEntity: "5As Capital Group LLC",
+    type: "Full"
   }
 ];
 

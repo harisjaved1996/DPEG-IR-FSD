@@ -106,16 +106,6 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>recordPicklistField</name>
-                    <value>Unison__Status__c</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:path</componentName>
-                <identifier>flexipage_path</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
                     <name>label</name>
                     <value>Tabs</value>
                 </componentInstanceProperties>
