@@ -1,15 +1,41 @@
 import { LightningElement } from "lwc";
 
-// Same type value always maps to the same tag/badge style.
-const TYPE_BADGE = {
-  Retail: "badge badge-blue",
-  Multifamily: "badge badge-purple",
-  Land: "badge badge-green",
-  Office: "badge badge-orange",
-  Industrial: "badge badge-teal"
+// Same type value always maps to the same pill colour.
+const TYPE_VARIANT = {
+  Retail: "blue",
+  Multifamily: "purple",
+  Land: "green",
+  Office: "orange",
+  Industrial: "teal"
 };
 
+// Each investment name links to its Investment record page. In real data every
+// row would carry its own record URL; the demo rows share one sample record.
+const INVESTMENT_RECORD_URL = "/lightning/r/Unison__Investment__c/a08FW003rCMBVNoYQP/view";
+
+const COLUMNS = [
+  {
+    label: "Name",
+    fieldName: "recordUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
+  },
+  {
+    label: "Type",
+    fieldName: "type",
+    type: "pill",
+    typeAttributes: { variant: { fieldName: "typeVariant" } }
+  },
+  { label: "Committed", fieldName: "committed", type: "text" },
+  { label: "Contributed", fieldName: "contributed", type: "text" },
+  { label: "Distributed", fieldName: "distributed", type: "text" },
+  { label: "Target IRR", fieldName: "targetIrr", type: "text" },
+  { label: "Investment Period", fieldName: "holdPeriod", type: "text" }
+];
+
 export default class IrInvestmentsList extends LightningElement {
+  columns = COLUMNS;
+
   investments = [
     {
       id: 1,
@@ -66,7 +92,17 @@ export default class IrInvestmentsList extends LightningElement {
   get rows() {
     return this.investments.map((row) => ({
       ...row,
-      typeBadge: TYPE_BADGE[row.type] || "badge badge-gray"
+      typeVariant: TYPE_VARIANT[row.type] || "gray",
+      recordUrl: INVESTMENT_RECORD_URL
     }));
+  }
+
+  get recordCount() {
+    return this.investments.length;
+  }
+
+  handleViewAll(event) {
+    event.preventDefault();
+    // Placeholder for the View All action.
   }
 }

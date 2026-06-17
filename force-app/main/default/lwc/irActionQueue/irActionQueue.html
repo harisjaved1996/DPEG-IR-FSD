@@ -1,10 +1,28 @@
 <template>
-    <ul class="aq-list">
-        <template for:each={actions} for:item="action">
-            <li key={action.id} class="aq-item">
-                <lightning-icon icon-name={action.iconName} size="small" class="aq-item-icon"></lightning-icon>
-                <span class="slds-text-body_regular aq-item-title">{action.title}</span>
-            </li>
-        </template>
-    </ul>
+    <div class="aq-card">
+        <div class="aq-header-title">
+            <span class="aq-header-icon">
+                <lightning-icon
+                    icon-name="standard:task"
+                    size="small"
+                    class="aq-header-icon-inner">
+                </lightning-icon>
+            </span>
+            <span class="slds-text-heading_medium aq-title">Action Queue</span>
+        </div>
+        <ul class="aq-list">
+            <template for:each={actions} for:item="action">
+                <li key={action.id} class="aq-item">
+                    <span class="aq-item-icon">
+                        <lightning-icon
+                            icon-name={action.iconName}
+                            size="small"
+                            class="aq-item-icon-inner">
+                        </lightning-icon>
+                    </span>
+                    <span class="slds-text-body_regular aq-item-title">{action.title}</span>
+                </li>
+            </template>
+        </ul>
+    </div>
 </template>

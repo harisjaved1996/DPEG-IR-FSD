@@ -3,7 +3,7 @@
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Onboarding Contacts List</masterLabel>
-    <description>Displays onboarding contacts (Name, Email, Address, Status, Phone, Date) in the irOfferingsList table style, with Verified/Pending/Duplicate status pills.</description>
+    <description>Displays onboarding contacts (Name, Email, Source, Address, Status, Phone, Date) as a native Lightning datatable, with New/Under Review status pills. Name links to the Lead record.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>

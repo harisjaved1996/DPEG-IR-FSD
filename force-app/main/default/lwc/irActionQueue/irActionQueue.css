@@ -1,27 +1,56 @@
-.aq-card {
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e4e6e8;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
+/* Separate this card from sibling cards stacked in the same region */
+:host {
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.aq-header {
-  display: flex;
+/* Parent card: border + uniform padding so children are inset from the border */
+.aq-card {
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: var(
+    --slds-c-card-radius-border,
+    var(--slds-s-container-radius-border, var(--slds-g-radius-border-2))
+  );
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Card title: rectangular standard icon + statCard-value typography */
+.aq-header-title {
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.25rem 0.75rem;
-  border-bottom: 1px solid #f0f2f4;
+  margin-bottom: 0.5rem;
 }
 
-.aq-chevron {
-  --slds-c-icon-color-foreground-default: var(--slds-g-color-neutral-base-30, #5c5c5c);
+/*
+ * Force the standard SLDS icon to render as a rectangle (rounded square).
+ * The wrapper clips the icon to a rounded rectangle and the slight scale pushes
+ * the icon's own rounded corners outside the clip so they fill with the colour.
+ */
+.aq-header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  line-height: 0;
   flex-shrink: 0;
 }
 
+.aq-header-icon-inner {
+  transform: scale(1.45);
+}
+
+/* Match the statCard value typography (slds-text-heading_medium + bold + dark) */
 .aq-title {
-  color: var(--slds-g-color-neutral-base-10, #181818);
   font-weight: 700;
+  color: var(--slds-g-color-neutral-base-10, #181818);
 }
 
 .aq-list {
@@ -34,13 +63,9 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.8125rem 1.25rem;
+  padding: 0.8125rem 0;
   border-bottom: 1px solid #f0f2f4;
   transition: background-color 0.15s ease;
-}
-
-.aq-item-icon {
-  flex-shrink: 0;
 }
 
 .aq-item:last-child {
@@ -49,6 +74,21 @@
 
 .aq-item:hover {
   background-color: #f9fafb;
+}
+
+/* Rectangular list-item icons */
+.aq-item-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.aq-item-icon-inner {
+  transform: scale(1.45);
 }
 
 .aq-item-title {

@@ -2,40 +2,40 @@ import { LightningElement } from "lwc";
 
 const STATS = [
   {
-    id: "inQueue",
+    key: "new",
     iconName: "standard:task",
-    label: "In Queue",
+    label: "New",
     value: "24"
   },
   {
-    id: "web",
-    iconName: "standard:lead",
-    label: "Web",
+    key: "underReview",
+    iconName: "standard:approval",
+    label: "Under Review",
     value: "63"
   },
   {
-    id: "email",
-    iconName: "standard:email",
-    label: "Email",
+    key: "createProfile",
+    iconName: "standard:contact",
+    label: "Create Profile",
     value: "38"
   },
   {
-    id: "duplicate",
-    iconName: "standard:record_lookup",
-    label: "Duplicate Detected",
+    key: "web",
+    iconName: "standard:lead",
+    label: "Web",
     value: "15"
   },
   {
-    key: "verified",
-    label: "Verified",
-    value: "55",
-    iconName: "standard:approval"
+    key: "phone",
+    iconName: "standard:call",
+    label: "Phone",
+    value: "55"
   },
   {
-    key: "pending",
-    label: "Pending",
-    value: "45",
-    iconName: "standard:task"
+    key: "other",
+    iconName: "standard:record",
+    label: "Other",
+    value: "45"
   }
 ];
 

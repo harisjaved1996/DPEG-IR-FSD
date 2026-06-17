@@ -1,15 +1,60 @@
-.container {
-  width: 100%;
+/* Separate this card from sibling cards stacked in the same region */
+:host {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Parent card: border + uniform padding so children are inset from the border */
+.oc-card {
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: var(
+    --slds-c-card-radius-border,
+    var(--slds-s-container-radius-border, var(--slds-g-radius-border-2))
+  );
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
   box-sizing: border-box;
 }
 
-.section-title {
-  margin: 0 0 0.75rem 0;
+/* Card title: rectangular standard icon + statCard-value typography */
+.oc-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.oc-title-text {
+  font-weight: 700;
+  color: var(--slds-g-color-neutral-base-10, #181818);
+}
+
+/*
+ * Force the standard SLDS icon to render as a rectangle (rounded square).
+ * The wrapper clips the icon to a rounded rectangle and the slight scale pushes
+ * the icon's own rounded corners outside the clip so they fill with the colour.
+ */
+.oc-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.oc-icon-inner {
+  transform: scale(1.45);
 }
 
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  gap: 1rem;
   width: 100%;
 }

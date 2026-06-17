@@ -1,5 +1,16 @@
 <template>
-    <div class="container">
+    <div class="oc-card">
+        <div class="oc-title">
+            <span class="oc-icon">
+                <lightning-icon
+                    icon-name="standard:lead"
+                    size="small"
+                    class="oc-icon-inner">
+                </lightning-icon>
+            </span>
+            <span class="slds-text-heading_medium oc-title-text">Onboarding Health</span>
+        </div>
+
         <div class="cards-grid">
             <template for:each={stats} for:item="stat">
                 <c-onboarding-card-child

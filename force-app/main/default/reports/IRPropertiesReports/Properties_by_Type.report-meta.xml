@@ -3,19 +3,7 @@
     <columns>
         <field>CUST_NAME</field>
     </columns>
-    <columns>
-        <field>Property__c.Annual_NOI__c</field>
-    </columns>
     <description>Count of properties grouped by property type, limited to Multifamily, Retail, Industrial, and Mixed-Use.</description>
-    <filter>
-        <criteriaItems>
-            <column>Property__c.Property_Type__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>Multifamily,Retail,Industrial,Mixed-Use</value>
-        </criteriaItems>
-    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>

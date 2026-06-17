@@ -1,15 +1,49 @@
 import { LightningElement } from "lwc";
 
-// Same stage value always maps to the same tag/badge style.
-const STAGE_BADGE = {
-  "Active Fundraising": "badge badge-blue",
-  Draft: "badge badge-gray",
-  "Signatures Pending": "badge badge-orange",
-  Closed: "badge badge-green",
-  Cancelled: "badge badge-red"
+// Same stage value always maps to the same pill colour.
+const STAGE_VARIANT = {
+  "Active Fundraising": "blue",
+  Draft: "gray",
+  "Signatures Pending": "orange",
+  Closed: "green",
+  Cancelled: "red"
 };
 
+// Each offering name links to its Offering record page. In real data every row
+// would carry its own record URL; the demo rows share one sample record.
+const OFFERING_RECORD_URL = "/lightning/r/Unison__Offering__c/a0AFW002mMT3KWu2QN/view";
+
+const COLUMNS = [
+  {
+    label: "Offering",
+    fieldName: "recordUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
+  },
+  {
+    label: "Stage",
+    fieldName: "stage",
+    type: "pill",
+    typeAttributes: { variant: { fieldName: "stageVariant" } }
+  },
+  { label: "Target", fieldName: "target", type: "text" },
+  { label: "Committed", fieldName: "committed", type: "text" },
+  { label: "Funded", fieldName: "funded", type: "text" },
+  {
+    label: "Progress",
+    fieldName: "pctLabel",
+    type: "progressBar",
+    typeAttributes: {
+      barStyle: { fieldName: "barStyle" },
+      pctStyle: { fieldName: "pctStyle" },
+      pctLabel: { fieldName: "pctLabel" }
+    }
+  }
+];
+
 export default class IrOfferingsList extends LightningElement {
+  columns = COLUMNS;
+
   offerings = [
     {
       id: 1,
@@ -71,7 +105,17 @@ export default class IrOfferingsList extends LightningElement {
   get rows() {
     return this.offerings.map((row) => ({
       ...row,
-      badgeCss: STAGE_BADGE[row.stage] || "badge badge-gray"
+      stageVariant: STAGE_VARIANT[row.stage] || "gray",
+      recordUrl: OFFERING_RECORD_URL
     }));
+  }
+
+  get recordCount() {
+    return this.offerings.length;
+  }
+
+  handleViewAll(event) {
+    event.preventDefault();
+    // Placeholder for the View All action.
   }
 }

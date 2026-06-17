@@ -10,13 +10,22 @@
     <description>Target raise amount summed by offering status.</description>
     <format>Summary</format>
     <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
         <field>Offering__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Offering Target Raise</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
     <reportType>CustomEntity$Offering__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Offering__c.Closing_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

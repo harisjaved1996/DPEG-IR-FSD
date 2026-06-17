@@ -1,0 +1,49 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3e3e3c;
+  white-space: nowrap;
+}
+
+.pill::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--dot, #8c8c8c);
+  flex-shrink: 0;
+}
+
+.pill_gray {
+  background: #f2f2f2;
+  --dot: #8c8c8c;
+}
+.pill_blue {
+  background: #eaf2fb;
+  --dot: #1d6fc4;
+}
+.pill_purple {
+  background: #f1edfb;
+  --dot: #6c3fc4;
+}
+.pill_orange {
+  background: #fdf1e3;
+  --dot: #d4860b;
+}
+.pill_teal {
+  background: #e6f6ef;
+  --dot: #047857;
+}
+.pill_green {
+  background: #eaf6ee;
+  --dot: #2e844a;
+}
+.pill_red {
+  background: #fdecec;
+  --dot: #c23934;
+}

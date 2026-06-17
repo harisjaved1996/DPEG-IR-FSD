@@ -4,12 +4,25 @@ const DEFAULT_ROWS = 5;
 
 const TYPES = ["Retail", "Multifamily", "Land"];
 
-// Same type value always maps to the same tag/badge style.
-const TYPE_BADGE = {
-  Retail: "badge badge-blue",
-  Multifamily: "badge badge-purple",
-  Land: "badge badge-green"
+// Same type value always maps to the same pill colour.
+const TYPE_VARIANT = {
+  Retail: "blue",
+  Multifamily: "purple",
+  Land: "green"
 };
+
+const COLUMNS = [
+  { label: "Name", fieldName: "name", type: "text" },
+  {
+    label: "Type",
+    fieldName: "type",
+    type: "pill",
+    typeAttributes: { variant: { fieldName: "typeVariant" } }
+  },
+  { label: "Committed", fieldName: "committed", type: "text" },
+  { label: "Contributed", fieldName: "contributed", type: "text" },
+  { label: "Distributed", fieldName: "distributedDisplay", type: "text" }
+];
 
 const CLOSED_DATA = [
   {
@@ -165,15 +178,22 @@ const CLOSED_DATA = [
 ];
 
 export default class ClosedInvestmentListingChild extends LightningElement {
+  columns = COLUMNS;
+
   get rows() {
     return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row, index) => {
       const type = TYPES[index % TYPES.length];
       return {
         ...row,
         type,
-        typeBadge: TYPE_BADGE[type],
+        typeVariant: TYPE_VARIANT[type],
         distributedDisplay: row.distributed || "—"
       };
     });
+  }
+
+  handleViewAll(event) {
+    event.preventDefault();
+    // Placeholder for the View All action.
   }
 }
