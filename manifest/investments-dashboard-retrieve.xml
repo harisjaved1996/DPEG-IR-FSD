@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>IR_Dashboards/oqdpeKcyYJeCLYsSDLytJHvmNmtOzb</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>IRInvestmentReports/Investments_by_Status</members>
+        <members>IRDistributionsReports/Distributions_by_Date</members>
+        <name>Report</name>
+    </types>
+    <version>66.0</version>
+</Package>

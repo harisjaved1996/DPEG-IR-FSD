@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Property_Type__c</fullName>
-    <label>Property Type</label>
     <description>Asset class / property type used to categorize the real-estate holding.</description>
-    <inlineHelpText>Select the property's asset class.</inlineHelpText>
+    <inlineHelpText>Select the property&apos;s asset class.</inlineHelpText>
+    <label>Property Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -20,14 +22,14 @@
                 <label>Retail</label>
             </value>
             <value>
-                <fullName>Retail Strip Center</fullName>
+                <fullName>Commercial</fullName>
                 <default>false</default>
-                <label>Retail Strip Center</label>
+                <label>Commercial</label>
             </value>
             <value>
-                <fullName>C-Store</fullName>
+                <fullName>Land</fullName>
                 <default>false</default>
-                <label>C-Store</label>
+                <label>Land</label>
             </value>
             <value>
                 <fullName>Industrial</fullName>
@@ -43,6 +45,21 @@
                 <fullName>Mixed-Use</fullName>
                 <default>false</default>
                 <label>Mixed-Use</label>
+            </value>
+            <value>
+                <fullName>Multi-Family</fullName>
+                <default>false</default>
+                <label>Multi-Family</label>
+            </value>
+            <value>
+                <fullName>Single-Family</fullName>
+                <default>false</default>
+                <label>Single-Family</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -11,7 +11,7 @@
         <chartType>VerticalColumn</chartType>
         <enableHoverLabels>true</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Account.Unison__Entity_Type__c</groupingColumn>
+        <groupingColumn>Investing_Entity__c.Entity_Type__c</groupingColumn>
         <location>CHART_TOP</location>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -25,27 +25,30 @@
         <titleSize>18</titleSize>
     </chart>
     <columns>
-        <field>Account.Unison__Account_Type__c</field>
+        <field>CUST_NAME</field>
     </columns>
-    <description>Count of investing entities grouped by legal entity type. Filtered to Account Type = Investing Entity. Feeds the 'Investing Entities By Type' dashboard widget.</description>
-    <filter>
-        <criteriaItems>
-            <column>Account.Unison__Account_Type__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Investing Entity</value>
-        </criteriaItems>
-    </filter>
+    <columns>
+        <field>Investing_Entity__c.Country__c</field>
+    </columns>
+    <description>Count of Investing Entity records grouped by Entity Type. Sources from the Unison__Investing_Entity__c object. Feeds the &apos;Investing Entities by Type&apos; dashboard widget on the Investor Dashboard.</description>
     <format>Summary</format>
     <groupingsDown>
-        <field>Account.Unison__Entity_Type__c</field>
+        <dateGranularity>Day</dateGranularity>
+        <field>Investing_Entity__c.Entity_Type__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Investing Entities by Type</name>
-    <reportType>AccountList</reportType>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Investing_Entity__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

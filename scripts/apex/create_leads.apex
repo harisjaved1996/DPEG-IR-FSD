@@ -1,0 +1,35 @@
+List<String> sal = new List<String>{'Mr.','Ms.','Dr.','Mrs.','Mr.','Ms.','Mr.','Mrs.','Mr.','Ms.','Dr.','Mr.','Ms.','Mr.','Mrs.'};
+List<String> fn = new List<String>{'Arjun','Priya','Rohan','Sana','Vikram','Aisha','Daniel','Maria','James','Lin','Omar','Ethan','Hana','Carlos','Fatima'};
+List<String> ln = new List<String>{'Kapoor','Shah','Mehta','Qureshi','Nair','Khan','Cohen','Garcia','Okafor','Chen','Farooq','Brooks','Tanaka','Mendez','Ali'};
+List<String> co = new List<String>{'Kapoor Capital LP','Shah Holdings LP','Mehta Investments LP','Qureshi Family LP','Nair Ventures LP','Khan Equity LP','Cohen Partners LP','Garcia Capital LP','Okafor Investments LP','Chen Holdings LP','Farooq Family LP','Brooks Ventures LP','Tanaka Equity LP','Mendez Partners LP','Ali Capital LP'};
+List<String> city = new List<String>{'Houston','Sugar Land','Katy','The Woodlands','Pearland','Cypress','Spring','Pasadena','Conroe','Richmond','Missouri City','Friendswood','League City','Humble','Tomball'};
+List<String> street = new List<String>{'Maple Ln','Oak Dr','Cedar St','Birch Blvd','Pine Ln','Elm Dr','Walnut St','Aspen Blvd','Cypress Ln','Magnolia Dr','Willow St','Juniper Blvd','Sycamore Ln','Hickory Dr','Cherry St'};
+List<String> src = new List<String>{'Web','Phone','Other'};
+List<String> stat = new List<String>{'New','Under_Review','Create_Profile','Closed'};
+List<String> chan = new List<String>{'Web-to-Lead','Email-to-Lead','Referral'};
+List<String> kyc = new List<String>{'Awaiting Docs','Accreditation Pending','Verified'};
+List<String> invite = new List<String>{'Pending','Invited'};
+List<Lead> ls = new List<Lead>();
+for (Integer i = 0; i < 15; i++) {
+    Lead l = new Lead();
+    l.Salutation = sal[i];
+    l.FirstName = fn[i];
+    l.LastName = ln[i];
+    l.Company = co[i];
+    l.Street = street[i];
+    l.City = city[i];
+    l.Country = 'United States';
+    l.PostalCode = String.valueOf(77000 + (i * 7));
+    l.Phone = '0900' + String.valueOf(78610 + i);
+    l.Email = fn[i].toLowerCase() + '.' + ln[i].toLowerCase() + '@example.com';
+    l.LeadSource = src[Math.mod(i, 3)];
+    l.Status = stat[Math.mod(i, 4)];
+    l.Unison__Investor_Channel__c = chan[Math.mod(i, 3)];
+    l.Unison__Onboarding_KYC_Status__c = kyc[Math.mod(i, 3)];
+    l.Unison__Portal_Invite_Status__c = invite[Math.mod(i, 2)];
+    ls.add(l);
+}
+Database.DMLOptions dml = new Database.DMLOptions();
+dml.duplicateRuleHeader.allowSave = true;
+Database.insert(ls, dml);
+System.debug('LEADS_INSERTED=' + ls.size());

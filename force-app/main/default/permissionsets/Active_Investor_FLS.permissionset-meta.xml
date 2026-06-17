@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants read/edit field-level security on the Contact Active Investor field.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Active_Investor__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Active Investor FLS</label>
+</PermissionSet>
