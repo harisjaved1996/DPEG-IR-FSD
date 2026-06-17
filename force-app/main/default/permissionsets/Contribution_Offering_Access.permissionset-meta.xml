@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Contribution Offering Field Access</label>
+    <description>Grants read/edit field-level security on the Contribution Offering lookup field, enabling Contributions-by-Offering data entry and reporting.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <readable>true</readable>
+        <field>Contribution__c.Offering__c</field>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+</PermissionSet>

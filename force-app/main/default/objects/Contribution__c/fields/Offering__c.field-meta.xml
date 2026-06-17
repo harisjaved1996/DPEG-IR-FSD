@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offering__c</fullName>
+    <label>Offering</label>
+    <description>The offering this contribution is associated with. Enables Contributions-by-Offering reporting on the Offerings Dashboard.</description>
+    <inlineHelpText>Select the offering this contribution applies to.</inlineHelpText>
+    <type>Lookup</type>
+    <referenceTo>Offering__c</referenceTo>
+    <relationshipLabel>Contributions</relationshipLabel>
+    <relationshipName>Contributions</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

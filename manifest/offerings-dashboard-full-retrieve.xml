@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>IR_Dashboards/odSsmsWjqifpOqOaWRArRvTPFBAYiV</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>IROfferingsReports/Offerings_by_Status</members>
+        <members>IROfferingsReports/Average_Minimum_Investment</members>
+        <members>IROfferingsReports/Target_Raise_by_Offering</members>
+        <members>IRContributionsReports/Contributions_by_Type</members>
+        <members>IRContributionsReports/Contributions_by_Date</members>
+        <members>IRContributionsReports/Contributions_by_Offering</members>
+        <members>IRCommitmentsReports/Commitments_XQZ</members>
+        <members>IRCommitmentsReports/Commitments_by_Offering</members>
+        <members>IRWaitlistReports/Waitlist_Investors_by_Offering</members>
+        <name>Report</name>
+    </types>
+    <version>66.0</version>
+</Package>
