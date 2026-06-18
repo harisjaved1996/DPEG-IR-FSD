@@ -5,9 +5,13 @@ const ROW_ACTIONS = [
   { label: "Delete", name: "delete" }
 ];
 
+// Each investing entity links to its Investing Entity record page. In real data
+// every row would carry its own record URL; the demo rows share one record.
+const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+
 const COLUMNS = [
   {
-    label: "Distribution Batch Number",
+    label: "Distribution Number",
     fieldName: "distributionUrl",
     type: "url",
     typeAttributes: {
@@ -15,7 +19,15 @@ const COLUMNS = [
       target: "_self"
     }
   },
-  { label: "Status", fieldName: "paidStatus", type: "text" },
+  {
+    label: "Investing Entity",
+    fieldName: "investingEntityUrl",
+    type: "url",
+    typeAttributes: {
+      label: { fieldName: "investingEntity" },
+      target: "_self"
+    }
+  },
   { label: "Amount", fieldName: "amountLabel", type: "text" },
   { label: "Distribution Date", fieldName: "distributionDate", type: "text" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
@@ -24,9 +36,11 @@ const COLUMNS = [
 const DATA = [
   {
     id: "1",
-    distributionNumber: "DB-020",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
-    paidStatus: "Completed",
+    distributionNumber: "DIST-2400",
+    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
+    investingEntity: "Gabri Investments LLC",
+    investingEntityUrl: INVESTING_ENTITY_URL,
+    paidStatus: "Paid",
     amount: 40000,
     amountLabel: "$40,000.00",
     distributionDate: "15/04/2026",
@@ -39,9 +53,11 @@ const DATA = [
   },
   {
     id: "2",
-    distributionNumber: "DB-021",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
-    paidStatus: "Completed",
+    distributionNumber: "DIST-2401",
+    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
+    investingEntity: "KBMM MSO LLC",
+    investingEntityUrl: INVESTING_ENTITY_URL,
+    paidStatus: "Paid",
     amount: 25000,
     amountLabel: "$25,000.00",
     distributionDate: "20/05/2026",
@@ -54,9 +70,11 @@ const DATA = [
   },
   {
     id: "3",
-    distributionNumber: "DB-023",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
-    paidStatus: "Completed",
+    distributionNumber: "DIST-2402",
+    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
+    investingEntity: "Kilam Ventures LTD",
+    investingEntityUrl: INVESTING_ENTITY_URL,
+    paidStatus: "Paid",
     amount: 60000,
     amountLabel: "$60,000.00",
     distributionDate: "10/06/2026",
@@ -69,7 +87,7 @@ const DATA = [
   }
 ];
 
-export default class DistributionInvestment extends LightningElement {
+export default class IndividualDistributions extends LightningElement {
   columns = COLUMNS;
   data = DATA;
   showModal = false;

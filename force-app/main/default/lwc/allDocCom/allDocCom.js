@@ -1,6 +1,27 @@
 import { LightningElement } from "lwc";
 
+const COLUMNS = [
+  { label: "Name", fieldName: "name", type: "text" },
+  { label: "Investment", fieldName: "investment", type: "text" },
+  { label: "Type", fieldName: "type", type: "text" },
+  { label: "Uploaded Date", fieldName: "date", type: "text" },
+  {
+    label: "Download",
+    type: "button-icon",
+    initialWidth: 110,
+    typeAttributes: {
+      iconName: "utility:download",
+      name: "download",
+      title: "Download",
+      alternativeText: "Download",
+      variant: "bare"
+    }
+  }
+];
+
 export default class AllDocCom extends LightningElement {
+  columns = COLUMNS;
+
   documents = [
     {
       id: 1,
@@ -50,6 +71,6 @@ export default class AllDocCom extends LightningElement {
     return this.documents;
   }
 
-  // Placeholder download handler — wiring only, no-op for now.
-  handleDownload() {}
+  // Placeholder download/row-action handler — wiring only, no-op for now.
+  handleRowAction() {}
 }

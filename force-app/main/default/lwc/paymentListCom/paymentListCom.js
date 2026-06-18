@@ -1,10 +1,27 @@
 import { LightningElement } from "lwc";
 
+const COLUMNS = [
+  {
+    label: "Account Nickname",
+    fieldName: "nicknameUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "nickname" }, target: "_blank" }
+  },
+  { label: "Bank Name", fieldName: "institution", type: "text" },
+  { label: "Routing #", fieldName: "routing", type: "text" },
+  { label: "Account #", fieldName: "accountNumber", type: "text" },
+  { label: "Linked Investments", fieldName: "linkedInvestment", type: "text" },
+  { label: "Entity Name", fieldName: "entityName", type: "text" }
+];
+
 export default class PaymentListCom extends LightningElement {
+  columns = COLUMNS;
+
   accounts = [
     {
       id: 1,
       nickname: "Checking …9880",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "TRIANGLE Y SHOPS",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -18,6 +35,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 2,
       nickname: "Checking …9079",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "ANSERA DEV",
       institution: "Simmons Bank",
       routing: "082900432",
@@ -31,6 +49,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 3,
       nickname: "Checking …5177",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "VICKSBURG",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -44,6 +63,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 4,
       nickname: "Checking …7503",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "HWY 6 Y SHOPS",
       institution: "Wells Fargo",
       routing: "121000248",
@@ -57,6 +77,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 5,
       nickname: "Checking …4839",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "PEARLAND ENT",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -70,6 +91,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 6,
       nickname: "Checking …4169",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "PARKWEST Y SHOPS",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -83,6 +105,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 7,
       nickname: "Checking …5979",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "10 KATY DEV",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -96,6 +119,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 8,
       nickname: "Checking …0043",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "249 JONES LLC",
       institution: "American Bank",
       routing: "114903284",
@@ -109,6 +133,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 9,
       nickname: "Checking …9476",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "B CENTRE ENT",
       institution: "Allegiance Bank",
       routing: "113025723",
@@ -122,6 +147,7 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 10,
       nickname: "Checking …1749",
+      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "CAVALCADE 59 DEV",
       institution: "Origin Bank",
       routing: "111102758",
@@ -137,7 +163,4 @@ export default class PaymentListCom extends LightningElement {
   get rows() {
     return this.accounts;
   }
-
-  // No-op stub: wiring only for the per-row sync button.
-  handleSync() {}
 }

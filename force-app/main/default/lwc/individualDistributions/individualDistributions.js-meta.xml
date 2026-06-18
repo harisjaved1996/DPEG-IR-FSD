@@ -2,8 +2,8 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>paymentListCom</masterLabel>
-    <description>Displays the Investment Bank Accounts listing as a custom HTML table with a per-row sync action.</description>
+    <masterLabel>Individual Distributions</masterLabel>
+    <description>Distributions related list with a per-row Repeat Distribution action that opens the repeatDistribution component in a modal.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>

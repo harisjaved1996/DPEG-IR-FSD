@@ -2,11 +2,9 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>paymentListCom</masterLabel>
-    <description>Displays the Investment Bank Accounts listing as a custom HTML table with a per-row sync action.</description>
+    <masterLabel>Contribution Investment Com</masterLabel>
+    <description>Native-style related list of investing entity contributions with icon, title, count, datatable, and centered View All. Investing Entity name links to the record.</description>
     <targets>
-        <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>
-        <target>lightning__HomePage</target>
     </targets>
 </LightningComponentBundle>

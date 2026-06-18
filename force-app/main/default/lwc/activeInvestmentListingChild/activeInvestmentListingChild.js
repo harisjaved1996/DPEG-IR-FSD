@@ -11,8 +11,17 @@ const TYPE_VARIANT = {
   Land: "green"
 };
 
+// Each investment name links to its Investment record page. In real data every
+// row would carry its own record URL; the demo rows share one sample record.
+const INVESTMENT_RECORD_URL = "/lightning/r/Unison__Investment__c/a08FW003rCMBVNoYQP/view";
+
 const COLUMNS = [
-  { label: "Name", fieldName: "name", type: "text" },
+  {
+    label: "Name",
+    fieldName: "recordUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
+  },
   {
     label: "Type",
     fieldName: "type",
@@ -289,7 +298,8 @@ export default class ActiveInvestmentListingChild extends LightningElement {
         ...row,
         type,
         typeVariant: TYPE_VARIANT[type],
-        distributedDisplay: row.distributed || "—"
+        distributedDisplay: row.distributed || "—",
+        recordUrl: INVESTMENT_RECORD_URL
       };
     });
   }

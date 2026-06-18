@@ -1,49 +1,11 @@
 <template>
-    <div class="card">
-        <div class="table-scroll">
-            <table class="list-table">
-                <thead>
-                <tr>
-                    <th class="th-text">Account Nickname</th>
-                    <th class="th-text">Bank Description</th>
-                    <th class="th-text">Banking Institution Name</th>
-                    <th class="th-text">Routing #</th>
-                    <th class="th-text">Account #</th>
-                    <th class="th-text">Account Type</th>
-                    <th class="th-text">Linked Investments</th>
-                    <th class="th-text">Entity Name</th>
-                    <th class="th-text">Entity Address</th>
-                    <th class="th-text">Balance</th>
-                    <th class="th-text"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template for:each={rows} for:item="row">
-                    <tr key={row.id}>
-                        <td class="td-text"><span class="row-name">{row.nickname}</span></td>
-                        <td class="td-text"><span class="row-name">{row.bankDescription}</span></td>
-                        <td class="td-text">{row.institution}</td>
-                        <td class="td-text">{row.routing}</td>
-                        <td class="td-text">{row.accountNumber}</td>
-                        <td class="td-text">{row.accountType}</td>
-                        <td class="td-text"><span class="row-name">{row.linkedInvestment}</span></td>
-                        <td class="td-text"><span class="row-name">{row.entityName}</span></td>
-                        <td class="td-text">{row.entityAddress}</td>
-                        <td class="td-text">{row.balance}</td>
-                        <td class="td-actions">
-                            <lightning-button-icon
-                                icon-name="utility:refresh"
-                                alternative-text="Sync"
-                                title="Sync"
-                                variant="bare"
-                                data-id={row.id}
-                                onclick={handleSync}
-                            ></lightning-button-icon>
-                        </td>
-                    </tr>
-                </template>
-            </tbody>
-            </table>
-        </div>
-    </div>
+    <lightning-card>
+        <lightning-datatable
+            key-field="id"
+            data={rows}
+            columns={columns}
+            hide-checkbox-column
+            column-widths-mode="auto">
+        </lightning-datatable>
+    </lightning-card>
 </template>

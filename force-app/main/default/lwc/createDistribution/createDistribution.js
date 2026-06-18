@@ -10,6 +10,14 @@ const TYPE_OPTIONS = [
   { label: "Return of Capital", value: "Return of Capital" }
 ];
 
+const BANK_ACCOUNT_OPTIONS = [
+  { label: "Checking 9880", value: "Checking 9880" },
+  { label: "Checking 9881", value: "Checking 9881" },
+  { label: "Checking 9882", value: "Checking 9882" },
+  { label: "Checking 9883", value: "Checking 9883" },
+  { label: "Checking 9884", value: "Checking 9884" }
+];
+
 function buildPeriodOptions() {
   const options = [];
   for (let year = 2022; year <= 2026; year++) {
@@ -63,6 +71,7 @@ export default class CreateDistribution extends LightningElement {
   sourceOptions = SOURCE_OPTIONS;
   typeOptions = TYPE_OPTIONS;
   periodOptions = buildPeriodOptions();
+  bankAccountOptions = BANK_ACCOUNT_OPTIONS;
   columns = PRO_COLUMNS;
 
   date = "";
@@ -70,6 +79,7 @@ export default class CreateDistribution extends LightningElement {
   period = "Q1 2026";
   effectiveDate = "";
   description = "";
+  bankAccount = "Checking 9880";
 
   type = "Preferred Return";
   totalAmount = null;
@@ -102,6 +112,10 @@ export default class CreateDistribution extends LightningElement {
 
   handleDescriptionChange(event) {
     this.description = event.detail.value;
+  }
+
+  handleBankAccountChange(event) {
+    this.bankAccount = event.detail.value;
   }
 
   handleTypeChange(event) {

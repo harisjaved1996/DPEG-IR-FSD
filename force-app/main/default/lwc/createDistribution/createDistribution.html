@@ -45,7 +45,7 @@
                             onchange={handleEffectiveDateChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-1 field">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
                         <lightning-textarea
                             label="Description"
                             required
@@ -54,6 +54,14 @@
                             onchange={handleDescriptionChange}>
                         </lightning-textarea>
                         <p class="help-text">255 characters max</p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                        <lightning-combobox
+                            label="Bank Account"
+                            value={bankAccount}
+                            options={bankAccountOptions}
+                            onchange={handleBankAccountChange}>
+                        </lightning-combobox>
                     </div>
                 </div>
                 </div>

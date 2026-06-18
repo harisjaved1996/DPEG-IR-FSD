@@ -1,35 +1,11 @@
 <template>
-    <div class="card">
-        <table class="list-table">
-            <thead>
-                <tr>
-                    <th class="th-text">Name</th>
-                    <th class="th-text">Investment</th>
-                    <th class="th-text">Type</th>
-                    <th class="th-text">Uploaded Date</th>
-                    <th class="th-text">Download</th>
-                </tr>
-            </thead>
-            <tbody>
-                <template for:each={rows} for:item="row">
-                    <tr key={row.id}>
-                        <td class="td-text"><span class="row-name">{row.name}</span></td>
-                        <td class="td-text"><span class="row-name">{row.investment}</span></td>
-                        <td class="td-text">{row.type}</td>
-                        <td class="td-text">{row.date}</td>
-                        <td class="td-actions">
-                            <lightning-button-icon
-                                icon-name="utility:download"
-                                alternative-text="Download"
-                                title="Download"
-                                variant="bare"
-                                data-id={row.id}
-                                onclick={handleDownload}
-                            ></lightning-button-icon>
-                        </td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
-    </div>
+    <lightning-card>
+        <lightning-datatable
+            key-field="id"
+            data={rows}
+            columns={columns}
+            hide-checkbox-column
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </lightning-card>
 </template>
