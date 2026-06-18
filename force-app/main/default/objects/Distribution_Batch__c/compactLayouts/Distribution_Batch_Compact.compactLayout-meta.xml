@@ -5,5 +5,6 @@
     <fields>Batch_Type__c</fields>
     <fields>Status__c</fields>
     <fields>Total_Amount__c</fields>
+    <fields>Investment__c</fields>
     <label>Distribution Batch Compact Layout</label>
 </CompactLayout>

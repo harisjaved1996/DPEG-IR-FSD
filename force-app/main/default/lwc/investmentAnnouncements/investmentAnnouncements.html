@@ -1,0 +1,71 @@
+<template>
+    <lightning-card icon-name="standard:news">
+        <span slot="title">Announcements ({recordCount})</span>
+        <lightning-button
+            slot="actions"
+            label="New Announcement"
+            variant="neutral"
+            onclick={handleNew}>
+        </lightning-button>
+
+        <ul class="ann-list">
+            <template for:each={announcements} for:item="item">
+                <li key={item.id} class="ann-card">
+                    <div class="ann-card-head">
+                        <h3 class="ann-subject">{item.subject}</h3>
+                        <span class="ann-date">{item.date}</span>
+                    </div>
+                    <p class="ann-description">{item.description}</p>
+                </li>
+            </template>
+        </ul>
+
+        <div class="ann-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+
+    <!-- New Announcement modal -->
+    <template lwc:if={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="ann-modal-heading"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="bare"
+                        size="medium"
+                        class="modal-close"
+                        title="Close"
+                        alternative-text="Close"
+                        onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 id="ann-modal-heading" class="slds-modal__title slds-hyphenate">New Announcement</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input
+                        label="Title"
+                        value={title}
+                        onchange={handleTitleChange}>
+                    </lightning-input>
+                    <lightning-textarea
+                        label="Description"
+                        class="slds-m-top_small"
+                        value={description}
+                        onchange={handleDescriptionChange}>
+                    </lightning-textarea>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button
+                        label="Save"
+                        variant="brand"
+                        class="slds-m-left_x-small"
+                        onclick={handleSave}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -6,37 +6,43 @@ export default class InvestmentDetailPageCard extends LightningElement {
       key: "lp Capital",
       displayValue: "$7.5M",
       label: "LP Capital",
-      iconName: "standard:opportunity"
+      iconName: "utility:opportunity",
+      iconColor: "#e8a33d"
     },
     {
       key: "dpegStakge",
       displayValue: "$1.3M",
       label: "DPEG Stake",
-      iconName: "standard:currency"
+      iconName: "utility:currency",
+      iconColor: "#2e844a"
     },
     {
       key: "investorContacts",
       displayValue: "15",
       label: "Total Investors",
-      iconName: "standard:contact"
+      iconName: "utility:contact",
+      iconColor: "#5867e8"
     },
     {
       key: "contributed",
       displayValue: "5M",
       label: "Total Contributed",
-      iconName: "standard:investment_account"
+      iconName: "utility:trending",
+      iconColor: "#06a59a"
     },
     {
       key: "distributed",
       displayValue: "$1.3M",
       label: "Total Distributed",
-      iconName: "standard:contract"
+      iconName: "utility:contract",
+      iconColor: "#dd7a01"
     },
     {
       key: "start Date",
       displayValue: "02 May 2021",
       label: "Start Date",
-      iconName: "standard:contract"
+      iconName: "utility:event",
+      iconColor: "#9050e9"
     }
   ];
 }

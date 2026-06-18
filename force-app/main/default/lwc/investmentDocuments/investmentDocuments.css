@@ -1,4 +1,4 @@
-/* Card border with internal padding (matches the Commitments card) */
+/* Card border with internal padding (matches the Contributions card) */
 :host {
   display: block;
   border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
@@ -20,6 +20,16 @@
 
 .view-all-footer a:hover {
   text-decoration: underline;
+}
+
+/* Investing entity checkbox list */
+.entity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 /* Modal close button (top-right of the header) */

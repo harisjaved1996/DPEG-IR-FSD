@@ -32,6 +32,11 @@
   transform: scale(1.45);
 }
 
+/* Plain icon variant — utility glyph with no background box */
+.stat-icon-plain {
+  flex-shrink: 0;
+}
+
 .text-col {
   display: flex;
   flex-direction: column;

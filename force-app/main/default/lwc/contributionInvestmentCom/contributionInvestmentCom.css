@@ -1,5 +1,15 @@
+/* Card border with internal padding (matches the Commitments card) */
+:host {
+  display: block;
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.5rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  padding: 0.75rem;
+}
+
 .view-all-footer {
   text-align: center;
+  padding-top: 0.75rem;
 }
 
 .view-all-footer a {

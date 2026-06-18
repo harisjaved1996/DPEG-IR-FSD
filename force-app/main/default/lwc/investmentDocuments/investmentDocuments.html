@@ -1,0 +1,101 @@
+<template>
+    <lightning-card icon-name="standard:document">
+        <span slot="title">Documents ({recordCount})</span>
+        <lightning-button
+            slot="actions"
+            label="New"
+            variant="neutral"
+            onclick={handleNew}>
+        </lightning-button>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+
+        <div class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+
+    <!-- New Document modal -->
+    <template lwc:if={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="doc-modal-heading"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="bare"
+                        size="medium"
+                        class="modal-close"
+                        title="Close"
+                        alternative-text="Close"
+                        onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 id="doc-modal-heading" class="slds-modal__title slds-hyphenate">New Document</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input
+                        type="file"
+                        label="Upload File"
+                        onchange={handleFileChange}>
+                    </lightning-input>
+                    <lightning-input
+                        label="Name"
+                        class="slds-m-top_small"
+                        value={documentName}
+                        onchange={handleNameChange}>
+                    </lightning-input>
+                    <lightning-combobox
+                        label="Type"
+                        class="slds-m-top_small"
+                        placeholder="Select Type"
+                        options={typeOptions}
+                        value={type}
+                        onchange={handleTypeChange}>
+                    </lightning-combobox>
+                    <lightning-combobox
+                        label="Year"
+                        class="slds-m-top_small"
+                        placeholder="Select Year"
+                        options={yearOptions}
+                        value={year}
+                        onchange={handleYearChange}>
+                    </lightning-combobox>
+
+                    <fieldset class="slds-form-element slds-m-top_small">
+                        <legend class="slds-form-element__label">Investing Entities</legend>
+                        <div class="slds-form-element__control">
+                            <ul class="entity-list">
+                                <template for:each={entities} for:item="entity">
+                                    <li key={entity.id} class="entity-item">
+                                        <lightning-input
+                                            type="checkbox"
+                                            label={entity.name}
+                                            data-id={entity.id}
+                                            checked={entity.selected}
+                                            onchange={handleEntityToggle}>
+                                        </lightning-input>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button
+                        label="Save"
+                        variant="brand"
+                        class="slds-m-left_x-small"
+                        onclick={handleSave}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
