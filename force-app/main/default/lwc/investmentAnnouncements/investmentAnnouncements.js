@@ -89,6 +89,12 @@ export default class InvestmentAnnouncements extends LightningElement {
     this.closeModal();
   }
 
+  handleShare(event) {
+    const announcementId = event.currentTarget.dataset.id;
+    // Placeholder: share the announcement identified by `announcementId`.
+    return announcementId;
+  }
+
   handleViewAll(event) {
     event.preventDefault();
     // Placeholder for the View All action.

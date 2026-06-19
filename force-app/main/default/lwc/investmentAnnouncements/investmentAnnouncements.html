@@ -16,6 +16,14 @@
                         <span class="ann-date">{item.date}</span>
                     </div>
                     <p class="ann-description">{item.description}</p>
+                    <div class="ann-card-actions">
+                        <lightning-button
+                            label="Share Announcement"
+                            variant="brand"
+                            data-id={item.id}
+                            onclick={handleShare}>
+                        </lightning-button>
+                    </div>
                 </li>
             </template>
         </ul>

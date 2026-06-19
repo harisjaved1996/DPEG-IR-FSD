@@ -60,6 +60,9 @@ export default class InvestmentDocuments extends LightningElement {
   yearOptions = YEAR_OPTIONS;
 
   showModal = false;
+  // Share With Contacts is disabled until at least one document row is selected.
+  shareDisabled = true;
+  selectedDocumentIds = [];
   documentName = "";
   type = "";
   year = "";
@@ -69,6 +72,7 @@ export default class InvestmentDocuments extends LightningElement {
     name,
     selected: true
   }));
+  allEntitiesSelected = true;
 
   _nextId = 100;
 
@@ -93,6 +97,7 @@ export default class InvestmentDocuments extends LightningElement {
       ...entity,
       selected: true
     }));
+    this.allEntitiesSelected = true;
   }
 
   handleFileChange(event) {
@@ -123,6 +128,14 @@ export default class InvestmentDocuments extends LightningElement {
     this.entities = this.entities.map((entity) =>
       entity.id === entityId ? { ...entity, selected: checked } : entity
     );
+    // Keep the "Select All" checkbox in sync with the individual selections.
+    this.allEntitiesSelected = this.entities.every((entity) => entity.selected);
+  }
+
+  handleSelectAllToggle(event) {
+    const checked = event.target.checked;
+    this.allEntitiesSelected = checked;
+    this.entities = this.entities.map((entity) => ({ ...entity, selected: checked }));
   }
 
   handleSave() {
@@ -137,6 +150,17 @@ export default class InvestmentDocuments extends LightningElement {
     };
     this.data = [newRow, ...this.data];
     this.closeModal();
+  }
+
+  handleRowSelection(event) {
+    const selectedRows = event.detail.selectedRows || [];
+    this.selectedDocumentIds = selectedRows.map((row) => row.id);
+    this.shareDisabled = this.selectedDocumentIds.length === 0;
+  }
+
+  handleShareWithContacts() {
+    // Placeholder: share the selected documents with contacts.
+    return this.selectedDocumentIds;
   }
 
   handleViewAll(event) {

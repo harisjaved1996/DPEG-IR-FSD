@@ -53,6 +53,13 @@
   line-height: 1.4;
 }
 
+/* Per-card actions — Share Announcement aligned bottom-right */
+.ann-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
 /* Footer — centered View All */
 .ann-footer {
   text-align: center;
