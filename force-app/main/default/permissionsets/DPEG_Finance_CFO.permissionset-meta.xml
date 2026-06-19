@@ -586,42 +586,6 @@
         <editable>false</editable>
     </fieldPermissions>
 
-    <!-- Share_Transfer__c (Transfer_Amount__c = R) -->
-    <fieldPermissions>
-        <field>Share_Transfer__c.Approval_Status__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Offering_Name__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Status__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Transfer_Amount__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Transfer_Date__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Transfer_Type__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Share_Transfer__c.Units_Transferred__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
 
     <!-- Subscription_Doc__c -->
     <fieldPermissions>

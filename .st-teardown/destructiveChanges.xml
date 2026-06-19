@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Share_Transfer__c.Status__c</members>
+        <members>Share_Transfer__c.Transfer_Amount__c</members>
+        <members>Share_Transfer__c.Transfer_Date__c</members>
+        <members>Share_Transfer__c.Transfer_Type__c</members>
+        <members>Share_Transfer__c.Transferor_Investment__c</members>
+        <members>Share_Transfer__c.Units_Transferred__c</members>
+        <members>Share_Transfer__c.Investment__c</members>
+        <members>Share_Transfer__c.Contact__c</members>
+        <members>Share_Transfer__c.Transferee_c__c</members>
+        <members>Share_Transfer__c.Transferee_Entity__c</members>
+        <members>Share_Transfer__c.Units_To_Transfer__c</members>
+        <members>Share_Transfer__c.Transfer_Amount_c__c</members>
+        <members>Share_Transfer__c.Transferor_Entity__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Investment__c.Share_Transfer</members>
+        <name>QuickAction</name>
+    </types>
+</Package>

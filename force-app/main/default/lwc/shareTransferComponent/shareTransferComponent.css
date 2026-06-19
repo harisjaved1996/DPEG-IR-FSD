@@ -1,9 +1,15 @@
+/* Card border with internal padding (matches the Contributions card) */
 :host {
   display: block;
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.5rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  padding: 0.75rem;
 }
 
 .view-all-footer {
   text-align: center;
+  padding-top: 0.75rem;
 }
 
 .view-all-footer a {
@@ -14,4 +20,20 @@
 
 .view-all-footer a:hover {
   text-decoration: underline;
+}
+
+/* Modal close button: transparent button with a white "X" on the dark backdrop. */
+.slds-modal__close {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.slds-modal__close lightning-icon {
+  --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+.slds-modal__close .slds-icon,
+.slds-modal__close svg {
+  fill: #ffffff;
 }

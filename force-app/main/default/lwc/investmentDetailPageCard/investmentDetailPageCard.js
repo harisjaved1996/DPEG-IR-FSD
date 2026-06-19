@@ -19,7 +19,7 @@ export default class InvestmentDetailPageCard extends LightningElement {
     {
       key: "investorContacts",
       displayValue: "15",
-      label: "Total Investors",
+      label: "Total Ivesting Entities",
       iconName: "utility:contact",
       iconColor: "#5867e8"
     },

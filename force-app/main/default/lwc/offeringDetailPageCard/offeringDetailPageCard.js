@@ -17,13 +17,13 @@ export default class OfferingDetailPageCard extends LightningElement {
     {
       key: "investorContacts",
       displayValue: "15",
-      label: "Committed Investors",
+      label: "Committed",
       iconName: "standard:contact"
     },
     {
       key: "FundedInvestors",
       displayValue: "10",
-      label: "Funded Investors",
+      label: "Funded",
       iconName: "standard:contact"
     },
     {

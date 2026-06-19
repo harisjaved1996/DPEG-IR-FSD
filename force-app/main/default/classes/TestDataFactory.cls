@@ -527,7 +527,9 @@ public class TestDataFactory {
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * @description Builds a Share_Transfer__c record (Partial transfer, Pending status).
+     * @description Builds a Share_Transfer__c record. The Share Transfer custom fields were removed
+     *              from the object, so only the record identity (auto-number Name) is created; the
+     *              parameters are retained for signature compatibility.
      *              Does NOT insert — caller is responsible for DML.
      */
     public static Share_Transfer__c buildShareTransfer(
@@ -536,16 +538,7 @@ public class TestDataFactory {
         Decimal units,
         Decimal amount
     ) {
-        return new Share_Transfer__c(
-            Transferor_Investment__c = transferorInvestmentId,
-            Transferee_Account__c = transfereeAccountId,
-            Units_Transferred__c = units,
-            Transfer_Amount__c = amount,
-            Transfer_Date__c = Date.today(),
-            Status__c = 'Pending',
-            Approval_Status__c = 'Pending Review',
-            Transfer_Type__c = 'Partial'
-        );
+        return new Share_Transfer__c();
     }
 
     /**

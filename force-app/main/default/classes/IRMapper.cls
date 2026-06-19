@@ -314,7 +314,8 @@ public with sharing class IRMapper {
     // ─── Share transfers (Share Transfers) ───────────────────────────────
 
     /**
-     * @description Maps a single share-transfer record to a row.
+     * @description Maps a single share-transfer record to a row. The Share Transfer custom fields
+     *              were removed from the object, so only the record identity (Id, Name) is mapped.
      * @param t Share_Transfer__c record.
      * @return A TransferRowDTO, or null when input is null.
      */
@@ -325,17 +326,6 @@ public with sharing class IRMapper {
         IRDTO.TransferRowDTO row = new IRDTO.TransferRowDTO();
         row.recordId = t.Id;
         row.name = t.Name;
-        row.fromEntity = (t.Transferor_Investment__r != null &&
-            t.Transferor_Investment__r.Investing_Entity__r != null)
-            ? t.Transferor_Investment__r.Investing_Entity__r.Name
-            : null;
-        row.toEntity = (t.Transferee_Account__r != null) ? t.Transferee_Account__r.Name : null;
-        row.offeringName = t.Offering_Name__c;
-        row.units = t.Units_Transferred__c;
-        row.amount = t.Transfer_Amount__c;
-        row.status = t.Status__c;
-        row.approvalStatus = t.Approval_Status__c;
-        row.transferDate = t.Transfer_Date__c;
         return row;
     }
 
