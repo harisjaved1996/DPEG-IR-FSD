@@ -17,18 +17,8 @@
  * The wrapper clips the icon to a rounded rectangle and the slight scale pushes
  * the icon's own rounded corners outside the clip so they fill with the colour.
  */
-.stat-icon {
+.stat-icon-plain {
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.stat-icon-inner {
-  transform: scale(1.45);
 }
 
 .text-col {

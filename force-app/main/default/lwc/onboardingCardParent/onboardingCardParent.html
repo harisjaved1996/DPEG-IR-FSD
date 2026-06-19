@@ -1,13 +1,12 @@
 <template>
     <div class="oc-card">
         <div class="oc-title">
-            <span class="oc-icon">
-                <lightning-icon
-                    icon-name="standard:lead"
-                    size="small"
-                    class="oc-icon-inner">
-                </lightning-icon>
-            </span>
+            <lightning-icon
+                icon-name="utility:lead"
+                size="small"
+                class="oc-icon-plain"
+                style={headerIconStyle}>
+            </lightning-icon>
             <span class="slds-text-heading_medium oc-title-text">Onboarding Health</span>
         </div>
 
@@ -17,7 +16,8 @@
                     key={stat.key}
                     value={stat.value}
                     label={stat.label}
-                    icon-name={stat.iconName}>
+                    icon-name={stat.iconName}
+                    icon-color={stat.iconColor}>
                 </c-onboarding-card-child>
             </template>
         </div>

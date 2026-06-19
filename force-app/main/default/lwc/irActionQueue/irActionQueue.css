@@ -33,18 +33,8 @@
  * The wrapper clips the icon to a rounded rectangle and the slight scale pushes
  * the icon's own rounded corners outside the clip so they fill with the colour.
  */
-.aq-header-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  line-height: 0;
+.aq-header-icon-plain {
   flex-shrink: 0;
-}
-
-.aq-header-icon-inner {
-  transform: scale(1.45);
 }
 
 /* Match the statCard value typography (slds-text-heading_medium + bold + dark) */
@@ -77,18 +67,8 @@
 }
 
 /* Rectangular list-item icons */
-.aq-item-icon {
+.aq-item-icon-plain {
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.aq-item-icon-inner {
-  transform: scale(1.45);
 }
 
 .aq-item-title {

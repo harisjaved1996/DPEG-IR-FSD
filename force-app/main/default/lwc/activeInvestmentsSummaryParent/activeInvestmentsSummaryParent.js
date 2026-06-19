@@ -5,37 +5,43 @@ const STATS = [
     key: "activeInvestments",
     label: "Active Investments",
     value: "25",
-    iconName: "standard:investment_account"
+    iconName: "utility:account",
+    iconColor: "#5867e8"
   },
   {
     key: "activeTotalCommited",
     label: "Total Commited",
     value: "$13M",
-    iconName: "standard:currency"
+    iconName: "utility:contract",
+    iconColor: "#dd7a01"
   },
   {
     key: "activeTotalContributed",
     label: "Total Contributed",
     value: "$10M",
-    iconName: "standard:note"
+    iconName: "utility:trending",
+    iconColor: "#06a59a"
   },
   {
     key: "activeTotalDistribued",
     label: "Total Distributed",
     value: "$200K",
-    iconName: "standard:currency"
+    iconName: "utility:money",
+    iconColor: "#2e844a"
   },
   {
     key: "activeTotalInvestors",
     label: "Total Investors",
     value: "215",
-    iconName: "standard:partner_fund_allocation"
+    iconName: "utility:people",
+    iconColor: "#9050e9"
   },
   {
     key: "nearestProjectedExit",
     label: "Nearest Projected Exit",
     value: "Q1 2027",
-    iconName: "standard:event"
+    iconName: "utility:event",
+    iconColor: "#e8a33d"
   }
 ];
 

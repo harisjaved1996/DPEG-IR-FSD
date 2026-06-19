@@ -6,43 +6,50 @@ export default class InvestorDashboardCards extends LightningElement {
       key: "activeOfferings",
       displayValue: "5",
       label: "Active Offerings",
-      iconName: "standard:opportunity"
+      iconName: "utility:opportunity",
+      iconColor: "#e8a33d"
     },
     {
       key: "wiresToday",
       displayValue: "14",
       label: "Wires Today",
-      iconName: "standard:currency"
+      iconName: "utility:currency",
+      iconColor: "#2e844a"
     },
     {
       key: "investorContacts",
       displayValue: "7,724",
       label: "Investor Contacts",
-      iconName: "standard:contact"
+      iconName: "utility:contact",
+      iconColor: "#5867e8"
     },
     {
       key: "activeInvestments",
       displayValue: "99",
       label: "Active Investments",
-      iconName: "standard:investment_account"
+      iconName: "utility:account",
+      iconColor: "#06a59a"
     },
     {
       key: "committed",
       displayValue: "$901.6M",
       label: "Committed",
-      iconName: "standard:contract"
+      iconName: "utility:contract",
+      iconColor: "#dd7a01"
     },
     {
       key: "contributed",
       displayValue: "$963.3M",
       label: "Contributed",
-      iconName: "standard:metrics"
+      iconName: "utility:trending",
+      iconColor: "#9050e9"
     },
     {
       key: "distributed",
       displayValue: "$248.6M",
       label: "Distributed",
-      iconName: "standard:partner_fund_allocation"
+      iconName: "utility:money",
+      iconColor: "#c23934"
     }
   ];
 }

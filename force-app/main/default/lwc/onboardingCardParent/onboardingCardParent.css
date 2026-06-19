@@ -38,18 +38,8 @@
  * The wrapper clips the icon to a rounded rectangle and the slight scale pushes
  * the icon's own rounded corners outside the clip so they fill with the colour.
  */
-.oc-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  line-height: 0;
+.oc-icon-plain {
   flex-shrink: 0;
-}
-
-.oc-icon-inner {
-  transform: scale(1.45);
 }
 
 .cards-grid {

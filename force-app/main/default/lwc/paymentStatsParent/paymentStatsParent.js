@@ -5,13 +5,15 @@ const STATS = [
     key: "totalBalance",
     label: "Total Balance",
     value: "$93.2M",
-    iconName: "standard:currency"
+    iconName: "utility:currency",
+    iconColor: "#2e844a"
   },
   {
     key: "linkedAccounts",
     label: "Linked Accounts",
     value: "10",
-    iconName: "standard:account"
+    iconName: "utility:account",
+    iconColor: "#5867e8"
   }
 ];
 
