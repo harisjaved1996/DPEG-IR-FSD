@@ -15,4 +15,9 @@
         <field>Contact.Distribution__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Accredited__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
 </Profile>

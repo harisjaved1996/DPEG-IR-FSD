@@ -77,12 +77,17 @@
                     <fieldset class="slds-form-element slds-m-top_small">
                         <legend class="slds-form-element__label">Investing Entities</legend>
                         <div class="slds-m-bottom_x-small">
-                            <lightning-input
-                                type="checkbox"
+                            <lightning-button
                                 label="Select All"
-                                checked={allEntitiesSelected}
-                                onchange={handleSelectAllToggle}>
-                            </lightning-input>
+                                variant="neutral"
+                                class="slds-m-right_x-small"
+                                onclick={handleSelectAllEntities}>
+                            </lightning-button>
+                            <lightning-button
+                                label="Unselect All"
+                                variant="neutral"
+                                onclick={handleUnselectAllEntities}>
+                            </lightning-button>
                         </div>
                         <div class="slds-form-element__control">
                             <ul class="entity-list">

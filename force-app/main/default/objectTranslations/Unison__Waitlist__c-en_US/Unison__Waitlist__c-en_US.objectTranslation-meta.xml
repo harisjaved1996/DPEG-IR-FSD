@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label>Share Count</label>
+        <name>Unison__Position__c</name>
+    </fields>
+    <nameFieldLabel>Waitlist Number</nameFieldLabel>
+</CustomObjectTranslation>

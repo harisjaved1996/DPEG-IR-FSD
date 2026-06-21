@@ -72,7 +72,6 @@ export default class InvestmentDocuments extends LightningElement {
     name,
     selected: true
   }));
-  allEntitiesSelected = true;
 
   _nextId = 100;
 
@@ -97,7 +96,6 @@ export default class InvestmentDocuments extends LightningElement {
       ...entity,
       selected: true
     }));
-    this.allEntitiesSelected = true;
   }
 
   handleFileChange(event) {
@@ -128,14 +126,14 @@ export default class InvestmentDocuments extends LightningElement {
     this.entities = this.entities.map((entity) =>
       entity.id === entityId ? { ...entity, selected: checked } : entity
     );
-    // Keep the "Select All" checkbox in sync with the individual selections.
-    this.allEntitiesSelected = this.entities.every((entity) => entity.selected);
   }
 
-  handleSelectAllToggle(event) {
-    const checked = event.target.checked;
-    this.allEntitiesSelected = checked;
-    this.entities = this.entities.map((entity) => ({ ...entity, selected: checked }));
+  handleSelectAllEntities() {
+    this.entities = this.entities.map((entity) => ({ ...entity, selected: true }));
+  }
+
+  handleUnselectAllEntities() {
+    this.entities = this.entities.map((entity) => ({ ...entity, selected: false }));
   }
 
   handleSave() {

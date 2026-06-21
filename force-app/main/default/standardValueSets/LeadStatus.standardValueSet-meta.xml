@@ -20,12 +20,6 @@
         <converted>false</converted>
     </standardValue>
     <standardValue>
-        <fullName>Closed</fullName>
-        <default>false</default>
-        <label>Closed</label>
-        <converted>false</converted>
-    </standardValue>
-    <standardValue>
         <fullName>Converted</fullName>
         <default>false</default>
         <label>Converted</label>

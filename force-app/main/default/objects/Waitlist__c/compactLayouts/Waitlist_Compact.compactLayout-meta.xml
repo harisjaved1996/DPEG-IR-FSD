@@ -4,6 +4,5 @@
     <fields>Name</fields>
     <fields>Position__c</fields>
     <fields>Amount__c</fields>
-    <fields>Status__c</fields>
     <label>Waitlist Compact Layout</label>
 </CompactLayout>
