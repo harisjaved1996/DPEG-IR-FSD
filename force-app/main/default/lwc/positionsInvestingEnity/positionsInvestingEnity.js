@@ -1,9 +1,20 @@
 import { LightningElement } from "lwc";
 
-// Dummy Investment record URL used for the linked Investment column.
-const INVESTMENT_URL = "/lightning/r/Unison__Investment__c/a01FW000000DPEG359/view";
+// Dummy record URLs used for the linked columns.
+const INVESTMENT_URL = "/lightning/r/Unison__Investment__c/a08FW003rCMBVNoYQP/view";
+const POSITION_URL = "/lightning/r/Unison__Position__c/a0MFW000BzmP2ua2IC/view";
 
 const COLUMNS = [
+  {
+    label: "Position Number",
+    fieldName: "positionUrl",
+    type: "url",
+    typeAttributes: {
+      label: { fieldName: "positionNumber" },
+      target: "_self"
+    },
+    cellAttributes: { alignment: "left" }
+  },
   {
     label: "Investment",
     fieldName: "investmentUrl",
@@ -11,18 +22,41 @@ const COLUMNS = [
     typeAttributes: {
       label: { fieldName: "investment" },
       target: "_self"
-    }
+    },
+    cellAttributes: { alignment: "left" }
   },
-  { label: "Ownership", fieldName: "ownership", type: "text" },
-  { label: "Committed", fieldName: "committed", type: "text" },
-  { label: "Contributed", fieldName: "contributed", type: "text" },
-  { label: "Distributed", fieldName: "distributed", type: "text" }
+  {
+    label: "Ownership",
+    fieldName: "ownership",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  },
+  {
+    label: "Committed",
+    fieldName: "committed",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  },
+  {
+    label: "Contributed",
+    fieldName: "contributed",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  },
+  {
+    label: "Distributed",
+    fieldName: "distributed",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  }
 ];
 
 // Dummy data modelled on the Positions screenshot.
 const DATA = [
   {
     id: "1",
+    positionNumber: "POS - 001",
+    positionUrl: POSITION_URL,
     investment: "DPEG 359, LLC",
     investmentUrl: INVESTMENT_URL,
     ownership: "2.5000%",
@@ -32,6 +66,8 @@ const DATA = [
   },
   {
     id: "2",
+    positionNumber: "POS - 002",
+    positionUrl: POSITION_URL,
     investment: "DPEG 412, LLC",
     investmentUrl: INVESTMENT_URL,
     ownership: "1.2500%",
@@ -41,6 +77,8 @@ const DATA = [
   },
   {
     id: "3",
+    positionNumber: "POS - 003",
+    positionUrl: POSITION_URL,
     investment: "DPEG 287, LLC",
     investmentUrl: INVESTMENT_URL,
     ownership: "3.0000%",

@@ -1,10 +1,22 @@
 import { LightningElement } from "lwc";
 
+// Dummy Contact record URL used for the linked Name column.
+const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
+
 const COLUMNS = [
-  { label: "Name", fieldName: "name", type: "text" },
-  { label: "Email", fieldName: "email", type: "email" },
-  { label: "Phone", fieldName: "phone", type: "phone" },
-  { label: "Primary", fieldName: "primary", type: "text" }
+  {
+    label: "Name",
+    fieldName: "nameUrl",
+    type: "url",
+    typeAttributes: {
+      label: { fieldName: "name" },
+      target: "_self"
+    },
+    cellAttributes: { alignment: "left" }
+  },
+  { label: "Email", fieldName: "email", type: "text", cellAttributes: { alignment: "left" } },
+  { label: "Phone", fieldName: "phone", type: "text", cellAttributes: { alignment: "left" } },
+  { label: "Primary", fieldName: "primary", type: "text", cellAttributes: { alignment: "left" } }
 ];
 
 // Dummy data modelled on the Associated Contacts screenshot.
@@ -12,6 +24,7 @@ const DATA = [
   {
     id: "1",
     name: "Taj Merchant",
+    nameUrl: CONTACT_URL,
     email: "merchanttaj@yahoo.com",
     phone: "(832) 875-1702",
     primary: "Yes"
@@ -19,6 +32,7 @@ const DATA = [
   {
     id: "2",
     name: "A. Greentree",
+    nameUrl: CONTACT_URL,
     email: "a.greentree@greentreellc.com",
     phone: "(713) 555-0148",
     primary: "No"
@@ -26,6 +40,7 @@ const DATA = [
   {
     id: "3",
     name: "Sarah Lin",
+    nameUrl: CONTACT_URL,
     email: "sarah.lin@greentreellc.com",
     phone: "(281) 555-0092",
     primary: "No"
