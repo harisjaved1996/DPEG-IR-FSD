@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Contact.Investing_Entity__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Contribution__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Distribution__c</field>
+    </columns>
+    <description>Top investors by contribution — feeds the Top 5 Investors table on the Investor Dashboard.</description>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Contribution__c</column>
+            <operator>greaterThan</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Top 5 Investors</name>
+    <reportType>ContactList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Contact.Contribution__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+</Report>

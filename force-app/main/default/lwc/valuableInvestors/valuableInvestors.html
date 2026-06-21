@@ -1,0 +1,20 @@
+<template>
+    <div class="ti-card">
+        <div class="ti-title">
+            <lightning-icon
+                icon-name="utility:people"
+                size="small"
+                class="ti-icon-plain"
+                style={headerIconStyle}>
+            </lightning-icon>
+            <span class="slds-text-heading_medium ti-title-text">Top 5 Investors</span>
+        </div>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+    </div>
+</template>

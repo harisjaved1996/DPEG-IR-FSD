@@ -15,6 +15,10 @@ function pillStyle(value) {
     : PILL_BASE + "background:#ecebea;color:#5c5c5c;";
 }
 
+// Demo links — every row points to one Contact / Investing Entity record.
+const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
+const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+
 const COLUMNS = [
   {
     label: "Contact",
@@ -22,9 +26,14 @@ const COLUMNS = [
     type: "url",
     typeAttributes: { label: { fieldName: "contact" }, target: "_self" }
   },
+  {
+    label: "Investing Entity",
+    fieldName: "investingEntityUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "investingEntity" }, target: "_self" }
+  },
   { label: "Commitment Date", fieldName: "commitmentDate", type: "text" },
   { label: "Committed Amount", fieldName: "committedAmount", type: "text" },
-  { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
   {
     label: "PPM Sent",
     fieldName: "ppmSent",
@@ -50,8 +59,9 @@ const DATA = [
     commitmentDate: "05/11/2025",
     committedAmount: "$200,000.00",
     contact: "A. Greentree",
-    contactUrl: "#",
+    contactUrl: CONTACT_URL,
     investingEntity: "18825 Sea, LLC",
+    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "Yes",
     ppmSigned: "Yes"
   },
@@ -62,8 +72,9 @@ const DATA = [
     commitmentDate: "12/11/2025",
     committedAmount: "$100,000.00",
     contact: "R. Thompson",
-    contactUrl: "#",
+    contactUrl: CONTACT_URL,
     investingEntity: "1988 Venture LLC",
+    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "Yes",
     ppmSigned: "No"
   },
@@ -74,11 +85,19 @@ const DATA = [
     commitmentDate: "28/10/2025",
     committedAmount: "$500,000.00",
     contact: "P. Sharma",
-    contactUrl: "#",
+    contactUrl: CONTACT_URL,
     investingEntity: "24 Seven REH, LLC",
+    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "No",
     ppmSigned: "No"
   }
+];
+
+const MEMBERSHIP_OPTIONS = [
+  { label: "General Partner", value: "General Partner" },
+  { label: "Limited Partner", value: "Limited Partner" },
+  { label: "Member", value: "Member" },
+  { label: "Manager", value: "Manager" }
 ];
 
 export default class CommitmentsOfferingCom extends LightningElement {
@@ -90,12 +109,60 @@ export default class CommitmentsOfferingCom extends LightningElement {
     ppmSignedStyle: pillStyle(row.ppmSigned)
   }));
 
+  membershipOptions = MEMBERSHIP_OPTIONS;
+
+  // Add Prospect modal state
+  showModal = false;
+  prospectContact = null;
+  prospectEntity = null;
+  committedAmount = null;
+  commitmentDate = null;
+  membership = null;
+
   get recordCount() {
     return this.data.length;
   }
 
   handleNew() {
-    // Placeholder for the New action.
+    this.resetForm();
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  handleContactChange(event) {
+    this.prospectContact = event.detail.recordId;
+  }
+
+  handleEntityChange(event) {
+    this.prospectEntity = event.detail.recordId;
+  }
+
+  handleAmountChange(event) {
+    this.committedAmount = event.detail.value;
+  }
+
+  handleDateChange(event) {
+    this.commitmentDate = event.detail.value;
+  }
+
+  handleMembershipChange(event) {
+    this.membership = event.detail.value;
+  }
+
+  handleSave() {
+    // Placeholder: persist the new prospect here.
+    this.closeModal();
+  }
+
+  resetForm() {
+    this.prospectContact = null;
+    this.prospectEntity = null;
+    this.committedAmount = null;
+    this.commitmentDate = null;
+    this.membership = null;
   }
 
   handleViewAll(event) {

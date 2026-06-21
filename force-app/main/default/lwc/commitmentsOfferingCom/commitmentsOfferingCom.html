@@ -21,4 +21,86 @@
             <a href="#" onclick={handleViewAll}>View All</a>
         </div>
     </lightning-card>
+
+    <!-- Add Prospect modal -->
+    <template lwc:if={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="prospect-modal-heading"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text="Close"
+                            variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="prospect-modal-heading" class="slds-modal__title slds-hyphenate">Add Prospect</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-record-picker
+                                label="Contact"
+                                placeholder="Search Contacts..."
+                                object-api-name="Contact"
+                                value={prospectContact}
+                                onchange={handleContactChange}>
+                            </lightning-record-picker>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-record-picker
+                                label="Investing Entity"
+                                placeholder="Search Investing Entities..."
+                                object-api-name="Unison__Investing_Entity__c"
+                                value={prospectEntity}
+                                onchange={handleEntityChange}>
+                            </lightning-record-picker>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-input
+                                type="number"
+                                formatter="currency"
+                                label="Committed Amount"
+                                value={committedAmount}
+                                onchange={handleAmountChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-input
+                                type="date"
+                                label="Commitment Date"
+                                value={commitmentDate}
+                                onchange={handleDateChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 field">
+                            <lightning-combobox
+                                label="Membership"
+                                placeholder="Select Membership"
+                                options={membershipOptions}
+                                value={membership}
+                                onchange={handleMembershipChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button
+                        class="slds-m-left_x-small"
+                        label="Save"
+                        variant="brand"
+                        onclick={handleSave}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>

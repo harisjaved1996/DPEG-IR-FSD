@@ -11,13 +11,19 @@ export default class OfferingDetailPageCard extends LightningElement {
     {
       key: "CommittedCapital",
       displayValue: "$8.6M",
-      label: "Committed Capital",
+      label: "Commitments",
       iconName: "standard:currency"
+    },
+    {
+      key: "contributed",
+      displayValue: "$1.3M",
+      label: "Contributions",
+      iconName: "standard:contract"
     },
     {
       key: "investorContacts",
       displayValue: "15",
-      label: "Committed",
+      label: "Committed Investors",
       iconName: "standard:contact"
     },
     {
@@ -25,12 +31,6 @@ export default class OfferingDetailPageCard extends LightningElement {
       displayValue: "10",
       label: "Funded",
       iconName: "standard:contact"
-    },
-    {
-      key: "contributed",
-      displayValue: "$1.3M",
-      label: "Total Contributed",
-      iconName: "standard:contract"
     },
     {
       key: "closing",

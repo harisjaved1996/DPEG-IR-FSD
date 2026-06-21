@@ -11,3 +11,19 @@
 .view-all-footer a:hover {
   text-decoration: underline;
 }
+
+/* Modal close button: transparent button with a white "X" on the dark backdrop. */
+.slds-modal__close {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.slds-modal__close lightning-icon {
+  --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+.slds-modal__close .slds-icon,
+.slds-modal__close svg {
+  fill: #ffffff;
+}
