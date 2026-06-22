@@ -521,8 +521,32 @@
                 <identifier>flexipage_tab6</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-ppmv2-sender01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>PPM V2</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_ppmv2</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>maintabs</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>ppmV2Sender</componentName>
+                <identifier>Unison_ppmV2Sender</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ppmv2-sender01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>

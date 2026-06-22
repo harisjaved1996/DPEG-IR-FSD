@@ -1,0 +1,21 @@
+<template>
+    <lightning-card icon-name="standard:contract" title="PPM V2 — Send for E-Signature">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <p class="slds-text-body_regular slds-m-bottom_small">
+                Send this Offering's PPM for electronic signature using DocuSign. The flow is:
+            </p>
+            <ul class="slds-list_ordered slds-m-bottom_medium ppm-steps">
+                <li>Upload the document from your computer</li>
+                <li>Add the signature placeholder</li>
+                <li>Add the fields on the document</li>
+                <li>Select the recipients</li>
+                <li>Send for e-signature</li>
+            </ul>
+            <div class="slds-box slds-theme_shade slds-text-body_small">
+                <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                Launch this from the <strong>Send with DocuSign</strong> button enabled through
+                DocuSign eSignature Setup. DocuSign's sender can't be embedded directly in this tab.
+            </div>
+        </div>
+    </lightning-card>
+</template>
