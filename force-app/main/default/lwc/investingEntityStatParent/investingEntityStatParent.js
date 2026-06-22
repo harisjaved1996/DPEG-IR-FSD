@@ -5,19 +5,22 @@ import { LightningElement } from "lwc";
 const STATS = [
   {
     id: "contribution",
-    iconName: "standard:currency",
+    iconName: "utility:currency",
+    iconColor: "#2e844a",
     label: "Total Contribution",
     value: "$10M"
   },
   {
     id: "distribution",
-    iconName: "standard:partner_fund_allocation",
+    iconName: "utility:money",
+    iconColor: "#5867e8",
     label: "Total Distribution",
     value: "$70K"
   },
   {
     id: "contacts",
-    iconName: "standard:contact",
+    iconName: "utility:contact",
+    iconColor: "#e8a33d",
     label: "Associated Contacts",
     value: "3"
   }

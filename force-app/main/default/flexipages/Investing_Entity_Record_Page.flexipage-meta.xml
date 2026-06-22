@@ -58,16 +58,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Country__c</fieldItem>
-                <identifier>RecordUnison_Country_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.OwnerId</fieldItem>
                 <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
@@ -84,6 +74,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Entity_Type__c</fieldItem>
                 <identifier>RecordUnison_Entity_Type_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Country__c</fieldItem>
+                <identifier>RecordUnison_Country_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-cc8a4205-4fa6-4f14-afae-744815456a18</name>

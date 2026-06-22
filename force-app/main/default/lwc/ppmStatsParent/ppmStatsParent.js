@@ -5,19 +5,22 @@ const STATS = [
     key: "ppmsSent",
     label: "PPMs Sent",
     value: "24",
-    iconName: "standard:email"
+    iconName: "utility:email",
+    iconColor: "#2e844a"
   },
   {
     key: "ppmsSigned",
     label: "PPMs Signed",
     value: "18",
-    iconName: "standard:contract"
+    iconName: "utility:contract",
+    iconColor: "#5867e8"
   },
   {
     key: "unsignedPPMs",
     label: "Unsigned PPMs",
     value: "6",
-    iconName: "standard:approval"
+    iconName: "utility:approval",
+    iconColor: "#dd7a01"
   }
 ];
 

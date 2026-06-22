@@ -6,37 +6,43 @@ export default class OfferingDetailPageCard extends LightningElement {
       key: "targetRaise",
       displayValue: "$12M",
       label: "Target Raise",
-      iconName: "standard:opportunity"
+      iconName: "utility:opportunity",
+      iconColor: "#e8a33d"
     },
     {
       key: "CommittedCapital",
       displayValue: "$8.6M",
       label: "Commitments",
-      iconName: "standard:currency"
+      iconName: "utility:currency",
+      iconColor: "#2e844a"
     },
     {
       key: "contributed",
       displayValue: "$1.3M",
       label: "Contributions",
-      iconName: "standard:contract"
+      iconName: "utility:contract",
+      iconColor: "#06a59a"
     },
     {
       key: "investorContacts",
       displayValue: "15",
       label: "Committed Investors",
-      iconName: "standard:contact"
+      iconName: "utility:contact",
+      iconColor: "#5867e8"
     },
     {
       key: "FundedInvestors",
       displayValue: "10",
       label: "Funded",
-      iconName: "standard:contact"
+      iconName: "utility:check",
+      iconColor: "#dd7a01"
     },
     {
       key: "closing",
       displayValue: " 10 July 2026",
       label: "Closing Date",
-      iconName: "standard:contract"
+      iconName: "utility:event",
+      iconColor: "#9050e9"
     }
   ];
 }
