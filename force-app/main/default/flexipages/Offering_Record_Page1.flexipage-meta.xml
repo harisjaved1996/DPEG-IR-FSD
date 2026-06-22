@@ -375,6 +375,16 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>offeringLaunchingActivities</componentName>
+                <identifier>Unison_offeringLaunchingActivities</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-launching-activities01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Offering__c.Id</value>
@@ -449,6 +459,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>detailTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-launching-activities01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Launching Activities</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>LaunchingActivitiesTab</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -581,6 +605,16 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>wireMatchingInsights</componentName>
+                <identifier>Unison_wireMatchingInsights</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wire-matching01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
                     <value>true</value>
@@ -595,6 +629,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wire-matching01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Wire Matching Insights</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wirematching</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-68dcfb11-705c-4a99-b1dc-cdf4a8860501</name>
