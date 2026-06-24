@@ -185,6 +185,21 @@
   margin: 0;
 }
 
+/* ---- View All footer link ------------------------------------------------- */
+.view-all-footer {
+  text-align: center;
+}
+
+.view-all-footer a {
+  color: var(--slds-g-color-brand-base-50, #0176d3);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.view-all-footer a:hover {
+  text-decoration: underline;
+}
+
 /* ---- Responsive ----------------------------------------------------------- */
 @media (max-width: 768px) {
   .wm-tabs {

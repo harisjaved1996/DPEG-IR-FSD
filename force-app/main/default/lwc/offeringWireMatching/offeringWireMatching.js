@@ -1,4 +1,5 @@
 import { LightningElement, api } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 /**
  * offeringWireMatching
@@ -91,6 +92,13 @@ const CURRENCY = new Intl.NumberFormat("en-US", {
   currency: "USD"
 });
 
+// Each Wire Number links to its Wire record page. In real data every row would
+// carry its own record URL; the demo rows share one sample Wire record.
+const WIRE_RECORD_URL = "/lightning/r/Unison__Wire__c/a0IFW0003rNQMzk2AH/view";
+
+// Wire numbers run WR-0088 onward, assigned by record position.
+const WIRE_NUMBER_START = 88;
+
 // Shared pill aesthetic — same base used by commitmentsOfferingCom (Prospects).
 const PILL_BASE =
   "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:0.25rem;font-size:0.75rem;font-weight:600;";
@@ -105,6 +113,13 @@ const PILL_TIERS = {
 // Columns rendered by the shared c-offering-datatable. The `pill` type and the
 // per-row `pillStyle` type-attribute mirror the Prospects table exactly.
 const COLUMNS = [
+  {
+    label: "Wire Number",
+    fieldName: "wireUrl",
+    type: "url",
+    typeAttributes: { label: { fieldName: "wireNumber" }, target: "_self" },
+    cellAttributes: { alignment: "left" }
+  },
   {
     label: "Sender",
     fieldName: "sender",
@@ -140,7 +155,7 @@ const TABS = [
   { key: "mismatch", label: "Mismatch", icon: "utility:warning", accent: "#ba0517" }
 ];
 
-export default class OfferingWireMatching extends LightningElement {
+export default class OfferingWireMatching extends NavigationMixin(LightningElement) {
   // FlexiPage provides recordId; unused here — the component is fully self-contained.
   @api recordId;
 
@@ -152,7 +167,11 @@ export default class OfferingWireMatching extends LightningElement {
 
   // --- Derived source lists (deep-cloned per instance) -----------------------
   get _records() {
-    return SEED.map((r) => ({ ...r }));
+    return SEED.map((r, index) => ({
+      ...r,
+      wireNumber: `WR-${String(WIRE_NUMBER_START + index).padStart(4, "0")}`,
+      wireUrl: WIRE_RECORD_URL
+    }));
   }
 
   get _autoMatched() {
@@ -217,6 +236,8 @@ export default class OfferingWireMatching extends LightningElement {
       const tier = this._tier(r.confidence);
       return {
         id: r.id,
+        wireNumber: r.wireNumber,
+        wireUrl: r.wireUrl,
         sender: r.sender,
         amount: CURRENCY.format(r.amount),
         memo: r.memo,
@@ -283,5 +304,20 @@ export default class OfferingWireMatching extends LightningElement {
       event.preventDefault();
       this.handleTabSelect(event);
     }
+  }
+
+  // Navigate to the Wire object list page, showing the "All" list view.
+  handleViewAll(event) {
+    event.preventDefault();
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Wire__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 }
