@@ -1,0 +1,15 @@
+<template>
+    <lightning-card>
+        <lightning-datatable
+            key-field="id"
+            data={rows}
+            columns={columns}
+            hide-checkbox-column
+            column-widths-mode="auto">
+        </lightning-datatable>
+
+        <div slot="footer" class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+</template>
