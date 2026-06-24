@@ -1,43 +1,193 @@
 :host {
   display: block;
+  font-family: "Salesforce Sans", Arial, sans-serif;
+  color: #080707;
 }
 
-.ir-wire-matching__total {
-  font-weight: 600;
-  color: var(--dpeg-navy, #032d60);
-}
-
-.ir-wire-matching__list {
+.wm {
   display: flex;
   flex-direction: column;
-  gap: var(--slds-g-spacing-2, 0.5rem);
+  gap: 12px;
+  max-width: 100%;
 }
 
-.ir-wire-matching__row {
-  display: flex;
-  flex-direction: column;
-  gap: var(--slds-g-spacing-1, 0.25rem);
-  padding-bottom: var(--slds-g-spacing-2, 0.5rem);
-  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+/* ---- Sub-tab chip row ----------------------------------------------------- */
+.wm-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.ir-wire-matching__row-main,
-.ir-wire-matching__row-meta {
-  display: flex;
-  justify-content: space-between;
+.wm-tab {
+  display: inline-flex;
   align-items: center;
-  gap: var(--slds-g-spacing-2, 0.5rem);
-}
-
-.ir-wire-matching__sender {
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px 12px;
+  background: #fff;
+  border: 1px solid #e5e9ef;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--dpeg-navy, #032d60);
+  color: #16325c;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    border-color 0.14s ease,
+    background 0.14s ease;
 }
 
-.ir-wire-matching__amount {
-  font-weight: 600;
+.wm-tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(16, 24, 40, 0.1);
+  border-color: #c9def5;
 }
 
-.ir-wire-matching__memo {
+.wm-tab:focus-visible {
+  outline: 2px solid #0176d3;
+  outline-offset: 2px;
+}
+
+.wm-tab--active {
+  border-color: var(--wm-accent, #0176d3);
+  background: #f5faff;
+  color: var(--wm-accent, #0176d3);
+  box-shadow: 0 5px 14px rgba(1, 118, 211, 0.15);
+}
+
+.wm-tab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wm-tab-count {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #eef3f9;
+  color: #514f4d;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.wm-tab--active .wm-tab-count {
+  background: var(--wm-accent, #0176d3);
+  color: #fff;
+}
+
+/* ---- Table title (icon + text) and spacing from the tab chips ------------- */
+.wm-table {
+  display: block;
+  margin-top: 8px;
+}
+
+.wm-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---- Per-tab summary header ---------------------------------------------- */
+.wm-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e9ef;
+  border-left: 4px solid var(--wm-accent, #0176d3);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  padding: 12px 16px;
+}
+
+.wm-summary-icon {
+  flex: 0 0 auto;
+  --slds-c-icon-color-foreground-default: var(--wm-accent, #0176d3);
+  --sds-c-icon-color-foreground-default: var(--wm-accent, #0176d3);
+}
+
+.wm-summary-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
   min-width: 0;
+}
+
+.wm-summary-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #16325c;
+}
+
+.wm-summary-sub {
+  font-size: 12px;
+  color: #706e6b;
+  font-variant-numeric: tabular-nums;
+}
+
+.wm-summary-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.wm-summary-total-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #969492;
+}
+
+.wm-summary-total-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #16325c;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Empty state ---------------------------------------------------------- */
+.wm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #dddbda;
+  border-radius: 10px;
+}
+
+.wm-empty-icon {
+  --slds-c-icon-color-foreground-default: #b0adab;
+  --sds-c-icon-color-foreground-default: #b0adab;
+}
+
+.wm-empty-text {
+  color: #969492;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ---- Responsive ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  .wm-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

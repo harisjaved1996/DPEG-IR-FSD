@@ -1,68 +1,48 @@
 <template>
-    <div class="ir-wire-matching">
-        <template lwc:if={isLoading}>
-            <div class="slds-is-relative slds-p-around_large">
-                <lightning-spinner alternative-text="Loading wire matching" size="medium"></lightning-spinner>
-            </div>
-        </template>
+    <div class="wm">
+        <!-- Sub-tab chip row (custom, matches the page's pill design language) -->
+        <div class="wm-tabs" role="tablist" aria-label="Wire matching categories">
+            <template for:each={tabs} for:item="t">
+                <button
+                    key={t.key}
+                    type="button"
+                    role="tab"
+                    class={t.chipClass}
+                    style={t.accentStyle}
+                    data-key={t.key}
+                    aria-selected={t.isActive}
+                    onclick={handleTabSelect}
+                    onkeydown={handleTabKey}
+                >
+                    <span class="wm-tab-label">{t.label}</span>
+                    <span class="wm-tab-count">{t.count}</span>
+                </button>
+            </template>
+        </div>
 
-        <template lwc:if={showContent}>
-            <lightning-layout multiple-rows="true" pull-to-boundary="small">
-                <template for:each={buckets} for:item="bucket">
-                    <lightning-layout-item
-                        key={bucket.key}
-                        size="12"
-                        medium-device-size="4"
-                        padding="around-small"
-                    >
-                        <c-section-card title={bucket.bucket} icon-name={bucket.icon}>
-                            <span slot="actions" class="slds-grid slds-grid_vertical-align-center slds-gutters_x-small">
-                                <span class="slds-col slds-text-body_small slds-text-color_weak ir-wire-matching__total">
-                                    {bucket.totalDisplay}
-                                </span>
-                                <span class="slds-col">
-                                    <c-confidence-badge bucket={bucket.bucket}></c-confidence-badge>
-                                </span>
-                            </span>
+        <!-- Wire list — shared custom datatable inside a lightning-card (matches Prospects) -->
+        <lightning-card class="wm-table">
+            <span slot="title" class="wm-card-title">
+                <lightning-icon icon-name="standard:currency" size="small"></lightning-icon>
+                <span class="wm-card-title-text">Wire Matching · {summaryTitle} ({summaryCount})</span>
+            </span>
 
-                            <template lwc:if={bucket.hasWires}>
-                                <ul class="ir-wire-matching__list">
-                                    <template for:each={bucket.wires} for:item="wire">
-                                        <li key={wire.recordId} class="ir-wire-matching__row">
-                                            <div class="ir-wire-matching__row-main">
-                                                <span class="ir-wire-matching__sender">{wire.sender}</span>
-                                                <span class="ir-wire-matching__amount">{wire.amountDisplay}</span>
-                                            </div>
-                                            <div class="ir-wire-matching__row-meta">
-                                                <span class="slds-text-body_small slds-text-color_weak slds-truncate ir-wire-matching__memo">
-                                                    {wire.memo}
-                                                </span>
-                                                <c-confidence-badge
-                                                    bucket={wire.bucket}
-                                                    confidence={wire.confidence}
-                                                ></c-confidence-badge>
-                                            </div>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </template>
-                            <template lwc:else>
-                                <p class="slds-text-body_small slds-text-color_weak slds-p-vertical_small">
-                                    No wires in this bucket.
-                                </p>
-                            </template>
-                        </c-section-card>
-                    </lightning-layout-item>
-                </template>
-            </lightning-layout>
-        </template>
+            <template lwc:if={hasRows}>
+                <c-offering-datatable
+                    key-field="id"
+                    data={rows}
+                    columns={columns}
+                    hide-checkbox-column>
+                </c-offering-datatable>
+            </template>
 
-        <template lwc:if={hasError}>
-            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
-                <p class="slds-text-body_regular">
-                    Unable to load wire matching. Please refresh or contact your administrator.
-                </p>
-            </div>
-        </template>
+            <!-- Empty state (all tabs have rows, but kept for safety) -->
+            <template lwc:else>
+                <div class="wm-empty">
+                    <lightning-icon icon-name="utility:moneybag" size="small" class="wm-empty-icon"></lightning-icon>
+                    <p class="wm-empty-text">No wire transfers in this category.</p>
+                </div>
+            </template>
+        </lightning-card>
     </div>
 </template>

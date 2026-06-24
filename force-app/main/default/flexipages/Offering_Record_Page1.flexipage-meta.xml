@@ -493,6 +493,20 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
+                    <value>Facet-wire-matching-tab01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Wire Matching</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>WireMatchingTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
                     <value>Facet-08cc2a34-8dd1-417f-9213-331c1094a163</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -571,6 +585,16 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-ppmv2-sender01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireMatching</componentName>
+                <identifier>Unison_offeringWireMatching</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wire-matching-tab01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>

@@ -6,6 +6,7 @@ import { LightningElement } from "lwc";
 const RAW = [
   {
     key: "totalSettled",
+    matchLabel: "All",
     value: "56",
     label: "Total Settled",
     iconName: "utility:summary",
