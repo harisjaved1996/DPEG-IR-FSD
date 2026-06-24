@@ -1,22 +1,19 @@
 import { LightningElement } from "lwc";
 
-const CURRENCY_ATTR = { currencyCode: "USD", minimumFractionDigits: 0 };
+// Format as USD with no decimals, e.g. $8,200,000. Rendered as text so both
+// the column headers and the values stay left-aligned (currency/number type
+// right-aligns both, which can't be overridden cleanly for headers).
+const CURRENCY_FMT = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0
+});
 
 const COLUMNS = [
   { label: "Name", fieldName: "name", type: "text" },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
-  {
-    label: "Contribution",
-    fieldName: "contribution",
-    type: "currency",
-    typeAttributes: CURRENCY_ATTR
-  },
-  {
-    label: "Distribution",
-    fieldName: "distribution",
-    type: "currency",
-    typeAttributes: CURRENCY_ATTR
-  }
+  { label: "Contribution", fieldName: "contribution", type: "text" },
+  { label: "Distribution", fieldName: "distribution", type: "text" }
 ];
 
 // Demo data — contribution $5M-$9M, distribution $1M-$4M.
@@ -60,7 +57,14 @@ const DATA = [
 
 export default class ValuableInvestors extends LightningElement {
   columns = COLUMNS;
-  data = DATA;
   headerIconStyle =
     "--slds-c-icon-color-foreground-default: #5867e8; --sds-c-icon-color-foreground-default: #5867e8;";
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      contribution: CURRENCY_FMT.format(row.contribution),
+      distribution: CURRENCY_FMT.format(row.distribution)
+    }));
+  }
 }

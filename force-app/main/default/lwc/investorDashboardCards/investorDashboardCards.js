@@ -19,7 +19,7 @@ export default class InvestorDashboardCards extends LightningElement {
     {
       key: "investorContacts",
       displayValue: "7,724",
-      label: "Investor Contacts",
+      label: "Investor",
       iconName: "utility:contact",
       iconColor: "#5867e8"
     },
