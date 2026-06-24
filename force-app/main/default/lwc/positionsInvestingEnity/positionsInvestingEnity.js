@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 // Dummy record URLs used for the linked columns.
 const INVESTMENT_URL = "/lightning/r/Unison__Investment__c/a08FW003rCMBVNoYQP/view";
@@ -88,7 +89,7 @@ const DATA = [
   }
 ];
 
-export default class PositionsInvestingEnity extends LightningElement {
+export default class PositionsInvestingEnity extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
 
@@ -98,6 +99,16 @@ export default class PositionsInvestingEnity extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Position object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Position__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 }

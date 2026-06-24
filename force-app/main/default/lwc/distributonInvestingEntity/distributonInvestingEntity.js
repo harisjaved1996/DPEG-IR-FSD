@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
@@ -69,7 +70,7 @@ const DATA = [
   }
 ];
 
-export default class DistributonInvestingEntity extends LightningElement {
+export default class DistributonInvestingEntity extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
   showModal = false;
@@ -100,6 +101,16 @@ export default class DistributonInvestingEntity extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Distribution object list page, showing the "All distributions" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Distribution__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All_distributions"
+      }
+    });
   }
 }

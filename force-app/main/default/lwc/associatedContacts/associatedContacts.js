@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 // Dummy Contact record URL used for the linked Name column.
 const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
@@ -47,7 +48,7 @@ const DATA = [
   }
 ];
 
-export default class AssociatedContacts extends LightningElement {
+export default class AssociatedContacts extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
 
@@ -61,6 +62,16 @@ export default class AssociatedContacts extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Contact object list page, showing the "All Contacts" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Contact",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__AllContacts"
+      }
+    });
   }
 }
