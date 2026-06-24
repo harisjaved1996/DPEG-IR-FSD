@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 // Same status value always maps to the same pill colour.
 const STATUS_VARIANT = {
@@ -99,7 +100,7 @@ const COLUMNS = [
   { label: "Date", fieldName: "date", type: "text" }
 ];
 
-export default class OnboardingContactsList extends LightningElement {
+export default class OnboardingContactsList extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   contacts = CONTACTS;
 
@@ -120,6 +121,16 @@ export default class OnboardingContactsList extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Lead object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Lead",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 }

@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const DEFAULT_ROWS = 5;
 
@@ -288,7 +289,7 @@ const ACTIVE_DATA = [
   }
 ];
 
-export default class ActiveInvestmentListingChild extends LightningElement {
+export default class ActiveInvestmentListingChild extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
   get rows() {
@@ -306,6 +307,16 @@ export default class ActiveInvestmentListingChild extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Investment object list page, showing the "All Investments" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Investment__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All_Investments"
+      }
+    });
   }
 }

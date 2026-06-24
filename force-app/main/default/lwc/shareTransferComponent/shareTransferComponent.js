@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const PILL_BASE =
   "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:0.25rem;font-size:0.75rem;font-weight:600;";
@@ -75,7 +76,7 @@ const TRANSFER_TYPE_OPTIONS = [
 // Each share is valued at $50,000; Sale Price = Shares To Transfer * this rate.
 const PRICE_PER_SHARE = 50000;
 
-export default class ShareTransferComponent extends LightningElement {
+export default class ShareTransferComponent extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
   rows = TRANSFERS.map((row) => ({
@@ -102,7 +103,17 @@ export default class ShareTransferComponent extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Share Transfer object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Share_Transfer__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 
   handleNew() {

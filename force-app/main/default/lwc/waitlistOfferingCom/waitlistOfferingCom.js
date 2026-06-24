@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
@@ -79,7 +80,7 @@ const DATA = [
   }
 ];
 
-export default class WaitlistOfferingCom extends LightningElement {
+export default class WaitlistOfferingCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
 
@@ -93,7 +94,17 @@ export default class WaitlistOfferingCom extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Waitlist object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Waitlist__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 
   handleRowAction(event) {

@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const COLUMNS = [
   {
@@ -83,7 +84,7 @@ const DATA = [
   }
 ];
 
-export default class PositionInvestments extends LightningElement {
+export default class PositionInvestments extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
   sortedBy = "entityUrl";
@@ -119,6 +120,16 @@ export default class PositionInvestments extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Position object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Position__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 }

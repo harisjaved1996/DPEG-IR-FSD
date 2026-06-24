@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 // Same type value always maps to the same pill colour.
 const TYPE_VARIANT = {
@@ -33,7 +34,7 @@ const COLUMNS = [
   { label: "Investment Period", fieldName: "holdPeriod", type: "text" }
 ];
 
-export default class IrInvestmentsList extends LightningElement {
+export default class IrInvestmentsList extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
   investments = [
@@ -103,6 +104,16 @@ export default class IrInvestmentsList extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Investment object list page, showing the "All Investments" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Investment__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All_Investments"
+      }
+    });
   }
 }

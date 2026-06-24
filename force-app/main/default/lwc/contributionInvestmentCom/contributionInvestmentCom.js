@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
@@ -65,7 +66,7 @@ const DATA = [
   }
 ];
 
-export default class ContributionInvestmentCom extends LightningElement {
+export default class ContributionInvestmentCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   data = DATA;
 
@@ -75,7 +76,17 @@ export default class ContributionInvestmentCom extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Contribution object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Contribution__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All"
+      }
+    });
   }
 
   handleRowAction(event) {

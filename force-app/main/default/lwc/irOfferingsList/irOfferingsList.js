@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
 
 // Same stage value always maps to the same pill colour.
 const STAGE_VARIANT = {
@@ -41,7 +42,7 @@ const COLUMNS = [
   }
 ];
 
-export default class IrOfferingsList extends LightningElement {
+export default class IrOfferingsList extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
   offerings = [
@@ -116,6 +117,16 @@ export default class IrOfferingsList extends LightningElement {
 
   handleViewAll(event) {
     event.preventDefault();
-    // Placeholder for the View All action.
+    // Navigate to the Offering object list page, showing the "All" list view.
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: "Unison__Offering__c",
+        actionName: "list"
+      },
+      state: {
+        filterName: "Unison__All_Offerings"
+      }
+    });
   }
 }
