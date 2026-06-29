@@ -12,8 +12,7 @@ const CURRENCY_FMT = new Intl.NumberFormat("en-US", {
 const COLUMNS = [
   { label: "Name", fieldName: "name", type: "text" },
   { label: "Investing Entity", fieldName: "investingEntity", type: "text" },
-  { label: "Contribution", fieldName: "contribution", type: "text" },
-  { label: "Distribution", fieldName: "distribution", type: "text" }
+  { label: "Life Time Value", fieldName: "lifeTImeValue", type: "text" }
 ];
 
 // Demo data — contribution $5M-$9M, distribution $1M-$4M.
@@ -22,36 +21,31 @@ const DATA = [
     id: "1",
     name: "Sarah Chen",
     investingEntity: "Riverstone Holdings LLC",
-    contribution: 8200000,
-    distribution: 3400000
+    lifeTImeValue: "$8200000"
   },
   {
     id: "2",
     name: "James Okafor",
     investingEntity: "Summit Peak Partners",
-    contribution: 6750000,
-    distribution: 2100000
+    lifeTImeValue: "$8850000"
   },
   {
     id: "3",
     name: "Priya Nair",
     investingEntity: "Blue Harbor Capital",
-    contribution: 9000000,
-    distribution: 3950000
+    lifeTImeValue: "$12950000"
   },
   {
     id: "4",
     name: "Daniel Vasquez",
     investingEntity: "Oakline Ventures LLC",
-    contribution: 5300000,
-    distribution: 1250000
+    lifeTImeValue: "$6550000"
   },
   {
     id: "5",
     name: "Mei Tanaka",
     investingEntity: "Crestwood Equity Group",
-    contribution: 7400000,
-    distribution: 2800000
+    lifeTImeValue: "$10200000"
   }
 ];
 
@@ -63,8 +57,7 @@ export default class ValuableInvestors extends LightningElement {
   get data() {
     return DATA.map((row) => ({
       ...row,
-      contribution: CURRENCY_FMT.format(row.contribution),
-      distribution: CURRENCY_FMT.format(row.distribution)
+      lifeTimeValue: CURRENCY_FMT.format(row.lifeTImeValue)
     }));
   }
 }
