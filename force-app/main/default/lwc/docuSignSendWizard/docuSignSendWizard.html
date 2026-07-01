@@ -1,0 +1,98 @@
+<template>
+  <lightning-card title="Send for E-Signature" icon-name="standard:document">
+    <div class="slds-var-p-horizontal_medium slds-var-p-bottom_medium">
+      <!-- Progress indicator -->
+      <lightning-progress-indicator
+        current-step={currentStep}
+        type="base"
+        variant="base"
+      >
+        <template for:each={progressSteps} for:item="step">
+          <lightning-progress-step
+            key={step.value}
+            label={step.label}
+            value={step.value}
+          ></lightning-progress-step>
+        </template>
+      </lightning-progress-indicator>
+
+      <!-- Loading -->
+      <template if:true={loading}>
+        <div class="slds-align_absolute-center slds-var-p-vertical_large">
+          <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+      </template>
+
+      <!-- Error -->
+      <template if:true={hasError}>
+        <div
+          class="slds-notify slds-notify_alert slds-theme_error slds-var-m-vertical_small"
+          role="alert"
+        >
+          <span class="slds-assistive-text">Error</span>
+          <span>{errorMessage}</span>
+        </div>
+      </template>
+
+      <!-- Steps -->
+      <template if:false={loading}>
+        <div class="slds-var-p-top_medium">
+          <template if:true={isDocumentsStep}>
+            <c-docu-sign-documents-step
+              record-id={recordId}
+              template-options={templateOptions}
+              document-options={documentOptions}
+              selected-template-id={selectedTemplateId}
+              selected-document-uids={selectedDocumentUids}
+              ontemplatechange={handleTemplateChange}
+              ondocumenttoggle={handleDocumentToggle}
+              ondocumentsuploaded={handleDocumentsUploaded}
+            ></c-docu-sign-documents-step>
+          </template>
+
+          <template if:true={isRecipientsStep}>
+            <c-docu-sign-recipients-step
+              recipient-options={recipientOptions}
+              selected-recipient-ids={selectedRecipientIdArray}
+              onrecipienttoggle={handleRecipientToggle}
+              onaddrecipient={handleAddRecipient}
+              onremoverecipient={handleRemoveRecipient}
+            ></c-docu-sign-recipients-step>
+          </template>
+
+          <template if:true={isPrepareStep}>
+            <c-docu-sign-prepare-step
+              tab-definitions={tabDefinitions}
+              ontabschange={handleTabsChange}
+            ></c-docu-sign-prepare-step>
+          </template>
+
+          <template if:true={isSendStep}>
+            <c-docu-sign-send-step
+              document-count={selectedDocumentUids.length}
+              recipient-count={selectedRecipientIdArray.length}
+              send-result={sendResult}
+              is-sending={isSending}
+            ></c-docu-sign-send-step>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <!-- Footer navigation -->
+    <div slot="footer" class="slds-grid slds-grid_align-spread">
+      <lightning-button
+        label="Back"
+        onclick={handleBack}
+        disabled={isFirstStep}
+        variant="neutral"
+      ></lightning-button>
+      <lightning-button
+        label={nextLabel}
+        onclick={handleNext}
+        disabled={nextDisabled}
+        variant="brand"
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>

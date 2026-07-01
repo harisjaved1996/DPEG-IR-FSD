@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.slds-notify_alert {
+  border-radius: var(--slds-g-radius-border-2, 0.25rem);
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Email_Filter__c</fullName>
+    <label>Default Email Filter</label>
+    <description>Substring matched against Contact.Email to auto-pre-check recipients in the DocuSign Send for E-Signature wizard. Recipients whose email contains this value are selected by default (and remain deselectable).</description>
+    <inlineHelpText>Enter the email fragment used to auto-select recipients (e.g. "haris"). Contacts whose email contains this text are pre-checked.</inlineHelpText>
+    <type>Text</type>
+    <length>255</length>
+    <required>false</required>
+    <unique>false</unique>
+    <externalId>false</externalId>
+</CustomField>

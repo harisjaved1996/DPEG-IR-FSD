@@ -1,0 +1,49 @@
+<template>
+  <div class="slds-text-heading_small slds-var-m-bottom_small">1. Choose documents</div>
+
+  <!-- Template picker -->
+  <lightning-combobox
+    label="DocuSign Template"
+    placeholder="Select a template"
+    options={templateComboOptions}
+    value={selectedTemplateId}
+    onchange={handleTemplateChange}
+    class="slds-var-m-bottom_medium"
+  ></lightning-combobox>
+
+  <!-- Salesforce files -->
+  <div class="slds-text-title_caps slds-var-m-bottom_x-small">Add from Salesforce</div>
+  <template if:true={hasDocuments}>
+    <ul class="slds-has-dividers_bottom-space" role="list">
+      <template for:each={documentRows} for:item="doc">
+        <li key={doc.uid} class="slds-item slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+          <span class="slds-truncate" title={doc.title}>
+            <lightning-icon icon-name="doctype:attachment" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+            {doc.title}
+          </span>
+          <lightning-button
+            data-uid={doc.uid}
+            label={doc.buttonLabel}
+            variant={doc.variant}
+            onclick={handleToggle}
+          ></lightning-button>
+        </li>
+      </template>
+    </ul>
+  </template>
+  <template if:false={hasDocuments}>
+    <p class="slds-text-body_small slds-text-color_weak">No files are linked to this record yet.</p>
+  </template>
+
+  <!-- Upload -->
+  <div class="slds-var-m-top_medium">
+    <div class="slds-text-title_caps slds-var-m-bottom_x-small">Upload new files</div>
+    <lightning-input
+      type="file"
+      label="Upload"
+      variant="label-hidden"
+      multiple
+      onchange={handleUpload}
+    ></lightning-input>
+  </div>
+</template>

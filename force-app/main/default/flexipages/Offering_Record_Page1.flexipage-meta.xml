@@ -567,7 +567,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
-                    <value>PPM V2</value>
+                    <value>Send for E-Signature</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab_ppmv2</identifier>
@@ -580,8 +580,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>ppmV2Sender</componentName>
-                <identifier>Unison_ppmV2Sender</identifier>
+                <componentName>docuSignSendWizard</componentName>
+                <identifier>Unison_docuSignSendWizard</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-ppmv2-sender01</name>

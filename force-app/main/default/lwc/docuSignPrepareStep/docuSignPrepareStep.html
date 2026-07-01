@@ -1,0 +1,56 @@
+<template>
+  <div class="slds-text-heading_small slds-var-m-bottom_x-small">3. Prepare fields</div>
+  <p class="slds-text-body_small slds-text-color_weak slds-var-m-bottom_small">
+    Define fields once. They are placed by anchor text and applied to every recipient's copy.
+  </p>
+
+  <template for:each={rows} for:item="row">
+    <div
+      key={row.key}
+      class="slds-box slds-box_x-small slds-var-m-bottom_x-small slds-grid slds-grid_vertical-align-end slds-gutters_x-small"
+    >
+      <div class="slds-col slds-size_4-of-12">
+        <lightning-combobox
+          label="Field type"
+          data-key={row.key}
+          value={row.type}
+          options={typeOptions}
+          onchange={handleTypeChange}
+        ></lightning-combobox>
+      </div>
+      <div class="slds-col slds-size_5-of-12">
+        <lightning-input
+          label="Anchor text"
+          data-key={row.key}
+          value={row.anchorText}
+          onchange={handleAnchorChange}
+        ></lightning-input>
+      </div>
+      <div class="slds-col slds-size_2-of-12">
+        <lightning-input
+          type="checkbox"
+          label="Required"
+          data-key={row.key}
+          checked={row.required}
+          onchange={handleRequiredChange}
+        ></lightning-input>
+      </div>
+      <div class="slds-col slds-size_1-of-12">
+        <lightning-button-icon
+          icon-name="utility:delete"
+          alternative-text="Remove field"
+          data-key={row.key}
+          onclick={handleRemove}
+        ></lightning-button-icon>
+      </div>
+    </div>
+  </template>
+
+  <lightning-button
+    label="Add field"
+    icon-name="utility:add"
+    onclick={handleAdd}
+    variant="neutral"
+    class="slds-var-m-top_x-small"
+  ></lightning-button>
+</template>

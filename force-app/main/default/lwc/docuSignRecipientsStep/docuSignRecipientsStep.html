@@ -1,0 +1,59 @@
+<template>
+  <div class="slds-text-heading_small slds-var-m-bottom_small">2. Choose recipients</div>
+  <p class="slds-text-body_small slds-text-color_weak slds-var-m-bottom_small">
+    Matching contacts are pre-selected. Each selected contact receives their own copy to sign.
+    ({selectedCount} selected)
+  </p>
+
+  <!-- Add Recipient: search and add any Contact -->
+  <div class="slds-var-m-bottom_medium">
+    <lightning-record-picker
+      lwc:ref="contactPicker"
+      label="Add Recipient"
+      placeholder="Search Contacts..."
+      object-api-name="Contact"
+      filter={contactFilter}
+      display-info={displayInfo}
+      matching-info={matchingInfo}
+      onchange={handlePicked}
+    ></lightning-record-picker>
+  </div>
+
+  <template if:true={hasRecipients}>
+    <ul class="slds-has-dividers_bottom-space" role="list">
+      <template for:each={rows} for:item="row">
+        <li
+          key={row.contactId}
+          class="slds-item slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+        >
+          <lightning-input
+            type="checkbox"
+            label={row.name}
+            field-level-help={row.email}
+            data-id={row.contactId}
+            checked={row.checked}
+            onchange={handleToggle}
+          ></lightning-input>
+          <div class="slds-grid slds-grid_vertical-align-center">
+            <span class="slds-text-body_small slds-text-color_weak slds-var-m-right_x-small">{row.email}</span>
+            <template if:true={row.manuallyAdded}>
+              <lightning-button-icon
+                icon-name="utility:close"
+                alternative-text="Remove recipient"
+                title="Remove recipient"
+                variant="bare"
+                data-id={row.contactId}
+                onclick={handleRemove}
+              ></lightning-button-icon>
+            </template>
+          </div>
+        </li>
+      </template>
+    </ul>
+  </template>
+  <template if:false={hasRecipients}>
+    <p class="slds-text-body_small slds-text-color_weak">
+      No contacts matched the recipient filter. Use "Add Recipient" above to add one.
+    </p>
+  </template>
+</template>

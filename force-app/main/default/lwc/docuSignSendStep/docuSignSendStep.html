@@ -1,0 +1,29 @@
+<template>
+  <div class="slds-text-heading_small slds-var-m-bottom_small">4. Send</div>
+
+  <template if:true={isSending}>
+    <div class="slds-align_absolute-center slds-var-p-vertical_medium">
+      <lightning-spinner alternative-text="Sending" size="small"></lightning-spinner>
+    </div>
+  </template>
+
+  <template if:true={showSummary}>
+    <dl class="slds-dl_horizontal">
+      <dt class="slds-dl_horizontal__label">Documents</dt>
+      <dd class="slds-dl_horizontal__detail">{documentCount}</dd>
+      <dt class="slds-dl_horizontal__label">Recipients</dt>
+      <dd class="slds-dl_horizontal__detail">{recipientCount}</dd>
+    </dl>
+    <p class="slds-text-body_small slds-text-color_weak slds-var-m-top_small">
+      Each recipient receives their own envelope to sign. Click Send to start.
+    </p>
+  </template>
+
+  <template if:true={hasResult}>
+    <div class={resultTheme} role="status">
+      <div class="slds-box slds-box_x-small">
+        <p>{sendResult.message}</p>
+      </div>
+    </div>
+  </template>
+</template>
