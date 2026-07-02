@@ -1,0 +1,298 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Prepare Fields" cache="false">
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; font-family: 'Salesforce Sans', Arial, sans-serif; color: #16325c; background: #f3f3f3; }
+        #ds-root { display: flex; flex-direction: column; height: 100vh; }
+        #ds-palette {
+            display: flex; gap: 8px; padding: 10px 12px; background: #fff;
+            border-bottom: 1px solid #dddbda; flex: 0 0 auto; flex-wrap: wrap; align-items: center;
+        }
+        #ds-palette .ds-hint { font-size: 12px; color: #706e6b; margin-right: 8px; }
+        .ds-chip {
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+            border: 1px solid #1b96ff; border-radius: 6px; background: #eef4ff; color: #0b5cab;
+            font-size: 13px; cursor: grab; user-select: none;
+        }
+        .ds-chip:active { cursor: grabbing; }
+        #ds-scroll { flex: 1 1 auto; overflow: auto; padding: 16px; }
+        .ds-page-frame { margin: 0 auto 18px; }
+        .ds-page-label { font-size: 12px; color: #706e6b; margin-bottom: 4px; }
+        .ds-page { position: relative; box-shadow: 0 1px 4px rgba(0,0,0,.25); background: #fff; }
+        .ds-canvas { display: block; }
+        .ds-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .ds-field {
+            position: absolute; border: 1.5px solid #1b96ff; background: rgba(27,150,255,.15);
+            border-radius: 3px; font-size: 11px; color: #0b5cab; display: flex; align-items: center;
+            justify-content: center; cursor: move; user-select: none; overflow: hidden; white-space: nowrap;
+        }
+        .ds-field .ds-remove {
+            position: absolute; top: -9px; right: -9px; width: 18px; height: 18px; line-height: 16px;
+            text-align: center; border-radius: 50%; background: #ea001e; color: #fff; font-size: 12px;
+            cursor: pointer; border: 1px solid #fff;
+        }
+        #ds-status { padding: 10px 12px; font-size: 13px; }
+        #ds-status.ds-error { color: #ea001e; background: #fef1ee; }
+        #ds-status.ds-info { color: #706e6b; }
+        .ds-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid #c9c7c5;
+            border-top-color: #1b96ff; border-radius: 50%; animation: ds-spin .7s linear infinite; vertical-align: middle; }
+        @keyframes ds-spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+<div id="ds-root">
+    <div id="ds-palette">
+        <span class="ds-hint">Drag a field onto the document. Placements apply to every recipient's copy.</span>
+        <div class="ds-chip" draggable="true" data-type="SignHere">&#9998; Signature</div>
+        <div class="ds-chip" draggable="true" data-type="FullName">&#128100; Full Name</div>
+        <div class="ds-chip" draggable="true" data-type="DateSigned">&#128197; Date Signed</div>
+    </div>
+    <div id="ds-status" class="ds-info"><span class="ds-spinner"></span>&nbsp; Loading preview&#8230;</div>
+    <div id="ds-scroll"></div>
+</div>
+
+<!-- PDF.js runs here in Visualforce, which is EXEMPT from Lightning Web Security / Locker, so the
+     worker loads and parses normally (the exact thing that is blocked inside an LWC). -->
+<script src="{!URLFOR($Resource.pdfjs, 'pdf.min.js')}"></script>
+<script>
+(function () {
+    "use strict";
+
+    // ── Field geometry, in DocuSign POINTS (must match the Apex DEFAULT_TAB sizes) ──
+    var FIELD_DEFAULTS = {
+        SignHere:   { width: 108, height: 24, label: "Signature" },
+        FullName:   { width: 108, height: 16, label: "Full Name" },
+        DateSigned: { width: 72,  height: 16, label: "Date Signed" }
+    };
+
+    var scrollEl  = document.getElementById("ds-scroll");
+    var statusEl  = document.getElementById("ds-status");
+    var paletteEl = document.getElementById("ds-palette");
+
+    var state = {
+        documentSequence: 1,
+        pages: [],   // [{ pageNumber, scale, widthPts, heightPts, overlay }]
+        fields: [],  // [{ id, type, pageNumber, x, y, width, height }] — points
+        dragType: null,
+        seq: 0
+    };
+
+    // Configure the worker from the SAME Visualforce origin — no cross-origin, no LWS, no hang.
+    if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "{!URLFOR($Resource.pdfjs, 'pdf.worker.min.js')}";
+    }
+
+    function post(msg) {
+        msg.source = "dsTagger";
+        try { parent.postMessage(msg, "*"); } catch (e) { /* noop */ }
+    }
+
+    function setStatus(text, kind) {
+        if (!text) { statusEl.style.display = "none"; return; }
+        statusEl.style.display = "block";
+        statusEl.className = kind === "error" ? "ds-error" : "ds-info";
+        statusEl.innerHTML = text;
+    }
+
+    // ── Coordinate mapping: drop point in CSS px → field top-left in POINTS (top-left origin) ──
+    function toPoints(dropXcss, dropYcss, scale, wPts, hPts, pageWpts, pageHpts) {
+        var s = scale || 1;
+        var x = Math.round((dropXcss - (wPts * s) / 2) / s);
+        var y = Math.round((dropYcss - (hPts * s) / 2) / s);
+        var maxX = Math.max(0, Math.round(pageWpts - wPts));
+        var maxY = Math.max(0, Math.round(pageHpts - hPts));
+        if (x < 0) x = 0; if (y < 0) y = 0;
+        if (x > maxX) x = maxX; if (y > maxY) y = maxY;
+        return { x: x, y: y };
+    }
+
+    function emitFields() {
+        var out = state.fields.map(function (f) {
+            return {
+                type: f.type, mode: "position", documentSequence: state.documentSequence,
+                pageNumber: f.pageNumber, x: f.x, y: f.y, width: f.width, height: f.height
+            };
+        });
+        post({ type: "fieldschange", fields: out });
+    }
+
+    function base64ToBytes(b64) {
+        var raw = atob(b64), len = raw.length, bytes = new Uint8Array(len);
+        for (var i = 0; i < len; i++) { bytes[i] = raw.charCodeAt(i); }
+        return bytes;
+    }
+
+    // ── Drag source (palette chips) ──
+    paletteEl.addEventListener("dragstart", function (e) {
+        var chip = e.target.closest(".ds-chip");
+        state.dragType = chip ? chip.getAttribute("data-type") : null;
+        if (e.dataTransfer) { e.dataTransfer.effectAllowed = "copy"; }
+    });
+    paletteEl.addEventListener("dragend", function () { state.dragType = null; });
+
+    function renderPlacedField(page, f) {
+        var box = document.createElement("div");
+        box.className = "ds-field";
+        box.setAttribute("data-id", f.id);
+        box.style.left   = (f.x * page.scale) + "px";
+        box.style.top    = (f.y * page.scale) + "px";
+        box.style.width  = (f.width * page.scale) + "px";
+        box.style.height = (f.height * page.scale) + "px";
+        box.textContent  = FIELD_DEFAULTS[f.type] ? FIELD_DEFAULTS[f.type].label : f.type;
+
+        var rm = document.createElement("div");
+        rm.className = "ds-remove"; rm.textContent = "×"; rm.title = "Remove";
+        rm.addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            state.fields = state.fields.filter(function (x) { return x.id !== f.id; });
+            box.parentNode.removeChild(box);
+            emitFields();
+        });
+        box.appendChild(rm);
+
+        // Drag an existing field to reposition it within its page.
+        box.addEventListener("mousedown", function (down) {
+            if (down.target === rm) { return; }
+            down.preventDefault();
+            var startX = down.clientX, startY = down.clientY;
+            var origLeft = parseFloat(box.style.left), origTop = parseFloat(box.style.top);
+            function move(mv) {
+                var nl = origLeft + (mv.clientX - startX);
+                var nt = origTop + (mv.clientY - startY);
+                var maxL = (page.widthPts - f.width) * page.scale;
+                var maxT = (page.heightPts - f.height) * page.scale;
+                nl = Math.max(0, Math.min(nl, maxL));
+                nt = Math.max(0, Math.min(nt, maxT));
+                box.style.left = nl + "px"; box.style.top = nt + "px";
+            }
+            function up() {
+                document.removeEventListener("mousemove", move);
+                document.removeEventListener("mouseup", up);
+                f.x = Math.round(parseFloat(box.style.left) / page.scale);
+                f.y = Math.round(parseFloat(box.style.top) / page.scale);
+                emitFields();
+            }
+            document.addEventListener("mousemove", move);
+            document.addEventListener("mouseup", up);
+        });
+
+        page.overlay.appendChild(box);
+    }
+
+    function wireOverlayDrop(page) {
+        page.overlay.addEventListener("dragover", function (e) { e.preventDefault(); });
+        page.overlay.addEventListener("drop", function (e) {
+            e.preventDefault();
+            var type = state.dragType; state.dragType = null;
+            if (!type || !FIELD_DEFAULTS[type]) { return; }
+            var rect = page.overlay.getBoundingClientRect();
+            var def = FIELD_DEFAULTS[type];
+            var pt = toPoints(e.clientX - rect.left, e.clientY - rect.top, page.scale,
+                              def.width, def.height, page.widthPts, page.heightPts);
+            var f = {
+                id: type + "-" + (++state.seq), type: type, pageNumber: page.pageNumber,
+                x: pt.x, y: pt.y, width: def.width, height: def.height
+            };
+            state.fields.push(f);
+            renderPlacedField(page, f);
+            emitFields();
+        });
+    }
+
+    function renderPdf(bytes) {
+        state.pages = []; state.fields = []; scrollEl.innerHTML = "";
+        var containerWidth = scrollEl.clientWidth - 32;
+        if (!(containerWidth > 40)) { containerWidth = 612; }
+
+        pdfjsLib.getDocument({ data: bytes }).promise.then(function (pdf) {
+            setStatus(null);
+            var chain = Promise.resolve();
+            for (var n = 1; n <= pdf.numPages; n++) {
+                (function (pageNumber) {
+                    chain = chain.then(function () {
+                        return pdf.getPage(pageNumber).then(function (pdfPage) {
+                            var base = pdfPage.getViewport({ scale: 1 });
+                            var widthPts = base.width, heightPts = base.height;
+                            var scale = Math.min(3, Math.max(0.5, containerWidth / widthPts));
+                            var vp = pdfPage.getViewport({ scale: scale });
+
+                            var frame = document.createElement("div");
+                            frame.className = "ds-page-frame";
+                            frame.style.width = vp.width + "px";
+                            var label = document.createElement("div");
+                            label.className = "ds-page-label";
+                            label.textContent = "Page " + pageNumber;
+                            var pageDiv = document.createElement("div");
+                            pageDiv.className = "ds-page";
+                            pageDiv.style.width = vp.width + "px";
+                            pageDiv.style.height = vp.height + "px";
+                            var canvas = document.createElement("canvas");
+                            canvas.className = "ds-canvas";
+                            var dpr = window.devicePixelRatio || 1;
+                            canvas.width = Math.floor(vp.width * dpr);
+                            canvas.height = Math.floor(vp.height * dpr);
+                            canvas.style.width = vp.width + "px";
+                            canvas.style.height = vp.height + "px";
+                            var overlay = document.createElement("div");
+                            overlay.className = "ds-overlay";
+
+                            pageDiv.appendChild(canvas);
+                            pageDiv.appendChild(overlay);
+                            frame.appendChild(label);
+                            frame.appendChild(pageDiv);
+                            scrollEl.appendChild(frame);
+
+                            var page = { pageNumber: pageNumber, scale: scale,
+                                         widthPts: widthPts, heightPts: heightPts, overlay: overlay };
+                            state.pages.push(page);
+                            wireOverlayDrop(page);
+
+                            var ctx = canvas.getContext("2d");
+                            ctx.scale(dpr, dpr);
+                            return pdfPage.render({ canvasContext: ctx, viewport: vp }).promise;
+                        });
+                    });
+                })(n);
+            }
+            return chain.then(function () {
+                post({ type: "rendered", pageCount: pdf.numPages });
+            });
+        }).catch(function (err) {
+            var m = (err && err.message) ? err.message : "Could not render the document.";
+            setStatus("Could not render the document preview: " + m, "error");
+            post({ type: "error", message: m });
+        });
+    }
+
+    // ── Message protocol with the parent LWC ──
+    window.addEventListener("message", function (e) {
+        var d = e.data;
+        if (!d || d.source !== "dsHost") { return; }
+        if (d.type === "render") {
+            state.documentSequence = d.documentSequence || 1;
+            if (!window.pdfjsLib) {
+                setStatus("PDF engine failed to load.", "error");
+                post({ type: "error", message: "pdfjsLib missing in Visualforce page." });
+                return;
+            }
+            try {
+                renderPdf(base64ToBytes(d.base64));
+            } catch (ex) {
+                setStatus("Could not decode the document.", "error");
+                post({ type: "error", message: (ex && ex.message) ? ex.message : String(ex) });
+            }
+        }
+    });
+
+    // Tell the parent we are ready to receive the document bytes.
+    post({ type: "ready" });
+})();
+</script>
+</body>
+</html>
+</apex:page>

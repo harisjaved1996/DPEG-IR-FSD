@@ -58,6 +58,28 @@ public with sharing class DocuSignDocumentSelector {
     }
 
     /**
+     * @description Selects the latest ContentVersion (including VersionData) for each supplied
+     *              ContentDocument Id. Used by the in-wizard visual tagger's byte-delivery endpoint to
+     *              render the master file. VersionData is heap-heavy, so callers should size-guard
+     *              before/after; this selector only owns the query (SOQL lives here per the layering
+     *              rule). Bulk-safe (accepts a Set).
+     * @param contentDocumentIds Set of ContentDocument Ids to resolve to their latest version bytes.
+     * @return List of ContentVersion records (latest per document, with VersionData); empty when input empty.
+     */
+    public static List<ContentVersion> selectVersionDataByDocumentId(Set<Id> contentDocumentIds) {
+        if (contentDocumentIds == null || contentDocumentIds.isEmpty()) {
+            return new List<ContentVersion>();
+        }
+
+        return [
+            SELECT Id, VersionData, ContentSize, FileExtension, Title, ContentDocumentId
+            FROM ContentVersion
+            WHERE ContentDocumentId IN :contentDocumentIds AND IsLatest = TRUE
+            WITH USER_MODE
+        ];
+    }
+
+    /**
      * @description Selects ContentVersion rows by their own Ids — used to resolve the
      *              ContentDocumentId of files the current transaction just inserted (the wizard's
      *              upload step) so they can be linked to the Offering.

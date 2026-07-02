@@ -41,8 +41,10 @@ export default class DocuSignSendWizard extends LightningElement {
   // Set<contactId> of currently selected recipients.
   selectedRecipientIds = new Set();
 
-  // Prepare step state — field (tab) definitions defined once, applied to all recipients.
-  @track tabDefinitions = [];
+  // Prepare step state — placed positional fields captured by the visual tagger (in DocuSign
+  // points), applied to every recipient's copy. `taggerLoadFailed` gates Send when PDF.js can't load.
+  @track placedFields = [];
+  taggerLoadFailed = false;
 
   // Send result.
   @track sendResult = null;
@@ -71,9 +73,6 @@ export default class DocuSignSendWizard extends LightningElement {
       this.selectedRecipientIds = new Set(
         this.recipientOptions.filter((r) => r.preChecked).map((r) => r.contactId)
       );
-
-      // Seed the default "tag once" fields: Signature, Full Name, Date Signed.
-      this.tabDefinitions = this.defaultTabDefinitions();
     } catch (error) {
       this.errorMessage = this.reduceError(error);
     } finally {
@@ -88,20 +87,6 @@ export default class DocuSignSendWizard extends LightningElement {
     } catch (templateError) {
       this.templateOptions = [];
     }
-  }
-
-  defaultTabDefinitions() {
-    return [
-      { key: "sign", type: "SignHere", anchorText: "\\s1\\", required: true, label: "Signature" },
-      { key: "name", type: "FullName", anchorText: "\\n1\\", required: false, label: "Full Name" },
-      {
-        key: "date",
-        type: "DateSigned",
-        anchorText: "\\d1\\",
-        required: false,
-        label: "Date Signed"
-      }
-    ];
   }
 
   // ─── Step navigation ───────────────────────────────────────────────────
@@ -151,7 +136,19 @@ export default class DocuSignSendWizard extends LightningElement {
     if (this.isRecipientsStep) {
       return this.selectedRecipientIds.size === 0;
     }
+    if (this.isPrepareStep) {
+      // A chosen template carries its own predefined fields — no placement required. Otherwise the
+      // visual tagger must have loaded AND at least one Signature field must be placed before Send.
+      if (this.usingTemplate) {
+        return this.isSending;
+      }
+      return this.isSending || this.taggerLoadFailed || !this.hasSignatureField;
+    }
     return this.isSending;
+  }
+
+  get hasSignatureField() {
+    return this.placedFields.some((f) => f.type === "SignHere");
   }
 
   handleBack() {
@@ -271,8 +268,35 @@ export default class DocuSignSendWizard extends LightningElement {
 
   // ─── Prepare step handlers ───────────────────────────────────────────────
 
-  handleTabsChange(event) {
-    this.tabDefinitions = (event.detail || []).map((t) => ({ ...t }));
+  handleFieldsChange(event) {
+    // The visual tagger emits the full placed-field list in the positional TabDefinition shape
+    // (points, top-left origin). Store a copy; handleSend passes them through unchanged.
+    this.placedFields = [...(event.detail || [])];
+  }
+
+  handleTaggerLoadError() {
+    // PDF.js / preview failed to load → block Send so a user can never send an un-tagged envelope.
+    this.taggerLoadFailed = true;
+  }
+
+  // True when a DocuSign template is chosen; the template owns its own fields (mutual exclusion
+  // with the visual tagger), so the tagger is skipped on the Prepare step.
+  get usingTemplate() {
+    return !!this.selectedTemplateId;
+  }
+
+  // The master FILE to render/tag: the FIRST selected document (keyed by stable uid).
+  get masterContentDocumentId() {
+    const first = Array.from(this.selectedDocumentsByUid.values())[0];
+    return first ? first.contentDocumentId : null;
+  }
+
+  // 1-based ordinal the master file receives in DocuSignBulkSendService.buildDocuments: that method
+  // adds the template FIRST (if any) then files, so a leading template pushes the file to sequence 2.
+  // With the template/tagger mutual-exclusion rule the tagger only runs when NO template is chosen,
+  // so the master file is document 1; the +template term is kept for correctness/robustness.
+  get masterDocumentSequence() {
+    return 1 + (this.selectedTemplateId ? 1 : 0);
   }
 
   // ─── Send ────────────────────────────────────────────────────────────────
@@ -281,7 +305,6 @@ export default class DocuSignSendWizard extends LightningElement {
     this.isSending = true;
     this.errorMessage = null;
     try {
-      console.log("working fine1");
       const request = {
         offeringId: this.recordId,
         templateId: this.selectedTemplateId,
@@ -289,13 +312,20 @@ export default class DocuSignSendWizard extends LightningElement {
           (d) => d.contentDocumentId
         ),
         recipientContactIds: Array.from(this.selectedRecipientIds),
-        tabs: this.tabDefinitions.map((t) => ({
-          type: t.type,
-          anchorText: t.anchorText,
-          required: t.required,
-          xOffset: 0,
-          yOffset: 0
-        })),
+        // When a template is chosen it carries its own fields — send no positional tabs. Otherwise
+        // pass the visual tagger's placements straight through as positional TabDefinitions.
+        tabs: this.usingTemplate
+          ? []
+          : this.placedFields.map((t) => ({
+              type: t.type,
+              mode: "position",
+              documentSequence: this.masterDocumentSequence,
+              pageNumber: t.pageNumber,
+              x: t.x,
+              y: t.y,
+              width: t.width,
+              height: t.height
+            })),
         emailSubject: "Please sign: Offering documents",
         emailMessage: ""
       };
@@ -304,7 +334,6 @@ export default class DocuSignSendWizard extends LightningElement {
       // invoked. A string parameter binds reliably; the controller deserializes it.
       this.sendResult = await sendForSignature({ requestJson: JSON.stringify(request) });
       if (this.sendResult && this.sendResult.success) {
-        console.log("working fine4");
         this.dispatchEvent(
           new ShowToastEvent({
             title: "DocuSign",

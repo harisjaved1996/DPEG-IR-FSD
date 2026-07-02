@@ -1,0 +1,50 @@
+<template>
+  <div class="slds-text-heading_small slds-var-m-bottom_x-small">3. Prepare fields</div>
+  <p class="slds-text-body_small slds-text-color_weak slds-var-m-bottom_small">
+    Drag a field onto the document where each recipient should sign. Placements apply to every
+    recipient's copy.
+  </p>
+
+  <!-- Loading (initial fetch, before the iframe is shown) -->
+  <template if:true={loading}>
+    <div class="slds-align_absolute-center slds-var-p-vertical_large">
+      <lightning-spinner alternative-text="Loading preview" size="small"></lightning-spinner>
+    </div>
+  </template>
+
+  <!-- Fatal load error (disables the host Send gate via the loaderror event) -->
+  <template if:true={hasFatalError}>
+    <div
+      class="slds-notify slds-notify_alert slds-theme_error slds-var-m-vertical_small"
+      role="alert"
+    >
+      <span class="slds-assistive-text">Error</span>
+      <span>{loadError}</span>
+      <lightning-button
+        label="Reload preview"
+        variant="neutral"
+        class="slds-var-m-left_small"
+        onclick={handleReload}
+      ></lightning-button>
+    </div>
+  </template>
+
+  <!-- Info state (too large / non-PDF) -->
+  <template if:true={showInfo}>
+    <div
+      class="slds-notify slds-notify_alert slds-theme_warning slds-var-m-vertical_small"
+      role="status"
+    >
+      <span>{infoMessage}</span>
+    </div>
+  </template>
+
+  <!-- Visualforce PDF tagger (renders + drag-drop run outside LWS; bridged via postMessage) -->
+  <template if:true={showFrame}>
+    <iframe
+      class="tagger__frame"
+      src={taggerUrl}
+      title="Prepare fields — drag fields onto the document"
+    ></iframe>
+  </template>
+</template>

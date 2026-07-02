@@ -54,14 +54,51 @@ public class DocuSignWizardDTO {
     }
 
     /**
-     * @description A single "tag once" field placement. The anchor text is the string DocuSign
-     *              searches for in the document(s); the tab is dropped relative to that anchor and
-     *              applied to every recipient's copy.
+     * @description A single field placement applied once and inherited by every recipient's copy.
+     *              Two placement modes are supported:
+     *               - 'anchor' (legacy): DocuSign searches the document(s) for `anchorText` and drops
+     *                 the tab relative to that anchor (offset by xOffset/yOffset pixels).
+     *               - 'position' (visual tagger): the tab is placed at an absolute
+     *                 documentSequence/pageNumber/x/y/width/height, in DocuSign points, captured by the
+     *                 in-wizard visual PDF tagger.
+     *              A null/blank `mode` is treated as 'anchor' so existing callers keep working.
      */
     public class TabDefinition {
         /** One of TabType: 'SignHere', 'FullName', 'DateSigned', 'Text'. */
         @AuraEnabled
         public String type { get; set; }
+
+        /** Placement mode: 'position' (visual tagger) or 'anchor' (legacy). Null/blank → 'anchor'. */
+        @AuraEnabled
+        public String mode { get; set; }
+
+        // ── Positional fields (mode == 'position') ──
+
+        /** 1-based document ordinal within the envelope's document list. */
+        @AuraEnabled
+        public Integer documentSequence { get; set; }
+
+        /** 1-based page number the field was placed on. */
+        @AuraEnabled
+        public Integer pageNumber { get; set; }
+
+        /** X offset from page top-left, in DocuSign points (Integer — Position ctor is Integer). */
+        @AuraEnabled
+        public Integer x { get; set; }
+
+        /** Y offset from page top-left, in DocuSign points. */
+        @AuraEnabled
+        public Integer y { get; set; }
+
+        /** Field width in points. */
+        @AuraEnabled
+        public Integer width { get; set; }
+
+        /** Field height in points. */
+        @AuraEnabled
+        public Integer height { get; set; }
+
+        // ── Anchor fields (mode == 'anchor', legacy — unchanged) ──
 
         /** Anchor string DocuSign matches in the documents (e.g. '\\s1\\', 'Full Name:'). */
         @AuraEnabled
@@ -80,6 +117,7 @@ public class DocuSignWizardDTO {
         public Integer yOffset { get; set; }
 
         public TabDefinition() {
+            this.mode = 'anchor'; // default preserves legacy anchor behavior for any existing caller
             this.required = true;
             this.xOffset = 0;
             this.yOffset = 0;
@@ -133,6 +171,38 @@ public class DocuSignWizardDTO {
             this.recipientCount = 0;
             this.failureCount = 0;
             this.recipientResults = new List<RecipientResult>();
+        }
+    }
+
+    /**
+     * @description Base64-encoded bytes of a selected document, delivered to the in-wizard visual
+     *              PDF tagger so PDF.js can render the master file for placement. `tooLarge` is set
+     *              (with no base64) when the file exceeds the preview heap ceiling, so the tagger can
+     *              show a "too large to preview" state instead of loading a huge blob into heap.
+     */
+    public class DocumentContent {
+        /** EncodingUtil.base64Encode of the latest ContentVersion.VersionData. Null when tooLarge. */
+        @AuraEnabled
+        public String base64 { get; set; }
+
+        /** File extension of the latest version (e.g. 'pdf'). */
+        @AuraEnabled
+        public String fileExtension { get; set; }
+
+        /** Raw (pre-base64) byte size of the file. */
+        @AuraEnabled
+        public Integer contentSize { get; set; }
+
+        /** File title. */
+        @AuraEnabled
+        public String title { get; set; }
+
+        /** True when the file exceeds MAX_PREVIEW_BYTES; base64 is then omitted. */
+        @AuraEnabled
+        public Boolean tooLarge { get; set; }
+
+        public DocumentContent() {
+            this.tooLarge = false;
         }
     }
 

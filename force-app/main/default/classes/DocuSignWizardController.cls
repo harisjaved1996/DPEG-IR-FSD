@@ -39,6 +39,15 @@ public with sharing class DocuSignWizardController {
 
     private static final String GENERIC_ERROR = 'Something went wrong preparing the DocuSign wizard. Please try again or contact your administrator.';
 
+    /**
+     * Raw (pre-base64) byte ceiling for the in-wizard PDF preview. Base64 inflates bytes ~1.33×, and
+     * Apex synchronous heap is 6 MB — a raw 3.5 MB file → ~4.66 MB base64 string, safely under the
+     * ceiling. Files above this are returned with tooLarge=true and NO base64, so a huge blob is never
+     * loaded into heap just to be rejected. @TestVisible + non-final so tests can exercise the branch.
+     */
+    @TestVisible
+    private static Integer MAX_PREVIEW_BYTES = 3500000;
+
     // ─── Read endpoints (Documents / Recipients / Prepare steps) ─────────
 
     /**
@@ -142,6 +151,74 @@ public with sharing class DocuSignWizardController {
                 options.add(new DocuSignWizardDTO.TemplateOption(String.valueOf(template.id), template.name));
             }
             return options;
+        } catch (Exception ex) {
+            throw buildAuraException(ex);
+        }
+    }
+
+    /**
+     * @description Returns the base64-encoded bytes of the latest version of a selected document so
+     *              the in-wizard visual PDF tagger (PDF.js) can render it for positional field
+     *              placement. Thin controller: SOQL lives in DocuSignDocumentSelector (WITH USER_MODE),
+     *              this method only size-guards and encodes. Read-only + no dfsle → cacheable is legal.
+     *
+     *              Heap safety: if the file's raw ContentSize exceeds MAX_PREVIEW_BYTES, a
+     *              DocumentContent with tooLarge=true and NO base64 is returned so a huge blob is never
+     *              base64-encoded into heap. The tagger then shows a "too large to preview" state.
+     * @param contentDocumentId The ContentDocument Id of the master file to render.
+     * @return DocumentContent with base64 (or tooLarge=true), fileExtension, contentSize and title.
+     */
+    @AuraEnabled(cacheable=true)
+    public static DocuSignWizardDTO.DocumentContent getDocumentContent(Id contentDocumentId) {
+        try {
+            DocuSignWizardDTO.DocumentContent content = new DocuSignWizardDTO.DocumentContent();
+            if (contentDocumentId == null) {
+                throw new AuraHandledException('No document supplied to preview.');
+            }
+
+            List<ContentVersion> versions = DocuSignDocumentSelector.selectVersionDataByDocumentId(
+                new Set<Id>{ contentDocumentId }
+            );
+            if (versions.isEmpty()) {
+                throw new AuraHandledException('The selected document could not be found or is not accessible.');
+            }
+
+            ContentVersion latest = versions[0];
+            content.fileExtension = latest.FileExtension;
+            content.contentSize = latest.ContentSize;
+            content.title = latest.Title;
+
+            // Size-guard BEFORE encoding: short-circuit so an oversized blob is never base64-encoded
+            // into heap. Base64 (~1.33× inflation) of a file at/above the ceiling risks the 6 MB
+            // synchronous heap limit.
+            if (latest.ContentSize != null && latest.ContentSize > MAX_PREVIEW_BYTES) {
+                content.tooLarge = true;
+                return content;
+            }
+
+            content.tooLarge = false;
+            content.base64 = EncodingUtil.base64Encode(latest.VersionData);
+            return content;
+        } catch (AuraHandledException ahe) {
+            throw ahe;
+        } catch (Exception ex) {
+            throw buildAuraException(ex);
+        }
+    }
+
+    /**
+     * @description Returns the relative URL of the Visualforce PDF-tagger page. PDF.js cannot run
+     *              inside a Lightning Web Component under Lightning Web Security (every Web Worker path
+     *              is blocked and the main-thread parser stalls), so the visual tagger renders the PDF
+     *              inside this Visualforce page — which is exempt from LWS/Locker — embedded via an
+     *              iframe. Resolving the URL in Apex yields the correct path including any namespace
+     *              prefix, which the LWC cannot construct reliably on its own.
+     * @return The relative Visualforce page URL (e.g. '/apex/docuSignPdfTagger').
+     */
+    @AuraEnabled(cacheable=true)
+    public static String getTaggerPageUrl() {
+        try {
+            return Page.docuSignPdfTagger.getUrl();
         } catch (Exception ex) {
             throw buildAuraException(ex);
         }

@@ -1,0 +1,22 @@
+<template>
+  <div
+    class={boxClass}
+    style={boxStyle}
+    draggable="true"
+    ondragstart={handleDragStart}
+    ondragend={handleDragEnd}
+    role="group"
+    aria-label={label}
+  >
+    <span class="placed-field__label">{label}</span>
+    <button
+      type="button"
+      class="placed-field__remove"
+      title="Remove field"
+      aria-label="Remove field"
+      onclick={handleRemove}
+    >
+      ×
+    </button>
+  </div>
+</template>

@@ -45,6 +45,16 @@ public with sharing class DocuSignBulkSendService {
     @TestVisible
     private static final String TAB_TEXT = 'Text';
 
+    /** Placement mode token for the visual-tagger positional path (DocuSignWizardDTO.TabDefinition.mode). */
+    @TestVisible
+    private static final String MODE_POSITION = 'position';
+
+    /** DocuSign default signature-box dimensions in points, used when a positional width/height is null. */
+    @TestVisible
+    private static final Integer DEFAULT_TAB_WIDTH = 108;
+    @TestVisible
+    private static final Integer DEFAULT_TAB_HEIGHT = 24;
+
     /** Anchor defaults: case-insensitive, ignore-if-not-present, pixels. */
     private static final Boolean ANCHOR_ALLOW_WHITESPACE = true;
     private static final Boolean ANCHOR_CASE_SENSITIVE = false;
@@ -228,11 +238,19 @@ public with sharing class DocuSignBulkSendService {
     // ─── Tab assembly (tag once → applied to every recipient via the role) ──
 
     /**
-     * @description Builds the `dfsle.Tab` list from the wizard's field definitions. Signature/name/
-     *              date/text tabs are positioned with anchor strings so they apply to whatever
-     *              document the anchor text appears in — defined once, inherited by every copy.
-     * @param definitions The Prepare-step tab definitions (type + anchor + offsets).
-     * @return List of dfsle.Tab; empty when no definitions supplied (e.g. a template carries its own tabs).
+     * @description Builds the `dfsle.Tab` list from the wizard's field definitions, branching on the
+     *              definition's placement `mode`:
+     *               - 'position' (visual tagger): the tab is placed at an absolute
+     *                 documentSequence/pageNumber/x/y/width/height via `dfsle.Tab.Position` (API doc
+     *                 line 271) and attached with `tab.withPosition(...)` (API doc line 230).
+     *               - 'anchor' / null / legacy: the existing anchor path — the tab is dropped relative
+     *                 to a matched anchor string via `tab.withAnchor(...)`, applied to whatever document
+     *                 the anchor text appears in.
+     *              Both paths reuse the existing `toTab(...)` concrete-subtype mapper (SignHere/FullName/
+     *              DateSigned/Text — API doc lines 318–355). Because tabs are rebuilt per envelope inside
+     *              `sendOne`, the same placement set is inherited by every recipient's copy for free.
+     * @param definitions The Prepare-step tab definitions (type + mode + positional or anchor fields).
+     * @return List of dfsle.Tab; empty when no usable definitions supplied (e.g. a template carries its own tabs).
      */
     @TestVisible
     private static List<dfsle.Tab> buildTabs(List<DocuSignWizardDTO.TabDefinition> definitions) {
@@ -242,15 +260,55 @@ public with sharing class DocuSignBulkSendService {
         }
 
         for (DocuSignWizardDTO.TabDefinition definition : definitions) {
-            if (definition == null || String.isBlank(definition.anchorText)) {
+            if (definition == null) {
                 continue;
             }
-            dfsle.Tab tab = toTab(definition);
-            if (tab != null) {
-                tabs.add(tab.withAnchor(buildAnchor(definition)));
+            Boolean isPositional =
+                String.isNotBlank(definition.mode) && definition.mode.equalsIgnoreCase(MODE_POSITION);
+
+            if (isPositional) {
+                // ── Positional path (visual tagger) ──
+                // Require the coordinates the DocuSign Position ctor needs; skip incomplete placements
+                // rather than sending a tab at a defaulted/wrong location.
+                if (definition.pageNumber == null || definition.x == null || definition.y == null) {
+                    continue;
+                }
+                dfsle.Tab tab = toTab(definition);
+                if (tab != null) {
+                    tabs.add(tab.withPosition(buildPosition(definition)));
+                }
+            } else {
+                // ── Legacy anchor path (UNCHANGED) ──
+                if (String.isBlank(definition.anchorText)) {
+                    continue;
+                }
+                dfsle.Tab tab = toTab(definition);
+                if (tab != null) {
+                    tabs.add(tab.withAnchor(buildAnchor(definition)));
+                }
             }
         }
         return tabs;
+    }
+
+    /**
+     * @description Builds a positional `dfsle.Tab.Position` from a TabDefinition. All args are
+     *              Integer to match the constructor
+     *              `dfsle.Tab.Position(Integer documentSequence, Integer pageNumber, Integer x,
+     *              Integer y, Integer width, Integer height)` (API doc line 271). Null coordinates are
+     *              defended: documentSequence/page default to 1, x/y to 0, and width/height to the
+     *              DocuSign default signature-box dimensions so a placed tab always has a valid size.
+     * @param definition The positional tab definition (documentSequence/pageNumber/x/y/width/height).
+     * @return A configured dfsle.Tab.Position.
+     */
+    private static dfsle.Tab.Position buildPosition(DocuSignWizardDTO.TabDefinition definition) {
+        Integer documentSequence = definition.documentSequence == null ? 1 : definition.documentSequence;
+        Integer pageNumber = definition.pageNumber == null ? 1 : definition.pageNumber;
+        Integer x = definition.x == null ? 0 : definition.x;
+        Integer y = definition.y == null ? 0 : definition.y;
+        Integer width = definition.width == null ? DEFAULT_TAB_WIDTH : definition.width;
+        Integer height = definition.height == null ? DEFAULT_TAB_HEIGHT : definition.height;
+        return new dfsle.Tab.Position(documentSequence, pageNumber, x, y, width, height);
     }
 
     /**

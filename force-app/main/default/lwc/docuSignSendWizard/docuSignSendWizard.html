@@ -61,10 +61,24 @@
           </template>
 
           <template if:true={isPrepareStep}>
-            <c-docu-sign-prepare-step
-              tab-definitions={tabDefinitions}
-              ontabschange={handleTabsChange}
-            ></c-docu-sign-prepare-step>
+            <!-- A chosen DocuSign template carries its own predefined fields; the visual tagger is
+                 mutually exclusive with a template, so we show a short note instead. -->
+            <template if:true={usingTemplate}>
+              <div class="slds-text-heading_small slds-var-m-bottom_x-small">3. Prepare fields</div>
+              <p class="slds-text-body_regular slds-var-m-vertical_small">
+                The selected DocuSign template's predefined fields will be used. No manual field
+                placement is required.
+              </p>
+            </template>
+            <template if:false={usingTemplate}>
+              <c-docu-sign-visual-tagger
+                content-document-id={masterContentDocumentId}
+                document-sequence={masterDocumentSequence}
+                placed-fields={placedFields}
+                onfieldschange={handleFieldsChange}
+                onloaderror={handleTaggerLoadError}
+              ></c-docu-sign-visual-tagger>
+            </template>
           </template>
 
           <template if:true={isSendStep}>

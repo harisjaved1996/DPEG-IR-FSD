@@ -1,0 +1,63 @@
+:host {
+  /* The host is a positioned child; the box inside carries the absolute geometry. */
+  display: block;
+}
+
+.placed-field {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--slds-g-spacing-1, 0.25rem);
+  border: 1px dashed var(--slds-g-color-brand-base-50, #0070d2);
+  border-radius: var(--slds-g-radius-border-1, 0.125rem);
+  background: var(--slds-g-color-surface-container-1, rgba(0, 112, 210, 0.12));
+  color: var(--slds-g-color-on-surface-1, #032d60);
+  font-size: var(--slds-g-font-scale-neg-2, 0.6875rem);
+  line-height: 1.1;
+  cursor: move;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.placed-field_signhere {
+  border-color: var(--slds-g-color-brand-base-50, #0070d2);
+  background: var(--slds-g-color-surface-container-1, rgba(0, 112, 210, 0.12));
+}
+
+.placed-field_fullname {
+  border-color: var(--slds-g-color-accent-container-1, #2bafac);
+  background: var(--slds-g-color-accent-container-1, rgba(43, 175, 172, 0.12));
+}
+
+.placed-field_datesigned {
+  border-color: var(--slds-g-color-warning-base-40, #dd7a01);
+  background: var(--slds-g-color-warning-container-1, rgba(221, 122, 1, 0.12));
+}
+
+.placed-field__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.placed-field__remove {
+  flex: 0 0 auto;
+  margin-left: var(--slds-g-spacing-1, 0.25rem);
+  padding: 0;
+  width: 1rem;
+  height: 1rem;
+  border: none;
+  border-radius: var(--slds-g-radius-border-circle, 50%);
+  background: var(--slds-g-color-surface-1, #ffffff);
+  color: var(--slds-g-color-on-surface-2, #706e6b);
+  font-size: var(--slds-g-font-scale-neg-1, 0.75rem);
+  line-height: 1rem;
+  cursor: pointer;
+}
+
+.placed-field__remove:hover,
+.placed-field__remove:focus {
+  color: var(--slds-g-color-error-base-40, #ba0517);
+}
