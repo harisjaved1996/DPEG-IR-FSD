@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Transfer_Type__c</fullName>
-    <label>Transfer Type</label>
-    <description>Indicates whether the transfer moves part or all of the transferor's position.</description>
+    <description>Indicates whether the transfer moves part or all of the transferor&apos;s position.</description>
     <inlineHelpText>Partial transfers move some units; Full transfers move the entire position.</inlineHelpText>
-    <type>Picklist</type>
+    <label>Transfer Type</label>
+    <required>false</required>
     <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>

@@ -1,0 +1,58 @@
+[
+  {
+    "sobject": "Account",
+    "files": ["Account.json"]
+  },
+  {
+    "sobject": "Unison__Property__c",
+    "files": ["Unison__Property__c.json"]
+  },
+  {
+    "sobject": "Unison__Offering__c",
+    "files": ["Unison__Offering__c.json"]
+  },
+  {
+    "sobject": "Unison__Investment__c",
+    "files": ["Unison__Investment__c.json"]
+  },
+  {
+    "sobject": "Contact",
+    "files": ["Contact.json"]
+  },
+  {
+    "sobject": "Unison__Investing_Entity__c",
+    "files": ["Unison__Investing_Entity__c.json"]
+  },
+  {
+    "sobject": "Unison__Distribution_Batch__c",
+    "files": ["Unison__Distribution_Batch__c.json"]
+  },
+  {
+    "sobject": "Unison__Bank_Account__c",
+    "files": ["Unison__Bank_Account__c.json"]
+  },
+  {
+    "sobject": "Unison__Wire__c",
+    "files": ["Unison__Wire__c.json"]
+  },
+  {
+    "sobject": "Unison__Contribution__c",
+    "files": ["Unison__Contribution__c.json"]
+  },
+  {
+    "sobject": "Unison__Waitlist__c",
+    "files": ["Unison__Waitlist__c.json"]
+  },
+  {
+    "sobject": "Unison__Distribution__c",
+    "files": ["Unison__Distribution__c.json"]
+  },
+  {
+    "sobject": "Unison__Position__c",
+    "files": ["Unison__Position__c.json"]
+  },
+  {
+    "sobject": "Unison__Share_Transfer__c",
+    "files": ["Unison__Share_Transfer__c.json"]
+  }
+]

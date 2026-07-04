@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- ===== Distribution Batch object (namespaced Unison__Distribution_Batch__c,
+         referenced bare) — brings fields, compact layout, list views,
+         validation rules, buttons ===== -->
+    <types>
+        <members>Distribution_Batch__c</members>
+        <name>CustomObject</name>
+    </types>
+
+    <!-- ===== Custom Report Types (so reports deploy without dependency errors) ===== -->
+    <types>
+        <members>*</members>
+        <name>ReportType</name>
+    </types>
+
+    <!-- ===== Dashboards (Investor / Investments / Offerings + department + IR) ===== -->
+    <types>
+        <members>IR_Dashboards/Investor_Dashboard</members>
+        <members>IR_Dashboards/IR_Dashboard</members>
+        <members>IR_Dashboards/IR_Department_Dashboard</members>
+        <members>IR_Dashboards/odSsmsWjqifpOqOaWRArRvTPFBAYiV</members>
+        <members>IR_Dashboards/oqdpeKcyYJeCLYsSDLytJHvmNmtOzb</members>
+        <name>Dashboard</name>
+    </types>
+
+    <!-- ===== Reports (all IR business reports feeding the dashboards) ===== -->
+    <types>
+        <members>IRCommitmentsReports/Commitments_by_Date</members>
+        <members>IRCommitmentsReports/Commitments_by_Offering</members>
+        <members>IRCommitmentsReports/Commitments_XQZ</members>
+        <members>IRCommitmentsReports/Funded_Commitments</members>
+        <members>IRCommitmentsReports/Investor_Commitments_by_Status</members>
+        <members>IRContactsReports/Active_Vs_In_Active_Investors</members>
+        <members>IRContactsReports/Active_Vs_Inactive_On_Mobile</members>
+        <members>IRContactsReports/Active_Vs_Inactive_On_Portal</members>
+        <members>IRContactsReports/New_Contacts_Accounts_Report_6mB</members>
+        <members>IRContactsReports/Repeat_Investors</members>
+        <members>IRContactsReports/Top_5_Investors</members>
+        <members>IRContactsReports/Total_Investors</members>
+        <members>IRContributionsReports/Contributions_by_Date</members>
+        <members>IRContributionsReports/Contributions_by_Offering</members>
+        <members>IRContributionsReports/Contributions_by_Type</members>
+        <members>IRDistributionsReports/Distributions_by_Date</members>
+        <members>IRInvestingEntitiesReports/Investing_Entities_by_Type</members>
+        <members>IRInvestmentReports/Average_Pricing_by_Period</members>
+        <members>IRInvestmentReports/Average_Returns_by_Status</members>
+        <members>IRInvestmentReports/Investment_Amount_by_Status</members>
+        <members>IRInvestmentReports/Investment_Key_Terms</members>
+        <members>IRInvestmentReports/Investments_by_Status</members>
+        <members>IRLeadsReports/Leads_by_Source_CP_Closed_Last5Months</members>
+        <members>IRLeadsReports/Leads_Create_Profile_or_Closed_by_Month</members>
+        <members>IRLeadsReports/Pending_Investors</members>
+        <members>IROfferingsReports/Average_Minimum_Investment</members>
+        <members>IROfferingsReports/Offering_Target_Raise</members>
+        <members>IROfferingsReports/Offerings_by_Status</members>
+        <members>IROfferingsReports/Target_Raise_by_Offering</members>
+        <members>IRPropertiesReports/Properties_by_Type</members>
+        <members>IRWaitlistReports/Waitlist_Investors_by_Offering</members>
+        <members>IRWaitlistReports/Waitlist_Records</members>
+        <name>Report</name>
+    </types>
+
+    <version>66.0</version>
+</Package>

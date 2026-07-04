@@ -3,16 +3,112 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irOnboarding</componentName>
-                <identifier>irOnboarding_main_1</identifier>
+                <componentName>onboardingParentStats</componentName>
+                <identifier>Unison_onboardingParentStats</identifier>
             </componentInstance>
         </itemInstances>
-        <name>main</name>
+        <name>region1</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>onboardingContactsList</componentName>
+                <identifier>Unison_onboardingContactsList</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-db51c8b4-810f-4980-aada-cf13641fa87b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-db51c8b4-810f-4980-aada-cf13641fa87b</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Recent Onboarding</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab3</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ebdd886c-9f12-4041-9212-a45bb3d04f12</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Tabs</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-ebdd886c-9f12-4041-9212-a45bb3d04f12</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region2</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>onboardingCardParent</componentName>
+                <identifier>Unison_onboardingCardParent</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-02351a3e-3bb2-4e74-aa57-ff4137247f0b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-02351a3e-3bb2-4e74-aa57-ff4137247f0b</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Onboarding Health Check</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-b556e411-a317-4021-9cc8-7435417bcd2a</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Tabs</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-b556e411-a317-4021-9cc8-7435417bcd2a</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>IR Onboarding</masterLabel>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:appHomeTemplateHeaderTwoColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>

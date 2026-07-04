@@ -61,6 +61,12 @@
                 <identifier>RecordInvesting_Entity_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Contact__c</fieldItem>
+                <identifier>RecordUnison__Contact__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-wl-left</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -145,6 +151,10 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <name>Facet-509170b2-08d5-43ac-bae8-488eb5d0d7e5</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -157,6 +167,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>detailTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-509170b2-08d5-43ac-bae8-488eb5d0d7e5</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Photos &amp; Videos</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab2</identifier>
             </componentInstance>
         </itemInstances>
         <name>maintabs</name>

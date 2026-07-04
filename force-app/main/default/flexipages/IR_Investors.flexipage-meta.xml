@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irInvestorList</componentName>
+                <componentName>irInvestorList</componentName>
                 <identifier>irInvestorList_main_1</identifier>
             </componentInstance>
         </itemInstances>

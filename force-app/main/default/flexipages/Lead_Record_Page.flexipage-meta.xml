@@ -85,6 +85,16 @@
                 <identifier>RecordStatusField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Accredited__c</fieldItem>
+                <identifier>RecordAccredited_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-9952ad2e-c4f9-4485-84d1-5fd2efd35904</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -117,16 +127,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.LeadSource</fieldItem>
                 <identifier>RecordLeadSourceField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Accredited__c</fieldItem>
-                <identifier>RecordAccredited_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-57710f07-1525-49e0-b523-9fe5a90512fc</name>

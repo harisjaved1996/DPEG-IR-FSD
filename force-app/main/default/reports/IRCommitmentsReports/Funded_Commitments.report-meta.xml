@@ -7,19 +7,30 @@
     <filter>
         <criteriaItems>
             <column>Commitment__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Funded</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
         <field>Commitment__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Funded Commitments</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
     <reportType>CustomEntity$Commitment__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Commitment__c.Commitment_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

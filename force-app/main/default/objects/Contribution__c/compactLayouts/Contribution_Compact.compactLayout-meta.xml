@@ -3,6 +3,5 @@
     <fullName>Contribution_Compact</fullName>
     <fields>Name</fields>
     <fields>Amount__c</fields>
-    <fields>Match_Status__c</fields>
     <label>Contribution Compact Layout</label>
 </CompactLayout>

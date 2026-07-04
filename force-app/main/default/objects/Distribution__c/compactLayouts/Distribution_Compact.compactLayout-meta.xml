@@ -3,6 +3,6 @@
     <fullName>Distribution_Compact</fullName>
     <fields>Name</fields>
     <fields>Amount__c</fields>
-    <fields>ACH_Status__c</fields>
+    <fields>Paid_By__c</fields>
     <label>Distribution Compact Layout</label>
 </CompactLayout>

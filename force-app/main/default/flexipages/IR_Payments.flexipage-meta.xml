@@ -3,16 +3,116 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irPayments</componentName>
-                <identifier>irPayments_main_1</identifier>
+                <componentName>paymentActionCom</componentName>
+                <identifier>Unison_paymentActionCom</identifier>
             </componentInstance>
         </itemInstances>
-        <name>main</name>
+        <name>region1</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>paymentListCom</componentName>
+                <identifier>Unison_paymentListCom</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ec83f4fe-e065-42db-9cfe-77610d7a2363</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-ec83f4fe-e065-42db-9cfe-77610d7a2363</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Linked Accounts</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-2f82c7f4-0e46-4291-a481-df980ba5b20e</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Tabs</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-2f82c7f4-0e46-4291-a481-df980ba5b20e</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region2</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>paymentStatsParent</componentName>
+                <identifier>Unison_paymentStatsParent</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-bc3e7190-90f6-46fb-8a89-d4d8b04cea8f</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-bc3e7190-90f6-46fb-8a89-d4d8b04cea8f</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Account Summary</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-cca26aa8-765c-4170-a129-acaac869912e</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Tabs</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-cca26aa8-765c-4170-a129-acaac869912e</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>IR Payments</masterLabel>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:appHomeTemplateHeaderTwoColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>

@@ -38,14 +38,14 @@
             <dashboardComponent>
                 <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
                 <chartSummary>
-                    <aggregate>Average</aggregate>
-                    <column>Offering__c.Minimum_Investment__c</column>
+                    <aggregate>Sum</aggregate>
+                    <column>Offering__c.Target_Raise__c</column>
                 </chartSummary>
                 <componentType>Metric</componentType>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
-                <header>Average Minimum Investments In Offerings</header>
+                <header>Target Raise</header>
                 <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
                 <indicatorHighColor>#00716B</indicatorHighColor>
@@ -127,19 +127,19 @@
                 <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
                 <chartSummary>
                     <aggregate>Sum</aggregate>
-                    <column>Offering__c.Target_Raise__c</column>
+                    <column>Commitment__c.Committed_Amount__c</column>
                 </chartSummary>
                 <componentType>Metric</componentType>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
-                <header>Target Raise</header>
+                <header>Total Commitments</header>
                 <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
-                <report>IROfferingsReports/Average_Minimum_Investment</report>
+                <report>IRCommitmentsReports/Commitments_XQZ</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>5</rowIndex>
@@ -189,20 +189,20 @@
             <dashboardComponent>
                 <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
                 <chartSummary>
-                    <aggregate>Sum</aggregate>
-                    <column>Commitment__c.Committed_Amount__c</column>
+                    <aggregate>Average</aggregate>
+                    <column>Offering__c.Minimum_Investment__c</column>
                 </chartSummary>
                 <componentType>Metric</componentType>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
-                <header>Total Commitments</header>
+                <header>Average Minimum Investments In Offerings</header>
                 <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
-                <report>IRCommitmentsReports/Commitments_XQZ</report>
+                <report>IROfferingsReports/Average_Minimum_Investment</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>10</rowIndex>

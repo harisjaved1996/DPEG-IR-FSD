@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irDistributions</componentName>
+                <componentName>irDistributions</componentName>
                 <identifier>irDistributions_main_1</identifier>
             </componentInstance>
         </itemInstances>

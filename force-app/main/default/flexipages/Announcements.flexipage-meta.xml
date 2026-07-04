@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:announcementsCards</componentName>
+                <componentName>announcementsCards</componentName>
                 <identifier>announcementsCards_header_1</identifier>
             </componentInstance>
         </itemInstances>
@@ -101,7 +101,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:totalAnnoucementsCom</componentName>
+                <componentName>totalAnnoucementsCom</componentName>
                 <identifier>total_lwc_1</identifier>
             </componentInstance>
         </itemInstances>
@@ -111,7 +111,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:reportAnnouncementsCom</componentName>
+                <componentName>reportAnnouncementsCom</componentName>
                 <identifier>report_lwc_1</identifier>
             </componentInstance>
         </itemInstances>
@@ -121,7 +121,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:opportunityAnnouncementsCom</componentName>
+                <componentName>opportunityAnnouncementsCom</componentName>
                 <identifier>opportunity_lwc_1</identifier>
             </componentInstance>
         </itemInstances>
@@ -131,7 +131,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:exitAnnouncementsCom</componentName>
+                <componentName>exitAnnouncementsCom</componentName>
                 <identifier>exit_lwc_1</identifier>
             </componentInstance>
         </itemInstances>
@@ -141,7 +141,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:investorEventAnnouncementsCom</componentName>
+                <componentName>investorEventAnnouncementsCom</componentName>
                 <identifier>event_lwc_1</identifier>
             </componentInstance>
         </itemInstances>

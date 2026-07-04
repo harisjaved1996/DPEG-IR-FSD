@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Bank_Account__c",
+        "referenceId": "Unison__Bank_Account__cRef1"
+      },
+      "Name": "Checking 9880",
+      "Unison__Bank_Description__c": "TRIANGLE Y SHOPS",
+      "Unison__Routing_Number__c": 113,
+      "Unison__Bank_Institution_Name__c": "Community Bank Of Texas NA",
+      "Unison__Account_Number__c": "03223232112121",
+      "Unison__Account_Type__c": "Business Checking",
+      "Unison__Investment__c": "@Unison__Investment__cRef1",
+      "Unison__Entity_Name__c": "Vickburg, LP",
+      "Unison__Balance__c": 2500000,
+      "Unison__Entity_Address__c": "11333 Fountain Lake Dr, Stafford, TX"
+    }
+  ]
+}

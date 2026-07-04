@@ -12,11 +12,6 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Multifamily</fullName>
-                <default>false</default>
-                <label>Multifamily</label>
-            </value>
-            <value>
                 <fullName>Retail</fullName>
                 <default>false</default>
                 <label>Retail</label>

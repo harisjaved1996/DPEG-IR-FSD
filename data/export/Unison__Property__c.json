@@ -1,0 +1,208 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef1"
+      },
+      "Name": "DPEG Vicksburg, LP",
+      "Unison__Address__c": "1420 Heights Blvd, Houston, TX 77008, USA",
+      "Unison__County__c": "USA",
+      "Unison__Property_Type__c": "Retail",
+      "Unison__Rentable_SqFt__c": 635325,
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 200,
+      "Unison__Year_Built__c": 2020,
+      "Unison__Acquisition_Date__c": "2026-06-01",
+      "Unison__Square_Feet__c": 635325,
+      "Unison__Land_Acres__c": 45.75
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef2"
+      },
+      "Name": "Magnolia Crossing — DPEG Fund LP",
+      "Unison__Address__c": "1420 Heights Blvd, Houston, TX 77008, USA",
+      "Unison__County__c": "USA",
+      "Unison__Property_Type__c": "Other",
+      "Unison__Rentable_SqFt__c": 635325,
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 200,
+      "Unison__Acquisition_Date__c": "2026-06-01",
+      "Unison__Square_Feet__c": 635325,
+      "Unison__Land_Acres__c": 45.75
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef3"
+      },
+      "Name": "Parkview Apartments",
+      "Unison__Annual_NOI__c": 1250000,
+      "Unison__Occupancy_Pct__c": 94.5,
+      "Unison__Property_Type__c": "Multi-Family",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 220,
+      "Unison__Acquisition_Date__c": "2026-06-26",
+      "Unison__Land_Acres__c": 65
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef4"
+      },
+      "Name": "Lakeside Residences",
+      "Unison__Annual_NOI__c": 980000,
+      "Unison__Occupancy_Pct__c": 91,
+      "Unison__Property_Type__c": "Multi-Family",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 168,
+      "Unison__Acquisition_Date__c": "2026-06-10",
+      "Unison__Land_Acres__c": 70
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef5"
+      },
+      "Name": "Maple Court Apartments",
+      "Unison__Annual_NOI__c": 1420000,
+      "Unison__Occupancy_Pct__c": 96.2,
+      "Unison__Property_Type__c": "Single-Family",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 250,
+      "Unison__Acquisition_Date__c": "2026-07-02",
+      "Unison__Land_Acres__c": 90
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef6"
+      },
+      "Name": "Gateway Logistics Center",
+      "Unison__Annual_NOI__c": 2100000,
+      "Unison__Occupancy_Pct__c": 100,
+      "Unison__Property_Type__c": "Industrial",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 4,
+      "Unison__Acquisition_Date__c": "2026-06-18",
+      "Unison__Land_Acres__c": 60
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef7"
+      },
+      "Name": "Northpoint Distribution Hub",
+      "Unison__Annual_NOI__c": 1750000,
+      "Unison__Occupancy_Pct__c": 98,
+      "Unison__Property_Type__c": "Industrial",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 6,
+      "Unison__Acquisition_Date__c": "2026-06-25",
+      "Unison__Land_Acres__c": 55
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef8"
+      },
+      "Name": "Summit Office Plaza",
+      "Unison__Annual_NOI__c": 1580000,
+      "Unison__Occupancy_Pct__c": 88.5,
+      "Unison__Property_Type__c": "Office",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 32,
+      "Unison__Acquisition_Date__c": "2026-07-02",
+      "Unison__Land_Acres__c": 95
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef9"
+      },
+      "Name": "Riverside Corporate Center",
+      "Unison__Annual_NOI__c": 1200000,
+      "Unison__Occupancy_Pct__c": 79,
+      "Unison__Property_Type__c": "Office",
+      "Unison__Status__c": "Disposed",
+      "Unison__Units__c": 24,
+      "Unison__Acquisition_Date__c": "2026-06-29",
+      "Unison__Land_Acres__c": 85
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef10"
+      },
+      "Name": "Union Square Mixed-Use",
+      "Unison__Annual_NOI__c": 1650000,
+      "Unison__Occupancy_Pct__c": 92,
+      "Unison__Property_Type__c": "Mixed-Use",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 45,
+      "Unison__Acquisition_Date__c": "2026-07-02",
+      "Unison__Land_Acres__c": 98
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef11"
+      },
+      "Name": "QuickStop Fuel & Market",
+      "Unison__Annual_NOI__c": 420000,
+      "Unison__Occupancy_Pct__c": 100,
+      "Unison__Property_Type__c": "Land",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 1,
+      "Unison__Acquisition_Date__c": "2026-06-29",
+      "Unison__Land_Acres__c": 75
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef12"
+      },
+      "Name": "Crossroads Strip Center",
+      "Unison__Annual_NOI__c": 760000,
+      "Unison__Occupancy_Pct__c": 90,
+      "Unison__Property_Type__c": "Commercial",
+      "Unison__Status__c": "Active",
+      "Unison__Units__c": 14,
+      "Unison__Acquisition_Date__c": "2026-06-18",
+      "Unison__Land_Acres__c": 50
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef13"
+      },
+      "Name": "Lakeview Apartments",
+      "Unison__Address__c": "1200 Lakeview Dr",
+      "Unison__County__c": "USA",
+      "Unison__Property_Type__c": "Multi-Family",
+      "Unison__Status__c": "Active",
+      "Unison__Submarket__c": "Austin",
+      "Unison__Units__c": 220,
+      "Unison__Year_Built__c": 2015,
+      "Unison__Acquisition_Date__c": "2026-07-02",
+      "Unison__Land_Acres__c": 80
+    },
+    {
+      "attributes": {
+        "type": "Unison__Property__c",
+        "referenceId": "Unison__Property__cRef14"
+      },
+      "Name": "Sunset Plaza",
+      "Unison__Address__c": "4500 Sunset Blvd",
+      "Unison__County__c": "USA",
+      "Unison__Property_Type__c": "Retail",
+      "Unison__Status__c": "Active",
+      "Unison__Submarket__c": "Dallas",
+      "Unison__Year_Built__c": 2008,
+      "Unison__Acquisition_Date__c": "2026-06-13",
+      "Unison__Land_Acres__c": 99
+    }
+  ]
+}

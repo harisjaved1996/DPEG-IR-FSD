@@ -2,5 +2,8 @@
 <CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Share_Transfer_Compact</fullName>
     <fields>Name</fields>
+    <fields>Investment__c</fields>
+    <fields>Transferee_Entity__c</fields>
+    <fields>Transferor_Entity__c</fields>
     <label>Share Transfer Compact Layout</label>
 </CompactLayout>

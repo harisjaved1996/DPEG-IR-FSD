@@ -2,6 +2,8 @@
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <brand>
         <headerColor>#032D60</headerColor>
+        <logo>ChatGPT_Image_Jun_25_2026_05_51_551</logo>
+        <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
     <description>Investor Relations application for DPEG — manages offerings, investments, distributions, share transfers, documents, and investor onboarding.</description>

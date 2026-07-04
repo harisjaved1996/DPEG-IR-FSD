@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Status__c</fullName>
-    <label>Status</label>
     <description>Lifecycle status of the investment position.</description>
     <inlineHelpText>Active for live positions; Exited, Partially Transferred, or Transferred as the position changes hands.</inlineHelpText>
-    <type>Picklist</type>
+    <label>Status</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
@@ -17,19 +18,21 @@
                 <label>Active</label>
             </value>
             <value>
-                <fullName>Exited</fullName>
+                <fullName>Closed</fullName>
                 <default>false</default>
-                <label>Exited</label>
+                <label>Closed</label>
             </value>
             <value>
-                <fullName>Partially Transferred</fullName>
+                <fullName>Acquisition</fullName>
                 <default>false</default>
-                <label>Partially Transferred</label>
+                <isActive>false</isActive>
+                <label>Acquisition</label>
             </value>
             <value>
-                <fullName>Transferred</fullName>
+                <fullName>Funded</fullName>
                 <default>false</default>
-                <label>Transferred</label>
+                <isActive>false</isActive>
+                <label>Funded</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irShareTransfers</componentName>
+                <componentName>irShareTransfers</componentName>
                 <identifier>irShareTransfers_main_1</identifier>
             </componentInstance>
         </itemInstances>

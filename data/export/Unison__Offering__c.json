@@ -1,0 +1,259 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef1"
+      },
+      "Name": "Magnolia Crossing — DPEG Fund LP",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Property__c": "@Unison__Property__cRef1",
+      "Unison__Status__c": "Draft",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5,
+      "Unison__Price_Per_Share__c": 50000,
+      "Unison__Investment_Period__c": "3 Years",
+      "Unison__Total_Shares__c": 1000
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef2"
+      },
+      "Name": "Cypress Grove — DPEG MF Fund VII",
+      "Unison__Amount_Raised__c": 0,
+      "Unison__Committed_Investor_Count__c": 0,
+      "Unison__GP_Entity__c": "DPEG GP II LLC",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Pre-Launch",
+      "Unison__Target_Raise__c": 21000000,
+      "Unison__Total_Committed__c": 0,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 11.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef3"
+      },
+      "Name": "Beltway Plaza Co-Invest",
+      "Unison__Amount_Raised__c": 9400000,
+      "Unison__Committed_Investor_Count__c": 12,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2024-06-01",
+      "Unison__Minimum_Investment__c": 25000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Fully Subscribed",
+      "Unison__Target_Raise__c": 7500000,
+      "Unison__Total_Committed__c": 9400000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 13
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef4"
+      },
+      "Name": "Westheimer C-Stores Refi",
+      "Unison__Amount_Raised__c": 4200000,
+      "Unison__Committed_Investor_Count__c": 64,
+      "Unison__GP_Entity__c": "DPEG GP III LLC",
+      "Unison__Launch_Date__c": "2023-09-01",
+      "Unison__Minimum_Investment__c": 25000,
+      "Unison__Overbook_Multiplier__c": 1,
+      "Unison__Status__c": "Closed Funded",
+      "Unison__Target_Raise__c": 4200000,
+      "Unison__Total_Committed__c": 4200000,
+      "Unison__Transfers_Permitted__c": true,
+      "Unison__Target_IRR__c": 12
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef5"
+      },
+      "Name": "Heights Apartments Q1 Dist",
+      "Unison__Amount_Raised__c": 8800000,
+      "Unison__Committed_Investor_Count__c": 312,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2022-01-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1,
+      "Unison__Status__c": "Investment Active",
+      "Unison__Target_Raise__c": 8800000,
+      "Unison__Total_Committed__c": 8800000,
+      "Unison__Transfers_Permitted__c": true,
+      "Unison__Target_IRR__c": 10.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef6"
+      },
+      "Name": "King of Prussia Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Draft",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef7"
+      },
+      "Name": "Dream Plaza Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Pre-Launch",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef8"
+      },
+      "Name": "Millenia Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Active Fundraising",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef9"
+      },
+      "Name": "Galleria Heights Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Fully Subscribed",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef10"
+      },
+      "Name": "Riverside Commons Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Signatures Pending",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef11"
+      },
+      "Name": "Beacon Hill Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Ready to Activate",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef12"
+      },
+      "Name": "Summit Pointe Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Investment Active",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    },
+    {
+      "attributes": {
+        "type": "Unison__Offering__c",
+        "referenceId": "Unison__Offering__cRef13"
+      },
+      "Name": "Harbor View Offering",
+      "Unison__Amount_Raised__c": 8600000,
+      "Unison__Closing_Date__c": "2026-07-10",
+      "Unison__Committed_Investor_Count__c": 70,
+      "Unison__GP_Entity__c": "DPEG GP I LLC",
+      "Unison__Launch_Date__c": "2025-10-01",
+      "Unison__Minimum_Investment__c": 50000,
+      "Unison__Overbook_Multiplier__c": 1.25,
+      "Unison__Status__c": "Closed Funded",
+      "Unison__Target_Raise__c": 12000000,
+      "Unison__Total_Committed__c": 9900000,
+      "Unison__Transfers_Permitted__c": false,
+      "Unison__Target_IRR__c": 10,
+      "Unison__Cashon_Cash__c": 7.5
+    }
+  ]
+}

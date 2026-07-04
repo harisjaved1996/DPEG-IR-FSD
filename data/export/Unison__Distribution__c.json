@@ -1,0 +1,59 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "Unison__Distribution__cRef1"
+      },
+      "Name": "DIST-2400",
+      "Unison__ACH_Status__c": "Paid",
+      "Unison__Amount__c": 40000,
+      "Unison__Distribution_Batch__c": "@Unison__Distribution_Batch__cRef3",
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Payment_Method__c": "ACH",
+      "Unison__Contact__c": "@ContactRef27",
+      "Unison__Investment__c": "@Unison__Investment__cRef1",
+      "Unison__Distribution_Period__c": "July 2026",
+      "Unison__Description__c": "SIXTH MONTHLY RENTAL INCOME DISTRIBUTION - July 2026",
+      "Unison__Source__c": "Cash Flow",
+      "Unison__Type__c": "Preferred Return",
+      "Unison__Paid_By__c": "ACH"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "Unison__Distribution__cRef2"
+      },
+      "Name": "DIST-2401",
+      "Unison__ACH_Status__c": "Paid",
+      "Unison__Amount__c": 17000,
+      "Unison__Distribution_Batch__c": "@Unison__Distribution_Batch__cRef3",
+      "Unison__Distribution_Date__c": "2026-01-15",
+      "Unison__Payment_Method__c": "ACH"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "Unison__Distribution__cRef3"
+      },
+      "Name": "DIST-2402",
+      "Unison__ACH_Status__c": "Paid",
+      "Unison__Amount__c": 12000,
+      "Unison__Distribution_Batch__c": "@Unison__Distribution_Batch__cRef3",
+      "Unison__Distribution_Date__c": "2026-02-15",
+      "Unison__Payment_Method__c": "Cheque"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution__c",
+        "referenceId": "Unison__Distribution__cRef4"
+      },
+      "Name": "DIST-2403",
+      "Unison__ACH_Status__c": "Paid",
+      "Unison__Amount__c": 16000,
+      "Unison__Distribution_Batch__c": "@Unison__Distribution_Batch__cRef3",
+      "Unison__Distribution_Date__c": "2026-03-15",
+      "Unison__Payment_Method__c": "ACH"
+    }
+  ]
+}

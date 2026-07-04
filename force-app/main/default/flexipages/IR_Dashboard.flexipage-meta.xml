@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irDashboard</componentName>
+                <componentName>irDashboard</componentName>
                 <identifier>irDashboard_main_1</identifier>
             </componentInstance>
         </itemInstances>

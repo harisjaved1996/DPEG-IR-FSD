@@ -3,16 +3,136 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>Unison:irConsole</componentName>
-                <identifier>irConsole_main_1</identifier>
+                <componentName>investorDashboardCards</componentName>
+                <identifier>Unison_investorDashboardCards</identifier>
             </componentInstance>
         </itemInstances>
-        <name>main</name>
+        <name>region1</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>irOfferingsList</componentName>
+                <identifier>Unison_irOfferingsList</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-a8153c84-0955-4067-9f2d-7db97f92fbdb</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>irInvestmentsList</componentName>
+                <identifier>Unison_irInvestmentsList</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-076f811a-e13f-4b9e-a5e6-e79af6cafc03</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>onboardingContactsList</componentName>
+                <identifier>Unison_onboardingContactsList</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-b5ff3001-4962-49fb-9163-326bca49eeb0</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-a8153c84-0955-4067-9f2d-7db97f92fbdb</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Active Offerings</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-076f811a-e13f-4b9e-a5e6-e79af6cafc03</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Active Investments</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-b5ff3001-4962-49fb-9163-326bca49eeb0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Recent Onboarding</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab3</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-5c6ce66a-6187-4a1f-b8b8-4b4ea5f4ecaa</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Tabs</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-5c6ce66a-6187-4a1f-b8b8-4b4ea5f4ecaa</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region2</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>onboardingCardParent</componentName>
+                <identifier>Unison_onboardingCardParent</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>valuableInvestors</componentName>
+                <identifier>Unison_valuableInvestors</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>irActionQueue</componentName>
+                <identifier>Unison_irActionQueue</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>IR Console</masterLabel>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:appHomeTemplateHeaderTwoColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>

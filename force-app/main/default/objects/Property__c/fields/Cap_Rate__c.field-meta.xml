@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Cap_Rate__c</fullName>
-    <label>Cap Rate</label>
     <description>Capitalization rate (NOI divided by value) for the property.</description>
     <inlineHelpText>Enter the cap rate as a percentage.</inlineHelpText>
-    <type>Percent</type>
+    <label>Cap Rate</label>
     <precision>5</precision>
+    <required>false</required>
     <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
 </CustomField>

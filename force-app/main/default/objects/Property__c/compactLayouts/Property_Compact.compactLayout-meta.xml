@@ -3,7 +3,6 @@
     <fullName>Property_Compact</fullName>
     <fields>Name</fields>
     <fields>Property_Type__c</fields>
-    <fields>Occupancy_Pct__c</fields>
-    <fields>Cap_Rate__c</fields>
+    <fields>Units__c</fields>
     <label>Property Compact Layout</label>
 </CompactLayout>

@@ -16,20 +16,21 @@
         <field>Contact.Distribution__c</field>
     </columns>
     <description>Top investors by contribution — feeds the Top 5 Investors table on the Investor Dashboard.</description>
-    <filter>
-        <criteriaItems>
-            <column>Contact.Contribution__c</column>
-            <operator>greaterThan</operator>
-            <value>0</value>
-        </criteriaItems>
-    </filter>
     <format>Tabular</format>
     <name>Top 5 Investors</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
     <reportType>ContactList</reportType>
-    <scope>organization</scope>
+    <scope>my</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <sortColumn>Contact.Contribution__c</sortColumn>
     <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>LAST_ACTIVITY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
 </Report>

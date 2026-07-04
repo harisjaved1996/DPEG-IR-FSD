@@ -1,0 +1,58 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "Unison__Distribution_Batch__cRef1"
+      },
+      "Name": "DB-018",
+      "Unison__ACH_Amount__c": 890000,
+      "Unison__Approval_Count__c": 0,
+      "Unison__Batch_Type__c": "Exit",
+      "Unison__Cheque_Amount__c": 310000,
+      "Unison__Distribution_Date__c": "2026-04-28",
+      "Unison__Investor_Count__c": 28,
+      "Unison__Offering__c": "@Unison__Offering__cRef1",
+      "Unison__Status__c": "Pending Approval",
+      "Unison__Total_Amount__c": 1200000,
+      "Unison__Investment__c": "@Unison__Investment__cRef13"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "Unison__Distribution_Batch__cRef2"
+      },
+      "Name": "DB-019",
+      "Unison__ACH_Amount__c": 107000,
+      "Unison__Approval_Count__c": 2,
+      "Unison__Batch_Type__c": "Monthly",
+      "Unison__Cheque_Amount__c": 35000,
+      "Unison__Distribution_Date__c": "2026-03-31",
+      "Unison__Investor_Count__c": 64,
+      "Unison__Offering__c": "@Unison__Offering__cRef4",
+      "Unison__Status__c": "Completed",
+      "Unison__Total_Amount__c": 142000,
+      "Unison__Investment__c": "@Unison__Investment__cRef10"
+    },
+    {
+      "attributes": {
+        "type": "Unison__Distribution_Batch__c",
+        "referenceId": "Unison__Distribution_Batch__cRef3"
+      },
+      "Name": "DB-020",
+      "Unison__ACH_Amount__c": 365000,
+      "Unison__Approval_Count__c": 2,
+      "Unison__Batch_Type__c": "Quarterly",
+      "Unison__Cheque_Amount__c": 121000,
+      "Unison__Distribution_Date__c": "2026-04-15",
+      "Unison__Investor_Count__c": 312,
+      "Unison__Status__c": "Completed",
+      "Unison__Total_Amount__c": 486000,
+      "Unison__Investment__c": "@Unison__Investment__cRef1",
+      "Unison__Distribution_Period__c": "July 2026",
+      "Unison__Description__c": "SIXTH MONTHLY RENTAL INCOME DISTRIBUTION - July 2026",
+      "Unison__Source__c": "Cash Flow",
+      "Unison__Type__c": "Preferred Return"
+    }
+  ]
+}
