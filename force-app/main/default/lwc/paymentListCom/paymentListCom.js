@@ -1,4 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const COLUMNS = [
   {
@@ -14,14 +16,17 @@ const COLUMNS = [
   { label: "Entity Name", fieldName: "entityName", type: "text" }
 ];
 
-export default class PaymentListCom extends LightningElement {
+// Prototype: every row links to this one real Bank Account record, looked up by
+// Name at runtime (no hardcoded Id) so it works in any org.
+const TARGET_BANK_ACCOUNT_NAME = "Checking 9880";
+
+export default class PaymentListCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
   accounts = [
     {
       id: 1,
       nickname: "Checking …9880",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "TRIANGLE Y SHOPS",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -35,7 +40,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 2,
       nickname: "Checking …9079",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "ANSERA DEV",
       institution: "Simmons Bank",
       routing: "082900432",
@@ -49,7 +53,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 3,
       nickname: "Checking …5177",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "VICKSBURG",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -63,7 +66,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 4,
       nickname: "Checking …7503",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "HWY 6 Y SHOPS",
       institution: "Wells Fargo",
       routing: "121000248",
@@ -77,7 +79,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 5,
       nickname: "Checking …4839",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "PEARLAND ENT",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -91,7 +92,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 6,
       nickname: "Checking …4169",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "PARKWEST Y SHOPS",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -105,7 +105,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 7,
       nickname: "Checking …5979",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "10 KATY DEV",
       institution: "Community Bank Of Texas NA",
       routing: "113111983",
@@ -119,7 +118,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 8,
       nickname: "Checking …0043",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "249 JONES LLC",
       institution: "American Bank",
       routing: "114903284",
@@ -133,7 +131,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 9,
       nickname: "Checking …9476",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "B CENTRE ENT",
       institution: "Allegiance Bank",
       routing: "113025723",
@@ -147,7 +144,6 @@ export default class PaymentListCom extends LightningElement {
     {
       id: 10,
       nickname: "Checking …1749",
-      nicknameUrl: "/lightning/r/Unison__Bank_Account__c/a0NFW001MYm8JM42YM/view",
       bankDescription: "CAVALCADE 59 DEV",
       institution: "Origin Bank",
       routing: "111102758",
@@ -160,7 +156,61 @@ export default class PaymentListCom extends LightningElement {
     }
   ];
 
+  // Generated at runtime from the resolved Bank Account Id; every row links here.
+  nicknameUrl;
+
   get rows() {
-    return this.accounts;
+    return this.accounts.map((account) => ({
+      ...account,
+      nicknameUrl: this.nicknameUrl
+    }));
+  }
+
+  get bankAccountVariables() {
+    return { name: TARGET_BANK_ACCOUNT_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query bankAccountByName($name: String) {
+        uiapi {
+          query {
+            Unison__Bank_Account__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$bankAccountVariables"
+  })
+  wiredBankAccount({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Bank_Account__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      this.nicknameUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Bank_Account__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }

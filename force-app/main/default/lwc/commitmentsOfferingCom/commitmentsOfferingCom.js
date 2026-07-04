@@ -1,4 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
@@ -15,9 +17,10 @@ function pillStyle(value) {
     : PILL_BASE + "background:#ecebea;color:#5c5c5c;";
 }
 
-// Demo links — every row points to one Contact / Investing Entity record.
-const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
-const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+// Prototype: every row links to one real Contact / Investing Entity record,
+// looked up by Name at runtime (no hardcoded Id) so it works in any org.
+const TARGET_CONTACT_LAST_NAME = "Greentree";
+const TARGET_INVESTING_ENTITY_NAME = "Greentree LLC";
 
 const COLUMNS = [
   {
@@ -59,9 +62,7 @@ const DATA = [
     commitmentDate: "05/11/2025",
     committedAmount: "$200,000.00",
     contact: "A. Greentree",
-    contactUrl: CONTACT_URL,
     investingEntity: "18825 Sea, LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "Yes",
     ppmSigned: "Yes"
   },
@@ -72,9 +73,7 @@ const DATA = [
     commitmentDate: "12/11/2025",
     committedAmount: "$100,000.00",
     contact: "R. Thompson",
-    contactUrl: CONTACT_URL,
     investingEntity: "1988 Venture LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "Yes",
     ppmSigned: "No"
   },
@@ -85,9 +84,7 @@ const DATA = [
     commitmentDate: "28/10/2025",
     committedAmount: "$500,000.00",
     contact: "P. Sharma",
-    contactUrl: CONTACT_URL,
     investingEntity: "24 Seven REH, LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     ppmSent: "No",
     ppmSigned: "No"
   }
@@ -100,14 +97,27 @@ const MEMBERSHIP_OPTIONS = [
   { label: "Manager", value: "Manager" }
 ];
 
-export default class CommitmentsOfferingCom extends LightningElement {
+const BASE_ROWS = DATA.map((row) => ({
+  ...row,
+  funded: true,
+  ppmSentStyle: pillStyle(row.ppmSent),
+  ppmSignedStyle: pillStyle(row.ppmSigned)
+}));
+
+export default class CommitmentsOfferingCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA.map((row) => ({
-    ...row,
-    funded: true,
-    ppmSentStyle: pillStyle(row.ppmSent),
-    ppmSignedStyle: pillStyle(row.ppmSigned)
-  }));
+
+  // Generated at runtime from the resolved record Ids; every row links here.
+  contactUrl;
+  investingEntityUrl;
+
+  get data() {
+    return BASE_ROWS.map((row) => ({
+      ...row,
+      contactUrl: this.contactUrl,
+      investingEntityUrl: this.investingEntityUrl
+    }));
+  }
 
   membershipOptions = MEMBERSHIP_OPTIONS;
 
@@ -175,5 +185,101 @@ export default class CommitmentsOfferingCom extends LightningElement {
     const { commitmentNumber } = event.detail.row;
     // Placeholder: handle `name` (edit/delete) for `commitmentNumber`.
     return { name, commitmentNumber };
+  }
+
+  get contactVariables() {
+    return { lastName: TARGET_CONTACT_LAST_NAME };
+  }
+
+  get investingEntityVariables() {
+    return { name: TARGET_INVESTING_ENTITY_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query contactByLastName($lastName: String) {
+        uiapi {
+          query {
+            Contact(where: { LastName: { eq: $lastName } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$contactVariables"
+  })
+  wiredContact({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Contact?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachContactUrl(edges[0].node.Id);
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investingEntityByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investing_Entity__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investingEntityVariables"
+  })
+  wiredInvestingEntity({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investing_Entity__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachInvestingEntityUrl(edges[0].node.Id);
+  }
+
+  async attachContactUrl(recordId) {
+    try {
+      this.contactUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Contact",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
+  }
+
+  async attachInvestingEntityUrl(recordId) {
+    try {
+      this.investingEntityUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investing_Entity__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }

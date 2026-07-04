@@ -1,8 +1,10 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
-// Dummy Contact record URL used for the linked Name column.
-const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
+// Prototype: every row links to one real Contact record, looked up by
+// Name at runtime (no hardcoded Id) so it works in any org.
+const TARGET_CONTACT_LAST_NAME = "Greentree";
 
 const COLUMNS = [
   {
@@ -25,7 +27,6 @@ const DATA = [
   {
     id: "1",
     name: "Taj Merchant",
-    nameUrl: CONTACT_URL,
     email: "merchanttaj@yahoo.com",
     phone: "(832) 875-1702",
     primary: "Yes"
@@ -33,7 +34,6 @@ const DATA = [
   {
     id: "2",
     name: "A. Greentree",
-    nameUrl: CONTACT_URL,
     email: "a.greentree@greentreellc.com",
     phone: "(713) 555-0148",
     primary: "No"
@@ -41,7 +41,6 @@ const DATA = [
   {
     id: "3",
     name: "Sarah Lin",
-    nameUrl: CONTACT_URL,
     email: "sarah.lin@greentreellc.com",
     phone: "(281) 555-0092",
     primary: "No"
@@ -50,7 +49,16 @@ const DATA = [
 
 export default class AssociatedContacts extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA;
+
+  // Generated at runtime from the resolved Contact Id; every row links here.
+  nameUrl;
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      nameUrl: this.nameUrl
+    }));
+  }
 
   get recordCount() {
     return this.data.length;
@@ -73,5 +81,53 @@ export default class AssociatedContacts extends NavigationMixin(LightningElement
         filterName: "Unison__AllContacts"
       }
     });
+  }
+
+  get contactVariables() {
+    return { lastName: TARGET_CONTACT_LAST_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query contactByLastName($lastName: String) {
+        uiapi {
+          query {
+            Contact(where: { LastName: { eq: $lastName } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$contactVariables"
+  })
+  wiredContact({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Contact?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      this.nameUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Contact",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }

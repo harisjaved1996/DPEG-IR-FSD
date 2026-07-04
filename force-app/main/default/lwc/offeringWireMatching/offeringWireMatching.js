@@ -1,5 +1,6 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 /**
  * offeringWireMatching
@@ -92,10 +93,6 @@ const CURRENCY = new Intl.NumberFormat("en-US", {
   currency: "USD"
 });
 
-// Each Wire Number links to its Wire record page. In real data every row would
-// carry its own record URL; the demo rows share one sample Wire record.
-const WIRE_RECORD_URL = "/lightning/r/Unison__Wire__c/a0IFW0003rNQMzk2AH/view";
-
 // Wire numbers run WR-0088 onward, assigned by record position.
 const WIRE_NUMBER_START = 88;
 
@@ -165,12 +162,15 @@ export default class OfferingWireMatching extends NavigationMixin(LightningEleme
   // Active sub-tab; defaults to "Total Matched".
   activeTab = "total";
 
+  // Generated at runtime from the resolved Wire Id; every row links here.
+  wireUrl;
+
   // --- Derived source lists (deep-cloned per instance) -----------------------
   get _records() {
     return SEED.map((r, index) => ({
       ...r,
       wireNumber: `WR-${String(WIRE_NUMBER_START + index).padStart(4, "0")}`,
-      wireUrl: WIRE_RECORD_URL
+      wireUrl: this.wireUrl
     }));
   }
 
@@ -319,5 +319,48 @@ export default class OfferingWireMatching extends NavigationMixin(LightningEleme
         filterName: "Unison__All"
       }
     });
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query wire {
+        uiapi {
+          query {
+            Unison__Wire__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredWire({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Wire__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      this.wireUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Wire__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }

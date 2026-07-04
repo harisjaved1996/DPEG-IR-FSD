@@ -1,13 +1,15 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
+import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
   { label: "Delete", name: "delete" }
 ];
 
-// Each investing entity links to its Investing Entity record page. In real data
-// every row would carry its own record URL; the demo rows share one record.
-const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+// Prototype: every row links to one real Distribution / Investing Entity record,
+// looked up at runtime (no hardcoded Id) so it works in any org.
+const TARGET_INVESTING_ENTITY_NAME = "Greentree LLC";
 
 const COLUMNS = [
   {
@@ -37,9 +39,7 @@ const DATA = [
   {
     id: "1",
     distributionNumber: "DIST-2400",
-    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
     investingEntity: "Gabri Investments LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     paidStatus: "Paid",
     amount: 40000,
     amountLabel: "$40,000.00",
@@ -54,9 +54,7 @@ const DATA = [
   {
     id: "2",
     distributionNumber: "DIST-2401",
-    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
     investingEntity: "KBMM MSO LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     paidStatus: "Paid",
     amount: 25000,
     amountLabel: "$25,000.00",
@@ -71,9 +69,7 @@ const DATA = [
   {
     id: "3",
     distributionNumber: "DIST-2402",
-    distributionUrl: "/lightning/r/Unison__Distribution__c/a05FW0018gTCjbMYAT/view",
     investingEntity: "Kilam Ventures LTD",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     paidStatus: "Paid",
     amount: 60000,
     amountLabel: "$60,000.00",
@@ -87,14 +83,116 @@ const DATA = [
   }
 ];
 
-export default class IndividualDistributions extends LightningElement {
+export default class IndividualDistributions extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA;
   showModal = false;
   selectedRecords = [];
 
+  // Generated at runtime from the resolved record Ids; every row links here.
+  distributionUrl;
+  investingEntityUrl;
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      distributionUrl: this.distributionUrl,
+      investingEntityUrl: this.investingEntityUrl
+    }));
+  }
+
   get recordCount() {
     return this.data.length;
+  }
+
+  get investingEntityVariables() {
+    return { name: TARGET_INVESTING_ENTITY_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query distributionFirst {
+        uiapi {
+          query {
+            Unison__Distribution__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredDistribution({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Distribution__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachDistributionUrl(edges[0].node.Id);
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investingEntityByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investing_Entity__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investingEntityVariables"
+  })
+  wiredInvestingEntity({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investing_Entity__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachInvestingEntityUrl(edges[0].node.Id);
+  }
+
+  async attachDistributionUrl(recordId) {
+    try {
+      this.distributionUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Distribution__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
+  }
+
+  async attachInvestingEntityUrl(recordId) {
+    try {
+      this.investingEntityUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investing_Entity__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleRowAction(event) {

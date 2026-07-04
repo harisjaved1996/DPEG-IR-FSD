@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const DEFAULT_ROWS = 5;
 
@@ -12,9 +13,9 @@ const TYPE_VARIANT = {
   Land: "green"
 };
 
-// Each investment name links to its Investment record page. In real data every
-// row would carry its own record URL; the demo rows share one sample record.
-const INVESTMENT_RECORD_URL = "/lightning/r/Unison__Investment__c/a08FW003rCMBVNoYQP/view";
+// Prototype: every row links to this one real Investment record, looked up by
+// Name at runtime (no hardcoded Id) so it works in any org.
+const TARGET_RECORD_NAME = "DPEG Vicksburg, LP";
 
 const COLUMNS = [
   {
@@ -189,18 +190,72 @@ const CLOSED_DATA = [
 
 export default class ClosedInvestmentListingChild extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
+  rows = [];
 
-  get rows() {
+  connectedCallback() {
+    // Show the demo rows immediately; links attach once the Id resolves.
+    this.rows = this.buildBaseRows();
+  }
+
+  buildBaseRows() {
     return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row, index) => {
       const type = TYPES[index % TYPES.length];
       return {
         ...row,
         type,
         typeVariant: TYPE_VARIANT[type],
-        distributedDisplay: row.distributed || "—",
-        recordUrl: INVESTMENT_RECORD_URL
+        distributedDisplay: row.distributed || "—"
       };
     });
+  }
+
+  get investmentVariables() {
+    return { name: TARGET_RECORD_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investmentByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investment__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investmentVariables"
+  })
+  wiredInvestment({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investment__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      const recordUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investment__c",
+          actionName: "view"
+        }
+      });
+      this.rows = this.buildBaseRows().map((row) => ({ ...row, recordUrl }));
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleViewAll(event) {

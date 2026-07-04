@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const PILL_BASE =
   "display:inline-flex;align-items:center;padding:0.125rem 0.5rem;border-radius:0.25rem;font-size:0.75rem;font-weight:600;";
@@ -10,9 +11,6 @@ const STATUS_PILL = {
   "IR Approval": PILL_BASE + "background:#fff0e0;color:#c05e00;",
   Completed: PILL_BASE + "background:#dcfce7;color:#166534;"
 };
-
-// All rows link to the Share Transfer record inserted in the org (demo data).
-const SHARE_TRANSFER_URL = "/lightning/r/Unison__Share_Transfer__c/a0DFW0012wPIiem2AD/view";
 
 const COLUMNS = [
   {
@@ -76,14 +74,23 @@ const TRANSFER_TYPE_OPTIONS = [
 // Each share is valued at $50,000; Sale Price = Shares To Transfer * this rate.
 const PRICE_PER_SHARE = 50000;
 
+const BASE_ROWS = TRANSFERS.map((row) => ({
+  ...row,
+  statusStyle: STATUS_PILL[row.status] || PILL_BASE + "background:#ecebea;color:#5c5c5c;"
+}));
+
 export default class ShareTransferComponent extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
 
-  rows = TRANSFERS.map((row) => ({
-    ...row,
-    shareTransferUrl: SHARE_TRANSFER_URL,
-    statusStyle: STATUS_PILL[row.status] || PILL_BASE + "background:#ecebea;color:#5c5c5c;"
-  }));
+  // Generated at runtime from the resolved Share Transfer Id; every row links here.
+  shareTransferUrl;
+
+  get rows() {
+    return BASE_ROWS.map((row) => ({
+      ...row,
+      shareTransferUrl: this.shareTransferUrl
+    }));
+  }
 
   // New Share Transfer modal state
   showModal = false;
@@ -169,5 +176,48 @@ export default class ShareTransferComponent extends NavigationMixin(LightningEle
     this.transferType = null;
     this.sharesToTransfer = null;
     this.transferDate = null;
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query shareTransfer {
+        uiapi {
+          query {
+            Unison__Share_Transfer__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredShareTransfer({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Share_Transfer__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      this.shareTransferUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Share_Transfer__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }

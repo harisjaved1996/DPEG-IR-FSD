@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 // Same stage value always maps to the same pill colour.
 const STAGE_VARIANT = {
@@ -10,9 +11,9 @@ const STAGE_VARIANT = {
   Cancelled: "red"
 };
 
-// Each offering name links to its Offering record page. In real data every row
-// would carry its own record URL; the demo rows share one sample record.
-const OFFERING_RECORD_URL = "/lightning/r/Unison__Offering__c/a0AFW002mMT3KWu2QN/view";
+// Prototype: every row links to this one real Offering record, looked up by
+// Name at runtime (no hardcoded Id) so it works in any org.
+const TARGET_RECORD_NAME = "Magnolia Crossing — DPEG Fund LP";
 
 const COLUMNS = [
   {
@@ -44,6 +45,7 @@ const COLUMNS = [
 
 export default class IrOfferingsList extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
+  rows = [];
 
   offerings = [
     {
@@ -103,16 +105,69 @@ export default class IrOfferingsList extends NavigationMixin(LightningElement) {
     }
   ];
 
-  get rows() {
+  connectedCallback() {
+    // Show the demo rows immediately; links attach once the Id resolves.
+    this.rows = this.buildBaseRows();
+  }
+
+  buildBaseRows() {
     return this.offerings.map((row) => ({
       ...row,
-      stageVariant: STAGE_VARIANT[row.stage] || "gray",
-      recordUrl: OFFERING_RECORD_URL
+      stageVariant: STAGE_VARIANT[row.stage] || "gray"
     }));
   }
 
   get recordCount() {
     return this.offerings.length;
+  }
+
+  get offeringVariables() {
+    return { name: TARGET_RECORD_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query offeringByName($name: String) {
+        uiapi {
+          query {
+            Unison__Offering__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$offeringVariables"
+  })
+  wiredOffering({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Offering__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      const recordUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Offering__c",
+          actionName: "view"
+        }
+      });
+      this.rows = this.buildBaseRows().map((row) => ({ ...row, recordUrl }));
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleViewAll(event) {

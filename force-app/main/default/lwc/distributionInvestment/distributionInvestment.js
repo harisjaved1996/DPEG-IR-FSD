@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
@@ -26,7 +27,6 @@ const DATA = [
   {
     id: "1",
     distributionNumber: "DB-020",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
     paidStatus: "Completed",
     amount: 40000,
     amountLabel: "$40,000.00",
@@ -41,7 +41,6 @@ const DATA = [
   {
     id: "2",
     distributionNumber: "DB-021",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
     paidStatus: "Completed",
     amount: 25000,
     amountLabel: "$25,000.00",
@@ -56,7 +55,6 @@ const DATA = [
   {
     id: "3",
     distributionNumber: "DB-023",
-    distributionUrl: "/lightning/r/Unison__Distribution_Batch__c/a04FW000Or3e6hUYIQ/view",
     paidStatus: "Completed",
     amount: 60000,
     amountLabel: "$60,000.00",
@@ -72,12 +70,64 @@ const DATA = [
 
 export default class DistributionInvestment extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA;
   showModal = false;
   selectedRecords = [];
 
+  // Generated at runtime from the resolved Distribution Batch Id; every row links here.
+  distributionUrl;
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      distributionUrl: this.distributionUrl
+    }));
+  }
+
   get recordCount() {
     return this.data.length;
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query distributionBatch {
+        uiapi {
+          query {
+            Unison__Distribution_Batch__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredDistributionBatch({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Distribution_Batch__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      this.distributionUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Distribution_Batch__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleRowAction(event) {

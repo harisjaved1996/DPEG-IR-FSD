@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 // Same status value always maps to the same pill colour.
 const STATUS_VARIANT = {
@@ -7,9 +8,9 @@ const STATUS_VARIANT = {
   "Under Review": "orange"
 };
 
-// Each Name links to its Lead record page. In real data every row would carry
-// its own record URL; the demo rows share one sample Lead record.
-const LEAD_RECORD_URL = "/lightning/r/Lead/00QFW003AVYXACC2Y5/view";
+// Prototype: every row links to this one real Lead record, looked up by Name at
+// runtime (no hardcoded Id) so it works in any org.
+const TARGET_RECORD_NAME = "Taj Merchant";
 
 const CONTACTS = [
   {
@@ -103,20 +104,74 @@ const COLUMNS = [
 export default class OnboardingContactsList extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
   contacts = CONTACTS;
+  rows = [];
+
+  connectedCallback() {
+    // Show the demo rows immediately; links attach once the Id resolves.
+    this.rows = this.buildBaseRows();
+  }
 
   // Rows ordered by date, latest first.
-  get rows() {
+  buildBaseRows() {
     return [...this.contacts]
       .sort((a, b) => parseDate(b.date) - parseDate(a.date))
       .map((row) => ({
         ...row,
-        statusVariant: STATUS_VARIANT[row.status] || "gray",
-        recordUrl: LEAD_RECORD_URL
+        statusVariant: STATUS_VARIANT[row.status] || "gray"
       }));
   }
 
   get recordCount() {
     return this.contacts.length;
+  }
+
+  get leadVariables() {
+    return { name: TARGET_RECORD_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query leadByName($name: String) {
+        uiapi {
+          query {
+            Lead(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$leadVariables"
+  })
+  wiredLead({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Lead?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachRecordUrl(edges[0].node.Id);
+  }
+
+  async attachRecordUrl(recordId) {
+    try {
+      const recordUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Lead",
+          actionName: "view"
+        }
+      });
+      this.rows = this.buildBaseRows().map((row) => ({ ...row, recordUrl }));
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleViewAll(event) {

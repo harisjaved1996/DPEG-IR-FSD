@@ -1,15 +1,15 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
   { label: "Delete", name: "delete" }
 ];
 
-// Each row links to its Contribution and Investing Entity record pages. In real
-// data every row would carry its own record URLs; the demo rows share one each.
-const CONTRIBUTION_URL = "/lightning/r/Unison__Contribution__c/a01FW004UbmvfeuYIA/view";
-const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+// Prototype: every row links to one real Contribution / Investing Entity record,
+// looked up at runtime (no hardcoded Id) so it works in any org.
+const TARGET_INVESTING_ENTITY_NAME = "Greentree LLC";
 
 const COLUMNS = [
   {
@@ -37,9 +37,7 @@ const DATA = [
   {
     id: "1",
     contributionNumber: "Cont - 008",
-    contributionUrl: CONTRIBUTION_URL,
     name: "12830 Oak Village Dr, LLC",
-    entityUrl: INVESTING_ENTITY_URL,
     amount: "$5000",
     contributionDate: "03/14/2026",
     paymentDetails: "Full"
@@ -47,9 +45,7 @@ const DATA = [
   {
     id: "2",
     contributionNumber: "Cont - 009",
-    contributionUrl: CONTRIBUTION_URL,
     name: "18825 Sea, LLC",
-    entityUrl: INVESTING_ENTITY_URL,
     amount: "$9500",
     contributionDate: "02/08/2026",
     paymentDetails: "Partial"
@@ -57,9 +53,7 @@ const DATA = [
   {
     id: "3",
     contributionNumber: "Cont - 010",
-    contributionUrl: CONTRIBUTION_URL,
     name: "1988 Venture LLC",
-    entityUrl: INVESTING_ENTITY_URL,
     amount: "$12000",
     contributionDate: "01/22/2026",
     paymentDetails: "Full"
@@ -68,10 +62,112 @@ const DATA = [
 
 export default class ContributionInvestmentCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA;
+
+  // Generated at runtime from the resolved record Ids; every row links here.
+  contributionUrl;
+  entityUrl;
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      contributionUrl: this.contributionUrl,
+      entityUrl: this.entityUrl
+    }));
+  }
 
   get recordCount() {
     return this.data.length;
+  }
+
+  get investingEntityVariables() {
+    return { name: TARGET_INVESTING_ENTITY_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query contributionFirst {
+        uiapi {
+          query {
+            Unison__Contribution__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredContribution({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Contribution__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachContributionUrl(edges[0].node.Id);
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investingEntityByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investing_Entity__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investingEntityVariables"
+  })
+  wiredInvestingEntity({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investing_Entity__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachInvestingEntityUrl(edges[0].node.Id);
+  }
+
+  async attachContributionUrl(recordId) {
+    try {
+      this.contributionUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Contribution__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
+  }
+
+  async attachInvestingEntityUrl(recordId) {
+    try {
+      this.entityUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investing_Entity__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   handleViewAll(event) {

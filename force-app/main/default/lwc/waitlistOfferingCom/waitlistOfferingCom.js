@@ -1,15 +1,16 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const ROW_ACTIONS = [
   { label: "Edit", name: "edit" },
   { label: "Delete", name: "delete" }
 ];
 
-// Demo links — every row points to one Waitlist / Contact / Investing Entity record.
-const WAITLIST_URL = "/lightning/r/Unison__Waitlist__c/a0HFW0003OEiSWS2Q3/view";
-const CONTACT_URL = "/lightning/r/Contact/003FW004msa80XgYAI/view";
-const INVESTING_ENTITY_URL = "/lightning/r/Unison__Investing_Entity__c/a0LFW0032uqkigG2AQ/view";
+// Prototype: every row links to one real Waitlist / Contact / Investing Entity
+// record, looked up at runtime (no hardcoded Id) so it works in any org.
+const TARGET_CONTACT_LAST_NAME = "Greentree";
+const TARGET_INVESTING_ENTITY_NAME = "Greentree LLC";
 
 const COLUMNS = [
   {
@@ -45,11 +46,8 @@ const DATA = [
   {
     id: "1",
     waitlistNumber: "WL-001",
-    waitlistUrl: WAITLIST_URL,
     contact: "K. Mehta",
-    contactUrl: CONTACT_URL,
     investingEntity: "24 Seven REH, LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     shareCount: 2,
     amount: "$250,000.00",
     date: "14/11/2025"
@@ -57,11 +55,8 @@ const DATA = [
   {
     id: "2",
     waitlistNumber: "WL-002",
-    waitlistUrl: WAITLIST_URL,
     contact: "Albert Stein",
-    contactUrl: CONTACT_URL,
     investingEntity: "5As Capital Group LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     shareCount: 3,
     amount: "$400,000.00",
     date: "02/12/2025"
@@ -69,11 +64,8 @@ const DATA = [
   {
     id: "3",
     waitlistNumber: "WL-003",
-    waitlistUrl: WAITLIST_URL,
     contact: "L. Brooks",
-    contactUrl: CONTACT_URL,
     investingEntity: "18825 Sea, LLC",
-    investingEntityUrl: INVESTING_ENTITY_URL,
     shareCount: 1,
     amount: "$320,000.00",
     date: "27/10/2025"
@@ -82,7 +74,20 @@ const DATA = [
 
 export default class WaitlistOfferingCom extends NavigationMixin(LightningElement) {
   columns = COLUMNS;
-  data = DATA;
+
+  // Generated at runtime from the resolved record Ids; every row links here.
+  waitlistUrl;
+  contactUrl;
+  investingEntityUrl;
+
+  get data() {
+    return DATA.map((row) => ({
+      ...row,
+      waitlistUrl: this.waitlistUrl,
+      contactUrl: this.contactUrl,
+      investingEntityUrl: this.investingEntityUrl
+    }));
+  }
 
   get recordCount() {
     return this.data.length;
@@ -112,5 +117,144 @@ export default class WaitlistOfferingCom extends NavigationMixin(LightningElemen
     const { contact } = event.detail.row;
     // Placeholder: handle `name` (edit/delete) for `contact`.
     return { name, contact };
+  }
+
+  get contactVariables() {
+    return { lastName: TARGET_CONTACT_LAST_NAME };
+  }
+
+  get investingEntityVariables() {
+    return { name: TARGET_INVESTING_ENTITY_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query firstWaitlist {
+        uiapi {
+          query {
+            Unison__Waitlist__c(first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  })
+  wiredWaitlist({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Waitlist__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachWaitlistUrl(edges[0].node.Id);
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query contactByLastName($lastName: String) {
+        uiapi {
+          query {
+            Contact(where: { LastName: { eq: $lastName } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$contactVariables"
+  })
+  wiredContact({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Contact?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachContactUrl(edges[0].node.Id);
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investingEntityByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investing_Entity__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investingEntityVariables"
+  })
+  wiredInvestingEntity({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investing_Entity__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachInvestingEntityUrl(edges[0].node.Id);
+  }
+
+  async attachWaitlistUrl(recordId) {
+    try {
+      this.waitlistUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Waitlist__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
+  }
+
+  async attachContactUrl(recordId) {
+    try {
+      this.contactUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Contact",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
+  }
+
+  async attachInvestingEntityUrl(recordId) {
+    try {
+      this.investingEntityUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investing_Entity__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 }
