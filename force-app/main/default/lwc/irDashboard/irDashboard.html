@@ -1,0 +1,82 @@
+<template>
+    <div class="ir-dashboard">
+        <header class="slds-m-bottom_medium ir-dashboard__header">
+            <h1 class="slds-text-heading_large ir-dashboard__title">Investor Relations Dashboard</h1>
+            <p class="slds-text-body_small slds-text-color_weak">Capital, commitments, and pipeline at a glance.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large ir-dashboard__loader">
+                <lightning-spinner alternative-text="Loading IR Dashboard" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showContent}>
+            <!-- KPI ROW -->
+            <template lwc:if={hasKpis}>
+                <lightning-layout multiple-rows="true" class="slds-m-bottom_medium ir-dashboard__kpis">
+                    <template for:each={kpis} for:item="kpi">
+                        <lightning-layout-item
+                            key={kpi.key}
+                            size="12"
+                            small-device-size="6"
+                            medium-device-size="4"
+                            large-device-size="2"
+                            padding="around-x-small"
+                        >
+                            <c-kpi-card
+                                label={kpi.label}
+                                value={kpi.displayValue}
+                                unit={kpi.unit}
+                                trend={kpi.trend}
+                                icon-name={kpi.iconName}
+                                accent={kpi.accent}
+                            ></c-kpi-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <!-- ACTIVE OFFERINGS -->
+                <lightning-layout-item
+                    size="12"
+                    large-device-size="7"
+                    padding="around-small"
+                >
+                    <c-section-card title="Active Offerings" icon-name="utility:summary">
+                        <c-ir-offering-progress-list
+                            offerings={activeOfferings}
+                        ></c-ir-offering-progress-list>
+                    </c-section-card>
+                </lightning-layout-item>
+
+                <!-- INVESTOR COMMITMENT FUNNEL -->
+                <lightning-layout-item
+                    size="12"
+                    large-device-size="5"
+                    padding="around-small"
+                >
+                    <c-section-card title="Investor Commitment Funnel" icon-name="utility:filter">
+                        <template lwc:if={hasFunnel}>
+                            <c-funnel-chart stages={funnel}></c-funnel-chart>
+                        </template>
+                        <template lwc:else>
+                            <p class="slds-text-body_regular slds-text-color_weak slds-p-vertical_small">
+                                No funnel data to display.
+                            </p>
+                        </template>
+                    </c-section-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <template lwc:if={hasError}>
+            <div class="slds-box slds-theme_error slds-m-top_small" role="alert">
+                <p class="slds-text-body_regular">
+                    Unable to load the IR Dashboard. Please refresh or contact your administrator.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

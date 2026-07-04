@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Status__c</fullName>
-    <label>Status</label>
     <description>Lifecycle stage of the commitment from soft commit through funding or cancellation.</description>
     <inlineHelpText>Track the commitment from Soft Commit through PPM signing, Committed, and Funded.</inlineHelpText>
-    <type>Picklist</type>
+    <label>Status</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>

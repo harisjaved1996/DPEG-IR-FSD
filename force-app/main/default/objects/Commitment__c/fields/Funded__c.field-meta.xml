@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Funded__c</fullName>
-    <label>Funded</label>
+    <defaultValue>false</defaultValue>
     <description>Indicates the commitment has been fully funded and converted to an investment position. Seeded in Phase A; automated in Phase C.</description>
     <inlineHelpText>Check when the commitment has been fully funded.</inlineHelpText>
-    <type>Checkbox</type>
-    <defaultValue>false</defaultValue>
+    <label>Funded</label>
     <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
 </CustomField>
