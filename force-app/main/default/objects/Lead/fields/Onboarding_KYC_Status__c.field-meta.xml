@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Onboarding_KYC_Status__c</fullName>
-    <label>Onboarding KYC Status</label>
     <description>Stage of the investor lead within the onboarding and KYC intake process.</description>
-    <inlineHelpText>Track the lead's onboarding progress through document collection, accreditation, and verification.</inlineHelpText>
-    <type>Picklist</type>
+    <inlineHelpText>Track the lead&apos;s onboarding progress through document collection, accreditation, and verification.</inlineHelpText>
+    <label>Onboarding KYC Status</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>

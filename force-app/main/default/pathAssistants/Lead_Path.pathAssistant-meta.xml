@@ -4,5 +4,8 @@
     <entityName>Lead</entityName>
     <fieldName>Status</fieldName>
     <masterLabel>Lead Path</masterLabel>
+    <pathAssistantSteps>
+        <picklistValueName>Under_Review</picklistValueName>
+    </pathAssistantSteps>
     <recordTypeName>__MASTER__</recordTypeName>
 </PathAssistant>

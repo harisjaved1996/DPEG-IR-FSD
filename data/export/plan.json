@@ -1,5 +1,9 @@
 [
   {
+    "sobject": "Lead",
+    "files": ["Lead.json"]
+  },
+  {
     "sobject": "Account",
     "files": ["Account.json"]
   },

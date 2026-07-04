@@ -1,17 +1,21 @@
 # DPEG Data Export — Relationship-Preserving Tree Export
 
-This directory contains a **`sf data import tree` plan** exporting **14 objects** of DATA RECORDS
+This directory contains a **`sf data import tree` plan** exporting **15 objects** of DATA RECORDS
 (not metadata) from the scratch org **`DPEG-IR-FSD`**, ready to be re-imported into a fresh org
 with all in-set relationships preserved via `@referenceId` placeholders.
 
 Generated: 2026-07-04 · Source org: `DPEG-IR-FSD` (namespace: `Unison`)
 
-> **Update:** This export was extended from 12 to **14 objects** by adding
-> `Unison__Investment__c` (14 records) and `Unison__Distribution_Batch__c` (3 records). Because
-> those objects are now in the export set, the lookups that previously had to be dropped
-> (Contact / Contribution / Position / Bank_Account / Distribution / Share_Transfer → Investment,
-> and Distribution → Distribution_Batch) now **resolve to `@referenceId` placeholders** and are
-> fully migrated.
+> **Update 1:** Extended from 12 to **14 objects** by adding `Unison__Investment__c` (14 records)
+> and `Unison__Distribution_Batch__c` (3 records). Because those objects are now in the export set,
+> the lookups that previously had to be dropped (Contact / Contribution / Position / Bank_Account /
+> Distribution / Share_Transfer → Investment, and Distribution → Distribution_Batch) now **resolve
+> to `@referenceId` placeholders** and are fully migrated.
+>
+> **Update 2:** Added the standard **`Lead`** object (36 records). Lead is **standalone** for this
+> data set — none of the other 14 objects reference Lead and Lead references none of them — so it
+> needs no `@referenceId` wiring. It is exported to its own `Lead.json` and registered first in
+> `plan.json`.
 
 ---
 
@@ -38,6 +42,7 @@ before the children that reference them.
 | File                                 | Records | In-set lookups                                                             |
 | ------------------------------------ | ------: | -------------------------------------------------------------------------- |
 | `plan.json`                          |       — | Import plan; **manually reordered** to parents-before-children (see below) |
+| `Lead.json`                          |      36 | (standalone — no in-set lookups)                                           |
 | `Account.json`                       |      26 | (root)                                                                     |
 | `Unison__Property__c.json`           |      14 | (root)                                                                     |
 | `Unison__Offering__c.json`           |      13 | → Property                                                                 |
@@ -53,7 +58,7 @@ before the children that reference them.
 | `Unison__Position__c.json`           |       2 | → Contact, Investing_Entity, Investment                                    |
 | `Unison__Share_Transfer__c.json`     |       1 | → Contact, Investing_Entity, Investment (×2)                               |
 
-**All 14 exported record counts match the expected counts exactly.**
+**All 15 exported record counts match the expected counts exactly.**
 
 ---
 
@@ -61,22 +66,24 @@ before the children that reference them.
 
 The `plan.json` in this directory has been **manually corrected**. The `sf data export tree`
 CLI generated the plan in a non-dependency order (children listed before parents), which would
-fail on import. The corrected, topologically-sorted order is:
+fail on import. `Lead` is standalone (nothing depends on it, it depends on nothing in-set), so it
+is placed first for convenience. The corrected, topologically-sorted order is:
 
-1. `Account`
-2. `Unison__Property__c`
-3. `Unison__Offering__c` _(→ Property)_
-4. `Unison__Investment__c` _(→ Account, Offering, Property)_
-5. `Contact` _(→ Account, Investment)_
-6. `Unison__Investing_Entity__c` _(→ Contact, Offering)_
-7. `Unison__Distribution_Batch__c` _(→ Offering, Investment)_
-8. `Unison__Bank_Account__c` _(→ Investment)_
-9. `Unison__Wire__c` _(→ Account, Offering)_
-10. `Unison__Contribution__c` _(→ Wire, Contact, Offering, Investing_Entity, Investment)_
-11. `Unison__Waitlist__c` _(→ Account, Offering, Contact)_
-12. `Unison__Distribution__c` _(→ Contact, Investment, Distribution_Batch)_
-13. `Unison__Position__c` _(→ Contact, Investing_Entity, Investment)_
-14. `Unison__Share_Transfer__c` _(→ Contact, Investing_Entity, Investment)_
+1. `Lead` _(standalone — independent of all other objects)_
+2. `Account`
+3. `Unison__Property__c`
+4. `Unison__Offering__c` _(→ Property)_
+5. `Unison__Investment__c` _(→ Account, Offering, Property)_
+6. `Contact` _(→ Account, Investment)_
+7. `Unison__Investing_Entity__c` _(→ Contact, Offering)_
+8. `Unison__Distribution_Batch__c` _(→ Offering, Investment)_
+9. `Unison__Bank_Account__c` _(→ Investment)_
+10. `Unison__Wire__c` _(→ Account, Offering)_
+11. `Unison__Contribution__c` _(→ Wire, Contact, Offering, Investing_Entity, Investment)_
+12. `Unison__Waitlist__c` _(→ Account, Offering, Contact)_
+13. `Unison__Distribution__c` _(→ Contact, Investment, Distribution_Batch)_
+14. `Unison__Position__c` _(→ Contact, Investing_Entity, Investment)_
+15. `Unison__Share_Transfer__c` _(→ Contact, Investing_Entity, Investment)_
 
 > Key placements: **`Investment` comes before Contact / Contribution / Position / Bank_Account /
 > Distribution / Share_Transfer** (all of which look up to it), and **after** Account / Offering /
@@ -92,9 +99,11 @@ fail on import. The corrected, topologically-sorted order is:
 Investment's createable lookups point only to **Account, Offering, Property** (its
 `Unison__Investing_Entity__c` field actually references **Account**, not the Investing_Entity
 object). Distribution_Batch points only to **Offering, Investment**. None of those parents look
-back to Investment or Distribution_Batch, and neither new object has a self-lookup.
+back to Investment or Distribution_Batch, and neither new object has a self-lookup. **Lead** is
+standalone — its only createable lookups (OwnerId, DandbCompanyId, IndividualId) all point outside
+the export set and are dropped, so it participates in no relationships here.
 
-**No circular or self references exist among the 14 in-set objects.** Therefore no lookup had to be
+**No circular or self references exist among the 15 in-set objects.** Therefore no lookup had to be
 split into a "first insert without the lookup, then re-populate" second pass, and a single-pass
 import in the order above succeeds.
 
@@ -126,12 +135,23 @@ the new org, causing import errors. **The relationship data in these fields is N
 | Account | `DandbCompanyId`     | DandBCompany           |                              0 |
 | Account | `OperatingHoursId`   | OperatingHours         |                              0 |
 | Contact | `IndividualId`       | Individual             |                              0 |
+| Lead    | `DandbCompanyId`     | DandBCompany           |                              0 |
+| Lead    | `IndividualId`       | Individual             |                              0 |
 
 > The `Unison__Investment__c` and `Unison__Distribution_Batch__c` lookups that were dropped in the
 > original 12-object export are **no longer dropped** — those objects are now in the export set and
 > their lookups resolve to `@referenceId` placeholders (see below). The only remaining external
 > references are standard platform objects (RecordType, Individual, DandBCompany, OperatingHours),
 > all of which were unpopulated except Account `RecordTypeId`.
+
+> **Lead-specific note:** For `Lead`, `OwnerId` (→ Group/User) was excluded per the standard
+> OwnerId rule, and `DandbCompanyId` (→ DandBCompany) and `IndividualId` (→ Individual) were dropped
+> as standard-platform references outside the export set — both unpopulated, same treatment as the
+> matching fields on Account/Contact. Lead's **compound `Name`** field is not selected; the
+> individual `FirstName`, `LastName`, and `Salutation` fields are exported instead. The compound
+> `Address` field is not createable and is excluded; its component fields (`Street`, `City`,
+> `State`, `PostalCode`, `Country`) are exported individually. Required fields `Company` and
+> `Status` are included.
 
 ### Previously-dropped lookups that now RESOLVE (migrated)
 
@@ -151,12 +171,13 @@ Confirmed as `@referenceId` placeholders in this export:
 
 ## Second-pass lookups needed
 
-- **No circular / self references were detected among the 14 in-set objects**, so no lookup had to
+- **No circular / self references were detected among the 15 in-set objects**, so no lookup had to
   be split out for cycle reasons.
 - With Investment and Distribution_Batch now in-set, **all custom-object relationships in scope are
   migrated in a single pass.** The only relationships not carried over are the standard-platform
-  references listed in the "dropped" table above (RecordType — see caveat — Individual, etc.), which
-  were unpopulated except Account RecordType.
+  references listed in the "dropped" table above (RecordType — see caveat — Individual, DandBCompany,
+  etc.), which were unpopulated except Account RecordType.
+- `Lead` is standalone and carries no in-set relationships, so no second pass is needed for it.
 
 ---
 
@@ -180,10 +201,12 @@ Confirmed as `@referenceId` placeholders in this export:
 
 ## Verification performed
 
-- Every `<object>.json` record count was checked against the expected counts — **all 14 match**.
+- Every `<object>.json` record count was checked against the expected counts — **all 15 match**
+  (including `Lead` = 36).
 - All in-set lookup fields resolved to `@referenceId` placeholders (e.g. `@ContactRef27`,
   `@Unison__Offering__cRef1`, `@Unison__Investment__cRef13`) — confirmed **no raw Salesforce Ids
   leaked** into any lookup field.
 - The previously-dropped Investment / Distribution_Batch lookups were confirmed to now resolve.
+- `Lead` was verified standalone (no in-set lookups) and registered first in `plan.json`.
 - `plan.json` import order was corrected and **topologically validated** (every parent precedes
   each child that references it).

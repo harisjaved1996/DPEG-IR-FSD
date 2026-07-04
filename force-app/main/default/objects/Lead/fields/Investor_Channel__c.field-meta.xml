@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Investor_Channel__c</fullName>
-    <label>Investor Channel</label>
     <description>Acquisition channel through which this prospective investor lead entered the onboarding pipeline.</description>
     <inlineHelpText>Select how this investor lead was sourced (web form, email, or referral).</inlineHelpText>
-    <type>Picklist</type>
+    <label>Investor Channel</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
