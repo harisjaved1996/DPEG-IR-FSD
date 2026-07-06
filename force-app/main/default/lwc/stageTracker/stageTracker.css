@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.ir-stage-tracker {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ir-stage-tracker__item {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+  padding: 0 var(--slds-g-spacing-1, 0.25rem);
+}
+
+/* Connector line drawn from each item's marker to the previous one. */
+.ir-stage-tracker__item::before {
+  content: "";
+  position: absolute;
+  top: 0.75rem;
+  right: 50%;
+  width: 100%;
+  height: 0.125rem;
+  background-color: var(--slds-g-color-border-1, #c9c9c9);
+  z-index: 0;
+}
+
+.ir-stage-tracker__item:first-child::before {
+  display: none;
+}
+
+/* Completed + current segments use the brand color for the trailing line. */
+.ir-stage-tracker__item_complete::before,
+.ir-stage-tracker__item_current::before {
+  background-color: var(--dpeg-blue, #0070d2);
+}
+
+.ir-stage-tracker__marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: var(--slds-g-font-scale-neg-2, 0.625rem);
+  font-weight: 700;
+  background-color: var(--slds-g-color-surface-container-2, #ececea);
+  color: var(--slds-g-color-on-surface-2, #5c5c5c);
+  border: 0.125rem solid var(--slds-g-color-border-1, #c9c9c9);
+}
+
+.ir-stage-tracker__item_complete .ir-stage-tracker__marker {
+  background-color: var(--dpeg-blue, #0070d2);
+  border-color: var(--dpeg-blue, #0070d2);
+  color: var(--slds-g-color-on-brand, #ffffff);
+}
+
+.ir-stage-tracker__item_current .ir-stage-tracker__marker {
+  background-color: var(--dpeg-navy, #032d60);
+  border-color: var(--dpeg-navy, #032d60);
+  color: var(--slds-g-color-on-brand, #ffffff);
+}
+
+.ir-stage-tracker__label {
+  display: block;
+  margin-top: var(--slds-g-spacing-1, 0.25rem);
+  font-size: var(--slds-g-font-scale-neg-1, 0.75rem);
+  color: var(--slds-g-color-on-surface-2, #5c5c5c);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.ir-stage-tracker__item_current .ir-stage-tracker__label {
+  color: var(--dpeg-navy, #032d60);
+  font-weight: 700;
+}
+
+/* Clickable variant: button resets, full-width activation target. */
+.ir-stage-tracker__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.ir-stage-tracker__button:focus-visible {
+  outline: 2px solid var(--dpeg-blue, #0070d2);
+  outline-offset: 2px;
+  border-radius: var(--slds-g-radius-border-2, 0.25rem);
+}

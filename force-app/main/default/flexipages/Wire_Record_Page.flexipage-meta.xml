@@ -130,6 +130,16 @@
                 <identifier>RecordUnison_Offering_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Investing_Entity__c</fieldItem>
+                <identifier>RecordUnison_Investing_Entity_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-3a55ec12-69c1-4761-af2d-c06a41f2f3a8</name>
         <type>Facet</type>
     </flexiPageRegions>

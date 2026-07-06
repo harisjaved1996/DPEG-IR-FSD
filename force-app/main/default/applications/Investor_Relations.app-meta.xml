@@ -16,19 +16,25 @@
     <navType>Standard</navType>
     <tabs>standard-Dashboard</tabs>
     <tabs>IR_Console</tabs>
-    <tabs>Active_Investments</tabs>
+    <tabs>Investments_Overview</tabs>
+    <tabs>IR_Documents</tabs>
     <tabs>IR_Payments</tabs>
     <tabs>Announcements</tabs>
-    <tabs>IR_Documents</tabs>
     <tabs>Offering__c</tabs>
     <tabs>standard-Contact</tabs>
-    <tabs>Investing_Entity__c</tabs>
     <tabs>Investment__c</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>Investing_Entity__c</tabs>
     <tabs>Commitment__c</tabs>
     <tabs>Contribution__c</tabs>
     <tabs>Distribution__c</tabs>
     <tabs>Position__c</tabs>
-    <tabs>standard-Lead</tabs>
+    <tabs>standard-report</tabs>
     <tabs>Property__c</tabs>
+    <tabs>Share_Transfer__c</tabs>
+    <tabs>Waitlist__c</tabs>
+    <tabs>Bank_Account__c</tabs>
+    <tabs>Distribution_Batch__c</tabs>
+    <tabs>Wire__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

@@ -1,0 +1,66 @@
+<template>
+    <template lwc:if={hasStages}>
+        <ol class="ir-stage-tracker" aria-label="Progress">
+            <template for:each={computedStages} for:item="stage">
+                <li
+                    key={stage.key}
+                    class={stage.itemClass}
+                    aria-current={stage.ariaCurrent}
+                >
+                    <!-- Clickable variant: marker + label inside a button -->
+                    <template lwc:if={clickable}>
+                        <button
+                            type="button"
+                            class="ir-stage-tracker__button"
+                            data-index={stage.index}
+                            onclick={handleStageClick}
+                        >
+                            <span
+                                class="ir-stage-tracker__marker"
+                                aria-hidden="true"
+                            >
+                                <template lwc:if={stage.isComplete}>
+                                    <lightning-icon
+                                        icon-name={stage.markerIcon}
+                                        size="xx-small"
+                                        variant="inverse"
+                                    ></lightning-icon>
+                                </template>
+                                <template lwc:else>{stage.stepNumber}</template>
+                            </span>
+                            <span class="ir-stage-tracker__label"
+                                >{stage.label}</span
+                            >
+                            <span class="slds-assistive-text"
+                                >{stage.statusText}</span
+                            >
+                        </button>
+                    </template>
+
+                    <!-- Static variant -->
+                    <template lwc:else>
+                        <span
+                            class="ir-stage-tracker__marker"
+                            aria-hidden="true"
+                        >
+                            <template lwc:if={stage.isComplete}>
+                                <lightning-icon
+                                    icon-name={stage.markerIcon}
+                                    size="xx-small"
+                                    variant="inverse"
+                                ></lightning-icon>
+                            </template>
+                            <template lwc:else>{stage.stepNumber}</template>
+                        </span>
+                        <span class="ir-stage-tracker__label"
+                            >{stage.label}</span
+                        >
+                        <span class="slds-assistive-text"
+                            >{stage.statusText}</span
+                        >
+                    </template>
+                </li>
+            </template>
+        </ol>
+    </template>
+</template>

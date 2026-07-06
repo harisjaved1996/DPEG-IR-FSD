@@ -66,12 +66,6 @@
                 <identifier>RecordUnison_Investment_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Investing_Entity__c</fieldItem>
-                <identifier>RecordUnison__Investing_Entity__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-0812bcb3-c32d-41e1-91d6-f0f7fbd80d43</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -98,12 +92,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Offering__c</fieldItem>
-                <identifier>RecordUnison_Offering_cField</identifier>
+                <fieldItem>Record.Investing_Entity__c</fieldItem>
+                <identifier>RecordUnison__Investing_Entity__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3216600a-8230-4041-abbe-f119b038a3cd</name>

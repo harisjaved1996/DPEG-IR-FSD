@@ -25,7 +25,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>numVisibleActions</name>
-                    <value>1</value>
+                    <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
                 <identifier>force_highlightsPanel</identifier>
@@ -56,6 +56,16 @@
                 <identifier>RecordUnison_Amount_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Distribution_Batch__c</fieldItem>
+                <identifier>RecordUnison_Distribution_Batch_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-d5af6f77-5336-4918-a1d3-ba9d7d405ead</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -78,6 +88,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Paid_By__c</fieldItem>
                 <identifier>RecordUnison__Paid_By__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Investing_Entity__c</fieldItem>
+                <identifier>RecordUnison_Investing_Entity_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8f223258-5c4b-4b75-aa79-9d962d5c3e3f</name>
