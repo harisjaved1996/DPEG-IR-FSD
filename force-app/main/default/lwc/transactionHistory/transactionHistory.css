@@ -1,0 +1,26 @@
+/* Card border with internal padding (matches the Past Positions card) */
+:host {
+  display: block;
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.5rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  padding: 0.75rem;
+}
+
+/* No side padding so the input spans exactly the same width as the datatable */
+.search-bar {
+  padding: 0 0 0.75rem;
+}
+
+.pagination-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.page-indicator {
+  font-size: 0.8125rem;
+  color: var(--slds-g-color-neutral-base-30, #444444);
+}

@@ -1,0 +1,37 @@
+<template>
+    <lightning-card icon-name="standard:currency">
+        <span slot="title">Transaction History</span>
+
+        <div class="search-bar">
+            <lightning-input
+                type="search"
+                variant="label-hidden"
+                label="Search transactions"
+                placeholder="Search transactions..."
+                value={searchTerm}
+                onchange={handleSearch}>
+            </lightning-input>
+        </div>
+
+        <lightning-datatable
+            key-field="transactionId"
+            data={pagedTransactions}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+
+        <div class="pagination-footer">
+            <lightning-button
+                label="Previous"
+                disabled={isFirstPage}
+                onclick={handlePrevious}>
+            </lightning-button>
+            <span class="page-indicator">Page {currentPage} of {totalPages}</span>
+            <lightning-button
+                label="Next"
+                disabled={isLastPage}
+                onclick={handleNext}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

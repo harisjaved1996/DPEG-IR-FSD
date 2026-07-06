@@ -1770,6 +1770,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Wire__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Wire__c.Investing_Entity__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1812,6 +1817,11 @@
         <editable>false</editable>
         <field>Wire__c.Sender_Name__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wire__c.Transaction_Id__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

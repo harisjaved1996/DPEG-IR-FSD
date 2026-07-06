@@ -100,6 +100,16 @@
                 <identifier>RecordUnison_Match_Status_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Transaction_Id__c</fieldItem>
+                <identifier>RecordUnison_Transaction_Id_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-3bce85d1-653c-488c-8b2f-6f25c54cdf61</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -152,6 +162,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Investing_Entity__c</fieldItem>
                 <identifier>RecordUnison_Investing_Entity_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Description__c</fieldItem>
+                <identifier>RecordUnison_Description_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3a55ec12-69c1-4761-af2d-c06a41f2f3a8</name>
@@ -355,6 +375,12 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>transactionHistory</componentName>
+                <identifier>Unison_transactionHistory</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
