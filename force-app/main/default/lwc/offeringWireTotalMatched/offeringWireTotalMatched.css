@@ -1,0 +1,57 @@
+/* Card border with internal padding (matches the Positions card) */
+:host {
+  display: block;
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.5rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  padding: 0.75rem;
+  font-family: "Salesforce Sans", Arial, sans-serif;
+  color: #080707;
+}
+
+.wm-table {
+  display: block;
+}
+
+.wm-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #dddbda;
+  border-radius: 10px;
+}
+
+.wm-empty-icon {
+  --slds-c-icon-color-foreground-default: #b0adab;
+  --sds-c-icon-color-foreground-default: #b0adab;
+}
+
+.wm-empty-text {
+  color: #969492;
+  font-size: 13px;
+  margin: 0;
+}
+
+.view-all-footer {
+  text-align: center;
+}
+
+.view-all-footer a {
+  color: var(--slds-g-color-brand-base-50, #0176d3);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.view-all-footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,28 @@
+<template>
+    <lightning-card class="wm-table">
+        <span slot="title" class="wm-card-title">
+            <lightning-icon icon-name="standard:currency" size="small"></lightning-icon>
+            <span class="wm-card-title-text">Total Matched ({summaryCount})</span>
+        </span>
+
+        <template lwc:if={hasRows}>
+            <c-offering-datatable
+                key-field="id"
+                data={rows}
+                columns={columns}
+                hide-checkbox-column>
+            </c-offering-datatable>
+        </template>
+
+        <template lwc:else>
+            <div class="wm-empty">
+                <lightning-icon icon-name="utility:moneybag" size="small" class="wm-empty-icon"></lightning-icon>
+                <p class="wm-empty-text">No wire transfers in this category.</p>
+            </div>
+        </template>
+
+        <div slot="footer" class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+</template>

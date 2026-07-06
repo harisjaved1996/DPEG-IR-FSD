@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Match_Status__c</fullName>
     <description>Operational status of matching this staged wire to a contribution and investor.</description>
-    <inlineHelpText>Auto-Settled when matched automatically; Review/Unmatched for the queue; Confirmed or Held after IR action.</inlineHelpText>
+    <inlineHelpText>Mismatch or Review while the wire is being reconciled; Matched once it is tied to a contribution and investor.</inlineHelpText>
     <label>Match Status</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
@@ -13,9 +13,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Auto-Settled</fullName>
+                <fullName>Mismatch</fullName>
                 <default>false</default>
-                <label>Auto-Settled</label>
+                <label>Mismatch</label>
             </value>
             <value>
                 <fullName>Review</fullName>
@@ -23,19 +23,9 @@
                 <label>Review</label>
             </value>
             <value>
-                <fullName>Unmatched</fullName>
+                <fullName>Matched</fullName>
                 <default>false</default>
-                <label>Unmatched</label>
-            </value>
-            <value>
-                <fullName>Confirmed</fullName>
-                <default>false</default>
-                <label>Confirmed</label>
-            </value>
-            <value>
-                <fullName>Held</fullName>
-                <default>false</default>
-                <label>Held</label>
+                <label>Matched</label>
             </value>
         </valueSetDefinition>
     </valueSet>

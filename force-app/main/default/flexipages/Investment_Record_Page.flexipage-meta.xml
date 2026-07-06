@@ -391,11 +391,75 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Positions</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-pos-subtabs01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset_pos</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-0bfdc3c7-2236-44cd-9e41-f8b7b7bcebc4</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-pos-current01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Current</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_pos_current</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-pos-past01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Past</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_pos_past</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-pos-subtabs01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
                 <componentName>positionInvestments</componentName>
                 <identifier>Unison_positionInvestments</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-0bfdc3c7-2236-44cd-9e41-f8b7b7bcebc4</name>
+        <name>Facet-pos-current01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>pastPositions</componentName>
+                <identifier>Unison_pastPositions</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-pos-past01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>

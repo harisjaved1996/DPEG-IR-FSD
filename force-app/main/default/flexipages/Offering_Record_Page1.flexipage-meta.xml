@@ -590,11 +590,123 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>offeringWireMatching</componentName>
-                <identifier>Unison_offeringWireMatching</identifier>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Wire Matching Categories</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-wm-subtabs01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset_wm</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-wire-matching-tab01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-total01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Total Matched</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_total</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-auto01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Auto Matched</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_auto</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-manual01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Manual Review</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_manual</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-mismatch01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Mismatch</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_mismatch</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-subtabs01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireTotalMatched</componentName>
+                <identifier>Unison_offeringWireTotalMatched</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-total01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireAutoMatched</componentName>
+                <identifier>Unison_offeringWireAutoMatched</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-auto01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireManualReview</componentName>
+                <identifier>Unison_offeringWireManualReview</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-manual01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireMismatch</componentName>
+                <identifier>Unison_offeringWireMismatch</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-mismatch01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
