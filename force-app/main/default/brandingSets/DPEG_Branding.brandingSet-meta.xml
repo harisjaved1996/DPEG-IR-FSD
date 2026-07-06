@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BrandingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brandingSetProperty>
+        <propertyName>BrandLogo</propertyName>
+        <propertyValue>dhanani_private_equity_group_logo</propertyValue>
+    </brandingSetProperty>
+    <brandingSetProperty>
+        <propertyName>BrandPrimaryColor</propertyName>
+        <propertyValue>#032D60</propertyValue>
+    </brandingSetProperty>
+    <description>DPEG corporate branding - Dhanani Private Equity Group logo and header color.</description>
+    <masterLabel>DPEG Branding</masterLabel>
+</BrandingSet>
