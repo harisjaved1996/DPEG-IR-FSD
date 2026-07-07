@@ -2,15 +2,6 @@ import { LightningElement, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { gql, graphql } from "lightning/uiGraphQLApi";
 
-// Same type value always maps to the same pill colour.
-const TYPE_VARIANT = {
-  Retail: "blue",
-  Multifamily: "purple",
-  Land: "green",
-  Office: "orange",
-  Industrial: "teal"
-};
-
 // Prototype: every row links to this one real Investment record, looked up by
 // Name at runtime (no hardcoded Id) so it works in any org.
 const TARGET_RECORD_NAME = "DPEG Vicksburg, LP";
@@ -21,12 +12,6 @@ const COLUMNS = [
     fieldName: "recordUrl",
     type: "url",
     typeAttributes: { label: { fieldName: "name" }, target: "_self" }
-  },
-  {
-    label: "Type",
-    fieldName: "type",
-    type: "pill",
-    typeAttributes: { variant: { fieldName: "typeVariant" } }
   },
   { label: "Committed", fieldName: "committed", type: "text" },
   { label: "Contributed", fieldName: "contributed", type: "text" },
@@ -43,7 +28,6 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
     {
       id: 1,
       name: "Global Zante, LLC",
-      type: "Retail",
       committed: "$1.3M",
       contributed: "$1.9M",
       distributed: "$450K",
@@ -53,7 +37,6 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
     {
       id: 2,
       name: "FX Series Fund 1, LP",
-      type: "Multifamily",
       committed: "$12.0M",
       contributed: "$12.0M",
       distributed: "$20.5M",
@@ -63,7 +46,6 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
     {
       id: 3,
       name: "Fuqua Park Row, LLC",
-      type: "Land",
       committed: "$5.0M",
       contributed: "$5.0M",
       distributed: "—",
@@ -73,7 +55,6 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
     {
       id: 4,
       name: "Falvel Apartments, LLC",
-      type: "Multifamily",
       committed: "$3.7M",
       contributed: "$4.0M",
       distributed: "$5.5M",
@@ -83,7 +64,6 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
     {
       id: 5,
       name: "DPEG Zarzamora, LLC",
-      type: "Retail",
       committed: "$7.4M",
       contributed: "$7.4M",
       distributed: "$1.5M",
@@ -98,10 +78,7 @@ export default class IrInvestmentsList extends NavigationMixin(LightningElement)
   }
 
   buildBaseRows() {
-    return this.investments.map((row) => ({
-      ...row,
-      typeVariant: TYPE_VARIANT[row.type] || "gray"
-    }));
+    return this.investments.map((row) => ({ ...row }));
   }
 
   get recordCount() {

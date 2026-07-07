@@ -4,15 +4,6 @@ import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const DEFAULT_ROWS = 5;
 
-const TYPES = ["Retail", "Multifamily", "Land"];
-
-// Same type value always maps to the same pill colour.
-const TYPE_VARIANT = {
-  Retail: "blue",
-  Multifamily: "purple",
-  Land: "green"
-};
-
 // Prototype: every row links to this one real Investment record, looked up by
 // Name at runtime (no hardcoded Id) so it works in any org.
 const TARGET_RECORD_NAME = "DPEG Vicksburg, LP";
@@ -23,12 +14,6 @@ const COLUMNS = [
     fieldName: "recordUrl",
     type: "url",
     typeAttributes: { label: { fieldName: "name" }, target: "_self" }
-  },
-  {
-    label: "Type",
-    fieldName: "type",
-    type: "pill",
-    typeAttributes: { variant: { fieldName: "typeVariant" } }
   },
   { label: "Committed", fieldName: "committed", type: "text" },
   { label: "Contributed", fieldName: "contributed", type: "text" },
@@ -198,15 +183,10 @@ export default class ClosedInvestmentListingChild extends NavigationMixin(Lightn
   }
 
   buildBaseRows() {
-    return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row, index) => {
-      const type = TYPES[index % TYPES.length];
-      return {
-        ...row,
-        type,
-        typeVariant: TYPE_VARIANT[type],
-        distributedDisplay: row.distributed || "—"
-      };
-    });
+    return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row) => ({
+      ...row,
+      distributedDisplay: row.distributed || "—"
+    }));
   }
 
   get investmentVariables() {

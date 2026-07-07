@@ -4,15 +4,6 @@ import { gql, graphql } from "lightning/uiGraphQLApi";
 
 const DEFAULT_ROWS = 5;
 
-const TYPES = ["Retail", "Multifamily", "Land"];
-
-// Same type value always maps to the same pill colour.
-const TYPE_VARIANT = {
-  Retail: "blue",
-  Multifamily: "purple",
-  Land: "green"
-};
-
 const COLUMNS = [
   {
     label: "Name",
@@ -20,17 +11,11 @@ const COLUMNS = [
     type: "url",
     typeAttributes: { label: { fieldName: "name" }, target: "_self" }
   },
-  {
-    label: "Type",
-    fieldName: "type",
-    type: "pill",
-    typeAttributes: { variant: { fieldName: "typeVariant" } }
-  },
   { label: "Committed", fieldName: "committed", type: "text" },
   { label: "Contributed", fieldName: "contributed", type: "text" },
   { label: "Distributed", fieldName: "distributedDisplay", type: "text" },
-  { label: "Target IRR", fieldName: "targetIrr", type: "text" },
-  { label: "Investment Period", fieldName: "holdPeriod", type: "text" }
+  { label: "Unreturned Capital", fieldName: "unreturnedCapital", type: "text" },
+  { label: "Net Equity", fieldName: "netEquity", type: "text" }
 ];
 
 // Demo data with placeholder ids (a1…a25). Once wired to real Investment
@@ -44,6 +29,8 @@ const ACTIVE_DATA = [
     committed: "$1.3M",
     contributed: "$1.9M",
     distributed: "$450K",
+    unreturnedCapital: "$3,247,500",
+    netEquity: "$21,483,920",
     targetIrr: "12%",
     holdPeriod: "3 Years"
   },
@@ -54,6 +41,8 @@ const ACTIVE_DATA = [
     committed: "$12.0M",
     contributed: "$12.0M",
     distributed: "$20.5M",
+    unreturnedCapital: "$3,861,200",
+    netEquity: "$24,067,315",
     targetIrr: "15%",
     holdPeriod: "5 Years"
   },
@@ -63,7 +52,9 @@ const ACTIVE_DATA = [
     gpEntity: "DPEG GP I LLC",
     committed: "$5.0M",
     contributed: "$5.0M",
-    distributed: "",
+    distributed: "$10.5M",
+    unreturnedCapital: "$3,094,750",
+    netEquity: "$20,762,048",
     targetIrr: "13%",
     holdPeriod: "4 Years"
   },
@@ -74,6 +65,8 @@ const ACTIVE_DATA = [
     committed: "$3.7M",
     contributed: "$4.0M",
     distributed: "$5.5M",
+    unreturnedCapital: "$3,578,300",
+    netEquity: "$23,214,586",
     targetIrr: "16%",
     holdPeriod: "5 Years"
   },
@@ -84,6 +77,8 @@ const ACTIVE_DATA = [
     committed: "$7.4M",
     contributed: "$7.4M",
     distributed: "$1.5M",
+    unreturnedCapital: "$3,912,640",
+    netEquity: "$25,108,772",
     targetIrr: "11%",
     holdPeriod: "3 Years"
   },
@@ -94,6 +89,8 @@ const ACTIVE_DATA = [
     committed: "$8.2M",
     contributed: "$8.2M",
     distributed: "$2.1M",
+    unreturnedCapital: "$3,405,880",
+    netEquity: "$22,391,450",
     targetIrr: "14%",
     holdPeriod: "5 Years"
   },
@@ -104,6 +101,8 @@ const ACTIVE_DATA = [
     committed: "$4.5M",
     contributed: "$4.2M",
     distributed: "",
+    unreturnedCapital: "$3,156,020",
+    netEquity: "$20,948,637",
     targetIrr: "12%",
     holdPeriod: "4 Years"
   },
@@ -114,6 +113,8 @@ const ACTIVE_DATA = [
     committed: "$15.0M",
     contributed: "$14.5M",
     distributed: "$6.0M",
+    unreturnedCapital: "$3,733,415",
+    netEquity: "$24,832,190",
     targetIrr: "18%",
     holdPeriod: "6 Years"
   },
@@ -124,6 +125,8 @@ const ACTIVE_DATA = [
     committed: "$3.2M",
     contributed: "$3.2M",
     distributed: "$800K",
+    unreturnedCapital: "$3,289,940",
+    netEquity: "$21,076,514",
     targetIrr: "13%",
     holdPeriod: "3 Years"
   },
@@ -134,6 +137,8 @@ const ACTIVE_DATA = [
     committed: "$6.8M",
     contributed: "$6.5M",
     distributed: "",
+    unreturnedCapital: "$3,644,180",
+    netEquity: "$23,647,825",
     targetIrr: "11%",
     holdPeriod: "4 Years"
   },
@@ -144,6 +149,8 @@ const ACTIVE_DATA = [
     committed: "$9.1M",
     contributed: "$9.1M",
     distributed: "$3.2M",
+    unreturnedCapital: "$3,982,305",
+    netEquity: "$25,283,946",
     targetIrr: "15%",
     holdPeriod: "5 Years"
   },
@@ -154,6 +161,8 @@ const ACTIVE_DATA = [
     committed: "$5.4M",
     contributed: "$5.0M",
     distributed: "$1.2M",
+    unreturnedCapital: "$3,071,650",
+    netEquity: "$20,415,208",
     targetIrr: "12%",
     holdPeriod: "3 Years"
   },
@@ -164,6 +173,8 @@ const ACTIVE_DATA = [
     committed: "$11.0M",
     contributed: "$10.5M",
     distributed: "$4.5M",
+    unreturnedCapital: "$3,518,720",
+    netEquity: "$22,957,360",
     targetIrr: "16%",
     holdPeriod: "6 Years"
   },
@@ -174,6 +185,8 @@ const ACTIVE_DATA = [
     committed: "$7.2M",
     contributed: "$7.0M",
     distributed: "",
+    unreturnedCapital: "$3,826,090",
+    netEquity: "$24,509,671",
     targetIrr: "13%",
     holdPeriod: "4 Years"
   },
@@ -184,6 +197,8 @@ const ACTIVE_DATA = [
     committed: "$20.0M",
     contributed: "$18.5M",
     distributed: "$8.0M",
+    unreturnedCapital: "$3,368,540",
+    netEquity: "$21,864,935",
     targetIrr: "17%",
     holdPeriod: "7 Years"
   },
@@ -194,6 +209,8 @@ const ACTIVE_DATA = [
     committed: "$4.8M",
     contributed: "$4.8M",
     distributed: "$1.8M",
+    unreturnedCapital: "$3,690,275",
+    netEquity: "$23,082,417",
     targetIrr: "14%",
     holdPeriod: "5 Years"
   },
@@ -204,6 +221,8 @@ const ACTIVE_DATA = [
     committed: "$6.3M",
     contributed: "$6.0M",
     distributed: "",
+    unreturnedCapital: "$3,127,830",
+    netEquity: "$20,633,742",
     targetIrr: "12%",
     holdPeriod: "3 Years"
   },
@@ -214,6 +233,8 @@ const ACTIVE_DATA = [
     committed: "$3.9M",
     contributed: "$3.7M",
     distributed: "$700K",
+    unreturnedCapital: "$3,459,610",
+    netEquity: "$22,148,569",
     targetIrr: "11%",
     holdPeriod: "4 Years"
   },
@@ -224,6 +245,8 @@ const ACTIVE_DATA = [
     committed: "$16.0M",
     contributed: "$15.0M",
     distributed: "$7.2M",
+    unreturnedCapital: "$3,905,120",
+    netEquity: "$25,391,084",
     targetIrr: "19%",
     holdPeriod: "6 Years"
   },
@@ -234,6 +257,8 @@ const ACTIVE_DATA = [
     committed: "$5.5M",
     contributed: "$5.5M",
     distributed: "$2.0M",
+    unreturnedCapital: "$3,214,385",
+    netEquity: "$21,527,806",
     targetIrr: "15%",
     holdPeriod: "5 Years"
   },
@@ -244,6 +269,8 @@ const ACTIVE_DATA = [
     committed: "$8.7M",
     contributed: "$8.2M",
     distributed: "",
+    unreturnedCapital: "$3,752,860",
+    netEquity: "$24,275,138",
     targetIrr: "13%",
     holdPeriod: "4 Years"
   },
@@ -254,6 +281,8 @@ const ACTIVE_DATA = [
     committed: "$12.5M",
     contributed: "$12.0M",
     distributed: "$5.1M",
+    unreturnedCapital: "$3,037,490",
+    netEquity: "$20,896,320",
     targetIrr: "16%",
     holdPeriod: "5 Years"
   },
@@ -264,6 +293,8 @@ const ACTIVE_DATA = [
     committed: "$4.1M",
     contributed: "$4.0M",
     distributed: "$900K",
+    unreturnedCapital: "$3,596,745",
+    netEquity: "$23,764,951",
     targetIrr: "12%",
     holdPeriod: "3 Years"
   },
@@ -274,6 +305,8 @@ const ACTIVE_DATA = [
     committed: "$7.8M",
     contributed: "$7.5M",
     distributed: "$2.8M",
+    unreturnedCapital: "$3,880,930",
+    netEquity: "$25,032,467",
     targetIrr: "14%",
     holdPeriod: "6 Years"
   },
@@ -284,6 +317,8 @@ const ACTIVE_DATA = [
     committed: "$9.5M",
     contributed: "$9.5M",
     distributed: "$4.0M",
+    unreturnedCapital: "$3,321,070",
+    netEquity: "$22,619,703",
     targetIrr: "17%",
     holdPeriod: "5 Years"
   }
@@ -303,15 +338,10 @@ export default class ActiveInvestmentListingChild extends NavigationMixin(Lightn
   }
 
   buildBaseRows() {
-    return ACTIVE_DATA.slice(0, DEFAULT_ROWS).map((row, index) => {
-      const type = TYPES[index % TYPES.length];
-      return {
-        ...row,
-        type,
-        typeVariant: TYPE_VARIANT[type],
-        distributedDisplay: row.distributed || "—"
-      };
-    });
+    return ACTIVE_DATA.slice(0, DEFAULT_ROWS).map((row) => ({
+      ...row,
+      distributedDisplay: row.distributed || "—"
+    }));
   }
 
   get investmentVariables() {

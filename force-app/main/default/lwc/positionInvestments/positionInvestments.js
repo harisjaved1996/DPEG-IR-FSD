@@ -23,7 +23,8 @@ const COLUMNS = [
   },
   { label: "Ownership", fieldName: "ownership", type: "text", sortable: true },
   { label: "Contributed", fieldName: "contributed", type: "text", sortable: true },
-  { label: "Distributed", fieldName: "distributed", type: "text", sortable: true }
+  { label: "Distributed", fieldName: "distributed", type: "text", sortable: true },
+  { label: "Unreturned Capital", fieldName: "unreturnedCapital", type: "text", sortable: true }
 ];
 
 const DATA = [
@@ -33,7 +34,8 @@ const DATA = [
     entity: "1988 Venture LLC",
     ownership: "0.2000%",
     contributed: "$100,000.00",
-    distributed: "$4,999.98"
+    distributed: "$4,999.98",
+    unreturnedCapital: "$100,000.00"
   },
   {
     id: "2",
@@ -41,7 +43,8 @@ const DATA = [
     entity: "3D Way, LLC",
     ownership: "0.2000%",
     contributed: "$100,000.00",
-    distributed: "$4,999.98"
+    distributed: "$4,999.98",
+    unreturnedCapital: "$100,000.00"
   },
   {
     id: "3",
@@ -49,7 +52,8 @@ const DATA = [
     entity: "5As Capital Group LLC",
     ownership: "0.2000%",
     contributed: "$100,000.00",
-    distributed: "$4,999.98"
+    distributed: "$4,999.98",
+    unreturnedCapital: "$100,000.00"
   },
   {
     id: "4",
@@ -57,7 +61,8 @@ const DATA = [
     entity: "A&S Meghjiani Investments, LLC",
     ownership: "0.2000%",
     contributed: "$100,000.00",
-    distributed: "$4,999.98"
+    distributed: "$4,999.98",
+    unreturnedCapital: "$100,000.00"
   },
   {
     id: "5",
@@ -65,7 +70,8 @@ const DATA = [
     entity: "Aamir Pirani and Nisha Pirani",
     ownership: "0.2000%",
     contributed: "$100,000.00",
-    distributed: "$4,999.98"
+    distributed: "$4,999.98",
+    unreturnedCapital: "$100,000.00"
   },
   {
     id: "6",
@@ -73,7 +79,8 @@ const DATA = [
     entity: "AANA LLC",
     ownership: "0.1000%",
     contributed: "$50,000.00",
-    distributed: "$2,500.02"
+    distributed: "$2,500.02",
+    unreturnedCapital: "$50,000.00"
   }
 ];
 
