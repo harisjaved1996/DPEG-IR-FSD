@@ -86,26 +86,6 @@
                 <identifier>RecordUnison_Source_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Type__c</fieldItem>
-                <identifier>RecordUnison_Type_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.OwnerId</fieldItem>
-                <identifier>RecordOwnerIdField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-8ebe1fcf-f575-4c8f-9814-ed6df06a52f8</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -138,6 +118,26 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Investor_Count__c</fieldItem>
                 <identifier>RecordUnison_Investor_Count_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Type__c</fieldItem>
+                <identifier>RecordUnison_Type_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.OwnerId</fieldItem>
+                <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-daf4a159-513b-4a3a-b1e6-ad5f0134312c</name>
