@@ -202,6 +202,18 @@
                 <identifier>RecordUnison_Property_rUnison_Square_Feet_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Valuation__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Valuation_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Loan_to_Value__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Loan_to_Value_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-bd9bb4e7-7ecc-49e5-aa4d-1213e0dff522</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -228,6 +240,12 @@
             <fieldInstance>
                 <fieldItem>Record.Unison__Property__r.Land_Acres__c</fieldItem>
                 <identifier>RecordUnison_Property_rUnison_Land_Acres_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Loan_Balance__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Loan_Balance_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8e826283-749e-4d15-8452-98479d489f94</name>
@@ -391,19 +409,21 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Positions</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>tabs</name>
-                    <value>Facet-pos-subtabs01</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tabset</componentName>
-                <identifier>flexipage_tabset_pos</identifier>
+                <componentName>positionInvestments</componentName>
+                <identifier>Unison_positionInvestments</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-0bfdc3c7-2236-44cd-9e41-f8b7b7bcebc4</name>
+        <name>Facet-pos-current01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>pastPositions</componentName>
+                <identifier>Unison_pastPositions</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-pos-past01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -445,21 +465,19 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>positionInvestments</componentName>
-                <identifier>Unison_positionInvestments</identifier>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Positions</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-pos-subtabs01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset_pos</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-pos-current01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>pastPositions</componentName>
-                <identifier>Unison_pastPositions</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-pos-past01</name>
+        <name>Facet-0bfdc3c7-2236-44cd-9e41-f8b7b7bcebc4</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>

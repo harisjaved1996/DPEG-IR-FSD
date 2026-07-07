@@ -86,6 +86,36 @@
                 <identifier>RecordUnison_Status_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Type__c</fieldItem>
+                <identifier>RecordUnison_Type_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Distribution_Schedule__c</fieldItem>
+                <identifier>RecordUnison_Distribution_Schedule_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Investment_Period__c</fieldItem>
+                <identifier>RecordUnison_Investment_Period_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-7c83218b-e272-4b62-9a7d-e8113f921a9d</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -108,6 +138,36 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Minimum_Investment__c</fieldItem>
                 <identifier>RecordUnison_Minimum_Investment_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Price_Per_Share__c</fieldItem>
+                <identifier>RecordUnison_Price_Per_Share_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Target_Raise__c</fieldItem>
+                <identifier>RecordUnison_Target_Raise_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Closing_Date__c</fieldItem>
+                <identifier>RecordUnison_Closing_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -154,6 +214,58 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Cashon_Cash__c</fieldItem>
+                <identifier>RecordUnison_Cashon_Cash_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-target-performance-left01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Target_IRR__c</fieldItem>
+                <identifier>RecordUnison_Target_IRR_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-target-performance-right01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-target-performance-left01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column11</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-target-performance-right01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column12</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-target-performance-cols01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Property__c</fieldItem>
                 <identifier>RecordUnison_Property_cField</identifier>
             </fieldInstance>
@@ -174,6 +286,18 @@
             <fieldInstance>
                 <fieldItem>Record.Unison__Property__r.Square_Feet__c</fieldItem>
                 <identifier>RecordUnison_Property_rUnison_Square_Feet_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Valuation__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Valuation_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Loan_to_Value__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Loan_to_Value_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-749f1b10-1ca1-485a-bef9-97c7d872d6c5</name>
@@ -202,6 +326,12 @@
             <fieldInstance>
                 <fieldItem>Record.Unison__Property__r.Land_Acres__c</fieldItem>
                 <identifier>RecordUnison_Property_rUnison_Land_Acres_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Unison__Property__r.Loan_Balance__c</fieldItem>
+                <identifier>RecordUnison_Property_rUnison_Loan_Balance_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-dae1c67d-4cea-40b2-adac-521aa8a61a42</name>
@@ -306,6 +436,24 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
+                    <value>Facet-target-performance-cols01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Target Performance</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection6</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
                     <value>Facet-1c0b6776-5191-4e0d-9983-cd4917b21ff5</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -345,11 +493,143 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>offeringLaunchingActivities</componentName>
+                <identifier>Unison_offeringLaunchingActivities</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-launching-activities01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
                 <componentName>commitmentsOfferingCom</componentName>
                 <identifier>Unison_commitmentsOfferingCom</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-cbbff5f0-cf40-4632-aae3-ea42f6565c95</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireTotalMatched</componentName>
+                <identifier>Unison_offeringWireTotalMatched</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-total01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireAutoMatched</componentName>
+                <identifier>Unison_offeringWireAutoMatched</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-auto01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireManualReview</componentName>
+                <identifier>Unison_offeringWireManualReview</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-manual01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>offeringWireMismatch</componentName>
+                <identifier>Unison_offeringWireMismatch</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-mismatch01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-total01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Total Matched</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_total</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-auto01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Auto Matched</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_auto</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-manual01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Manual Review</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_manual</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-wm-mismatch01</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Mismatch</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_wm_mismatch</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wm-subtabs01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Wire Matching Categories</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-wm-subtabs01</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset_wm</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-wire-matching-tab01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -370,16 +650,6 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-182d79ec-2882-4183-b2a7-ee3e1975c217</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>offeringLaunchingActivities</componentName>
-                <identifier>Unison_offeringLaunchingActivities</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-launching-activities01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -440,6 +710,16 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-presentation-notesattach01</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>docuSignSendWizard</componentName>
+                <identifier>Unison_docuSignSendWizard</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ppmv2-sender01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -575,138 +855,6 @@
         </itemInstances>
         <mode>Replace</mode>
         <name>maintabs</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>docuSignSendWizard</componentName>
-                <identifier>Unison_docuSignSendWizard</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-ppmv2-sender01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Wire Matching Categories</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>tabs</name>
-                    <value>Facet-wm-subtabs01</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tabset</componentName>
-                <identifier>flexipage_tabset_wm</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wire-matching-tab01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>active</name>
-                    <value>true</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-wm-total01</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Total Matched</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab_wm_total</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-wm-auto01</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Auto Matched</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab_wm_auto</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-wm-manual01</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Manual Review</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab_wm_manual</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-wm-mismatch01</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Mismatch</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab_wm_mismatch</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wm-subtabs01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>offeringWireTotalMatched</componentName>
-                <identifier>Unison_offeringWireTotalMatched</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wm-total01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>offeringWireAutoMatched</componentName>
-                <identifier>Unison_offeringWireAutoMatched</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wm-auto01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>offeringWireManualReview</componentName>
-                <identifier>Unison_offeringWireManualReview</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wm-manual01</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>offeringWireMismatch</componentName>
-                <identifier>Unison_offeringWireMismatch</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-wm-mismatch01</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>

@@ -1294,6 +1294,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Offering__c.Distribution_Schedule__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Offering__c.GP_Entity__c</field>
         <readable>false</readable>
@@ -1372,6 +1377,11 @@
         <editable>false</editable>
         <field>Offering__c.Transfers_Permitted__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Offering__c.Type__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1499,6 +1509,16 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Property__c.Loan_Balance__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Property__c.Loan_to_Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Property__c.Occupancy_Pct__c</field>
         <readable>false</readable>
@@ -1542,6 +1562,11 @@
         <editable>false</editable>
         <field>Property__c.Units__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Property__c.Valuation__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

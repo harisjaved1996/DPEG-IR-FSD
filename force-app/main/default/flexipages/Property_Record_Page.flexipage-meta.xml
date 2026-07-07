@@ -86,6 +86,26 @@
                 <identifier>RecordUnison_Land_Acres_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Valuation__c</fieldItem>
+                <identifier>RecordUnison_Valuation_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Loan_to_Value__c</fieldItem>
+                <identifier>RecordUnison_Loan_to_Value_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-088154a7-88af-4ae1-9017-1cbb1dc0cd11</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -138,6 +158,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Year_Built__c</fieldItem>
                 <identifier>RecordUnison_Year_Built_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Loan_Balance__c</fieldItem>
+                <identifier>RecordUnison_Loan_Balance_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-55e41348-a3e9-4344-a69b-e93f00f8e92f</name>

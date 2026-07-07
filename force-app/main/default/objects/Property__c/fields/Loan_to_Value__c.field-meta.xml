@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_to_Value__c</fullName>
+    <description>Loan-to-value ratio: Loan Balance divided by Valuation, expressed as a number out of 100. Returns 0 when Loan Balance or Valuation is empty or zero.</description>
+    <formula>IF(OR(ISBLANK(Loan_Balance__c), Loan_Balance__c = 0, ISBLANK(Valuation__c), Valuation__c = 0), 0, Loan_Balance__c / Valuation__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Automatically calculated: Loan Balance / Valuation, shown as a percentage.</inlineHelpText>
+    <label>Loan to Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>
