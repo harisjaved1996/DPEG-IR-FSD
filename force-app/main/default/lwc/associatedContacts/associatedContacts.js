@@ -19,7 +19,13 @@ const COLUMNS = [
   },
   { label: "Email", fieldName: "email", type: "text", cellAttributes: { alignment: "left" } },
   { label: "Phone", fieldName: "phone", type: "text", cellAttributes: { alignment: "left" } },
-  { label: "Primary", fieldName: "primary", type: "text", cellAttributes: { alignment: "left" } }
+  { label: "Primary", fieldName: "primary", type: "text", cellAttributes: { alignment: "left" } },
+  {
+    label: "Required Signer",
+    fieldName: "requiredSigner",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  }
 ];
 
 // Dummy data modelled on the Associated Contacts screenshot.
@@ -29,21 +35,24 @@ const DATA = [
     name: "Taj Merchant",
     email: "merchanttaj@yahoo.com",
     phone: "(832) 875-1702",
-    primary: "Yes"
+    primary: "Yes",
+    requiredSigner: "Yes"
   },
   {
     id: "2",
     name: "A. Greentree",
     email: "a.greentree@greentreellc.com",
     phone: "(713) 555-0148",
-    primary: "No"
+    primary: "No",
+    requiredSigner: "No"
   },
   {
     id: "3",
     name: "Sarah Lin",
     email: "sarah.lin@greentreellc.com",
     phone: "(281) 555-0092",
-    primary: "No"
+    primary: "No",
+    requiredSigner: "No"
   }
 ];
 

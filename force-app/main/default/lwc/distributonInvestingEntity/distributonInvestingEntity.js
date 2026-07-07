@@ -7,6 +7,8 @@ const ROW_ACTIONS = [
   { label: "Delete", name: "delete" }
 ];
 
+const TARGET_INVESTMENT_NAME = "DPEG Vicksburg, LP";
+
 const COLUMNS = [
   {
     label: "Distribution Number",
@@ -17,9 +19,21 @@ const COLUMNS = [
       target: "_self"
     }
   },
+  {
+    label: "Investment",
+    fieldName: "investmentUrl",
+    type: "url",
+    typeAttributes: {
+      label: { fieldName: "investment" },
+      target: "_self"
+    },
+    cellAttributes: { alignment: "left" }
+  },
   { label: "Paid Status", fieldName: "paidStatus", type: "text" },
   { label: "Amount", fieldName: "amountLabel", type: "text" },
   { label: "Distribution Date", fieldName: "distributionDate", type: "text" },
+  { label: "Source", fieldName: "source", type: "text" },
+  { label: "Type", fieldName: "type", type: "text" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];
 
@@ -27,6 +41,7 @@ const DATA = [
   {
     id: "1",
     distributionNumber: "DIST-2400",
+    investment: "DPEG 359, LLC",
     paidStatus: "Paid",
     amount: 40000,
     amountLabel: "$40,000.00",
@@ -41,6 +56,7 @@ const DATA = [
   {
     id: "2",
     distributionNumber: "DIST-2401",
+    investment: "DPEG 412, LLC",
     paidStatus: "Paid",
     amount: 25000,
     amountLabel: "$25,000.00",
@@ -55,6 +71,7 @@ const DATA = [
   {
     id: "3",
     distributionNumber: "DIST-2402",
+    investment: "DPEG 287, LLC",
     paidStatus: "Paid",
     amount: 60000,
     amountLabel: "$60,000.00",
@@ -73,18 +90,53 @@ export default class DistributonInvestingEntity extends NavigationMixin(Lightnin
   showModal = false;
   selectedRecords = [];
 
-  // Generated at runtime from the resolved Distribution Id; every row links here.
+  // Generated at runtime from the resolved Distribution and Investment Ids; every row links here.
   distributionUrl;
+  investmentUrl;
 
   get data() {
     return DATA.map((row) => ({
       ...row,
-      distributionUrl: this.distributionUrl
+      distributionUrl: this.distributionUrl,
+      investmentUrl: this.investmentUrl
     }));
   }
 
   get recordCount() {
     return this.data.length;
+  }
+
+  get investmentVariables() {
+    return { name: TARGET_INVESTMENT_NAME };
+  }
+
+  @wire(graphql, {
+    query: gql`
+      query investmentByName($name: String) {
+        uiapi {
+          query {
+            Unison__Investment__c(where: { Name: { eq: $name } }, first: 1) {
+              edges {
+                node {
+                  Id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: "$investmentVariables"
+  })
+  wiredInvestment({ data, errors }) {
+    if (errors || !data) {
+      return;
+    }
+    const edges = data?.uiapi?.query?.Unison__Investment__c?.edges;
+    if (!edges || !edges.length) {
+      return;
+    }
+    this.attachInvestmentUrl(edges[0].node.Id);
   }
 
   @wire(graphql, {
@@ -113,6 +165,21 @@ export default class DistributonInvestingEntity extends NavigationMixin(Lightnin
       return;
     }
     this.attachDistributionUrl(edges[0].node.Id);
+  }
+
+  async attachInvestmentUrl(recordId) {
+    try {
+      this.investmentUrl = await this[NavigationMixin.GenerateUrl]({
+        type: "standard__recordPage",
+        attributes: {
+          recordId,
+          objectApiName: "Unison__Investment__c",
+          actionName: "view"
+        }
+      });
+    } catch (error) {
+      // Leave rows without links if URL generation fails so the table still renders.
+    }
   }
 
   async attachDistributionUrl(recordId) {

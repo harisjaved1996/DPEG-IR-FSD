@@ -50,10 +50,31 @@ const COLUMNS = [
     fieldName: "distributed",
     type: "text",
     cellAttributes: { alignment: "left" }
+  },
+  {
+    label: "Unreturned Capital",
+    fieldName: "unreturnedCapital",
+    type: "text",
+    cellAttributes: { alignment: "left" }
+  },
+  {
+    label: "Net Equity",
+    fieldName: "netEquity",
+    type: "text",
+    cellAttributes: { alignment: "left" }
   }
 ];
 
 // Dummy data modelled on the Positions screenshot.
+const generateRandomNetEquity = () => {
+  const min = 115000;
+  const max = 225115;
+  const random = Math.floor(Math.random() * (max - min + 1)) + min;
+  return (
+    "$" + random.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  );
+};
+
 const DATA = [
   {
     id: "1",
@@ -62,7 +83,9 @@ const DATA = [
     ownership: "2.5000%",
     committed: "$222,500.00",
     contributed: "$227,500.00",
-    distributed: "$0.00"
+    distributed: "$0.00",
+    unreturnedCapital: "$227,500.00",
+    netEquity: generateRandomNetEquity()
   },
   {
     id: "2",
@@ -71,7 +94,9 @@ const DATA = [
     ownership: "1.2500%",
     committed: "$100,000.00",
     contributed: "$100,000.00",
-    distributed: "$15,000.00"
+    distributed: "$15,000.00",
+    unreturnedCapital: "$100,000.00",
+    netEquity: generateRandomNetEquity()
   },
   {
     id: "3",
@@ -80,7 +105,9 @@ const DATA = [
     ownership: "3.0000%",
     committed: "$300,000.00",
     contributed: "$280,000.00",
-    distributed: "$45,000.00"
+    distributed: "$45,000.00",
+    unreturnedCapital: "$280,000.00",
+    netEquity: generateRandomNetEquity()
   }
 ];
 
