@@ -1,294 +1,143 @@
-# 📋 DESIGN REQUIREMENTS — Investment Listing LWCs: Remove Type Column; Swap Target IRR / Investment Period for Unreturned Capital + Net Equity (active child)
+# Design Requirements — Distribution Investment: Source & Type Columns + Picklist Fields
 
 **Prepared by:** salesforce-design subagent
 **Date:** 2026-07-07
 **Target org:** DPEG-IR-FSD-V3 (org namespace: `Unison`)
-**Components touched:** `lwc/activeInvestmentListingChild`, `lwc/closedInvestmentListingChild`, `lwc/irInvestmentsList` — **JS files only** (no HTML/CSS/meta changes)
-**Classification:** 100% LWC DEVELOPMENT work → 🟢 salesforce-developer → 🟣 salesforce-code-review → 🔴 salesforce-devops. **No Apex** → no unit-testing agent. **No Jest tests exist for these 3 bundles → do NOT add any** (scope guard). No admin work. Documentation step skipped (session preference).
+**Status:** PLAN ONLY — awaiting user confirmation (Gate 1)
 
 ---
 
-## WHAT USER REQUESTED (verbatim scope — nothing more)
+## 1. Summary of the Request
 
-1. `activeInvestmentListingChild` **and** `closedInvestmentListingChild`: remove the **Type** column and its value.
-2. `activeInvestmentListingChild` only: replace **Target IRR** and **Investment Period** columns with **Unreturned Capital** and **Net Equity**, using arbitrary demo values — Unreturned Capital between **$3,000,000–$4,000,000**, Net Equity between **$20,106,551–$25,500,233**.
-3. `irInvestmentsList`: remove the **Type** column. (Its Target IRR / Investment Period columns are **NOT** touched.)
+Three linked changes:
 
----
-
-## VERIFIED FINDINGS (repo inspection, 2026-07-07)
-
-| #   | Finding                                                                                                                                                                                                                                                                                                                                                                                        | Evidence                                                                                                                                  |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| F1  | **All three components are fully self-contained.** Columns are a `COLUMNS` const and rows are hardcoded demo-data arrays inside each component's own JS. No `@api` inputs, no Apex controller, no data from parents. The only wire is a GraphQL lookup of one Investment Id ("DPEG Vicksburg, LP") used solely to attach `recordUrl` to the Name link — untouched by this change.              | `activeInvestmentListingChild.js`, `closedInvestmentListingChild.js`, `irInvestmentsList.js`                                              |
-| F2  | **Render paths:** activeInvestmentListingChild + closedInvestmentListingChild are placed **directly** on `flexipages/Active_Investments.flexipage-meta.xml` (lines 52, 62). irInvestmentsList is placed **directly** on `flexipages/IR_Console.flexipage-meta.xml` (line 26). Flexipages pass NO componentInstanceProperties → **no flexipage edits needed**.                                  | Both flexipage files                                                                                                                      |
-| F3  | Wrapper components `investmentListingParent` (renders both children) and `irActiveListingTabs` (renders irInvestmentsList) exist but are **not placed on any flexipage and not consumed by any other component** — and they pass no data anyway. **No parent edits needed.** `investmentListingParent.css` only sets host-level `display/margin` — column-agnostic.                            | Grep for `c-investment-listing-parent`, `c-ir-active-listing-tabs` across `force-app` → no consumers                                      |
-| F4  | Tables render via shared `c-pill-datatable` (extends `lightning/datatable`; custom types `pill`, `progressBar`, `emailLink`). The Type column is the only `pill`-type column in these 3 components. After removal, the `pill` custom type is **still used by 6 other components** (`irOfferingsList`, `onboardingContactsList`, `shareTransferComponent`, etc.) → **pillDatatable untouched.** | `lwc/pillDatatable/pillDatatable.js`; grep `type: "pill"` → 9 files                                                                       |
-| F5  | **No sorting, no column-width classes, no colspan, no CSS grid** tied to columns anywhere in the three bundles. Each bundle's CSS styles only the "View All" footer. Column count is fully driven by the `COLUMNS` array → removal/replacement is safe with zero layout side effects.                                                                                                          | All 3 `.html`/`.css` files (identical card + `c-pill-datatable` + footer structure)                                                       |
-| F6  | **Type value origin differs:** in active/closed children, `type`/`typeVariant` are **computed** in `buildBaseRows()` from module consts `TYPES` + `TYPE_VARIANT` (round-robin by row index) — the data arrays contain no `type` key. In `irInvestmentsList`, `type` **is a data key** on each of the 5 rows, mapped to `typeVariant` in `buildBaseRows()` via its own `TYPE_VARIANT` const.    | `activeInvestmentListingChild.js:7-14,305-315`; `closedInvestmentListingChild.js:7-14,200-210`; `irInvestmentsList.js:5-12,42-93,100-105` |
-| F7  | `activeInvestmentListingChild` shows only the **first 5 rows** (`DEFAULT_ROWS = 5`, `ACTIVE_DATA.slice(0, DEFAULT_ROWS)`) of a 25-row array (ids `a1`–`a25`). There is no in-component "show more" — "View All" navigates away to the Investment list view. So rows a1–a5 are the only visible rows.                                                                                           | `activeInvestmentListingChild.js:5,39-290,306`                                                                                            |
-| F8  | `closedInvestmentListingChild` has **no Target IRR / Investment Period columns** (only Name, Type, Committed, Contributed, Distributed) — its `CLOSED_DATA` rows carry unused `targetIrr`/`holdPeriod` keys already (pre-existing pattern). Only the Type removal applies here.                                                                                                                | `closedInvestmentListingChild.js:20-36,38-189`                                                                                            |
-| F9  | Currency display convention in these tables = **hardcoded `$`-prefixed strings in `type: "text"` columns** (e.g. `"$1.3M"`). The new columns follow the same mechanism (hardcoded strings, text type) but at full-dollar precision — see Decision Point 1.                                                                                                                                     | `COLUMNS` arrays in all 3 files                                                                                                           |
-| F10 | **No Jest tests exist** for any of the three bundles (no `__tests__` folders). Other unrelated components independently use the terms "Unreturned Capital"/"Target IRR" (`irPortfolioCard`, `irrProgressCard`, `offeringPropertyOverview`) with their own definitions — **no shared column definitions anywhere; do not touch them.**                                                          | Glob `lwc/**/__tests__/**`; grep for the column terms                                                                                     |
+1. **LWC `distributionInvestment`** — add two new columns at the END of the datatable, labeled **"Source"** and **"Type"**.
+2. **`Distribution Batch` object** — convert the two existing fields **Source** and **Type** into **Picklists** with defined value sets.
+3. **FLS** — grant field-level security (read + edit) on both fields to the **Admin profile**, then deploy.
 
 ---
 
-## ⚠ DECISION POINTS (recommendations proceed unless user changes them)
+## 2. Verified Facts (validated against the repo)
 
-### Decision Point 1 — New-value display format (RECOMMENDED: full-digit currency `"$3,247,500"`)
-
-Neighbouring columns use compact strings (`"$1.3M"`), but the user specified ranges at exact-dollar precision (`$20,106,551–$25,500,233`) — compact formatting would collapse every Unreturned Capital value into near-identical `$3.x M` figures and lose the requested precision. **Recommendation:** full-digit, comma-separated, `$`-prefixed strings in `type: "text"` columns (same mechanism as existing currency columns). Alternative (compact `"$3.2M"`) only if the user prefers visual uniformity over precision.
-
-### Decision Point 2 — How many ACTIVE_DATA rows get the new values (RECOMMENDED: all 25)
-
-Only rows a1–a5 render (F7). **Recommendation:** populate `unreturnedCapital` + `netEquity` on **all 25 rows** so every row object keeps a uniform shape and no blank cells appear if `DEFAULT_ROWS` is ever raised. Exact values for all 25 are specified below (deterministic hardcoded demo values — no `Math.random`). Minimal alternative: populate only a1–a5.
-
-### Decision Point 3 — Dead-data cleanup boundaries (RECOMMENDED: as below)
-
-- **Keep** the now-undisplayed `targetIrr`/`holdPeriod` keys in `ACTIVE_DATA` — matches the existing precedent in `closedInvestmentListingChild` (carries them unused today) and keeps the diff minimal.
-- **Remove** the `type: "…"` key from the 5 `investments` rows in `irInvestmentsList.js` — with the column and `TYPE_VARIANT` mapping gone they are fully dead, and the user's intent ("remove the Type column and its value") covers the stored values.
-- **Remove** the now-unused `TYPES` / `TYPE_VARIANT` consts (and their comment lines) in all three files — leaving them would fail `no-unused-vars` linting.
+| Fact                                           | Confirmation                                                                                                                                                                                                                                                            |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Namespace = `Unison`                           | Local bare `Distribution_Batch__c` → live as `Unison__Distribution_Batch__c`; fields deploy as `Unison__Source__c` / `Unison__Type__c`. Confirmed in the LWC GraphQL query (`Unison__Distribution_Batch__c`).                                                           |
+| `Source__c` exists as **Text(255)**            | `objects/Distribution_Batch__c/fields/Source__c.field-meta.xml` → `<type>Text</type>`, `<length>255</length>`.                                                                                                                                                          |
+| `Type__c` exists as **Text(255)**              | `objects/Distribution_Batch__c/fields/Type__c.field-meta.xml` → `<type>Text</type>`, `<length>255</length>`.                                                                                                                                                            |
+| LWC COLUMNS ends with a row-action column      | `distributionInvestment.js` line 23: `{ type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }`.                                                                                                                                                                 |
+| Mock DATA rows already carry `source` + `type` | Rows have `source`/`type` props with VARIED values (row 2 = `Sale of Property` / `Return of Capital`, row 3 type = `Other`), NOT the fixed `Cash Flow`/`Preferred Return` the request states.                                                                           |
+| Admin profile is undeployable in V3            | `memory/admin-profile-undeployable-v3.md`: dangling `flowAccesses` entry (`sfdc_default_ReportExport_Protection_Flow`) blocks full-profile deploys. FLS previously granted via `FieldPermissions` rows on the profile's parent PermissionSet (Id `0PSFW000K5T0EeK4IV`). |
 
 ---
 
-## 🟢 DEVELOPMENT WORK (salesforce-developer) — 3 JS files, nothing else
+## 3. Components Affected
 
-### File 1: `force-app/main/default/lwc/activeInvestmentListingChild/activeInvestmentListingChild.js`
-
-**Edit A1 — delete lines 7–14** (the `TYPES` const, the pill-colour comment, and the `TYPE_VARIANT` const). Keep `const DEFAULT_ROWS = 5;`.
-
-**Edit A2 — replace the `COLUMNS` const (lines 16–34)** with:
-
-```js
-const COLUMNS = [
-  {
-    label: "Name",
-    fieldName: "recordUrl",
-    type: "url",
-    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
-  },
-  { label: "Committed", fieldName: "committed", type: "text" },
-  { label: "Contributed", fieldName: "contributed", type: "text" },
-  { label: "Distributed", fieldName: "distributedDisplay", type: "text" },
-  { label: "Unreturned Capital", fieldName: "unreturnedCapital", type: "text" },
-  { label: "Net Equity", fieldName: "netEquity", type: "text" }
-];
-```
-
-(Type pill column removed; Target IRR and Investment Period replaced in place, after Distributed.)
-
-**Edit A3 — add two keys to every `ACTIVE_DATA` row (a1–a25)**, placed after the `distributed` key, keeping `targetIrr`/`holdPeriod` untouched (DP3). Exact values:
-
-| id  | unreturnedCapital | netEquity       |
-| --- | ----------------- | --------------- |
-| a1  | `"$3,247,500"`    | `"$21,483,920"` |
-| a2  | `"$3,861,200"`    | `"$24,067,315"` |
-| a3  | `"$3,094,750"`    | `"$20,762,048"` |
-| a4  | `"$3,578,300"`    | `"$23,214,586"` |
-| a5  | `"$3,912,640"`    | `"$25,108,772"` |
-| a6  | `"$3,405,880"`    | `"$22,391,450"` |
-| a7  | `"$3,156,020"`    | `"$20,948,637"` |
-| a8  | `"$3,733,415"`    | `"$24,832,190"` |
-| a9  | `"$3,289,940"`    | `"$21,076,514"` |
-| a10 | `"$3,644,180"`    | `"$23,647,825"` |
-| a11 | `"$3,982,305"`    | `"$25,283,946"` |
-| a12 | `"$3,071,650"`    | `"$20,415,208"` |
-| a13 | `"$3,518,720"`    | `"$22,957,360"` |
-| a14 | `"$3,826,090"`    | `"$24,509,671"` |
-| a15 | `"$3,368,540"`    | `"$21,864,935"` |
-| a16 | `"$3,690,275"`    | `"$23,082,417"` |
-| a17 | `"$3,127,830"`    | `"$20,633,742"` |
-| a18 | `"$3,459,610"`    | `"$22,148,569"` |
-| a19 | `"$3,905,120"`    | `"$25,391,084"` |
-| a20 | `"$3,214,385"`    | `"$21,527,806"` |
-| a21 | `"$3,752,860"`    | `"$24,275,138"` |
-| a22 | `"$3,037,490"`    | `"$20,896,320"` |
-| a23 | `"$3,596,745"`    | `"$23,764,951"` |
-| a24 | `"$3,880,930"`    | `"$25,032,467"` |
-| a25 | `"$3,321,070"`    | `"$22,619,703"` |
-
-Example (row a1, lines 40–49) after the edit:
-
-```js
-  {
-    id: "a1",
-    name: "Global Zante, LLC",
-    gpEntity: "DPEG GP I LLC",
-    committed: "$1.3M",
-    contributed: "$1.9M",
-    distributed: "$450K",
-    unreturnedCapital: "$3,247,500",
-    netEquity: "$21,483,920",
-    targetIrr: "12%",
-    holdPeriod: "3 Years"
-  },
-```
-
-(All values are inside the requested ranges: $3,000,000–$4,000,000 and $20,106,551–$25,500,233; every row distinct.)
-
-**Edit A4 — replace `buildBaseRows()` (lines 305–315)** with (drops the now-unused `index` param and the `type`/`typeVariant` assignments):
-
-```js
-  buildBaseRows() {
-    return ACTIVE_DATA.slice(0, DEFAULT_ROWS).map((row) => ({
-      ...row,
-      distributedDisplay: row.distributed || "—"
-    }));
-  }
-```
-
-**No other changes** — HTML, CSS, js-meta.xml, the GraphQL wire, `attachRecordUrl`, and `handleViewAll` stay exactly as they are.
-
-### File 2: `force-app/main/default/lwc/closedInvestmentListingChild/closedInvestmentListingChild.js`
-
-**Edit C1 — delete lines 7–14** (`TYPES`, comment, `TYPE_VARIANT`).
-
-**Edit C2 — remove the Type entry (lines 27–32) from `COLUMNS`**, leaving:
-
-```js
-const COLUMNS = [
-  {
-    label: "Name",
-    fieldName: "recordUrl",
-    type: "url",
-    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
-  },
-  { label: "Committed", fieldName: "committed", type: "text" },
-  { label: "Contributed", fieldName: "contributed", type: "text" },
-  { label: "Distributed", fieldName: "distributedDisplay", type: "text" }
-];
-```
-
-**Edit C3 — replace `buildBaseRows()` (lines 200–210)** with:
-
-```js
-  buildBaseRows() {
-    return CLOSED_DATA.slice(0, DEFAULT_ROWS).map((row) => ({
-      ...row,
-      distributedDisplay: row.distributed || "—"
-    }));
-  }
-```
-
-**⛔ Scope guard:** `CLOSED_DATA` is untouched (its unused `targetIrr`/`holdPeriod` keys stay — F8/DP3). This component gets **no** new columns.
-
-### File 3: `force-app/main/default/lwc/irInvestmentsList/irInvestmentsList.js`
-
-**Edit I1 — delete lines 5–12** (pill-colour comment + `TYPE_VARIANT` const).
-
-**Edit I2 — remove the Type entry (lines 25–30) from `COLUMNS`**, leaving:
-
-```js
-const COLUMNS = [
-  {
-    label: "Name",
-    fieldName: "recordUrl",
-    type: "url",
-    typeAttributes: { label: { fieldName: "name" }, target: "_self" }
-  },
-  { label: "Committed", fieldName: "committed", type: "text" },
-  { label: "Contributed", fieldName: "contributed", type: "text" },
-  { label: "Distributed", fieldName: "distributed", type: "text" },
-  { label: "Target IRR", fieldName: "targetIrr", type: "text" },
-  { label: "Investment Period", fieldName: "holdPeriod", type: "text" }
-];
-```
-
-**⛔ Scope guard:** Target IRR and Investment Period stay in this component.
-
-**Edit I3 — remove the `type: "…"` key** from each of the 5 `investments` rows (lines 46, 56, 66, 76, 86) — DP3.
-
-**Edit I4 — replace `buildBaseRows()` (lines 100–105)** with (drops the dead `typeVariant` mapping; keeps the shallow copy so `investments` objects are never shared into `rows`):
-
-```js
-  buildBaseRows() {
-    return this.investments.map((row) => ({ ...row }));
-  }
-```
-
-**No other changes** (the unused `recordCount` getter is pre-existing — leave it).
-
-### Global scope guards (all files)
-
-- No HTML/CSS/js-meta.xml edits in any bundle. No edits to `pillDatatable`, `investmentListingParent`, `irActiveListingTabs`, any flexipage, or the unrelated components that mention "Unreturned Capital"/"Target IRR" (`irPortfolioCard`, `irrProgressCard`, `offeringPropertyOverview`).
-- **Do NOT add Jest tests** — none exist for these bundles.
-- No `Math.random()` — values are the deterministic hardcoded strings above.
-- After edits, verify no remaining references to `TYPES`, `TYPE_VARIANT`, `type`, or `typeVariant` in the three files (ESLint `no-unused-vars` clean).
+| #   | Component                                                                              | Type        | Change                             |
+| --- | -------------------------------------------------------------------------------------- | ----------- | ---------------------------------- |
+| 1   | `force-app/main/default/lwc/distributionInvestment/distributionInvestment.js`          | LWC         | Add two text columns to `COLUMNS`. |
+| 2   | `force-app/main/default/objects/Distribution_Batch__c/fields/Source__c.field-meta.xml` | CustomField | Text → Picklist.                   |
+| 3   | `force-app/main/default/objects/Distribution_Batch__c/fields/Type__c.field-meta.xml`   | CustomField | Text → Picklist.                   |
+| 4   | FLS for `Unison__Source__c` + `Unison__Type__c` → Admin                                | Security    | Grant read+edit (mechanism below). |
 
 ---
 
-## 🔵 ADMIN WORK
+## 4. Recommended Approach — by Component
 
-**None.** No objects, fields, flexipages, profiles, or permission sets change.
+### 4.1 LWC datatable columns (developer)
+
+- Insert two `type: "text"` columns into `COLUMNS`, bound to the existing row properties `source` and `type`:
+  ```js
+  { label: "Source", fieldName: "source", type: "text" },
+  { label: "Type",   fieldName: "type",   type: "text" },
+  ```
+- **Placement recommendation:** the request says "at the END of the datatable." The action column (`type: "action"`) is a control column, not a data column. Recommended order: the two new data columns placed AFTER the current last data column (`Distribution Date`) and BEFORE the action column, so the row-action menu stays flush-right per SLDS convention. Net visible result: Source and Type are the last two _data_ columns. **Confirm** if the user instead wants them literally after the action column.
+- **Fixed vs. bound values (OPEN QUESTION — see §7):** The request specifies Source='Cash Flow' and Type='Preferred Return', but the mock DATA already has varied values. Recommended: **bind columns to the existing `source`/`type` row fields** (no data mutation) so the table reflects real per-row values. The stated fixed values already match row 1. Only override every row to the fixed pair if the user explicitly wants a static display.
+- Jest test (`__tests__/distributionInvestment.test.js`) + `@sa11y/jest` a11y assertion per ARCHITECTURE §5. No `__tests__` folder exists in the bundle today (only `.js`, `.html`, `.css`, `.js-meta.xml`); one is added if tests are in scope.
+- Run the SLDS 2 linter before deploy (no styling change expected, but per policy).
+
+### 4.2 Text → Picklist conversion (admin — see §6)
+
+**Risk flag — field-type change on an existing field that may hold data:**
+
+Salesforce _does_ allow converting Text → Picklist via the Metadata API / Setup, but:
+
+- If the field already contains data in the org, existing Text values that do NOT match a picklist value are retained as **non-configured/inactive** values (data is generally preserved but flagged as non-standard); reporting and validation behavior changes.
+- A **restricted picklist** will reject/flag any stored value outside the defined set and can cause the deploy/validation to fail if such values exist.
+- Per project rule `no-hand-authored-metadata` and MEMORY, **do not fabricate** — the admin/devops step should first check whether `Unison__Source__c` / `Unison__Type__c` hold any data in the org (SOQL count + distinct values) before converting. If populated, surface the values to the user before choosing restricted vs. unrestricted.
+
+**Recommended conversion strategy:**
+
+1. Query the org for existing distinct values / row count on both fields.
+2. Rewrite each `field-meta.xml`: replace `<type>Text</type>` + `<length>255</length>` with `<type>Picklist</type>` and a `<valueSet>` block (values in §5).
+3. Set restriction on the value set: recommend **`restricted=false`** for the first deploy if any data exists (avoids deploy/validation errors), or **`restricted=true`** if the field is confirmed empty and the user wants strict enforcement. Default recommendation: **restricted=true only after confirming the field is empty.**
+4. Deploy the object/field metadata via devops.
+5. Metadata generation MUST follow `.claude/rules/salesforce-global-rule.md`: load `sf-custom-field` skill → attempt `salesforce-api-context` MCP for the CustomField/Picklist type → then generate. One type at a time.
+
+### 4.3 Admin FLS (admin/devops — special handling required)
+
+**Do NOT rely on a full Admin.profile deploy** — it is blocked in V3 by the dangling `flowAccesses` entry (documented in memory). Two options:
+
+- **Option A (recommended, matches prior precedent):** Grant FLS by inserting `FieldPermissions` rows (read=true, edit=true) directly on the System Administrator profile's **parent PermissionSet** (`0PSFW000K5T0EeK4IV` in V3) via the data API, for `Unison__Distribution_Batch__c.Unison__Source__c` and `...Unison__Type__c`. This is exactly how `Unison__Offering__c` FLS was applied on 2026-07-07. Optionally also add matching `<fieldPermissions>` entries to the repo `Admin.profile-meta.xml` so file and org agree (but do not deploy the profile).
+- **Option B:** Create/extend a dedicated **PermissionSet** in the repo granting FLS on both fields and deploy that (cleaner for source control, assignable). Choose if the user prefers a deployable, tracked artifact over a direct data insert.
+
+**Recommendation:** Option A for immediate parity with existing org practice; Option B noted as the source-controlled alternative. Flag both for the devops step. Full-profile deploys remain blocked until the user approves removing the dangling flow entry or the flow exists in the org.
 
 ---
 
-## 🔴 DEPLOYMENT (salesforce-devops) — run in PowerShell (not Git Bash)
+## 5. Picklist Value Sets (exactly as specified)
 
-The three components are live in DPEG-IR-FSD-V3 (placed on `Active_Investments` and `IR_Console` flexipages — F2). Redeploy **only the three changed bundles**; flexipages are unchanged:
+**Source** (`Unison__Source__c`):
 
-```powershell
-sf project deploy start --source-dir "force-app/main/default/lwc/activeInvestmentListingChild" --source-dir "force-app/main/default/lwc/closedInvestmentListingChild" --source-dir "force-app/main/default/lwc/irInvestmentsList" -o DPEG-IR-FSD-V3
-```
+1. Cash Flow
+2. Redemption
+3. Refinance
+4. Sale of Property
 
-- If source tracking raises conflict errors (tracking on this org is stale/noisy), re-run the same command with `--ignore-conflicts`.
-- Expected result: 3 `LightningComponentBundle` components deployed, 0 failures.
-- Verification: deploy output shows the 3 bundles Succeeded; optionally open the org (`sf org open -o DPEG-IR-FSD-V3`) → Active Investments page shows both tables without a Type column, active table showing Unreturned Capital ($3.0M–$4.0M range values) + Net Equity ($20.1M–$25.5M range values) after Distributed; IR Console's investments list shows no Type column but still shows Target IRR + Investment Period.
+**Type** (`Unison__Type__c`):
 
----
+1. Catch Up
+2. Fee
+3. Interest
+4. Other
+5. Preferred Return
+6. Return of Capital
 
-## EXECUTION ORDER
-
-| Step | Agent                     | Work                                                                                                                 |
-| ---- | ------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| 1    | 🟢 salesforce-developer   | Edits A1–A4, C1–C3, I1–I4 above (3 JS files only)                                                                    |
-| 2    | 🟣 salesforce-code-review | Review the 3 changed files for scope + cleanliness (checklist in prompt)                                             |
-| 3    | 🔴 salesforce-devops      | Deploy the 3 LWC bundles to DPEG-IR-FSD-V3 (command above)                                                           |
-| —    | Skipped                   | admin (no declarative work) / unit-testing (no Apex; no Jest additions per F10) / documentation (session preference) |
+(Order above = requested order; recommend preserving it — do not auto-sort.)
 
 ---
 
-## 📝 PROMPTS
+## 6. Complexity Routing Recommendation
 
-### Prompt for salesforce-developer
+| Work item                                                                | Complexity                                                                                                          | Route to                                                                                                                                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text → Picklist conversion on 2 existing fields (with data-safety check) | Field-type change with a known data-preservation caveat, but single-object, 2 fields, no multi-object schema design | **`salesforce-admin`** (routine field work). If the org-data check reveals populated fields requiring a migration/cleanup strategy → escalate to **`salesforce-solution-architect`**. |
+| LWC datatable column additions + Jest test                               | Standard LWC change                                                                                                 | **`salesforce-developer`**                                                                                                                                                            |
+| FLS via FieldPermissions / PermissionSet                                 | Routine security                                                                                                    | **`salesforce-admin`** (executes the insert / permission-set edit) → **`salesforce-devops`** for deploy.                                                                              |
 
-```
-Use the salesforce-developer subagent to: Implement the LWC column changes in agent-output/design-requirements.md exactly as specified — edits to THREE JS files only, no other files:
+No Apex is created → **skip `salesforce-unit-testing`**. Code review still applies to the LWC + metadata before deploy.
 
-1. force-app/main/default/lwc/activeInvestmentListingChild/activeInvestmentListingChild.js:
-   (A1) Delete the TYPES const, the "Same type value always maps..." comment, and the TYPE_VARIANT const (lines 7-14).
-   (A2) Replace COLUMNS with the 6-column version in the design doc: Name (url), Committed, Contributed, Distributed (distributedDisplay), Unreturned Capital (fieldName unreturnedCapital, type text), Net Equity (fieldName netEquity, type text) — Type pill column removed, Target IRR and Investment Period replaced in place.
-   (A3) Add unreturnedCapital and netEquity keys (after the distributed key) to ALL 25 ACTIVE_DATA rows using the EXACT per-row values in the design doc table (a1: "$3,247,500"/"$21,483,920" ... a25: "$3,321,070"/"$22,619,703"). Keep targetIrr/holdPeriod keys untouched. No Math.random.
-   (A4) Replace buildBaseRows() with the version in the doc that only adds distributedDisplay (drop the index param, type, typeVariant).
-2. force-app/main/default/lwc/closedInvestmentListingChild/closedInvestmentListingChild.js:
-   (C1) Delete TYPES, the pill-colour comment, and TYPE_VARIANT (lines 7-14).
-   (C2) Remove only the Type entry from COLUMNS (leaving Name, Committed, Contributed, Distributed).
-   (C3) Replace buildBaseRows() per the doc (only adds distributedDisplay; drop index/type/typeVariant).
-   Do NOT add any columns here and do NOT touch CLOSED_DATA.
-3. force-app/main/default/lwc/irInvestmentsList/irInvestmentsList.js:
-   (I1) Delete the pill-colour comment and TYPE_VARIANT const (lines 5-12).
-   (I2) Remove only the Type entry from COLUMNS — Target IRR and Investment Period STAY.
-   (I3) Remove the type: "..." key from each of the 5 investments rows.
-   (I4) Replace buildBaseRows() with: return this.investments.map((row) => ({ ...row }));
-Scope guards: no HTML/CSS/js-meta.xml changes; do not touch pillDatatable, investmentListingParent, irActiveListingTabs, any flexipage, or other components; do NOT create Jest tests (none exist for these bundles); after editing, confirm zero remaining references to TYPES/TYPE_VARIANT/typeVariant in the three files. Do not deploy.
-```
+---
 
-### Prompt for salesforce-code-review
+## 7. Open Questions / Confirmation Points
 
-```
-Use the salesforce-code-review subagent to: Review the three changed LWC JS files (activeInvestmentListingChild.js, closedInvestmentListingChild.js, irInvestmentsList.js) against agent-output/design-requirements.md. Checklist:
-1. Type column (pill) removed from all three COLUMNS arrays; no leftover TYPES/TYPE_VARIANT consts, typeVariant mappings, or unused function params (ESLint no-unused-vars clean).
-2. activeInvestmentListingChild: Target IRR + Investment Period columns replaced by Unreturned Capital (unreturnedCapital) + Net Equity (netEquity) after Distributed; all 25 ACTIVE_DATA rows carry the exact hardcoded values from the design doc; every unreturnedCapital value within $3,000,000-$4,000,000 and every netEquity value within $20,106,551-$25,500,233; values distinct per row; no Math.random.
-3. closedInvestmentListingChild: ONLY the Type column removed (no new columns, CLOSED_DATA untouched).
-4. irInvestmentsList: ONLY the Type column removed; Target IRR + Investment Period still present; type keys removed from the 5 data rows.
-5. No changes to HTML/CSS/meta files, pillDatatable, parents, flexipages, or any other component; no Jest tests added; GraphQL wire / attachRecordUrl / handleViewAll logic unchanged in all three files.
-Report APPROVED / APPROVED WITH WARNINGS / CHANGES REQUIRED.
-```
+1. **Fixed vs. bound column values:** Bind the new columns to the existing per-row `source`/`type` values (recommended), or override ALL rows to a static `Cash Flow` / `Preferred Return`?
+2. **Column placement:** Place Source/Type as the last two _data_ columns (before the action menu, recommended), or literally after the action column?
+3. **Restricted picklist?** Should the picklists be **restricted** (reject values outside the set) or **unrestricted**? Depends on whether the fields currently hold data — we will run a value/count check first. Confirm your preferred enforcement level.
+4. **FLS mechanism:** Approve **Option A** (FieldPermissions insert on parent PermissionSet `0PSFW000K5T0EeK4IV`, matching prior practice) — or prefer **Option B** (a deployable, source-controlled PermissionSet)?
+5. **Admin profile file:** Should we also add matching `<fieldPermissions>` entries to the repo `Admin.profile-meta.xml` (for file/org parity) even though it is not deployed?
+6. **Target org:** Confirm deployment target is **DPEG-IR-FSD-V3**.
 
-### Prompt for salesforce-devops
+---
 
-```
-Use the salesforce-devops subagent to: Deploy the three changed LWC bundles to org DPEG-IR-FSD-V3, running commands in PowerShell (not Git Bash):
-sf project deploy start --source-dir "force-app/main/default/lwc/activeInvestmentListingChild" --source-dir "force-app/main/default/lwc/closedInvestmentListingChild" --source-dir "force-app/main/default/lwc/irInvestmentsList" -o DPEG-IR-FSD-V3
-If source-tracking conflict errors occur (tracking is stale/noisy on this org), re-run with --ignore-conflicts. Deploy ONLY these three bundles — no flexipages, no other metadata. Confirm the deploy result lists the 3 LightningComponentBundle components as Succeeded and report the deploy Id.
-```
+## 8. Ordered Execution Steps (post-confirmation)
+
+1. **[admin]** Check org for existing data on `Unison__Source__c` / `Unison__Type__c` (SOQL count + distinct values). Surface findings; decide restricted vs. unrestricted with the user.
+2. **[admin]** Per `salesforce-global-rule`: load `sf-custom-field` skill → `salesforce-api-context` MCP for CustomField/Picklist → rewrite `Source__c.field-meta.xml` (Text → Picklist + valueSet from §5).
+3. **[admin]** Same cycle for `Type__c.field-meta.xml` (one type at a time).
+4. **[developer]** Edit `distributionInvestment.js` COLUMNS: add "Source" and "Type" text columns (placement per §4.1); add/adjust Jest + a11y test; run SLDS 2 linter.
+5. **[code-review]** Review LWC change + both field metadata changes.
+6. **[Gate 2]** Await review verdict.
+7. **[devops]** Deploy the two field metadata changes + the LWC to the target org (with deployment confirmation).
+8. **[admin/devops]** Grant Admin FLS via the chosen mechanism (Option A: FieldPermissions insert on PermSet `0PSFW000K5T0EeK4IV`; or Option B: deploy PermissionSet). Do NOT attempt full Admin.profile deploy.
+9. **[documentation]** (parallel) Document the field-type change, picklist values, and FLS mechanism.
+10. **[main]** Summarize results.

@@ -3,10 +3,34 @@
     <fullName>Source__c</fullName>
     <externalId>false</externalId>
     <label>Source</label>
-    <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cash Flow</fullName>
+                <default>false</default>
+                <label>Cash Flow</label>
+            </value>
+            <value>
+                <fullName>Redemption</fullName>
+                <default>false</default>
+                <label>Redemption</label>
+            </value>
+            <value>
+                <fullName>Refinance</fullName>
+                <default>false</default>
+                <label>Refinance</label>
+            </value>
+            <value>
+                <fullName>Sale of Property</fullName>
+                <default>false</default>
+                <label>Sale of Property</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
 </CustomField>

@@ -20,6 +20,8 @@ const COLUMNS = [
   { label: "Status", fieldName: "paidStatus", type: "text" },
   { label: "Amount", fieldName: "amountLabel", type: "text" },
   { label: "Distribution Date", fieldName: "distributionDate", type: "text" },
+  { label: "Source", fieldName: "source", type: "text" },
+  { label: "Type", fieldName: "type", type: "text" },
   { type: "action", typeAttributes: { rowActions: ROW_ACTIONS } }
 ];
 
@@ -49,8 +51,8 @@ const DATA = [
     effectiveDate: "21/05/2026",
     period: "Q2 2026",
     description: "Return of Capital",
-    source: "Sale of Property",
-    type: "Return of Capital"
+    source: "Cash Flow",
+    type: "Preferred Return"
   },
   {
     id: "3",
@@ -64,7 +66,7 @@ const DATA = [
     period: "Q3 2026",
     description: "Quarterly Cash Distribution",
     source: "Cash Flow",
-    type: "Other"
+    type: "Preferred Return"
   }
 ];
 

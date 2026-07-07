@@ -2,10 +2,16 @@ import { LightningElement } from "lwc";
 
 const SOURCE_OPTIONS = [
   { label: "Cash Flow", value: "Cash Flow" },
+  { label: "Redemption", value: "Redemption" },
+  { label: "Refinance", value: "Refinance" },
   { label: "Sale of Property", value: "Sale of Property" }
 ];
 
 const TYPE_OPTIONS = [
+  { label: "Catch Up", value: "Catch Up" },
+  { label: "Fee", value: "Fee" },
+  { label: "Interest", value: "Interest" },
+  { label: "Other", value: "Other" },
   { label: "Preferred Return", value: "Preferred Return" },
   { label: "Return of Capital", value: "Return of Capital" }
 ];

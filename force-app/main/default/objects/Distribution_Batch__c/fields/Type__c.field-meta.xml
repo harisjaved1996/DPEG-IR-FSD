@@ -3,10 +3,44 @@
     <fullName>Type__c</fullName>
     <externalId>false</externalId>
     <label>Type</label>
-    <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Catch Up</fullName>
+                <default>false</default>
+                <label>Catch Up</label>
+            </value>
+            <value>
+                <fullName>Fee</fullName>
+                <default>false</default>
+                <label>Fee</label>
+            </value>
+            <value>
+                <fullName>Interest</fullName>
+                <default>false</default>
+                <label>Interest</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Preferred Return</fullName>
+                <default>false</default>
+                <label>Preferred Return</label>
+            </value>
+            <value>
+                <fullName>Return of Capital</fullName>
+                <default>false</default>
+                <label>Return of Capital</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
 </CustomField>
