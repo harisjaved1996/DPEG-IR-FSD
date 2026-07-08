@@ -18,14 +18,9 @@
                 <label>Draft</label>
             </value>
             <value>
-                <fullName>Preparing Documents</fullName>
+                <fullName>Under Review</fullName>
                 <default>false</default>
-                <label>Preparing Documents</label>
-            </value>
-            <value>
-                <fullName>Sent for Signature</fullName>
-                <default>false</default>
-                <label>Sent for Signature</label>
+                <label>Under Review</label>
             </value>
             <value>
                 <fullName>Pending Approval</fullName>
@@ -38,9 +33,19 @@
                 <label>Approved</label>
             </value>
             <value>
-                <fullName>Rejected</fullName>
+                <fullName>Preparing Documents</fullName>
                 <default>false</default>
-                <label>Rejected</label>
+                <label>Preparing Documents</label>
+            </value>
+            <value>
+                <fullName>Sent for Signature</fullName>
+                <default>false</default>
+                <label>Sent for Signature</label>
+            </value>
+            <value>
+                <fullName>Shares Transferred</fullName>
+                <default>false</default>
+                <label>Shares Transferred</label>
             </value>
             <value>
                 <fullName>Completed</fullName>

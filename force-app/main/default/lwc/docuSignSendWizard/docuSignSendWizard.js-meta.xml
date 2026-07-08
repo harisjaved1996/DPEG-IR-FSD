@@ -9,6 +9,7 @@
         <targetConfig targets="lightning__RecordPage">
             <objects>
                 <object>Unison__Offering__c</object>
+                <object>Share_Transfer__c</object>
             </objects>
         </targetConfig>
     </targetConfigs>
