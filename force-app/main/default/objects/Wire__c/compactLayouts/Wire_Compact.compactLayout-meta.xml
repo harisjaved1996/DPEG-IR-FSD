@@ -3,6 +3,6 @@
     <fullName>Wire_Compact</fullName>
     <fields>Name</fields>
     <fields>Amount__c</fields>
-    <fields>Match_Status__c</fields>
+    <fields>Transaction_Id__c</fields>
     <label>Wire Compact Layout</label>
 </CompactLayout>

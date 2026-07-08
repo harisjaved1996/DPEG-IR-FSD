@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+
+.card {
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-radius: 0.75rem;
+  background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #eef0f2);
+}
+
+.header-icon {
+  --slds-c-icon-color-foreground-default: var(--slds-g-color-brand-base-50, #0176d3);
+}
+
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--slds-g-color-neutral-base-10, #16325c);
+  margin: 0;
+}
+
+.card-body {
+  padding: 0.5rem 1rem;
+}
+
+/* icon | label | value — everything aligns on a clean 3-column grid */
+.match-row {
+  display: grid;
+  grid-template-columns: 1.25rem 8rem 1fr;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #f3f3f3);
+}
+
+.match-row:last-child {
+  border-bottom: none;
+}
+
+.row-label {
+  font-size: 0.8125rem;
+  color: var(--slds-g-color-neutral-base-30, #747474);
+}
+
+.row-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--slds-g-color-neutral-base-10, #181818);
+}
+
+/* All three actions on a single row, sharing width equally */
+.card-footer {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem 1rem 1rem;
+  border-top: 1px solid var(--slds-g-color-border-base-1, #eef0f2);
+}
+
+.footer-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.2;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+}

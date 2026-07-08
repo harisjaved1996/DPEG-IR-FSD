@@ -1,0 +1,48 @@
+<template>
+  <article class="card">
+    <header class="card-header">
+      <lightning-icon
+        icon-name="utility:connected_apps"
+        size="small"
+        class="header-icon">
+      </lightning-icon>
+      <h2 class="card-title">Suggested Matched Prospect</h2>
+    </header>
+
+    <div class="card-body">
+      <template for:each={rows} for:item="row">
+        <div key={row.key} class="match-row">
+          <lightning-icon
+            icon-name={row.icon}
+            variant={row.variant}
+            size="x-small"
+            class="row-icon">
+          </lightning-icon>
+          <span class="row-label">{row.label}</span>
+          <span class="row-value">{row.value}</span>
+        </div>
+      </template>
+    </div>
+
+    <footer class="card-footer">
+      <button
+        type="button"
+        class="slds-button slds-button_brand footer-btn"
+        onclick={handleConfirm}>
+        Confirm &amp; create cont
+      </button>
+      <button
+        type="button"
+        class="slds-button slds-button_neutral footer-btn"
+        onclick={handlePartialPayment}>
+        Record partial payment
+      </button>
+      <button
+        type="button"
+        class="slds-button slds-button_neutral footer-btn"
+        onclick={handleContactInvestor}>
+        Contact investor
+      </button>
+    </footer>
+  </article>
+</template>

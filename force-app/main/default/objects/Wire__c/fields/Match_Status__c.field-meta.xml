@@ -13,19 +13,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Mismatch</fullName>
+                <fullName>Received</fullName>
                 <default>false</default>
-                <label>Mismatch</label>
+                <label>Received</label>
             </value>
             <value>
-                <fullName>Review</fullName>
+                <fullName>In Review</fullName>
                 <default>false</default>
-                <label>Review</label>
+                <label>In Review</label>
             </value>
             <value>
-                <fullName>Matched</fullName>
+                <fullName>Verify</fullName>
                 <default>false</default>
-                <label>Matched</label>
+                <label>Verify</label>
+            </value>
+            <value>
+                <fullName>Reconciled</fullName>
+                <default>false</default>
+                <label>Reconciled</label>
             </value>
         </valueSetDefinition>
     </valueSet>

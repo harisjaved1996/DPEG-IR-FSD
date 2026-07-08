@@ -43,6 +43,13 @@
                 </componentInstanceProperties>
                 <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
                 <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
+                        <operator>GE</operator>
+                        <rightValue>70</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -194,6 +201,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Match_Status__c</fieldItem>
                 <identifier>RecordUnison_Match_Status_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
+                        <operator>GE</operator>
+                        <rightValue>70</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3a55ec12-69c1-4761-af2d-c06a41f2f3a8</name>
@@ -415,6 +429,19 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>wireMatchedProspect</componentName>
+                <identifier>Unison_wireMatchedProspect</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
+                        <operator>GE</operator>
+                        <rightValue>70</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentName>transactionHistory</componentName>
