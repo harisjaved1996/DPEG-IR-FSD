@@ -9,15 +9,15 @@ import { gql } from "lightning/uiGraphQLApi";
  *
  * DATA PATTERN: none — all data is seeded in-memory below. No Apex, no server
  * calls. Each record carries an explicit category; confidence ranges per category:
- *   Auto Matched   — 98–99
+ *   Auto Matched   — 99
  *   Manual Review  — 75–80
- *   Mismatch       — 75–80
+ *   Mismatch       — 60–65
  *   Total Matched  — Auto Matched + Manual Review (79–99)
  */
 
 // Seed records: { id, sender, amount (Number), memo, confidence (Number), category }.
 const SEED = [
-  // Auto Matched (98–99)
+  // Auto Matched (99)
   {
     id: "wm-1",
     sender: "John A. Carter",
@@ -31,7 +31,7 @@ const SEED = [
     sender: "Meridian Holdings LLC",
     amount: 500000,
     memo: "Wire ref #88213 commitment",
-    confidence: 98,
+    confidence: 99,
     category: "auto"
   },
   {
@@ -47,7 +47,7 @@ const SEED = [
     sender: "Blue Oak Capital",
     amount: 1000000,
     memo: "Subscription – Aspen LP",
-    confidence: 98,
+    confidence: 99,
     category: "auto"
   },
   {
@@ -91,13 +91,13 @@ const SEED = [
     confidence: 80,
     category: "manual"
   },
-  // Mismatch (75–80)
+  // Mismatch (60–65)
   {
     id: "wm-10",
     sender: "Unknown Originator",
     amount: 45000,
     memo: "No matching commitment",
-    confidence: 77,
+    confidence: 62,
     category: "mismatch"
   },
   {
@@ -105,7 +105,7 @@ const SEED = [
     sender: "Cayman SPV 12",
     amount: 610000,
     memo: "Amount exceeds commitment",
-    confidence: 80,
+    confidence: 64,
     category: "mismatch"
   },
   {
@@ -113,7 +113,7 @@ const SEED = [
     sender: "J. Doe",
     amount: 10000,
     memo: "Duplicate wire?",
-    confidence: 75,
+    confidence: 61,
     category: "mismatch"
   }
 ];
