@@ -1,7 +1,13 @@
 import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { graphql } from "lightning/uiGraphQLApi";
-import { COLUMNS, WIRE_ID_QUERY, getRecords, manualReview, toRows } from "c/wireMatchingShared";
+import {
+  COLUMNS,
+  WIRE_ID_MATCH_79_QUERY,
+  getRecords,
+  manualReview,
+  toRows
+} from "c/wireMatchingShared";
 
 /**
  * OfferingWireManualReview - the "Manual Review" wire matching category table.
@@ -47,7 +53,7 @@ export default class OfferingWireManualReview extends NavigationMixin(LightningE
     });
   }
 
-  @wire(graphql, { query: WIRE_ID_QUERY })
+  @wire(graphql, { query: WIRE_ID_MATCH_79_QUERY })
   wiredWire({ data, errors }) {
     if (errors || !data) {
       return;

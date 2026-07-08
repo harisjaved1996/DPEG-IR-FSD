@@ -191,6 +191,24 @@ export const WIRE_ID_QUERY = gql`
   }
 `;
 
+// Resolves a Wire whose Match Confidence = 79 — used by the Manual Review table so
+// its rows link to a wire record with that matching confidence score.
+export const WIRE_ID_MATCH_79_QUERY = gql`
+  query wireMatch79 {
+    uiapi {
+      query {
+        Unison__Wire__c(where: { Unison__Match_Confidence__c: { eq: 79 } }, first: 1) {
+          edges {
+            node {
+              Id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 // All seed records with their assigned wire number and shared record link.
 export function getRecords(wireUrl) {
   return SEED.map((r, index) => ({
