@@ -1,0 +1,16 @@
+<template>
+    <lightning-card icon-name="standard:investment_account">
+        <span slot="title">Closed Investments ({recordCount})</span>
+
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+
+        <div class="view-all-footer">
+            <a href="#" onclick={handleViewAll}>View All</a>
+        </div>
+    </lightning-card>
+</template>

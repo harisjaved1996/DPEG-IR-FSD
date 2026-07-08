@@ -1,0 +1,34 @@
+<template>
+  <article class="card">
+    <header class="card-header">
+      <lightning-icon
+        icon-name="utility:favorite"
+        size="x-small"
+        class="header-icon">
+      </lightning-icon>
+      <h2 class="card-title">Investor Preferences</h2>
+    </header>
+
+    <div class="card-body">
+      <template for:each={sections} for:item="section">
+        <section key={section.key} class="pref-section">
+          <p class="section-subtitle">{section.label}</p>
+          <div class="chip-group">
+            <template for:each={section.options} for:item="option">
+              <button
+                key={option.key}
+                type="button"
+                class={option.cssClass}
+                data-section={section.key}
+                data-value={option.value}
+                aria-pressed={option.selected}
+                onclick={handleToggle}>
+                {option.label}
+              </button>
+            </template>
+          </div>
+        </section>
+      </template>
+    </div>
+  </article>
+</template>

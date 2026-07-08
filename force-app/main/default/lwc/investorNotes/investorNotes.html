@@ -1,0 +1,113 @@
+<template>
+  <article class="card">
+    <header class="card-header">
+      <div class="header-left">
+        <lightning-icon
+          icon-name="utility:note"
+          size="x-small"
+          class="header-icon">
+        </lightning-icon>
+        <h2 class="card-title">All Notes</h2>
+        <span class="count">({recordCount})</span>
+      </div>
+      <lightning-button
+        label="Add Note"
+        variant="brand"
+        icon-name="utility:add"
+        onclick={openModal}>
+      </lightning-button>
+    </header>
+
+    <div class="table-wrap">
+      <table class="notes-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Note</th>
+            <th>By / date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={displayNotes} for:item="row">
+            <tr key={row.id}>
+              <td><span class={row.typeClass}>{row.type}</span></td>
+              <td class="muted">{row.categoryDisplay}</td>
+              <td class="note-cell">{row.note}</td>
+              <td class="muted nowrap">{row.byDate}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <!-- Add Note modal -->
+  <template lwc:if={showModal}>
+    <section
+      role="dialog"
+      tabindex="-1"
+      aria-modal="true"
+      aria-labelledby="addNoteHeading"
+      class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <lightning-button-icon
+            icon-name="utility:close"
+            variant="bare"
+            size="medium"
+            class="modal-close"
+            title="Close"
+            alternative-text="Close"
+            onclick={closeModal}>
+          </lightning-button-icon>
+          <h2 id="addNoteHeading" class="slds-modal__title slds-hyphenate">Add Note</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium modal-body">
+          <lightning-combobox
+            label="Type"
+            value={draftType}
+            placeholder="Select type"
+            options={typeOptions}
+            onchange={handleType}
+            required>
+          </lightning-combobox>
+          <lightning-combobox
+            label="Category"
+            value={draftCategory}
+            placeholder="Select category"
+            options={categoryOptions}
+            onchange={handleCategory}>
+          </lightning-combobox>
+          <lightning-textarea
+            label="Note"
+            value={draftNote}
+            placeholder="Enter note details"
+            onchange={handleNote}
+            required>
+          </lightning-textarea>
+          <lightning-input
+            type="date"
+            label="Date"
+            value={draftDate}
+            onchange={handleDate}>
+          </lightning-input>
+        </div>
+        <footer class="slds-modal__footer">
+          <lightning-button
+            label="Cancel"
+            onclick={closeModal}
+            class="slds-m-right_x-small">
+          </lightning-button>
+          <lightning-button
+            label="Save"
+            variant="brand"
+            onclick={handleSave}
+            disabled={saveDisabled}>
+          </lightning-button>
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>
