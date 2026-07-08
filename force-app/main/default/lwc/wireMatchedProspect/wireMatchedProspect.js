@@ -1,7 +1,7 @@
 import { LightningElement } from "lwc";
 
 // Static suggested-match summary shown on the Wire record page. Prototype only —
-// the three action buttons are placeholders with no backend wired up yet.
+// the action buttons are placeholders with no backend wired up yet.
 const MATCH_ROWS = [
   {
     key: "name",
@@ -27,7 +27,12 @@ const MATCH_ROWS = [
 ];
 
 export default class WireMatchedProspect extends LightningElement {
-  rows = MATCH_ROWS;
+  get rows() {
+    return MATCH_ROWS.map((row) => ({
+      ...row,
+      badgeClass: row.variant === "success" ? "badge badge_success" : "badge badge_warning"
+    }));
+  }
 
   handleConfirm() {
     // Placeholder: confirm match & create contribution.

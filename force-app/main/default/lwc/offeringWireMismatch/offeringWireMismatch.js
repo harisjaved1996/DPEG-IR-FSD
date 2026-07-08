@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { graphql } from "lightning/uiGraphQLApi";
-import { COLUMNS, WIRE_ID_QUERY, getRecords, mismatch, toRows } from "c/wireMatchingShared";
+import { COLUMNS, WIRE_ID_WR0027_QUERY, getRecords, mismatch, toRows } from "c/wireMatchingShared";
 
 /**
  * OfferingWireMismatch - the "Mismatch" wire matching category table.
@@ -47,7 +47,7 @@ export default class OfferingWireMismatch extends NavigationMixin(LightningEleme
     });
   }
 
-  @wire(graphql, { query: WIRE_ID_QUERY })
+  @wire(graphql, { query: WIRE_ID_WR0027_QUERY })
   wiredWire({ data, errors }) {
     if (errors || !data) {
       return;

@@ -13,13 +13,35 @@
 .card-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--slds-g-color-border-base-1, #eef0f2);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
 .header-icon {
   --slds-c-icon-color-foreground-default: var(--slds-g-color-brand-base-50, #0176d3);
+}
+
+/* Confidence score pill at the end of the title row */
+.confidence-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 1rem;
+  background-color: #ebf7ed;
+  color: #2e844a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .card-title {
@@ -83,34 +105,4 @@
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--slds-g-color-neutral-base-10, #181818);
-}
-
-/* Footer — one prominent primary action, two secondary actions beneath */
-.card-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.875rem 1rem 1rem 1rem;
-  border-top: 1px solid var(--slds-g-color-border-base-1, #eef0f2);
-}
-
-.primary-btn {
-  width: 100%;
-  justify-content: center;
-  min-height: 2.25rem;
-}
-
-.secondary-row {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.secondary-btn {
-  flex: 1 1 0;
-  min-width: 0;
-  justify-content: center;
-  white-space: normal;
-  line-height: 1.2;
-  min-height: 2.25rem;
-  padding: 0.35rem 0.5rem;
 }

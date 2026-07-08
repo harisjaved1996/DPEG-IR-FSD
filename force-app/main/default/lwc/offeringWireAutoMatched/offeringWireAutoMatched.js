@@ -1,7 +1,13 @@
 import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { graphql } from "lightning/uiGraphQLApi";
-import { COLUMNS, WIRE_ID_QUERY, getRecords, autoMatched, toRows } from "c/wireMatchingShared";
+import {
+  COLUMNS,
+  WIRE_ID_WR0026_QUERY,
+  getRecords,
+  autoMatched,
+  toRows
+} from "c/wireMatchingShared";
 
 /**
  * OfferingWireAutoMatched - the "Auto Matched" wire matching category table.
@@ -47,7 +53,7 @@ export default class OfferingWireAutoMatched extends NavigationMixin(LightningEl
     });
   }
 
-  @wire(graphql, { query: WIRE_ID_QUERY })
+  @wire(graphql, { query: WIRE_ID_WR0026_QUERY })
   wiredWire({ data, errors }) {
     if (errors || !data) {
       return;

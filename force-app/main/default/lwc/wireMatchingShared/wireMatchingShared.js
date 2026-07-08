@@ -209,6 +209,42 @@ export const WIRE_ID_MATCH_79_QUERY = gql`
   }
 `;
 
+// Resolves the Wire whose Name (wire number) = 'WR-0027' — used by the Mismatch table so
+// every row's Wire Number links to that specific wire record.
+export const WIRE_ID_WR0027_QUERY = gql`
+  query wireWr0027 {
+    uiapi {
+      query {
+        Unison__Wire__c(where: { Name: { eq: "WR-0027" } }, first: 1) {
+          edges {
+            node {
+              Id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+// Resolves the Wire whose Name (wire number) = 'WR-0026' — used by the Auto Matched
+// table so every row's Wire Number links to that specific wire record.
+export const WIRE_ID_WR0026_QUERY = gql`
+  query wireWr0026 {
+    uiapi {
+      query {
+        Unison__Wire__c(where: { Name: { eq: "WR-0026" } }, first: 1) {
+          edges {
+            node {
+              Id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 // All seed records with their assigned wire number and shared record link.
 export function getRecords(wireUrl) {
   return SEED.map((r, index) => ({

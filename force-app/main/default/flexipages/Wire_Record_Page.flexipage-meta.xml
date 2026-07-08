@@ -43,13 +43,6 @@
                 </componentInstanceProperties>
                 <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
                 <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
-                        <operator>GE</operator>
-                        <rightValue>70</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -202,10 +195,33 @@
                 <fieldItem>Record.Match_Status__c</fieldItem>
                 <identifier>RecordUnison_Match_Status_cField</identifier>
                 <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
                     <criteria>
-                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
-                        <operator>GE</operator>
-                        <rightValue>70</rightValue>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Manual Review</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Auto Match</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Status__c</fieldItem>
+                <identifier>RecordUnison_Status_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Mismatch</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -431,13 +447,39 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>wireInvestigateProspect</componentName>
+                <identifier>Unison_wireInvestigateProspect</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Mismatch</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentName>wireMatchedProspect</componentName>
                 <identifier>Unison_wireMatchedProspect</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Match_Confidence__c}</leftValue>
-                        <operator>GE</operator>
-                        <rightValue>70</rightValue>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Manual Review</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>autoMatchedProspect</componentName>
+                <identifier>Unison_autoMatchedProspect</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.RecordType.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Auto Match</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>

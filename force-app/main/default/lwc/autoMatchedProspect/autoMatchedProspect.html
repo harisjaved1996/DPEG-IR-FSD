@@ -1,0 +1,33 @@
+<template>
+  <article class="card">
+    <header class="card-header">
+      <div class="header-left">
+        <lightning-icon
+          icon-name="utility:connected_apps"
+          size="small"
+          class="header-icon">
+        </lightning-icon>
+        <h2 class="card-title">Matched Prospect</h2>
+      </div>
+      <span class="confidence-badge">{confidenceLabel}</span>
+    </header>
+
+    <div class="card-body">
+      <template for:each={rows} for:item="row">
+        <div key={row.key} class="match-row">
+          <span class={row.badgeClass}>
+            <lightning-icon
+              icon-name={row.icon}
+              variant={row.variant}
+              size="x-small">
+            </lightning-icon>
+          </span>
+          <div class="row-text">
+            <span class="row-label">{row.label}</span>
+            <span class="row-value">{row.value}</span>
+          </div>
+        </div>
+      </template>
+    </div>
+  </article>
+</template>
