@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Sidebar Stat Card</masterLabel>
+    <description>Generic KPI stat tile with a colored plain icon, for sidebar/compact stat grids.</description>
+</LightningComponentBundle>
