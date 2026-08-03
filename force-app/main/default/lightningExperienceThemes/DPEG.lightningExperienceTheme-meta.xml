@@ -2,6 +2,8 @@
 <LightningExperienceTheme xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultBrandingSet>DPEG_Branding</defaultBrandingSet>
     <description>DPEG corporate theme with the Dhanani Private Equity Group logo.</description>
+    <designSystemVersion>SLDS_v1</designSystemVersion>
+    <isDarkModeEnabled>false</isDarkModeEnabled>
     <masterLabel>DPEG</masterLabel>
     <shouldOverrideLoadingImage>false</shouldOverrideLoadingImage>
 </LightningExperienceTheme>

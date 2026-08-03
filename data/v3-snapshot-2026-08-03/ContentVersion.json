@@ -1,0 +1,118 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002GuX6YpYYIV"
+        },
+        "Id": "068FW002GuX6YpYYIV",
+        "Title": "LogoIcon",
+        "PathOnClient": "LogoIcon.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002GoQnwFoYIJ",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002H6JrrtsYIB"
+        },
+        "Id": "068FW002H6JrrtsYIB",
+        "Title": "ChatGPT Image Jun 25, 2026, 05_51_55 PM",
+        "PathOnClient": "ChatGPT Image Jun 25, 2026, 05_51_55 PM.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002H1BnayqYIB",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002HXbpW5MYYU"
+        },
+        "Id": "068FW002HXbpW5MYYU",
+        "Title": "DPEG Park North, LP - 1 Share Transfer from Aamir Ghulamani to Kalani Holdings.pdf",
+        "PathOnClient": "DPEG Park North, LP - 1 Share Transfer from Aamir Ghulamani to Kalani Holdings.pdf",
+        "FileExtension": "pdf",
+        "ContentDocumentId": "069FW002HS9STSeYYO",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002ItldG8SYIU"
+        },
+        "Id": "068FW002ItldG8SYIU",
+        "Title": "dhanani_private_equity_group_logo",
+        "PathOnClient": "dhanani_private_equity_group_logo.jpg",
+        "FileExtension": "jpg",
+        "ContentDocumentId": "069FW002IokKZmeYIG",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002Iue2lGOYIY"
+        },
+        "Id": "068FW002Iue2lGOYIY",
+        "Title": "DPEG_Logo",
+        "PathOnClient": "DPEG_Logo.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002IpVyULMYI3",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002J32oCHcYIM"
+        },
+        "Id": "068FW002J32oCHcYIM",
+        "Title": "DPEG_Logo_Clear",
+        "PathOnClient": "DPEG_Logo_Clear.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002IxaR9euYIC",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002J6XN4SqYIL"
+        },
+        "Id": "068FW002J6XN4SqYIL",
+        "Title": "DPEG_Logo",
+        "PathOnClient": "DPEG_Logo.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002J0yERGuYIO",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002J7d2y96YIA"
+        },
+        "Id": "068FW002J7d2y96YIA",
+        "Title": "dhanani_logo_476x117",
+        "PathOnClient": "dhanani_logo_476x117.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002J2AfvWOYIZ",
+        "VersionNumber": "1"
+      },
+      {
+        "attributes": {
+          "type": "ContentVersion",
+          "url": "/services/data/v67.0/sobjects/ContentVersion/068FW002JCs1fi0YYA"
+        },
+        "Id": "068FW002JCs1fi0YYA",
+        "Title": "DPEG_Logo",
+        "PathOnClient": "DPEG_Logo.png",
+        "FileExtension": "png",
+        "ContentDocumentId": "069FW002J7WQDeWYIX",
+        "VersionNumber": "1"
+      }
+    ],
+    "totalSize": 9,
+    "done": true
+  },
+  "warnings": []
+}

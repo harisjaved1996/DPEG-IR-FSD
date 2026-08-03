@@ -32,6 +32,54 @@
                 <default>false</default>
                 <label>Reconciled</label>
             </value>
+            <value>
+                <fullName>Auto-Settled</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Auto-Settled</label>
+            </value>
+            <value>
+                <fullName>Confirm</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Confirm</label>
+            </value>
+            <value>
+                <fullName>Confirmed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Confirmed</label>
+            </value>
+            <value>
+                <fullName>Held</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Held</label>
+            </value>
+            <value>
+                <fullName>Matched</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Matched</label>
+            </value>
+            <value>
+                <fullName>Mismatch</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Mismatch</label>
+            </value>
+            <value>
+                <fullName>Review</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Review</label>
+            </value>
+            <value>
+                <fullName>Unmatched</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Unmatched</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

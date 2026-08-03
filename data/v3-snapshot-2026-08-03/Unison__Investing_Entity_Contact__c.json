@@ -1,0 +1,230 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfNwGaYYK"
+        },
+        "Id": "a0eFW001YNfNwGaYYK",
+        "IsDeleted": false,
+        "Name": "IEC-0001",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007Btel5MKYIY",
+        "Unison__Contact__c": "003FW007xAs1Y3EYQU",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfS8PcYYK"
+        },
+        "Id": "a0eFW001YNfS8PcYYK",
+        "IsDeleted": false,
+        "Name": "IEC-0002",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007Btel5MKYIY",
+        "Unison__Contact__c": "003FW007xAs5kCGYQY",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Secondary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfWKYeYYO"
+        },
+        "Id": "a0eFW001YNfWKYeYYO",
+        "IsDeleted": false,
+        "Name": "IEC-0003",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BtegtDIYIY",
+        "Unison__Contact__c": "003FW007xAs1Y3EYQU",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfaWhgYYE"
+        },
+        "Id": "a0eFW001YNfaWhgYYE",
+        "IsDeleted": false,
+        "Name": "IEC-0004",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BteYUvEYIW",
+        "Unison__Contact__c": "003FW007xAs9wLIYQY",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfeiqiYYA"
+        },
+        "Id": "a0eFW001YNfeiqiYYA",
+        "IsDeleted": false,
+        "Name": "IEC-0005",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007Btech4GYIQ",
+        "Unison__Contact__c": "003FW007xAsE8UKYQ0",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfiuzkYYA"
+        },
+        "Id": "a0eFW001YNfiuzkYYA",
+        "IsDeleted": false,
+        "Name": "IEC-0006",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BteUImCYIW",
+        "Unison__Contact__c": "003FW007xAsIKdMYQW",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfn78mYYA"
+        },
+        "Id": "a0eFW001YNfn78mYYA",
+        "IsDeleted": false,
+        "Name": "IEC-0007",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BteQ6dAYIS",
+        "Unison__Contact__c": "003FW007xAsMWmOYQW",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfrJHoYYM"
+        },
+        "Id": "a0eFW001YNfrJHoYYM",
+        "IsDeleted": false,
+        "Name": "IEC-0008",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BteLuU8YIK",
+        "Unison__Contact__c": "003FW007xAsQivQYQS",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfvVQqYYM"
+        },
+        "Id": "a0eFW001YNfvVQqYYM",
+        "IsDeleted": false,
+        "Name": "IEC-0009",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007BteHiL6YIK",
+        "Unison__Contact__c": "003FW007xAsUv4SYQS",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNfzhZsYYI"
+        },
+        "Id": "a0eFW001YNfzhZsYYI",
+        "IsDeleted": false,
+        "Name": "IEC-0010",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007Bte9K32YIE",
+        "Unison__Contact__c": "003FW007xAsZ7DUYQ0",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Investing_Entity_Contact__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Investing_Entity_Contact__c/a0eFW001YNg3tiuYYA"
+        },
+        "Id": "a0eFW001YNg3tiuYYA",
+        "IsDeleted": false,
+        "Name": "IEC-0011",
+        "CreatedDate": "2026-07-04T14:38:26.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:26.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:26.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Investing_Entity__c": "001FW007Bte57u0YIA",
+        "Unison__Contact__c": "003FW007xAsdJMWYQ2",
+        "Unison__Signature_Required__c": true,
+        "Unison__Signer_Role__c": "Primary"
+      }
+    ],
+    "totalSize": 11,
+    "done": true
+  },
+  "warnings": []
+}

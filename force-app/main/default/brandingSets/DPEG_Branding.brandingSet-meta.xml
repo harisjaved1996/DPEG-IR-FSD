@@ -6,8 +6,12 @@
     </brandingSetProperty>
     <brandingSetProperty>
         <propertyName>BrandPrimaryColor</propertyName>
-        <propertyValue>#032D60</propertyValue>
+        <propertyValue>#0070D2</propertyValue>
     </brandingSetProperty>
-    <description>DPEG corporate branding - Dhanani Private Equity Group logo and header color.</description>
+    <brandingSetProperty>
+        <propertyName>BrandBackgroundColor</propertyName>
+        <propertyValue>#F3F2F2</propertyValue>
+    </brandingSetProperty>
+    <description>DPEG branding - Dhanani logo on the standard Lightning look (default blue accents, default grey background).</description>
     <masterLabel>DPEG Branding</masterLabel>
 </BrandingSet>

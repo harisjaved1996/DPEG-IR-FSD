@@ -1,0 +1,48 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "Unison__Property_Asset__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Property_Asset__c/a0kFW000GoD9aP2YIJ"
+        },
+        "Id": "a0kFW000GoD9aP2YIJ",
+        "OwnerId": "005FW001bKjvV5sYQE",
+        "IsDeleted": false,
+        "Name": "Heights Apartments — Asset",
+        "CreatedDate": "2026-07-04T14:38:25.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:25.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:25.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Property__c": null,
+        "Unison__Status__c": "Active"
+      },
+      {
+        "attributes": {
+          "type": "Unison__Property_Asset__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Property_Asset__c/a0kFW000GoDDmY4YIL"
+        },
+        "Id": "a0kFW000GoDDmY4YIL",
+        "OwnerId": "005FW001bKjvV5sYQE",
+        "IsDeleted": false,
+        "Name": "Westheimer C-Stores — Asset",
+        "CreatedDate": "2026-07-04T14:38:25.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:38:25.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:38:25.000+0000",
+        "LastViewedDate": null,
+        "LastReferencedDate": null,
+        "Unison__Property__c": null,
+        "Unison__Status__c": "Active"
+      }
+    ],
+    "totalSize": 2,
+    "done": true
+  },
+  "warnings": []
+}

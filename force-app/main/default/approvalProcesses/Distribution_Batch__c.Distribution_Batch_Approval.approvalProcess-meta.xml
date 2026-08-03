@@ -7,8 +7,9 @@
     </allowedSubmitters>
     <approvalPageFields>
         <field>Name</field>
-        <field>Status__c</field>
-        <field>Total_Amount__c</field>
+        <field>Unison__Status__c</field>
+        <field>Unison__Total_Amount__c</field>
+        <field>Owner</field>
     </approvalPageFields>
     <approvalStep>
         <allowDelegate>false</allowDelegate>
@@ -25,12 +26,15 @@
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>
         <criteriaItems>
-            <field>Distribution_Batch__c.Status__c</field>
+            <field>Unison__Distribution_Batch__c.Unison__Status__c</field>
             <operation>equals</operation>
             <value>Under Review</value>
         </criteriaItems>
     </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <label>Distribution Batch Approval</label>
+    <processOrder>1</processOrder>
     <recordEditability>AdminOnly</recordEditability>
     <showApprovalHistory>true</showApprovalHistory>
 </ApprovalProcess>

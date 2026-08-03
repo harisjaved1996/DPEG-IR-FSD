@@ -168,6 +168,7 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Wires</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <searchLayouts></searchLayouts>
     <sharingModel>Private</sharingModel>
     <visibility>Public</visibility>

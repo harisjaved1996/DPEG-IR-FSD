@@ -1,0 +1,37 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "Unison__Bank_Account__c",
+          "url": "/services/data/v67.0/sobjects/Unison__Bank_Account__c/a0WFW000IIfEfwi2YC"
+        },
+        "Id": "a0WFW000IIfEfwi2YC",
+        "OwnerId": "005FW001bKjvV5sYQE",
+        "IsDeleted": false,
+        "Name": "Checking 9880",
+        "CreatedDate": "2026-07-04T14:00:16.000+0000",
+        "CreatedById": "005FW001bKjvV5sYQE",
+        "LastModifiedDate": "2026-07-04T14:00:16.000+0000",
+        "LastModifiedById": "005FW001bKjvV5sYQE",
+        "SystemModstamp": "2026-07-04T14:00:16.000+0000",
+        "LastActivityDate": null,
+        "LastViewedDate": "2026-07-08T09:26:41.000+0000",
+        "LastReferencedDate": "2026-07-08T09:26:41.000+0000",
+        "Unison__Account_Number__c": "03223232112121",
+        "Unison__Account_Type__c": "Business Checking",
+        "Unison__Balance__c": 2500000,
+        "Unison__Bank_Description__c": "TRIANGLE Y SHOPS",
+        "Unison__Bank_Institution_Name__c": "Community Bank Of Texas NA",
+        "Unison__Entity_Address__c": "11333 Fountain Lake Dr, Stafford, TX",
+        "Unison__Entity_Name__c": "Vickburg, LP",
+        "Unison__Investment__c": "a0gFW000jeGqa3cYAB",
+        "Unison__Routing_Number__c": 113
+      }
+    ],
+    "totalSize": 1,
+    "done": true
+  },
+  "warnings": []
+}

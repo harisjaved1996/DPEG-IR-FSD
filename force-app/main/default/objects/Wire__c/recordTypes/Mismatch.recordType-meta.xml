@@ -4,21 +4,21 @@
     <active>true</active>
     <label>Mismatch</label>
     <picklistValues>
-        <picklist>Status__c</picklist>
+        <picklist>Match_Status__c</picklist>
+        <values>
+            <fullName>In Review</fullName>
+            <default>false</default>
+        </values>
         <values>
             <fullName>Received</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Investigate</fullName>
+            <fullName>Reconciled</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Verify</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Reconciled</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -30,6 +30,25 @@
         </values>
         <values>
             <fullName>Wire</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Investigate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reconciled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verify</fullName>
             <default>false</default>
         </values>
     </picklistValues>
