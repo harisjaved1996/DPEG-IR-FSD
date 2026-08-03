@@ -1,0 +1,565 @@
+<title>DPEG IR — Business ERD Explorer</title>
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --grid-dot: #ccd3dd;
+    --panel: #ffffff;
+    --panel-edge: #dfe4eb;
+    --ink: #1d2733;
+    --ink-soft: #5b6675;
+    --card-body: #ffffff;
+    --card-edge: #c9d1db;
+    --card-row-line: #eef1f5;
+    --field: #24303d;
+    --ftype: #7a8494;
+    --wire: #8a94a3;
+    --wire-lit: #1d4ed8;
+    --chip-ink: #ffffff;
+    --z-party: #1e5eae;
+    --z-raise: #1e7f4f;
+    --z-post: #b45309;
+    --z-asset: #6b46a8;
+    --z-supp: #556070;
+    --btn-bg: #ffffff;
+    --btn-edge: #cfd6df;
+    --btn-ink: #2a3543;
+    --accent: #1d4ed8;
+    --shadow: 0 2px 6px rgba(29, 39, 51, 0.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181e; --grid-dot: #2a313b; --panel: #1d232b; --panel-edge: #303845;
+      --ink: #e8ecf1; --ink-soft: #98a2b0; --card-body: #1f262f; --card-edge: #3a4452;
+      --card-row-line: #2a323d; --field: #dde3ea; --ftype: #8b95a5; --wire: #5d6979;
+      --wire-lit: #7ba3ff; --z-party: #2f6fc4; --z-raise: #278f5e; --z-post: #c26a1a;
+      --z-asset: #7d58bd; --z-supp: #63707f; --btn-bg: #232a34; --btn-edge: #3a4452;
+      --btn-ink: #dde3ea; --accent: #7ba3ff; --shadow: 0 2px 8px rgba(0,0,0,0.45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181e; --grid-dot: #2a313b; --panel: #1d232b; --panel-edge: #303845;
+    --ink: #e8ecf1; --ink-soft: #98a2b0; --card-body: #1f262f; --card-edge: #3a4452;
+    --card-row-line: #2a323d; --field: #dde3ea; --ftype: #8b95a5; --wire: #5d6979;
+    --wire-lit: #7ba3ff; --z-party: #2f6fc4; --z-raise: #278f5e; --z-post: #c26a1a;
+    --z-asset: #7d58bd; --z-supp: #63707f; --btn-bg: #232a34; --btn-edge: #3a4452;
+    --btn-ink: #dde3ea; --accent: #7ba3ff; --shadow: 0 2px 8px rgba(0,0,0,0.45);
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f6f9; --grid-dot: #ccd3dd; --panel: #ffffff; --panel-edge: #dfe4eb;
+    --ink: #1d2733; --ink-soft: #5b6675; --card-body: #ffffff; --card-edge: #c9d1db;
+    --card-row-line: #eef1f5; --field: #24303d; --ftype: #7a8494; --wire: #8a94a3;
+    --wire-lit: #1d4ed8; --z-party: #1e5eae; --z-raise: #1e7f4f; --z-post: #b45309;
+    --z-asset: #6b46a8; --z-supp: #556070; --btn-bg: #ffffff; --btn-edge: #cfd6df;
+    --btn-ink: #2a3543; --accent: #1d4ed8; --shadow: 0 2px 6px rgba(29,39,51,0.14);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header.bar {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 10px 16px; background: var(--panel);
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .bar h1 { font-size: 15px; margin: 0; font-weight: 650; letter-spacing: 0.1px; }
+  .bar .sub { font-size: 12px; color: var(--ink-soft); }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    font: 500 12.5px system-ui, sans-serif; color: var(--btn-ink);
+    background: var(--btn-bg); border: 1px solid var(--btn-edge);
+    border-radius: 6px; padding: 6px 11px; cursor: pointer;
+  }
+  .bar button:hover { border-color: var(--accent); }
+  .bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  #stage { flex: 1; position: relative; overflow: hidden; }
+  svg#diagram { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #legend {
+    position: absolute; left: 14px; bottom: 14px; z-index: 5;
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 8px; box-shadow: var(--shadow);
+    padding: 10px 14px; font-size: 12px; line-height: 1.9;
+  }
+  #legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 7px; vertical-align: -1px; }
+  #legend .note { color: var(--ink-soft); font-size: 11.5px; }
+  #hint {
+    position: absolute; right: 14px; bottom: 14px; z-index: 5;
+    font-size: 11.5px; color: var(--ink-soft);
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 8px; padding: 7px 11px;
+  }
+</style>
+
+<header class="bar">
+  <h1>DPEG Investor Relations — Business ERD</h1>
+  <span class="sub">Attributes taken from the record pages · click <em>show more</em> on any card</span>
+  <span class="spacer"></span>
+  <button id="expandBtn" type="button">Expand all</button>
+  <button id="collapseBtn" type="button">Collapse all</button>
+  <button id="fitBtn" type="button">Fit</button>
+  <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+  <button id="zoomOut" type="button" aria-label="Zoom out">&minus;</button>
+  <button id="resetBtn" type="button">Reset layout</button>
+  <button id="dlBtn" type="button">Download SVG</button>
+</header>
+
+<div id="stage">
+  <svg id="diagram" role="img" aria-label="Entity relationship diagram of the DPEG Investor Relations business model"></svg>
+  <div id="legend">
+    <div class="note">crow's foot = many &nbsp;·&nbsp; bar = one</div>
+  </div>
+  <div id="hint">Click a card to trace its links · drag to move · scroll to zoom</div>
+</div>
+
+<script>
+'use strict';
+/* ===================== MODEL =====================
+   Attributes below are taken from the RECORD PAGES / UI components
+   (detail sections, KPI cards, related list columns) — not object schema.  */
+const ZONES = { party:'--z-party', raise:'--z-raise', post:'--z-post', asset:'--z-asset', supp:'--z-supp' };
+
+const BAND_DEFS = [
+  { key:'people', label:'PEOPLE',                          zone:'party' },
+  { key:'raise',  label:'OFFERING & CAPITAL RAISE',         zone:'raise' },
+  { key:'post',   label:'INVESTMENT & POST-CLOSE OPERATIONS', zone:'post' },
+  { key:'docs',   label:'DOCUMENTS & COMMUNICATIONS',       zone:'supp' },
+];
+
+const PREVIEW = 4; // attributes shown before "show more"
+
+const ENTITIES = [
+  /* ---------- PEOPLE ---------- */
+  { id:'Lead', band:'people', col:0, zone:'party', fields:[
+    ['Name','Text'],['Email','Email'],['Phone','Phone'],['Channel','Picklist'],
+    ['Accreditation Status','Picklist'],['KYC Status','Picklist'],
+    ['Portal Invite Status','Picklist'],['Onboarding Status','Picklist']]},
+  { id:'Case', band:'people', col:1, zone:'party', fields:[
+    ['Case Number','Auto Number'],['Subject','Text'],['Status','Picklist'],['Priority','Picklist'],
+    ['Created Date','Date/Time'],['Contact','Lookup'],['Account','Lookup']]},
+  { id:'Contact', band:'people', col:2, zone:'party', fields:[
+    ['Name','Text'],['Email','Email'],['Phone','Phone'],['Accreditation Status','Picklist'],
+    ['Portal Activated','Checkbox'],['Mobile Activated','Checkbox'],['Active Investor','Checkbox'],
+    ['Repeat Investor','Checkbox'],['Mailing Address','Address'],['Other Address','Address']]},
+  { id:'Associated Contact', band:'people', col:3, zone:'party', fields:[
+    ['Account ID','Lookup'],['Contact ID','Lookup'],['Is Primary','Checkbox'],['Is Required Signer','Checkbox']]},
+  { id:'Account', band:'people', col:4, zone:'party', fields:[
+    ['Name','Text'],['Entity Type','Picklist'],['Country','Picklist']]},
+
+  /* ---------- OFFERING & CAPITAL RAISE ---------- */
+  { id:'Waitlist', band:'raise', col:0, zone:'raise', fields:[
+    ['Contact Id','Lookup'],['Account ID','Lookup'],['Share Count','Number'],['Amount','Currency'],
+    ['Date','Date'],['Offering ID','Lookup']]},
+  { id:'Offering', band:'raise', col:1, zone:'raise', fields:[
+    ['Offering Name','Text'],['GP Entity','Text'],['Minimum Investment','Currency'],['Status','Picklist'],
+    ['Price Per Share','Currency'],['Type','Picklist'],['Target Raise','Currency'],
+    ['Distribution Schedule','Picklist'],['Closing Date','Date'],['Investment Period','Text'],
+    ['Target Cash on Cash','Percent'],['Target Investor IRR','Percent']]},
+  { id:'Commitment', band:'raise', col:2, zone:'raise', fields:[
+    ['Contact','Lookup'],['Account ID','Lookup'],['Commitment Date','Date'],['Committed Amount','Currency'],
+    ['Offering Id','Lookup'],['PPM Sent','Checkbox'],['PPM Signed','Checkbox'],['Funded','Checkbox']]},
+  { id:'Wire', band:'raise', col:3, zone:'raise', fields:[
+    ['Transaction ID','Text'],['Sender Name','Text'],['Received Time','Date/Time'],['Payment Method','Picklist'],
+    ['Amount','Currency'],['Description','Text'],['Offering Id','Lookup'],['Match Confidence','Number'],
+    ['Commitment ID','Lookup']]},
+  { id:'Contribution', band:'raise', col:4, zone:'raise', fields:[
+    ['Contribution Date','Date'],['Amount','Currency'],['Type','Picklist'],['Offering ID','Lookup'],
+    ['Wire ID','Lookup'],['Commitment Id','Lookup'],['Account Id','Lookup'],['Contact ID','Lookup']]},
+
+  /* ---------- INVESTMENT & POST-CLOSE ---------- */
+  { id:'Property', band:'post', col:0, zone:'asset', fields:[
+    ['Property Name','Text'],['Property Type','Picklist'],['Address','Text'],['Valuation','Currency'],
+    ['County','Text'],['Units','Number'],['Square Feet','Number'],['Land Acres','Number'],
+    ['Loan Balance','Currency'],['Loan to Value','Percent'],['Acquisition Date','Date']]},
+  { id:'Investment', band:'post', col:1, zone:'post', fields:[
+    ['Name','Text'],['Price per Share','Currency'],['Target Cash on Cash','Percent'],['Target IRR','Percent'],
+    ['IRR to Date','Percent'],['Status','Picklist'],['Minimum Investment','Currency'],
+    ['Investment Period','Text'],['DPEG Stake','Currency'],['LP Capital','Currency']]},
+  { id:'Position', band:'post', col:2, zone:'post', fields:[
+    ['Investment Id','Lookup'],['Account ID','Lookup'],['Ownership','Percent'],
+    ['Contributed','Currency'],['Distributed','Currency'],['Unreturned Capital','Currency']]},
+  { id:'Distribution Batch', band:'post', col:3, zone:'post', fields:[
+    ['Investment ID','Lookup'],['Status','Picklist'],['Amount','Currency'],
+    ['Distribution Date','Date'],['Source','Picklist'],['Type','Picklist']]},
+  { id:'Distribution', band:'post', col:4, zone:'post', fields:[
+    ['Distribution Batch ID','Lookup'],['Investment ID','Lookup'],['Amount','Currency'],
+    ['Distribution Date','Date'],['Account ID','Lookup']]},
+  { id:'Share Transfer', band:'post', col:5, zone:'post', fields:[
+    ['Investment ID','Lookup'],['Transfer From (Account)','Lookup'],['Transfer To (Account)','Lookup'],
+    ['Shares to Transfer','Number'],['Sale Price','Currency'],['Purchase Price','Currency'],
+    ['Status','Picklist'],['Transfer Type','Picklist']]},
+  { id:'Announcement', band:'post', col:6, zone:'post', fields:[
+    ['Investment Id','Lookup'],['Announcement Title','Text'],['Announcement Body','Text'],
+    ['Announcement Type','Picklist']]},
+  { id:'Rent Roll', band:'post', col:7, zone:'post', fields:[
+    ['Tenant','Text'],['Investment ID','Lookup'],['Monthly Rent','Currency'],['Square Feet','Number']]},
+
+  /* ---------- DOCUMENTS & COMMUNICATIONS ---------- */
+  { id:'Master Document', band:'docs', col:0, zone:'raise', fields:[
+    ['Document Id','Text'],['Investment ID','Lookup'],['Total Investors','Number']]},
+  { id:'Document', band:'docs', col:1, zone:'raise', fields:[
+    ['Document ID','Text'],['Contact','Lookup']]},
+  { id:'Master PPM Document', band:'docs', col:2, zone:'raise', fields:[
+    ['Document Link','URL'],['Total PPM Docs','Number'],['Completed PPM Docs','Number'],
+    ['Incomplete PPM Docs','Number'],['Offering','Lookup']]},
+  { id:'PPM Doc', band:'docs', col:3, zone:'raise', fields:[
+    ['Master Document','Lookup'],['Commitment','Lookup'],['Is Completed','Checkbox'],['Offering','Lookup']]},
+  { id:'Master Email', band:'docs', col:4, zone:'raise', fields:[
+    ['Email ID','Text'],['Total Sent','Number'],['Total Opened','Number'],['Total Not Opened','Number'],
+    ['Offering','Lookup'],['Investment Id','Lookup']]},
+  { id:'Email', band:'docs', col:5, zone:'raise', fields:[
+    ['Master Email','Lookup'],['Contact','Lookup'],['Is Opened','Checkbox']]},
+];
+
+/* a = the "one" side, b = the "many" side (unless kind says otherwise) */
+const EDGES = [
+  // People
+  { a:'Lead', b:'Contact', kind:'1-1', dash:true, label:'a qualified Lead converts to a Contact' },
+  { a:'Lead', b:'Account', kind:'1-1', dash:true, label:'a qualified Lead converts to an Account' },
+  { a:'Contact', b:'Case', kind:'1-N', label:'one Contact has many Cases' },
+  { a:'Contact', b:'Associated Contact', kind:'1-N', label:'one Contact can sit on many Accounts' },
+  { a:'Account', b:'Associated Contact', kind:'1-N', label:'one Account has many Associated Contacts' },
+  // People into the raise
+  { a:'Account', b:'Commitment', kind:'1-N', label:'one Account makes many Commitments' },
+  { a:'Contact', b:'Commitment', kind:'1-N', label:'Primary Contact on the Commitment' },
+  { a:'Account', b:'Waitlist', kind:'1-N', bowY:40, label:'one Account has many Waitlist entries' },
+  { a:'Account', b:'Contribution', kind:'1-N', label:'one Account has many Contributions' },
+  // Capital raise — money path left to right
+  { a:'Offering', b:'Waitlist', kind:'1-N', label:'one Offering has many Waitlist entries' },
+  { a:'Offering', b:'Commitment', kind:'1-N', label:'one Offering receives many Commitments' },
+  { a:'Commitment', b:'Wire', kind:'1-N', label:'one Commitment can receive many Wires (reconciled by sender + amount, confidence score)' },
+  { a:'Wire', b:'Contribution', kind:'1-1', dash:true, label:'once reconciled, one Wire creates one Contribution' },
+  { a:'Offering', b:'Wire', kind:'1-N', bowY:110, label:'one Offering receives many Wires' },
+  { a:'Commitment', b:'Contribution', kind:'1-N', bowY:160, label:'payments against the Commitment (Full or Partial)' },
+  { a:'Offering', b:'Contribution', kind:'1-N', bowY:210, label:'one Offering has many Contributions' },
+  // Investment & post-close
+  { a:'Offering', b:'Investment', kind:'1-1', label:'one Offering activates into one Investment' },
+  { a:'Offering', b:'Property', kind:'1-1', label:'one Offering is raised against one Property' },
+  { a:'Property', b:'Investment', kind:'1-1', label:'one Property is held by one Investment' },
+  { a:'Investment', b:'Contribution', kind:'1-N', label:'one Investment has many Contributions' },
+  { a:'Investment', b:'Position', kind:'1-N', label:'one Investment is divided into many Positions (ownership per Account)' },
+  { a:'Investment', b:'Distribution Batch', kind:'1-N', bowY:150, label:'one Investment pays out through many Distribution Batches' },
+  { a:'Distribution Batch', b:'Distribution', kind:'1-N', label:'one Distribution Batch splits into many Distributions' },
+  { a:'Investment', b:'Share Transfer', kind:'1-N', bowY:230, label:'one Investment has many Share Transfers' },
+  { a:'Investment', b:'Announcement', kind:'1-N', bowY:280, label:'one Investment has many Announcements' },
+  { a:'Investment', b:'Rent Roll', kind:'1-N', bowY:330, label:'one Investment has many Rent Rolls' },
+  // Documents & communications
+  { a:'Investment', b:'Master Document', kind:'1-N', label:'one Investment has many Master Documents' },
+  { a:'Master Document', b:'Document', kind:'1-N', label:'one Master Document fans out to many Documents (one per Contact)' },
+  { a:'Contact', b:'Document', kind:'1-N', bowX:-280, label:'one Contact has many Documents' },
+  { a:'Offering', b:'Master PPM Document', kind:'1-1', label:'one Offering has one Master PPM Document' },
+  { a:'Master PPM Document', b:'PPM Doc', kind:'1-N', label:'one Master PPM Document has many PPM Docs' },
+  { a:'Commitment', b:'PPM Doc', kind:'1-1', label:'each Commitment gets its own PPM Doc to sign' },
+  { a:'Offering', b:'Master Email', kind:'1-N', bowY:80, label:'one Offering has many Master Emails (blasts)' },
+  { a:'Investment', b:'Master Email', kind:'1-N', bowY:180, label:'one Investment has many Master Emails' },
+  { a:'Master Email', b:'Email', kind:'1-N', label:'one Master Email fans out to many Emails (one per Contact)' },
+  { a:'Contact', b:'Email', kind:'1-N', bowY:-160, label:'one Contact has many Emails' },
+];
+
+/* ===================== RENDER ===================== */
+const NS = 'http://www.w3.org/2000/svg';
+const CARD_W = 268, HDR_H = 34, ROW_H = 21, TOGGLE_H = 22, PAD_B = 8;
+const COL_W = 500, BAND_GAP = 90, BAND_PAD_TOP = 68, BAND_PAD_BOT = 26;
+
+const svg = document.getElementById('diagram');
+const byId = {};
+ENTITIES.forEach(e => { byId[e.id] = e; e.expanded = false; e.moved = false; });
+
+function visibleCount(e) { return e.expanded ? e.fields.length : Math.min(PREVIEW, e.fields.length); }
+function hasToggle(e) { return e.fields.length > PREVIEW; }
+function cardH(e) { return HDR_H + visibleCount(e) * ROW_H + (hasToggle(e) ? TOGGLE_H : 0) + PAD_B; }
+
+const SVG_CSS = `
+  .card-body { fill: var(--card-body); stroke: var(--card-edge); }
+  .card-shadow { fill: rgba(20,26,34,0.10); }
+  .hdr-title { fill: var(--chip-ink); font: 650 13px system-ui, sans-serif; }
+  .fname { fill: var(--field); font: 12px system-ui, sans-serif; }
+  .ftype { fill: var(--ftype); font: 10.5px ui-monospace, Consolas, monospace; }
+  .rowline { stroke: var(--card-row-line); }
+  .tgl-text { fill: var(--accent); font: 600 11px system-ui, sans-serif; }
+  .tgl-hit { fill: transparent; cursor: pointer; }
+  .edge { stroke: var(--wire); stroke-width: 1.6; fill: none; cursor: pointer; }
+  .edge.dash { stroke-dasharray: 7 5; }
+  .edge:hover { stroke-width: 3; }
+  .lit-edge { stroke: var(--wire-lit); stroke-width: 2.4; }
+  .mk { stroke: var(--wire); fill: none; }
+  .mk-lit { stroke: var(--wire-lit); fill: none; }
+  .grid-dot { fill: var(--grid-dot); }
+  .band { fill-opacity: 0.055; }
+  .band-label { font: 700 13px system-ui, sans-serif; letter-spacing: 2.5px; opacity: 0.6; }
+  .dim { opacity: 0.12; }
+  .card { cursor: grab; }
+`;
+const styleEl = document.createElementNS(NS, 'style');
+styleEl.textContent = SVG_CSS;
+svg.appendChild(styleEl);
+
+const defs = document.createElementNS(NS, 'defs');
+defs.innerHTML = '<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">' +
+                 '<circle class="grid-dot" cx="1.2" cy="1.2" r="1.2"/></pattern>';
+svg.appendChild(defs);
+const bgRect = document.createElementNS(NS, 'rect');
+bgRect.setAttribute('width', '100%'); bgRect.setAttribute('height', '100%');
+bgRect.setAttribute('fill', 'url(#dots)');
+svg.appendChild(bgRect);
+
+const world = document.createElementNS(NS, 'g'); svg.appendChild(world);
+const bandLayer = document.createElementNS(NS, 'g');
+const edgeLayer = document.createElementNS(NS, 'g');
+const cardLayer = document.createElementNS(NS, 'g');
+world.appendChild(bandLayer); world.appendChild(edgeLayer); world.appendChild(cardLayer);
+
+function el(name, attrs, parent) {
+  const n = document.createElementNS(NS, name);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+
+/* ---- band + card geometry, recomputed whenever a card grows ---- */
+function layout() {
+  let top = 0;
+  BAND_DEFS.forEach(b => {
+    const members = ENTITIES.filter(e => e.band === b.key);
+    const rowY = top + BAND_PAD_TOP;
+    members.forEach(m => { if (!m.moved) { m.x = 60 + m.col * COL_W; m.y = rowY; } });
+    const bottom = Math.max(...members.map(m => m.y + cardH(m)));
+    const right  = Math.max(...members.map(m => m.x + CARD_W));
+    b.x = -60; b.y = top; b.w = right + 120; b.h = (bottom - top) + BAND_PAD_BOT;
+    top = top + b.h + BAND_GAP;
+  });
+  const widest = Math.max(...BAND_DEFS.map(b => b.w));
+  BAND_DEFS.forEach(b => { b.w = widest; });
+}
+
+function renderBands() {
+  bandLayer.textContent = '';
+  BAND_DEFS.forEach(b => {
+    el('rect', { class:'band', x:b.x, y:b.y, width:b.w, height:b.h, rx:16, fill:`var(${ZONES[b.zone]})` }, bandLayer);
+  });
+}
+
+function renderCard(ent) {
+  const g = ent.node;
+  g.textContent = '';
+  const h = cardH(ent), n = visibleCount(ent);
+  el('rect', { class:'card-shadow', x:3, y:4, rx:7, width:CARD_W, height:h }, g);
+  el('rect', { class:'card-body', x:0, y:0, rx:7, width:CARD_W, height:h }, g);
+  el('rect', { x:0, y:0, rx:7, width:CARD_W, height:HDR_H, fill:`var(${ZONES[ent.zone]})` }, g);
+  el('rect', { x:0, y:HDR_H-8, width:CARD_W, height:8, fill:`var(${ZONES[ent.zone]})` }, g);
+  const t = el('text', { class:'hdr-title', x:12, y:22 }, g); t.textContent = ent.id;
+  for (let i = 0; i < n; i++) {
+    const f = ent.fields[i], yy = HDR_H + i * ROW_H;
+    if (i > 0) el('line', { class:'rowline', x1:10, y1:yy, x2:CARD_W-10, y2:yy }, g);
+    const fn = el('text', { class:'fname', x:12, y:yy+15 }, g); fn.textContent = f[0];
+    const ft = el('text', { class:'ftype', x:CARD_W-12, y:yy+14.5, 'text-anchor':'end' }, g); ft.textContent = f[1];
+  }
+  if (hasToggle(ent)) {
+    const ty = HDR_H + n * ROW_H;
+    el('line', { class:'rowline', x1:10, y1:ty, x2:CARD_W-10, y2:ty }, g);
+    const lbl = el('text', { class:'tgl-text', x:12, y:ty+15 }, g);
+    lbl.textContent = ent.expanded ? '▴  show less' : `▾  show more (${ent.fields.length - PREVIEW})`;
+    el('rect', { class:'tgl-hit', 'data-toggle':'1', x:0, y:ty, width:CARD_W, height:TOGGLE_H }, g);
+  }
+  g.setAttribute('transform', `translate(${ent.x},${ent.y})`);
+}
+
+ENTITIES.forEach(ent => {
+  ent.node = el('g', { class:'card', 'data-id':ent.id, tabindex:0 }, cardLayer);
+});
+
+/* ---- edges ---- */
+const dupCount = {};
+EDGES.forEach(e => {
+  const key = [e.a, e.b].sort().join('|');
+  e.dupIdx = (dupCount[key] = (dupCount[key] || 0) + 1) - 1;
+  const g = el('g', { class:'edgeG' }, edgeLayer);
+  e.path = el('path', { class:'edge' }, g);
+  const tip = document.createElementNS(NS, 'title');
+  tip.textContent = e.label;
+  e.path.appendChild(tip);
+  e.mkA = el('path', { class:'mk' }, g);
+  e.mkB = el('path', { class:'mk' }, g);
+  e.g = g;
+});
+
+function anchor(ent, otherCx, otherCy) {
+  const h = cardH(ent);
+  const cx = ent.x + CARD_W / 2, cy = ent.y + h / 2;
+  const dx = otherCx - cx, dy = otherCy - cy;
+  if (Math.abs(dx) * 0.9 > Math.abs(dy)) {
+    return dx > 0 ? { x: ent.x + CARD_W, y: cy, dir:[1,0] } : { x: ent.x, y: cy, dir:[-1,0] };
+  }
+  return dy > 0 ? { x: cx, y: ent.y + h, dir:[0,1] } : { x: cx, y: ent.y, dir:[0,-1] };
+}
+function ornament(p, dir, type) {
+  const [ux, uy] = dir, px = -uy, py = ux;
+  const at = (d, s) => `${p.x + ux*d + px*s},${p.y + uy*d + py*s}`;
+  if (type === 'many') return `M ${at(14,-6)} L ${at(0,0)} L ${at(14,6)} M ${at(0,0)} L ${at(14,0)}`;
+  return `M ${at(9,-6)} L ${at(9,6)}`;
+}
+function drawEdge(e) {
+  const A = byId[e.a], B = byId[e.b];
+  const pa = anchor(A, B.x + CARD_W/2, B.y + cardH(B)/2);
+  const pb = anchor(B, A.x + CARD_W/2, A.y + cardH(A)/2);
+  const k = 0.45 * Math.max(60, Math.hypot(pb.x-pa.x, pb.y-pa.y) * 0.5);
+  const off = e.dupIdx * 34 * (e.dupIdx % 2 ? 1 : -1);
+  const c1x = pa.x + pa.dir[0]*k - pa.dir[1]*off + (e.bowX||0), c1y = pa.y + pa.dir[1]*k + pa.dir[0]*off + (e.bowY||0);
+  const c2x = pb.x + pb.dir[0]*k - pb.dir[1]*off + (e.bowX||0), c2y = pb.y + pb.dir[1]*k + pb.dir[0]*off + (e.bowY||0);
+  e.path.setAttribute('d', `M ${pa.x},${pa.y} C ${c1x},${c1y} ${c2x},${c2y} ${pb.x},${pb.y}`);
+  e.mkA.setAttribute('d', ornament(pa, pa.dir, e.kind === 'N-N' ? 'many' : 'one'));
+  e.mkB.setAttribute('d', ornament(pb, pb.dir, e.kind === '1-1' ? 'one' : 'many'));
+}
+function redraw() {
+  layout(); renderBands();
+  ENTITIES.forEach(renderCard);
+  EDGES.forEach(drawEdge);
+}
+
+/* ===================== INTERACTION ===================== */
+let view = { x:0, y:0, s:1 };
+function applyView() { world.setAttribute('transform', `translate(${view.x},${view.y}) scale(${view.s})`); }
+
+function contentBounds() {
+  let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  ENTITIES.forEach(e => {
+    x1 = Math.min(x1, e.x); y1 = Math.min(y1, e.y);
+    x2 = Math.max(x2, e.x + CARD_W); y2 = Math.max(y2, e.y + cardH(e));
+  });
+  BAND_DEFS.forEach(b => {
+    x1 = Math.min(x1, b.x); y1 = Math.min(y1, b.y);
+    x2 = Math.max(x2, b.x + b.w); y2 = Math.max(y2, b.y + b.h);
+  });
+  return { x1, y1, x2, y2 };
+}
+function fit() {
+  const b = contentBounds(), vw = svg.clientWidth, vh = svg.clientHeight;
+  const s = Math.min(vw / (b.x2-b.x1+80), vh / (b.y2-b.y1+80), 1.6);
+  view.s = s;
+  view.x = (vw - (b.x2-b.x1)*s)/2 - b.x1*s;
+  view.y = (vh - (b.y2-b.y1)*s)/2 - b.y1*s;
+  applyView();
+}
+
+function toggleCard(id) {
+  const e = byId[id];
+  e.expanded = !e.expanded;
+  redraw();
+  if (selected) selectCard(selected, true);
+}
+
+let drag = null;
+svg.addEventListener('pointerdown', ev => {
+  const cardG = ev.target.closest('.card');
+  if (ev.target.getAttribute && ev.target.getAttribute('data-toggle')) {
+    toggleCard(cardG.getAttribute('data-id'));
+    return;
+  }
+  svg.setPointerCapture(ev.pointerId);
+  if (cardG) {
+    const ent = byId[cardG.getAttribute('data-id')];
+    drag = { kind:'card', ent, sx:ev.clientX, sy:ev.clientY, ox:ent.x, oy:ent.y };
+    cardG.style.cursor = 'grabbing';
+  } else {
+    drag = { kind:'pan', sx:ev.clientX, sy:ev.clientY, ox:view.x, oy:view.y };
+  }
+});
+svg.addEventListener('pointermove', ev => {
+  if (!drag) return;
+  const dx = ev.clientX - drag.sx, dy = ev.clientY - drag.sy;
+  drag.dist = (drag.dist || 0) + Math.abs(dx) + Math.abs(dy);
+  if (drag.kind === 'card') {
+    drag.ent.x = drag.ox + dx/view.s; drag.ent.y = drag.oy + dy/view.s;
+    drag.ent.moved = true;
+    drag.ent.node.setAttribute('transform', `translate(${drag.ent.x},${drag.ent.y})`);
+    EDGES.forEach(drawEdge);
+  } else {
+    view.x = drag.ox + dx; view.y = drag.oy + dy; applyView();
+  }
+});
+svg.addEventListener('pointerup', () => {
+  if (drag && drag.kind === 'card') {
+    drag.ent.node.style.cursor = 'grab';
+    if (!(drag.dist > 4)) selectCard(drag.ent.id);
+  } else if (drag && drag.kind === 'pan' && !(drag.dist > 4)) clearSelect();
+  drag = null;
+});
+svg.addEventListener('wheel', ev => {
+  ev.preventDefault();
+  const ns = Math.min(2.5, Math.max(0.12, view.s * Math.exp(-ev.deltaY * 0.0012)));
+  const r = svg.getBoundingClientRect(), mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  view.x = mx - (mx - view.x) * (ns/view.s);
+  view.y = my - (my - view.y) * (ns/view.s);
+  view.s = ns; applyView();
+}, { passive:false });
+
+let selected = null;
+function clearSelect() {
+  selected = null;
+  cardLayer.querySelectorAll('.card').forEach(c => c.classList.remove('dim'));
+  EDGES.forEach(e => { e.g.classList.remove('dim'); e.path.classList.remove('lit-edge');
+    e.mkA.classList.remove('mk-lit'); e.mkB.classList.remove('mk-lit'); });
+}
+function selectCard(id, keep) {
+  if (selected === id && !keep) { clearSelect(); return; }
+  clearSelect(); selected = id;
+  const near = new Set([id]);
+  EDGES.forEach(e => {
+    if (e.a === id || e.b === id) {
+      near.add(e.a); near.add(e.b);
+      e.path.classList.add('lit-edge'); e.mkA.classList.add('mk-lit'); e.mkB.classList.add('mk-lit');
+    } else e.g.classList.add('dim');
+  });
+  cardLayer.querySelectorAll('.card').forEach(c => {
+    if (!near.has(c.getAttribute('data-id'))) c.classList.add('dim');
+  });
+}
+cardLayer.addEventListener('keydown', ev => {
+  const c = ev.target.closest('.card');
+  if (c && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); selectCard(c.getAttribute('data-id')); }
+});
+
+/* ---- toolbar ---- */
+document.getElementById('expandBtn').addEventListener('click', () => {
+  ENTITIES.forEach(e => { e.expanded = true; }); redraw(); fit();
+});
+document.getElementById('collapseBtn').addEventListener('click', () => {
+  ENTITIES.forEach(e => { e.expanded = false; }); redraw(); fit();
+});
+document.getElementById('fitBtn').addEventListener('click', fit);
+document.getElementById('zoomIn').addEventListener('click', () => { view.s = Math.min(2.5, view.s*1.2); applyView(); });
+document.getElementById('zoomOut').addEventListener('click', () => { view.s = Math.max(0.12, view.s/1.2); applyView(); });
+document.getElementById('resetBtn').addEventListener('click', () => {
+  ENTITIES.forEach(e => { e.moved = false; e.expanded = false; });
+  clearSelect(); redraw(); fit();
+});
+document.getElementById('dlBtn').addEventListener('click', () => {
+  const clone = svg.cloneNode(true);
+  const b = contentBounds();
+  clone.setAttribute('viewBox', `${b.x1-40} ${b.y1-40} ${b.x2-b.x1+80} ${b.y2-b.y1+80}`);
+  clone.setAttribute('width', b.x2-b.x1+80); clone.setAttribute('height', b.y2-b.y1+80);
+  clone.setAttribute('xmlns', NS);
+  clone.querySelectorAll('g').forEach(g => { if (g.parentNode === clone) g.removeAttribute('transform'); });
+  const cs = getComputedStyle(document.documentElement);
+  clone.querySelector('style').textContent =
+    SVG_CSS.replace(/var\((--[a-z-]+)\)/g, (_, v) => cs.getPropertyValue(v).trim() || '#888') +
+    ' text{font-family:system-ui,Segoe UI,sans-serif} .dim{opacity:1}';
+  clone.querySelectorAll('[fill^="var("]').forEach(r => {
+    r.setAttribute('fill', cs.getPropertyValue(r.getAttribute('fill').slice(4,-1)).trim());
+  });
+  const bg = clone.querySelector('rect');
+  bg.setAttribute('x', b.x1-40); bg.setAttribute('y', b.y1-40);
+  const blob = new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(clone)],
+    { type:'image/svg+xml' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'DPEG_IR_Business_ERD.svg';
+  a.click(); URL.revokeObjectURL(a.href);
+});
+
+redraw();
+fit();
+window.addEventListener('resize', fit);
+</script>
