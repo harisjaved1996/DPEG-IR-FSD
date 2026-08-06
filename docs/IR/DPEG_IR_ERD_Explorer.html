@@ -95,7 +95,7 @@
 
 <header class="bar">
   <h1>DPEG Investor Relations — Business ERD</h1>
-  <span class="sub">Attributes taken from the record pages · click <em>show more</em> on any card</span>
+  <span class="sub">Attributes taken from the record pages · click <em>show more</em> on any card · rev 2026-08-03</span>
   <span class="spacer"></span>
   <button id="expandBtn" type="button">Expand all</button>
   <button id="collapseBtn" type="button">Collapse all</button>
@@ -133,9 +133,8 @@ const PREVIEW = 4; // attributes shown before "show more"
 const ENTITIES = [
   /* ---------- PEOPLE ---------- */
   { id:'Lead', band:'people', col:0, zone:'party', fields:[
-    ['Name','Text'],['Email','Email'],['Phone','Phone'],['Channel','Picklist'],
-    ['Accreditation Status','Picklist'],['KYC Status','Picklist'],
-    ['Portal Invite Status','Picklist'],['Onboarding Status','Picklist']]},
+    ['First Name','Text'],['Last Name','Text'],['Email','Email'],['Lead Source','Picklist'],
+    ['Lead Status','Picklist'],['Accredited','Checkbox'],['Description','Text']]},
   { id:'Case', band:'people', col:1, zone:'party', fields:[
     ['Case Number','Auto Number'],['Subject','Text'],['Status','Picklist'],['Priority','Picklist'],
     ['Created Date','Date/Time'],['Contact','Lookup'],['Account','Lookup']]},
